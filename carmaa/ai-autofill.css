@@ -1,0 +1,61 @@
+/* پاپ‌آپ «هوش مصنوعی در حال تکمیل اطلاعات خودرو» — شیشه‌ی مات، الهام‌گرفته از iOS */
+.cm-ai { position:fixed; inset:0; z-index:1200; display:flex; align-items:center; justify-content:center; padding:24px; background:rgba(0,0,0,0); -webkit-backdrop-filter:blur(0px); backdrop-filter:blur(0px); transition:background .35s ease, backdrop-filter .35s ease, -webkit-backdrop-filter .35s ease; touch-action:none; }
+.cm-ai.is-in { background:rgba(0,0,0,.42); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
+.cm-ai.is-out { background:rgba(0,0,0,0); -webkit-backdrop-filter:blur(0px); backdrop-filter:blur(0px); }
+.cm-ai-card { position:relative; box-sizing:border-box; width:min(88vw,330px); padding:30px 22px 22px; border-radius:32px; text-align:center; color:#F5F5F7; background:rgba(38,38,40,.74); -webkit-backdrop-filter:saturate(180%) blur(32px); backdrop-filter:saturate(180%) blur(32px); border:1px solid rgba(255,255,255,.14); box-shadow:0 30px 80px rgba(0,0,0,.5), 0 2px 0 rgba(255,255,255,.06) inset; opacity:0; transform:scale(.9) translateY(10px); transition:opacity .3s ease, transform .5s cubic-bezier(.2,.9,.3,1.18); }
+.cm-ai.is-in .cm-ai-card { opacity:1; transform:none; }
+.cm-ai.is-out .cm-ai-card { opacity:0; transform:scale(.96); transition:opacity .26s ease, transform .26s ease; }
+
+.cm-ai-orb { position:relative; width:76px; height:76px; margin:0 auto 18px; }
+.cm-ai-glow, .cm-ai-ring { position:absolute; inset:0; border-radius:50%; background:conic-gradient(from 0deg,#bc82f3,#f5b9ea,#8d9fff,#aa6eee,#ffffff,#ffba71,#c686ff,#bc82f3); animation:cm-ai-spin 3.2s linear infinite; color:#1D1D1F}
+.cm-ai-glow { inset:-6px; filter:blur(16px); opacity:.65; }
+.cm-ai-ring { -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2.5px)); mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2.5px)); }
+.cm-ai-core { position:absolute; inset:5px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:radial-gradient(circle at 50% 30%,#262628,#1D1D1F); }
+.cm-ai-core svg { width:30px; height:30px; fill:#fff; animation:cm-ai-pulse 1.8s ease-in-out infinite; }
+.cm-ai-check { position:absolute; inset:5px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:#34c759; opacity:0; transform:scale(.6); transition:opacity .25s ease, transform .45s cubic-bezier(.2,.9,.3,1.4); }
+.cm-ai-check svg { width:30px; height:30px; fill:none; stroke:#fff; stroke-width:3.2; stroke-linecap:round; stroke-linejoin:round; }
+.cm-ai.is-done .cm-ai-check { opacity:1; transform:none; }
+.cm-ai.is-done .cm-ai-ring, .cm-ai.is-done .cm-ai-glow { animation-play-state:paused; opacity:.25; }
+
+.cm-ai-title { margin:0 0 6px; font-size:19px; font-weight:800; line-height:1.4; letter-spacing:-.01em; }
+.cm-ai-sub { margin:0; font-size:13.5px; font-weight:600; line-height:1.7; color:rgba(245,245,247,.68); }
+.cm-ai-car { display:inline-block; max-width:100%; margin:14px 0 18px; padding:6px 14px; border-radius:999px; font-size:12.5px; font-weight:800; direction:rtl; background:rgba(255,255,255,.09); color:#F5F5F7; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+.cm-ai-steps { list-style:none; margin:0 0 18px; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:8px; text-align:start; }
+.cm-ai-steps li { display:flex; align-items:center; gap:8px; min-height:36px; padding:0 10px; border-radius:12px; font-size:12px; font-weight:700; color:rgba(245,245,247,.38); background:rgba(255,255,255,.05); transition:color .3s ease, background .3s ease; }
+.cm-ai-dot { flex:none; width:16px; height:16px; border-radius:50%; border:2px solid rgba(255,255,255,.22); box-sizing:border-box; transition:all .3s ease; }
+.cm-ai-steps li.is-active { color:#F5F5F7; background:rgba(255,255,255,.1); }
+.cm-ai-steps li.is-active .cm-ai-dot { border-color:rgba(255,255,255,.25); border-top-color:#fff; animation:cm-ai-spin .7s linear infinite; }
+.cm-ai-steps li.is-done { color:#F5F5F7; }
+.cm-ai-steps li.is-done .cm-ai-dot { border-color:#34c759; background:#34c759 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.4l2.6 2.6L12 5.6' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat; animation:none; }
+
+.cm-ai-bar { height:4px; border-radius:99px; overflow:hidden; background:rgba(255,255,255,.12); }
+.cm-ai-bar i { display:block; height:100%; width:0; border-radius:inherit; background:linear-gradient(90deg,#8d9fff,#bc82f3,#ffffff); transition:width .35s cubic-bezier(.3,.7,.3,1); color:#1D1D1F}
+.cm-ai.is-done .cm-ai-bar i { background:#34c759; }
+
+.theme-light .cm-ai.is-in { background:rgba(38,38,40,.28); }
+.theme-light .cm-ai-card { color:#262628; background:rgba(255,255,255,.8); border-color:rgba(255,255,255,.9); box-shadow:0 30px 80px rgba(38,38,40,.28), 0 1px 0 #fff inset; }
+.theme-light .cm-ai-core { background:radial-gradient(circle at 50% 30%,#333336,#262628); }
+.theme-light .cm-ai-sub { color:rgba(38,38,40,.62); }
+.theme-light .cm-ai-car { background:rgba(0,0,0,.06); color:#262628; }
+.theme-light .cm-ai-steps li { color:rgba(38,38,40,.38); background:rgba(0,0,0,.04); }
+.theme-light .cm-ai-steps li.is-active { color:#262628; background:rgba(0,0,0,.07); }
+.theme-light .cm-ai-steps li.is-done { color:#262628; }
+.theme-light .cm-ai-dot { border-color:rgba(0,0,0,.18); }
+.theme-light .cm-ai-steps li.is-active .cm-ai-dot { border-color:rgba(0,0,0,.15); border-top-color:#262628; }
+.theme-light .cm-ai-bar { background:rgba(0,0,0,.08); }
+
+.cm-ai-note { display:flex; align-items:flex-start; gap:8px; margin:14px 0 0; padding:10px 12px; border-radius:14px; text-align:start; font-size:11.5px; font-weight:600; line-height:1.8; color:rgba(245,245,247,.62); background:rgba(255,159,10,.1); }
+.cm-ai-note svg { flex:none; width:16px; height:16px; margin-top:3px; fill:none; stroke:#ff9f0a; stroke-width:2; stroke-linecap:round; }
+.theme-light .cm-ai-note { color:rgba(38,38,40,.66); background:rgba(255,159,10,.12); }
+
+@keyframes cm-ai-spin { to { transform:rotate(360deg); } }
+@keyframes cm-ai-pulse { 0%,100% { transform:scale(1); opacity:1; } 50% { transform:scale(.86); opacity:.78; } }
+@media (prefers-reduced-motion:reduce) { .cm-ai-glow,.cm-ai-ring,.cm-ai-core svg { animation:none; } .cm-ai-card { transition:opacity .2s ease; transform:none !important; } }
+/* پاپ‌آپ تشخیص از روی عکس: دکمه‌ها */
+.cm-ai-actions { display:flex; flex-direction:column; gap:8px; margin-top:16px; }
+.cm-ai-actions:empty { display:none; }
+.cm-ai-btn { appearance:none; border:0; cursor:pointer; min-height:44px; padding:0 16px; border-radius:14px; font:inherit; font-size:14px; font-weight:800; color:#fff; background:linear-gradient(90deg,#8d9fff,#bc82f3); }
+.cm-ai-btn.is-ghost { color:inherit; background:rgba(255,255,255,.09); font-weight:700; }
+.theme-light .cm-ai-btn.is-ghost { background:rgba(0,0,0,.06); }
+.cm-ai-car[hidden] { display:none; }

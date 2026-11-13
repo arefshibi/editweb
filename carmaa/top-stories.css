@@ -1,0 +1,33 @@
+/* استوری‌های برتر (صفحه اصلی، زیر بنر) + شمارنده‌ی بازدید مخصوص صاحب استوری — حلقه‌ی رنگی برای دیده‌نشده‌ها، خاکستری برای دیده‌شده‌ها */
+.cm-ts { margin:20px 0 4px; }
+.cm-ts .cm-home-section-heading { margin-bottom:10px; }
+.cm-ts-rail { display:flex; gap:14px; overflow-x:auto; overflow-y:hidden; box-sizing:border-box; margin-inline:-14px; padding:6px 14px 16px; scroll-padding-inline:14px; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; overscroll-behavior-x:contain; scrollbar-width:none; }
+/* ریل تا لبه‌ی صفحه کشیده می‌شود (والد .cm-hb از دو طرف ۱۴px پدینگ دارد) */
+@media (min-width:760px) { .cm-ts-rail { margin-inline:0; padding-inline:2px; scroll-padding-inline:2px; } }
+.cm-ts-rail::-webkit-scrollbar { display:none; }
+.cm-ts-item { flex:none; width:76px; display:flex; flex-direction:column; align-items:center; gap:0; background:none; border:0; padding:0; color:inherit; font:inherit; cursor:pointer; scroll-snap-align:start; text-align:center; }
+.cm-ts-ring { position:relative; width:72px; height:72px; border-radius:50%; padding:3px; background:rgba(255,255,255,.16); box-shadow:0 6px 16px rgba(0,0,0,.5); }
+.cm-ts-item.is-unseen .cm-ts-ring { background:linear-gradient(135deg,#b9a9ff 0%,#8b5cf6 38%,#ec4899 72%,#f59e0b 100%); box-shadow:0 6px 16px rgba(0,0,0,.5); }
+.cm-ts-av { display:grid; place-items:center; width:100%; height:100%; border-radius:50%; overflow:hidden; border:3px solid #1D1D1F; background:#1D1D1F; color:#F5F5F7; font-size:24px; font-weight:800; }
+.cm-ts-av img { width:100%; height:100%; object-fit:cover; display:block; }
+.cm-ts-av img.is-logo { object-fit:contain; padding:10px; background:#1D1D1F; }
+.cm-ts-rank { position:absolute; left:50%; bottom:-6px; transform:translateX(-50%); min-width:22px; height:18px; padding:0 6px; border-radius:9px; background:#F5F5F7; color:#1D1D1F; font-size:10.5px; font-weight:800; display:grid; place-items:center; box-shadow:0 3px 8px rgba(0,0,0,.5); }
+.cm-ts-name { margin-top:10px; max-width:76px; font-size:11.5px; font-weight:700; color:#ececee; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.cm-ts-kind { font-size:10px; color:#8c8d93; margin-top:1px; }
+/* بازدید در نمای استوری — فقط برای صاحب */
+.mr-sv-views { display:inline-flex; align-items:center; gap:5px; height:30px; padding:0 11px; margin-inline-end:8px; border-radius:15px; background:rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.14); color:#fff; font-size:12px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+.mr-sv-views[hidden] { display:none; }
+.mr-sv-views svg { width:15px; height:15px; fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
+.mr-sv-views b { font-weight:700; }
+
+/* ورود استوری تازه: فقط یک fade-in ساده؛ بدون scale/چرخش/blur و بدون هاله‌ی نور */
+@keyframes cm-st-pop { from { opacity:0; } to { opacity:1; } }
+.cm-st-new { animation:cm-st-pop .28s ease-out both; }
+@media (prefers-reduced-motion:reduce) { .cm-st-new { animation:none; } }
+
+/* حباب خودِ کاربر در ابتدای ریل: پروفایل + دکمه‌ی + برای گذاشتن استوری */
+.cm-ts-me .cm-ts-plus { position:absolute; inset-inline-end:-3px; bottom:-3px; width:26px; height:26px; border-radius:50%; display:grid; place-items:center; background:linear-gradient(135deg,#4f8cff,#7c5cff); border:3px solid #1D1D1F; box-shadow:0 3px 8px rgba(0,0,0,.55); cursor:pointer; z-index:2; padding:0; }
+.cm-ts-me .cm-ts-plus::before { content:""; position:absolute; inset:-8px; }
+.cm-ts-me .cm-ts-plus svg { width:13px; height:13px; fill:none; stroke:#fff; stroke-width:2.8; stroke-linecap:round; stroke-linejoin:round; pointer-events:none; }
+.cm-ts-me:not(.has-story) .cm-ts-ring { background:rgba(255,255,255,.16); box-shadow:0 6px 16px rgba(0,0,0,.5); }
+.cm-ts-me .cm-ts-plus:active { transform:scale(.92); }

@@ -1,0 +1,80 @@
+/* custom colors (written by the on-site color tool) */
+html:not(.theme-light) body :is(.cm-lt-body):not(#cmct-a):not(#cmct-b){background:rgba(71,71,71,0.19) ! important}
+html:not(.theme-light) body :is(.cm-br-bar):not(#cmct-a):not(#cmct-b){background:rgba(51,51,54,0.51) ! important;border-color:rgba(51,51,51,0.66) ! important}
+html:not(.theme-light) body :is(.cm-ts-sug):not(#cmct-a):not(#cmct-b){background:#ffffff ! important;border-color:rgba(255,255,255,0) ! important;color:#1D1D1F ! important}
+html:not(.theme-light) body :is(.cm-lay-link):not(#cmct-a):not(#cmct-b){background:rgba(51,51,51,0.19) ! important;border-color:rgba(255,255,255,0.2) ! important;color:#ffffff ! important}
+html:not(.theme-light) body :is(.cm-hfs-featured):not(#cmct-a):not(#cmct-b){color:#ffffff ! important}
+html:not(.theme-light) body :is(.cm-br5-hint):not(#cmct-a):not(#cmct-b){border-color:rgba(0,0,0,0.12) ! important}
+html:not(.theme-light) body :is(.cm-br5-hint > svg):not(#cmct-a):not(#cmct-b){color:#ffffff ! important}
+html:not(.theme-light) body :is(.cm-br5-all):not(#cmct-a):not(#cmct-b){border-color:rgba(48,48,48,0.4) ! important}
+html:not(.theme-light) body :is(.cm-lt-all):not(#cmct-a):not(#cmct-b){border-color:rgba(61,61,61,0.38) ! important}
+html:not(.theme-light) body :is(.cm-lay-link):not(#cmct-a):not(#cmct-b){border-color:rgba(43,43,43,0.38) ! important}
+html:not(.theme-light) body :is(.cm-lay-link):not(#cmct-a):not(#cmct-b){border-color:rgba(43,43,43,0.38) ! important}
+html:not(.theme-light) body :is(.xcd-chip.xcd-chip--city):not(#cmct-a):not(#cmct-b){background:#ffffff ! important;border-color:#383838 ! important;color:#000000 ! important}
+html:not(.theme-light) body :is(.xcd-chip.xcd-chip--city > svg):not(#cmct-a):not(#cmct-b){background:rgba(0,0,0,0) ! important;border-color:#000000 ! important;color:#000000 ! important}
+html:not(.theme-light) body :is(.adc-cta):not(#cmct-a):not(#cmct-b){background:#ffffff ! important;color:#1D1D1F ! important}
+html:not(.theme-light) body :is(.cm-dc):not(#cmct-a):not(#cmct-b){background:rgba(255,255,255,0) ! important;border-color:rgba(255,255,255,0) ! important;color:#f5f7fa ! important}
+html:not(.theme-light) body :is(.cm-br5-all):not(#cmct-a):not(#cmct-b){background:rgba(38,38,40,0) ! important;border-color:rgba(48,48,48,0) ! important}
+html:not(.theme-light) body :is(.cm-dc):not(#cmct-a):not(#cmct-b){background:rgba(255,255,255,0) ! important;border-color:rgba(255,255,255,0) ! important;color:#f5f7fa ! important}
+html:not(.theme-light) body :is(.cm-br5-all):not(#cmct-a):not(#cmct-b){background:rgba(38,38,40,0) ! important;border-color:rgba(48,48,48,0) ! important}
+html:not(.theme-light) body :is(.cm-lt-body):not(#cmct-a):not(#cmct-b){background:rgba(156,156,156,0.15) ! important;border-color:#000000 ! important;color:#000000 ! important}
+html:not(.theme-light) body :is(.cm-lt-sub):not(#cmct-a):not(#cmct-b){color:#ffffff ! important}
+html:not(.theme-light) body :is(.cm-lt-price > b):not(#cmct-a):not(#cmct-b){background:rgba(0,0,0,0) ! important;border-color:#ffffff ! important;color:#ffffff ! important}
+html:not(.theme-light) body :is(.cm-lt-title):not(#cmct-a):not(#cmct-b){color:#ffffff ! important}
+html:not(.theme-light) body :is(.cm-ts-sug):not(#cmct-a):not(#cmct-b){background:#ffffff ! important;color:#1D1D1F !important}
+html:not(.theme-light) body :is(.cm-dc):not(#cmct-a):not(#cmct-b){background:#000000 ! important;border-color:rgba(255,255,255,0) ! important}
+html:not(.theme-light) body :is(.cm-qf-chip):not(#cmct-a):not(#cmct-b){background:rgba(255,255,255,0.16) ! important}
+html:not(.theme-light) body :is(.cm-dc):not(#cmct-a):not(#cmct-b){background:#000000 ! important;border-color:rgba(255,255,255,0) ! important}
+html:not(.theme-light) body :is(.cm-qf-chip):not(#cmct-a):not(#cmct-b){background:rgba(255,255,255,0.16) ! important}
+html:not(.theme-light) body :is(.vx-tab):not(#cmct-a):not(#cmct-b){color:#ffffff ! important}
+html:not(.theme-light) body :is(.price-unit):not(#cmct-a):not(#cmct-b){color:#0071E3 ! important}
+html:not(.theme-light) body :is(.icon.icon-sm):not(#cmct-a):not(#cmct-b){color:rgba(255,0,0,0.57) ! important}
+html:not(.theme-light) body :is(.icon.icon-sm > use):not(#cmct-a):not(#cmct-b){color:#ffffff ! important}
+html:not(.theme-light) body :is(.round-action.ig-story-btn):not(#cmct-a):not(#cmct-b){background:rgba(92,92,92,0.4) ! important;border-color:rgba(46,46,46,0.74) ! important;color:#f4f4f6 ! important}
+html:not(.theme-light) body :is(.cm-dc-tabs):not(#cmct-a):not(#cmct-b){background:rgba(255,255,255,0.12) ! important}
+html:not(.theme-light) body :is(.cm-dc):not(#cmct-a):not(#cmct-b){background:#000000 ! important;border-color:rgba(255,255,255,0) ! important}
+html:not(.theme-light) body :is(.cm-qf-chip):not(#cmct-a):not(#cmct-b){background:rgba(255,255,255,0.16) ! important}
+html:not(.theme-light) body :is(.vx-tab):not(#cmct-a):not(#cmct-b){color:#ffffff ! important}
+html:not(.theme-light) body :is(.price-unit):not(#cmct-a):not(#cmct-b){color:#0071E3 ! important}
+html:not(.theme-light) body :is(.icon.icon-sm):not(#cmct-a):not(#cmct-b){color:rgba(255,0,0,0.57) ! important}
+html:not(.theme-light) body :is(.icon.icon-sm > use):not(#cmct-a):not(#cmct-b){color:#ffffff ! important}
+html:not(.theme-light) body :is(.round-action.ig-story-btn):not(#cmct-a):not(#cmct-b){background:rgba(92,92,92,0.4) ! important;border-color:rgba(46,46,46,0.74) ! important;color:#f4f4f6 ! important}
+html:not(.theme-light) body :is(.cm-dc-tabs):not(#cmct-a):not(#cmct-b){background:rgba(255,255,255,0.12) ! important}
+html:not(.theme-light) body :is(.cm-sr-chips):not(#cmct-a):not(#cmct-b){background:rgba(255,255,255,0.15) ! important;color:#ffffff ! important}
+html:not(.theme-light) body :is(.cm-hfs-body):not(#cmct-a):not(#cmct-b){background:rgba(71,71,71,0.2) ! important;border-color:rgba(244,246,250,0) ! important}
+html:not(.theme-light) body :is(.cm-post.cm-news-home):not(#cmct-a):not(#cmct-b){background:rgba(61,61,61,0.35) ! important}
+html:not(.theme-light) body :is(.cm-dc):not(#cmct-a):not(#cmct-b){background:#000000 ! important;border-color:rgba(255,255,255,0) ! important}
+html:not(.theme-light) body :is(.cm-qf-chip):not(#cmct-a):not(#cmct-b){background:rgba(255,255,255,0.16) ! important}
+html:not(.theme-light) body :is(.vx-tab):not(#cmct-a):not(#cmct-b){color:#ffffff ! important}
+html:not(.theme-light) body :is(.price-unit):not(#cmct-a):not(#cmct-b){color:#0071E3 ! important}
+html:not(.theme-light) body :is(.icon.icon-sm):not(#cmct-a):not(#cmct-b){color:rgba(255,0,0,0.57) ! important}
+html:not(.theme-light) body :is(.icon.icon-sm > use):not(#cmct-a):not(#cmct-b){color:#ffffff ! important}
+html:not(.theme-light) body :is(.round-action.ig-story-btn):not(#cmct-a):not(#cmct-b){background:rgba(92,92,92,0.4) ! important;border-color:rgba(46,46,46,0.74) ! important;color:#f4f4f6 ! important}
+html:not(.theme-light) body :is(.cm-dc-tabs):not(#cmct-a):not(#cmct-b){background:rgba(255,255,255,0.12) ! important}
+html:not(.theme-light) body :is(.cm-sr-chips):not(#cmct-a):not(#cmct-b){background:rgba(255,255,255,0.15) ! important;color:#ffffff ! important}
+html:not(.theme-light) body :is(.cm-hfs-body):not(#cmct-a):not(#cmct-b){background:rgba(71,71,71,0.2) ! important;border-color:rgba(244,246,250,0) ! important}
+html:not(.theme-light) body :is(.cm-post.cm-news-home):not(#cmct-a):not(#cmct-b){background:rgba(61,61,61,0.35) ! important}
+html:not(.theme-light) body :is(.cm-lh-btn):not(#cmct-a):not(#cmct-b){background:#0071E3 ! important;border-color:#ffffff ! important;color:#ffffff ! important}
+html:not(.theme-light) body :is(.toolbox-chip):not(#cmct-a):not(#cmct-b){background:rgba(64,64,64,0.69) ! important;border-color:rgba(66,66,66,0.84) ! important;color:#ffffff ! important}
+html:not(.theme-light) body :is(.cm-lt-all):not(#cmct-a):not(#cmct-b){background:rgba(51,51,51,0.76) ! important}
+html:not(.theme-light) body :is(.cm-lay-link):not(#cmct-a):not(#cmct-b){background:rgba(51,51,51,0.76) ! important}
+html:not(.theme-light) body :is(.cm-dc):not(#cmct-a):not(#cmct-b){background:#000000 ! important;border-color:rgba(255,255,255,0) ! important}
+html:not(.theme-light) body :is(.cm-qf-chip):not(#cmct-a):not(#cmct-b){background:rgba(255,255,255,0.16) ! important}
+html:not(.theme-light) body :is(.vx-tab):not(#cmct-a):not(#cmct-b){color:#ffffff ! important}
+html:not(.theme-light) body :is(.price-unit):not(#cmct-a):not(#cmct-b){color:#0071E3 ! important}
+html:not(.theme-light) body :is(.icon.icon-sm):not(#cmct-a):not(#cmct-b){color:rgba(255,0,0,0.57) ! important}
+html:not(.theme-light) body :is(.icon.icon-sm > use):not(#cmct-a):not(#cmct-b){color:#ffffff ! important}
+html:not(.theme-light) body :is(.round-action.ig-story-btn):not(#cmct-a):not(#cmct-b){background:rgba(92,92,92,0.4) ! important;border-color:rgba(46,46,46,0.74) ! important;color:#f4f4f6 ! important}
+html:not(.theme-light) body :is(.cm-dc-tabs):not(#cmct-a):not(#cmct-b){background:rgba(255,255,255,0.12) ! important}
+html:not(.theme-light) body :is(.cm-sr-chips):not(#cmct-a):not(#cmct-b){background:rgba(255,255,255,0.15) ! important;color:#ffffff ! important}
+html:not(.theme-light) body :is(.cm-hfs-body):not(#cmct-a):not(#cmct-b){background:rgba(71,71,71,0.2) ! important;border-color:rgba(244,246,250,0) ! important}
+html:not(.theme-light) body :is(.cm-post.cm-news-home):not(#cmct-a):not(#cmct-b){background:rgba(61,61,61,0.35) ! important}
+html:not(.theme-light) body :is(.cm-lh-btn):not(#cmct-a):not(#cmct-b){background:#0071E3 ! important;border-color:#ffffff ! important;color:#ffffff ! important}
+html:not(.theme-light) body :is(.toolbox-chip):not(#cmct-a):not(#cmct-b){background:rgba(64,64,64,0.69) ! important;border-color:rgba(66,66,66,0.84) ! important;color:#ffffff ! important}
+html:not(.theme-light) body :is(.cm-lt-all):not(#cmct-a):not(#cmct-b){background:rgba(51,51,51,0.76) ! important}
+html:not(.theme-light) body :is(.cm-lay-link):not(#cmct-a):not(#cmct-b){background:rgba(51,51,51,0.76) ! important}
+html:not(.theme-light) body :is(.account-edit-btn.text-red-400.border):not(#cmct-a):not(#cmct-b){background:rgba(242,22,22,0.83) ! important;color:#ffffff ! important}
+html:not(.theme-light) body :is(.account-pin-card.card-fade-in):not(#cmct-a):not(#cmct-b){border-color:#2e2e2e ! important}
+html:not(.theme-light) body :is(.cm-dc):not(#cmct-a):not(#cmct-b){background:#000000 ! important}
+html:not(.theme-light) body :is(.cm-dc-tabs):not(#cmct-a):not(#cmct-b){background:rgba(255,255,255,0.15) ! important}
+html:not(.theme-light) body :is(.cm-qf-chip):not(#cmct-a):not(#cmct-b){background:rgba(255,255,255,0.15) ! important}

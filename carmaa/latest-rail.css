@@ -1,0 +1,114 @@
+/* CM-LT: home latest-listings rail + promo banner */
+.cm-home-page .cm-lt-sec{margin:26px 0 0;padding-inline:16px}
+.cm-lt-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px}
+.cm-lt-head h2{margin:0;font-size:20px;line-height:1.35;font-weight:800;color:#f4f6f9;display:flex;align-items:center;gap:8px}
+.cm-lt-head h2::before{content:"";width:12px;height:3px;border-radius:2px;background:#ffffff}
+.cm-lt-all{display:inline-flex;align-items:center;gap:4px;border:0;background:transparent;color:#c9ccd3;font:inherit;font-size:13px;font-weight:600;padding:6px 0;cursor:pointer}
+.cm-lt-all svg{width:16px;height:16px;fill:none;stroke:#ffffff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.cm-lt-wrap{position:relative}
+.cm-lt-rail{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;padding:2px 2px 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.cm-lt-rail::-webkit-scrollbar{display:none}
+.cm-lt-card{flex:0 0 clamp(212px,62vw,250px);scroll-snap-align:start;position:relative;overflow:hidden;border-radius:18px;background:#1D1D1F;border:1px solid rgba(255,255,255,.07);color:#f4f6f9;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .2s ease}
+.cm-lt-card:active{transform:scale(.985)}
+.cm-lt-photo{position:relative;aspect-ratio:16/10;background:#262628;overflow:hidden}
+.cm-lt-photo>*:not(.cm-lt-heart){position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cm-lt-photo::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(0,0,0,.28) 0,rgba(0,0,0,0) 38%,rgba(29,29,31,0) 62%,#1D1D1F 100%)}
+.cm-lt-heart{position:absolute;top:8px;left:8px;z-index:2;width:34px;height:34px;display:grid;place-items:center;padding:0;border:0;background:transparent;color:#fff;cursor:pointer}
+.cm-lt-heart svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
+.cm-lt-heart.is-on svg{fill:#ffffff;stroke:#ffffff}
+.cm-lt-body{position:relative;z-index:1;padding:0 14px 14px;margin-top:-4px;display:flex;flex-direction:column;gap:8px;text-align:right}
+.cm-lt-title{margin:0;font-size:15px;line-height:1.4;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cm-lt-meta{display:flex;align-items:center;gap:12px;font-size:11.5px;color:#a9adb6;white-space:nowrap}
+.cm-lt-meta span{display:inline-flex;align-items:center;gap:5px;min-width:0}
+.cm-lt-meta svg{width:14px;height:14px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.cm-lt-price{display:flex;align-items:baseline;gap:5px;font-size:14.5px;font-weight:800}
+.cm-lt-price b{font-weight:800;direction:ltr;unicode-bidi:isolate}
+.cm-lt-price small{font-size:12px;font-weight:600;color:#d5d8de}
+.cm-lt-tag{align-self:flex-start;display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:9px;background:rgba(255,255,255,.1);color:#e6e8ee;font-size:11px;font-weight:700}
+.cm-lt-tag.is-urgent{color:#ffb454}
+.cm-lt-nav{position:absolute;top:34%;z-index:3;width:38px;height:38px;display:grid;place-items:center;padding:0;border:0;border-radius:50%;background:rgba(38,38,40,.94);color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.45);cursor:pointer}
+.cm-lt-nav[hidden]{display:none}
+.cm-lt-nav svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.cm-lt-next{left:-6px}
+.cm-lt-prev{right:-6px}
+@media (hover:none){.cm-lt-nav{display:none!important}}
+.cm-lt-promo{position:relative;margin:18px 16px 0;height:clamp(170px,46vw,250px);border-radius:20px;overflow:hidden;background:#1D1D1F;border:1px solid rgba(255,255,255,.07);isolation:isolate}
+.cm-lt-promo-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.cm-lt-promo-img.is-flip{transform:scaleX(-1)}
+.cm-lt-promo::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to right,rgba(29,29,31,.88) 0,rgba(29,29,31,.55) 38%,rgba(29,29,31,0) 72%)}
+.cm-lt-promo-copy{position:absolute;z-index:2;left:clamp(16px,5vw,34px);top:50%;transform:translateY(-50%);width:62%;max-width:420px;text-align:left;color:#f5f6f8}
+.cm-lt-promo-copy h3{margin:0 0 8px;font-size:clamp(17px,4.8vw,26px);line-height:1.4;font-weight:800;color:#fff}
+.cm-lt-promo-copy p{margin:0 0 14px;font-size:clamp(12px,3.3vw,15px);line-height:1.6;color:#c9ccd3}
+.cm-lt-cta{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 16px;border:0;border-radius:999px;background:#fff;color:#262628;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.cm-lt-cta svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+html.theme-light .cm-lt-head h2{color:#1D1D1F}
+html.theme-light .cm-lt-all{color:#4b5058}
+html.theme-light .cm-lt-card{background:#fff;border-color:rgba(0,0,0,.08);color:#1D1D1F}
+html.theme-light .cm-lt-photo::after{background:linear-gradient(to bottom,rgba(0,0,0,.22) 0,rgba(0,0,0,0) 38%,rgba(255,255,255,0) 62%,#fff 100%)}
+html.theme-light .cm-lt-meta{color:#5b6068}
+html.theme-light .cm-lt-price small{color:#333336}
+html.theme-light .cm-lt-tag{background:rgba(0,0,0,.07);color:#262628}
+
+/* CM-XP:START — کارت «تجربه‌ای متفاوت» (ماشین قرمز) */
+.cm-lt-promo.cm-xp{height:auto;aspect-ratio:736/412;background:#040203;border:1px solid rgba(255,255,255,.108);box-shadow:0 18px 40px -22px rgba(255,255,255,.33),inset 0 0 0 1px rgba(255,255,255,.025)}
+.cm-xp .cm-lt-promo-img{object-position:center 60%;transform:scale(1.001);transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.cm-xp .cm-lt-promo-img.is-flip{transform:none}
+.cm-xp::after{background:linear-gradient(to bottom,rgba(0,0,0,.42) 0,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 60%,rgba(0,0,0,.6) 100%)}
+.cm-xp .cm-lt-promo-copy{position:absolute;inset:0;left:0;top:0;transform:none;width:auto;max-width:none;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:clamp(12px,4.4vw,20px) 16px;text-align:center}
+.cm-xp .cm-lt-promo-copy h3{margin:0;font-size:clamp(12.5px,3.7vw,15px);line-height:1.5;font-weight:700;letter-spacing:0;color:#fff;text-shadow:0 1px 14px rgba(0,0,0,.85)}
+.cm-xp .cm-lt-promo-copy h3::before{content:"";display:block;width:22px;height:2px;margin:0 auto 7px;border-radius:2px;background:linear-gradient(90deg,#ffffff,#cfd0d5);box-shadow:0 0 10px rgba(255,255,255,.4)}
+.cm-xp .cm-lt-cta{height:30px;padding:0 13px;gap:6px;font-size:12px;font-weight:700;color:#1D1D1F;background:linear-gradient(180deg,#ffffff,#cfd0d5);border:1px solid rgba(255,255,255,.228);box-shadow:0 8px 20px -8px rgba(255,255,255,.4),inset 0 1px 0 rgba(255,255,255,.22);transition:transform .18s ease,filter .18s ease,box-shadow .18s ease}
+.cm-xp .cm-lt-cta svg{width:13px;height:13px}
+.cm-xp .cm-lt-cta:active{transform:scale(.96)}
+.cm-xp .cm-lt-cta:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media (hover:hover){.cm-xp:hover .cm-lt-promo-img{transform:scale(1.035)}.cm-xp .cm-lt-cta:hover{filter:brightness(1.12);box-shadow:0 10px 24px -8px rgba(255,255,255,.4),inset 0 1px 0 rgba(255,255,255,.28)}}
+@media (min-width:768px){
+  .cm-lt-promo.cm-xp{aspect-ratio:auto;height:clamp(240px,22vw,300px)}
+  .cm-xp .cm-lt-promo-img{object-position:center 56%}
+  .cm-xp::after{background:linear-gradient(to left,rgba(0,0,0,.62) 0,rgba(0,0,0,.25) 30%,rgba(0,0,0,0) 52%)}
+  .cm-xp .cm-lt-promo-copy{justify-content:center;align-items:flex-start;gap:16px;padding:0 clamp(32px,5vw,64px);text-align:start}
+  .cm-xp .cm-lt-promo-copy h3{font-size:20px}
+  .cm-xp .cm-lt-promo-copy h3::before{margin:0 0 9px;width:28px}
+  .cm-xp .cm-lt-cta{height:34px;padding:0 16px;font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){.cm-xp .cm-lt-promo-img,.cm-xp .cm-lt-cta{transition:none}.cm-xp:hover .cm-lt-promo-img{transform:none}}
+/* CM-XP:END */
+
+/* CM-LT2:START — کارت‌های مینیمال سبک iOS */
+.cm-home-page .cm-lt-head{margin:0 0 12px}
+.cm-home-page .cm-lt-head h2{font-size:22px;font-weight:700;letter-spacing:0;color:#F5F5F7}
+.cm-home-page .cm-lt-head h2::before{display:none}
+.cm-home-page .cm-lt-all{font-size:14px;font-weight:500;color:#ffffff;gap:2px}
+.cm-home-page .cm-lt-all svg{width:15px;height:15px;stroke:currentColor;stroke-width:2.2}
+.cm-home-page .cm-lt-rail{gap:12px;padding:2px 2px 8px;align-items:flex-start}
+.cm-home-page .cm-lt-rail .cm-lt-card{flex:0 0 clamp(200px,58vw,236px)!important;width:auto;padding:0!important;background:#1D1D1F!important;background-image:none!important;border:0!important;border-radius:24px!important;overflow:hidden!important;box-shadow:inset 0 0 0 .5px rgba(255,255,255,.08)!important;color:#F5F5F7;transform:none;transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.cm-home-page .cm-lt-rail .cm-lt-card:active{transform:scale(.975)}
+.cm-home-page .cm-lt-card .cm-lt-photo{aspect-ratio:4/3;border-radius:0!important;background:#262628;overflow:hidden;box-shadow:none;clip-path:none}
+.cm-home-page .cm-lt-card .cm-lt-photo::after,.cm-home-page .cm-lt-card .cm-lt-photo::before{display:none!important}
+.cm-lt-photo>img{transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.cm-home-page .cm-lt-card .cm-lt-heart{top:10px;left:10px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(14px) saturate(1.6);backdrop-filter:blur(14px) saturate(1.6)}
+.cm-lt-heart svg{width:16px;height:16px;stroke-width:2;filter:none}
+.cm-lt-photo>.cm-lt-badge.cm-lt-badge{position:absolute;inset:10px 10px auto auto;width:auto;height:24px;z-index:2;display:inline-flex;align-items:center;padding:0 10px;border-radius:12px;font-size:11.5px;font-weight:600;color:#1D1D1F;background:rgba(255,255,255,.92)}
+.cm-home-page .cm-lt-card .cm-lt-body{padding:12px 14px 14px!important;margin:0!important;gap:3px;background:transparent!important;text-align:right}
+.cm-home-page .cm-lt-card .cm-lt-title{margin:0;font-size:15px;line-height:1.5;font-weight:600;color:#F5F5F7}
+.cm-home-page .cm-lt-card .cm-lt-sub{margin:0;font-size:13px;line-height:1.5;min-height:1.5em;color:rgba(235,235,245,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cm-home-page .cm-lt-card .cm-lt-price{margin-top:6px;gap:4px;font-size:15px;font-weight:600;color:#F5F5F7}
+.cm-lt-price b{font-weight:600}
+.cm-lt-price small{font-size:12.5px;font-weight:500;color:rgba(235,235,245,.6)}
+.cm-lt-nav{top:70px;width:34px;height:34px;background:rgba(38,38,40,.8);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 2px 10px rgba(0,0,0,.35)}
+@media (hover:hover){.cm-lt-card:hover .cm-lt-photo>img{transform:scale(1.04)}}
+@media (min-width:768px){.cm-home-page .cm-lt-rail .cm-lt-card{flex-basis:248px!important}.cm-home-page .cm-lt-rail{gap:16px}.cm-lt-nav{top:90px}}
+@media (prefers-reduced-motion:reduce){.cm-lt-card,.cm-lt-photo>img{transition:none}.cm-lt-card:hover .cm-lt-photo>img{transform:none}}
+/* CM-LT2:END */
+
+/* >>> CM-LTMORE START */
+.cm-lt-more{flex:0 0 auto;align-self:stretch;min-width:112px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:16px 10px;text-align:center;cursor:pointer;position:relative;overflow:hidden;box-sizing:border-box;border-radius:18px;color:#eceff4;background:radial-gradient(120% 70% at 50% 115%,rgba(255,255,255,.18),transparent 70%),#262628;border:1px solid rgba(255,255,255,.204);scroll-snap-align:end;-webkit-tap-highlight-color:transparent;transition:border-color .2s}
+.cm-lt-more::before{content:"";position:absolute;top:0;left:26%;right:26%;height:2px;border-radius:0 0 2px 2px;background:#ffffff}
+.cm-lt-more:hover,.cm-lt-more:focus-visible{border-color:rgba(255,255,255,.42);outline:none}
+.cm-lt-more-ic{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#1D1D1F;background:#ffffff;box-shadow:0 8px 16px -8px rgba(255,255,255,.4);transition:transform .2s}
+.cm-lt-more:hover .cm-lt-more-ic,.cm-lt-more:active .cm-lt-more-ic{transform:translateX(-3px)}
+.cm-lt-more b{font-size:14px;font-weight:800;line-height:1.5}
+.cm-lt-more span:last-child{font-size:11.5px;line-height:1.6;color:#8a919d}
+html.theme-light .cm-lt-more{color:#12151a;background:radial-gradient(120% 70% at 50% 115%,rgba(155,27,48,.16),transparent 70%),#fff;border-color:rgba(155,27,48,.35)}
+html.theme-light .cm-lt-more span:last-child{color:#5f6672}
+/* <<< CM-LTMORE END */

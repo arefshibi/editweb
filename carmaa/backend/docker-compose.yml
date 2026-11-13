@@ -1,0 +1,57 @@
+services:
+  api:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://carmaa:${POSTGRES_PASSWORD}@db:5432/carmaa
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+      MEDIA_ROOT: /app/var/media
+    ports:
+      - "${CARMA_LAN_IP:-127.0.0.1}:3000:3000"
+    volumes:
+      - carmaa_media:/app/var/media
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,noexec,nosuid
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: carmaa
+      POSTGRES_USER: carmaa
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - carmaa_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U carmaa -d carmaa"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    # No public host port: only the API container can reach PostgreSQL.
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD}"]
+    volumes:
+      - carmaa_redis:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$${REDIS_PASSWORD}\" ping | grep PONG"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+volumes:
+  carmaa_db:
+  carmaa_redis:
+  carmaa_media:

@@ -1,0 +1,67 @@
+/* CarMaa — پاپ‌آپ پیشنهاد استوری اولین آگهی */
+.fas-bd{position:fixed;inset:0;z-index:100000;background:rgba(29,29,31,.62);-webkit-backdrop-filter:blur(0);backdrop-filter:blur(0);opacity:0;transition:opacity .35s ease,backdrop-filter .35s ease,-webkit-backdrop-filter .35s ease}
+.fas-bd.is-in{opacity:1;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.fas-bd.is-out{opacity:0;-webkit-backdrop-filter:blur(0);backdrop-filter:blur(0)}
+.fas-card{position:fixed;z-index:100001;left:50%;bottom:0;width:min(440px,100%);box-sizing:border-box;direction:rtl;text-align:center;font-family:'Vazirmatn',Tahoma,sans-serif;color:#f5f1f1;
+  padding:26px 22px calc(22px + env(safe-area-inset-bottom,0px));border-radius:30px 30px 0 0;background:linear-gradient(180deg,#262628 0%,#1D1D1F 100%);
+  box-shadow:0 -24px 80px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.07);transform:translate(-50%,105%);opacity:.6;transition:transform .55s cubic-bezier(.2,.9,.25,1),opacity .35s ease}
+.fas-card.is-in{transform:translate(-50%,0);opacity:1}
+.fas-card.is-out{transform:translate(-50%,105%);opacity:0;transition:transform .36s cubic-bezier(.5,0,.75,0),opacity .3s ease}
+@media(min-width:640px){.fas-card{bottom:auto;top:50%;border-radius:30px;padding-bottom:24px;transform:translate(-50%,-44%) scale(.94);opacity:0}.fas-card.is-in{transform:translate(-50%,-50%) scale(1);opacity:1}.fas-card.is-out{transform:translate(-50%,-46%) scale(.96)}}
+.fas-x{position:absolute;top:14px;left:14px;width:34px;height:34px;border:0;border-radius:50%;background:rgba(255,255,255,.07);display:grid;place-items:center;cursor:pointer;transition:background .2s,transform .2s}
+.fas-x:hover{background:rgba(255,255,255,.13)}.fas-x:active{transform:scale(.9)}
+.fas-x svg{width:16px;height:16px;fill:none;stroke:#e9dede;stroke-width:2.2;stroke-linecap:round}
+.fas-stage{position:relative;width:128px;height:210px;margin:6px auto 18px;display:grid;place-items:center}
+.fas-glow{position:absolute;inset:-26px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.3),transparent 72%);filter:blur(8px);animation:fasBreath 3.6s ease-in-out infinite}
+.fas-ring{position:absolute;inset:-5px;border-radius:26px;padding:2.5px;background:conic-gradient(from 0deg,#ffffff,#9a9aa1,#ffffff,#9a9aa1,#ffffff);animation:fasSpin 5s linear infinite;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);color:#1D1D1F}
+.fas-ph{position:relative;width:100%;height:100%;border-radius:22px;overflow:hidden;background:#262628;box-shadow:0 18px 40px rgba(0,0,0,.5);animation:fasFloat 4.2s ease-in-out infinite;transform:rotate(-2deg)}
+.fas-ph img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transform:scale(1.06);transition:opacity .6s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.fas-ph:not(.is-loading) img{opacity:1;transform:scale(1)}
+.fas-sh{position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.1) 50%,transparent 70%);background-size:220% 100%;animation:fasShine 1.5s linear infinite;opacity:0;transition:opacity .3s}
+.fas-ph.is-loading .fas-sh{opacity:1}
+.fas-tag{position:absolute;top:8px;right:8px;font-size:9.5px;font-weight:700;padding:3px 8px;border-radius:99px;background:rgba(29,29,31,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#fff}
+.fas-t{margin:0 0 6px;font-size:21px;font-weight:800;letter-spacing:-.2px;opacity:0;transform:translateY(10px);transition:opacity .5s .18s,transform .5s .18s cubic-bezier(.2,.9,.25,1)}
+.fas-s{margin:0 auto 20px;max-width:300px;font-size:13.5px;line-height:1.85;color:#b9adad;opacity:0;transform:translateY(10px);transition:opacity .5s .26s,transform .5s .26s cubic-bezier(.2,.9,.25,1)}
+.fas-card.is-in .fas-t,.fas-card.is-in .fas-s,.fas-card.is-in .fas-go,.fas-card.is-in .fas-no{opacity:1;transform:none}
+.fas-go{position:relative;width:100%;height:54px;border:0;border-radius:18px;cursor:pointer;color:#1D1D1F;font:700 15.5px 'Vazirmatn',Tahoma,sans-serif;background:linear-gradient(135deg,#ffffff,#e7e8ea 55%,#cfd0d5);
+  box-shadow:0 10px 26px rgba(255,255,255,.228),inset 0 1px 0 rgba(255,255,255,.22);overflow:hidden;display:flex;align-items:center;justify-content:center;gap:10px;
+  opacity:0;transform:translateY(12px);transition:opacity .5s .34s,transform .5s .34s cubic-bezier(.2,.9,.25,1),box-shadow .25s,background .4s,filter .2s}
+.fas-go::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.28) 50%,transparent 65%);transform:translateX(-120%);animation:fasSweep 3.2s 1.2s ease-in-out infinite}
+.fas-go:active:not(:disabled){transform:scale(.97)}
+.fas-go:disabled{cursor:default}
+.fas-sp,.fas-ok{display:none;width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.fas-sp{stroke-dasharray:36 22;animation:fasSpin .8s linear infinite}
+.fas-go.is-busy{filter:saturate(.9)}.fas-go.is-busy::after{display:none}.fas-go.is-busy .fas-sp{display:block}
+.fas-go.is-done{background:linear-gradient(135deg,#2fb36a,#1f8f52);box-shadow:0 10px 26px rgba(47,179,106,.35),inset 0 1px 0 rgba(255,255,255,.25)}
+.fas-go.is-done::after{display:none}.fas-go.is-done .fas-ok{display:block;stroke-dasharray:28;stroke-dashoffset:28;animation:fasDraw .5s .05s ease forwards}
+.fas-go.is-done .fas-lb{animation:fasPop .45s cubic-bezier(.2,.9,.25,1)}
+.fas-go.is-err{animation:fasShake .45s}
+.fas-no{display:block;margin:12px auto 0;border:0;background:none;color:#8f8484;font:600 13px 'Vazirmatn',Tahoma,sans-serif;padding:8px 18px;cursor:pointer;opacity:0;transition:opacity .5s .42s,color .2s}
+.fas-no:hover{color:#cfc4c4}
+.fas-card.is-done .fas-ring{animation-duration:1.4s}
+.fas-card.is-done .fas-glow{background:radial-gradient(closest-side,rgba(47,179,106,.45),transparent 72%)}
+/* گزینه‌های بعد از انتشار */
+.fas-after{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s cubic-bezier(.2,.9,.25,1)}
+.fas-after-in{overflow:hidden;min-height:0}
+.fas-card.show-after .fas-after{grid-template-rows:1fr}
+.fas-row{display:flex;gap:10px;padding-top:12px;opacity:0;transform:translateY(10px);transition:opacity .45s .12s,transform .5s .12s cubic-bezier(.2,.9,.25,1)}
+.fas-card.show-after .fas-row{opacity:1;transform:none}
+.fas-ig,.fas-lt{height:48px;border-radius:16px;font:700 13.5px 'Vazirmatn',Tahoma,sans-serif;cursor:pointer;transition:transform .2s,filter .2s,background .2s}
+.fas-ig{flex:1.7;border:0;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#f58529,#dd2a7b 50%,#8134af);box-shadow:0 8px 22px rgba(221,42,123,.3),inset 0 1px 0 rgba(255,255,255,.25)}
+.fas-ig svg{width:19px;height:19px;fill:none;stroke:#fff;stroke-width:2}.fas-ig svg .d{fill:#fff;stroke:none}
+.fas-lt{flex:1;border:0;background:rgba(255,255,255,.08);color:#d9cfcf}
+.fas-lt:hover{background:rgba(255,255,255,.13)}
+.fas-ig:active,.fas-lt:active{transform:scale(.96)}
+html.theme-light .fas-lt{background:rgba(0,0,0,.06);color:#3a2f30}
+@keyframes fasSpin{to{transform:rotate(360deg)}}
+@keyframes fasBreath{50%{opacity:.55;transform:scale(1.08)}}
+@keyframes fasFloat{50%{transform:rotate(-2deg) translateY(-7px)}}
+@keyframes fasShine{to{background-position:-120% 0}}
+@keyframes fasSweep{60%,100%{transform:translateX(120%)}}
+@keyframes fasDraw{to{stroke-dashoffset:0}}
+@keyframes fasPop{0%{transform:scale(.85);opacity:.4}100%{transform:none;opacity:1}}
+@keyframes fasShake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+html.theme-light .fas-card{background:linear-gradient(180deg,#fff,#f6f1f1);color:#161011;box-shadow:0 -24px 80px rgba(0,0,0,.25),inset 0 0 0 1px rgba(0,0,0,.06)}
+html.theme-light .fas-s{color:#6b6061}html.theme-light .fas-x{background:rgba(0,0,0,.06)}html.theme-light .fas-x svg{stroke:#2a2021}html.theme-light .fas-no{color:#7d7273}
+@media(prefers-reduced-motion:reduce){.fas-card,.fas-bd,.fas-t,.fas-s,.fas-go,.fas-no{transition-duration:.01s!important;transition-delay:0s!important}.fas-glow,.fas-ring,.fas-ph,.fas-go::after,.fas-sh{animation:none!important}}

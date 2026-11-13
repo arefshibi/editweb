@@ -1,0 +1,22 @@
+CarMaa phase 1+2 validation report
+Date: 2026-10-20
+
+PASS: backend unit/regression tests: 27/27
+PASS: backend source/test syntax check (`npm run check`)
+PASS: all frontend JavaScript syntax checks (`find js -name '*.js' ... node --check`)
+PASS: archive content derived from CarMaa_secure_backend_v2.zip; no .env file or real secrets added
+
+BLOCKED / NOT RUN:
+- `npm install --package-lock-only --ignore-scripts --no-audit --no-fund` timed out; no package-lock.json was fabricated.
+- Docker/Podman/PostgreSQL/Redis binaries are unavailable in this execution environment.
+- No live database migration or `/health/ready` integration test was run.
+- No staging API smoke test, SMS delivery, payment sandbox, load test, SAST/DAST, or live penetration test was run.
+
+Changes in this iteration:
+- Added account API client methods for favorites, profile update, and saved searches.
+- Added server-authoritative favorite hydration and toggle bridge.
+- Favorites are loaded on session restore and after OTP login completes.
+- In API mode, favorite toggling for server listing IDs calls the server and only updates state after a successful response.
+- Added regression tests for the above behavior.
+
+Status: development/staging handoff only; not production-security certification.

@@ -1,0 +1,60 @@
+/* CM-BLUE2: آبی هوشمند — فقط دکمه‌های اصلی و حالت‌های انتخاب‌شده */
+:root{--bw-blue:#0071E3;--dock-cherry:#0071E3}
+html{accent-color:#0071E3}
+input,textarea,[contenteditable]{caret-color:#0071E3}
+:focus-visible{outline-color:#0071E3}
+/* دکمه‌های اصلی (پر) */
+html body .cm-fc-post,html body .cm-cs-send,html body .cm-xp .cm-lt-cta,
+html body .cm-home-page .cm-sr-cta,html body .fas-go,
+html body .sell-location-map .sell-confirm-btn,html body .cm-dc-tabs button.is-on,
+html body .cm-fc-tool.is-on,html body .cm-home-page .cm-dc .cm-qf .cm-qf-chip.is-on,
+html body .cm-home-page .cm-dc .cm-qf .cm-qf-chip:active,
+html body .cm-ft2 .cm-ft-btn.is-primary,
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-split .detail-cta-contact,
+html:not(.theme-light) body :is(.adc-cta,.cm-ts-sug):not(#cmct-a):not(#cmct-b):not(#cmct-c),
+html body .bw-primary{
+  background:#0071E3!important;background-image:none!important;border-color:#0071E3!important;
+  color:#fff!important;box-shadow:0 8px 22px -10px rgba(0,113,227,.65)!important}
+html body .cm-fc-post *,html body .cm-cs-send *,html body .cm-xp .cm-lt-cta *,
+html body .cm-home-page .cm-sr-cta *,html body .fas-go *,
+html body .sell-location-map .sell-confirm-btn *,html body .cm-dc-tabs button.is-on *,
+html body .cm-fc-tool.is-on *,html body .cm-home-page .cm-dc .cm-qf .cm-qf-chip.is-on *,
+html body .cm-ft2 .cm-ft-btn.is-primary *,
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-split .detail-cta-contact *,
+html:not(.theme-light) body :is(.adc-cta,.cm-ts-sug):not(#cmct-a):not(#cmct-b):not(#cmct-c) *,
+html body .bw-primary *{color:#fff!important}
+html body .cm-fc-post svg,html body .cm-cs-send svg,html body .cm-xp .cm-lt-cta svg,
+html body .cm-home-page .cm-sr-cta svg,html body .fas-go svg,
+html body .sell-location-map .sell-confirm-btn svg,html body .cm-fc-tool.is-on svg,
+html body .bw-primary svg{stroke:#fff!important}
+/* نشانک‌ها: اعلان خوانده‌نشده، نقطه‌ی اسلاید، گزینه‌ی انتخاب‌شده */
+html body .mr-bell-badge,html body .mr-chat-dock-badge,html body .cm-feed-notify i,
+html body .cm-home-promo-dots button.is-active,
+html body #sellCityPicker .sell-trim-option.is-selected b{background:#0071E3!important;color:#fff!important}
+/* دکمه‌ی + وسط دوک */
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"],
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"].is-active,
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-item.dock-plus,
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-item.dock-plus.is-active{
+  background:#0071E3!important;background-color:#0071E3!important;color:#fff!important;border-color:rgba(255,255,255,.22)!important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"] svg,
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock .dock-item.dock-plus svg{stroke:#fff!important;color:#fff!important}
+/* چیپ/تب/سوییچ انتخاب‌شده */
+:is(button,a,label,div,span)[class*="chip"]:is(.is-on,.is-selected,.is-active,.on,[aria-pressed="true"],[aria-selected="true"]):not(.bw-primary){
+  background:rgba(0,113,227,.18)!important;border-color:rgba(0,113,227,.6)!important;color:#2997FF!important}
+[role="tab"][aria-selected="true"]{color:#0071E3!important;border-color:#0071E3!important}
+.sell-toggle>input:checked+.sell-switch,[role="switch"][aria-checked="true"]{background-color:#0071E3!important}
+/* لینک‌های ساده‌ی داخل متن */
+a[href]:not([class]){color:#0071E3}
+
+/* Design tokens — Apple (dark theme derived) */
+:root{
+  --cm-primary:#0071E3;--cm-accent:#2997FF;--cm-accent-1:#0066CC;
+  --cm-canvas:#FFFFFF;--cm-surface-light:#F5F5F7;--cm-ink:#000000;--cm-body:#1D1D1F;--cm-hairline:#D2D2D7;
+  --cm-neutral-1:#333336;--cm-neutral-2:#E8E8ED;--cm-neutral-3:#6E6E73;
+  --cm-bg:#1D1D1F;--cm-surface:#262628;--cm-surface-raised:#333336;--cm-text:#F5F5F7;--cm-text-muted:#98989D;--cm-border:#3A3A3D;
+  --bw-blue:#0071E3;--dock-cherry:#0071E3;--cm-page:#1D1D1F;color-scheme:dark}
+html body{background-color:#1D1D1F}
+:focus-visible{outline:2px solid #0071E3!important;outline-offset:2px}
+html body .bw-primary:active,html body .cm-fc-post:active,html body .cm-cs-send:active{background:#0066CC!important;border-color:#0066CC!important}
+a:not([class]):hover{text-decoration:underline}

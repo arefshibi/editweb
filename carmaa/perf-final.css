@@ -1,0 +1,44 @@
+/* CarMaa final performance layer — loaded after all theme/page styles. */
+
+/* 7) Mobile GPU budget: preserve the glass appearance but cap full-width / sticky
+      surfaces. Large backdrop-filter regions are disproportionately expensive on
+      older Adreno/Mali GPUs during scroll. */
+@media (max-width: 820px) {
+  #bottomDock .bottom-dock-inner,
+  .vehicle-cta-dock-inner,
+  #stickyHeaderGroup,
+  .header-search-box,
+  .toolbox-filter-main,
+  .xc-glass,
+  .sell-year-picker-sheet,
+  .sell-brand-picker-sheet,
+  .sell-color-picker-sheet,
+  .sell-trim-picker-sheet,
+  .sell-publishing-card,
+  .mr-cv-top::before,
+  .mr-cv-pill {
+    -webkit-backdrop-filter: blur(8px) saturate(120%) !important;
+    backdrop-filter: blur(8px) saturate(120%) !important;
+  }
+  /* Avoid repainting huge blurred image layers while horizontally scrolling cards. */
+  .smart-photo-bg { filter: blur(8px) brightness(.58) saturate(1.08) !important; }
+}
+
+/* 8) Keep off-screen decorative sections out of the rendering pipeline where supported. */
+@supports (content-visibility: auto) {
+  .cm-home-promos, .cm-home-showrooms, .cm-home-trust-strip,
+  .cm-home-sell-cta, .cm-home-footer-note {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 320px;
+  }
+}
+
+/* 9) Avoid expensive animation work in hidden tabs and honor reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

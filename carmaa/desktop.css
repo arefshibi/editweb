@@ -1,0 +1,222 @@
+@media (min-width:1024px){
+  html,body{background:#1D1D1F}
+  #appFrame{display:block!important;background:#1D1D1F!important}
+  #appViewport{width:100%!important;max-width:100%!important;margin:0!important;border-inline:0!important;background:#1D1D1F!important}
+  #pageContent{width:100%;max-width:1320px;margin-inline:auto;padding-inline:32px;padding-bottom:120px;box-sizing:border-box}
+
+  #stickyHeaderGroup,#siteHeader{width:100%}
+  #siteHeader .header-home-row,#siteHeader .non-home-header-row{max-width:1320px;margin-inline:auto;box-sizing:border-box;padding-inline:32px!important}
+  #siteHeader .header-wordmark{font-size:30px}
+  #siteHeader .header-home-row{padding-block:10px!important}
+  #siteHeader .non-home-header-row{display:flex;align-items:center;gap:20px}
+  #siteHeader .header-search-box{flex:1 1 auto;max-width:760px;margin-inline:auto}
+  .page-header-sticky,#toolbarSlot,#pageHeaderSlot{max-width:1320px;margin-inline:auto;box-sizing:border-box}
+  #bottomDock .bottom-dock-inner{max-width:440px!important;margin-inline:auto}
+
+  body:has(#pageContent > [data-page="home"]) #pageContent{max-width:1320px}
+  .cm-home-page{display:block!important;max-width:1320px!important;margin:0 auto!important;padding:28px 0 110px!important}
+  .cm-home-page .cm-home-hero{max-width:820px;margin-inline:auto;text-align:center}
+  .cm-home-page .cm-home-hero h1{max-width:820px;margin-inline:auto!important;font-size:42px!important}
+  .cm-home-page .cm-home-hero p{max-width:640px;margin-inline:auto!important;font-size:14px!important}
+  .cm-home-page .cm-home-search-wrap{max-width:760px;margin:18px auto 26px!important;padding:0!important}
+  .cm-home-page .cm-hb{max-width:none!important;margin:0!important;padding:0 0 36px!important;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:stretch}
+  .cm-home-page .cm-hb-banner,.cm-home-page .cm-hb-track,.cm-home-page .cm-hb-slide{height:100%!important;min-height:320px}
+  .cm-home-page .cm-hb-grid{margin-top:0;gap:16px;grid-auto-rows:1fr}
+  .cm-home-page .cm-hb-box{height:auto;min-height:150px}
+  .cm-home-page .cm-home-section-heading h2,.cm-home-page .sr-section-head h2{font-size:24px!important}
+  .cm-home-page section{margin-bottom:12px}
+  .cm-home-featured-rail{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;overflow:visible!important;scroll-snap-type:none!important}
+  .cm-home-featured-rail>*{width:auto!important;min-width:0!important;max-width:none!important;flex:none!important}
+  .cm-home-featured-rail>.cm-home-empty-latest{grid-column:1/-1}
+  .sr-rail{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;overflow:visible!important;scroll-snap-type:none!important}
+  .sr-rail>*{width:auto!important;min-width:0!important;max-width:none!important;flex:none!important}
+  .sr-rail>.sr-home-empty{grid-column:1/-1}
+  .cm-home-brand-marquee{max-width:100%}
+  .cm-home-footer-note{max-width:720px;margin-inline:auto}
+
+  .explore-list{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start;padding-inline:0!important}
+  .explore-list>*{min-width:0;width:100%!important;max-width:none!important;justify-self:stretch}
+  [data-page="dealers"] [data-slot="cards"],[data-page="saved"] [data-slot="cards"],[data-page="manage-listings"] [data-slot="cards"]{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+  [data-page="brand-models"] [data-slot="grid"],[data-page="brand-models"] .brand-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+
+  [data-page="vehicle"] .page-shell,.vehicle-demo-layout .page-shell{width:100%!important;max-width:1320px!important;padding:24px 0 40px!important}
+  .vehicle-demo-layout .listing-layout{display:grid!important;grid-template-columns:minmax(0,1.35fr) minmax(360px,.85fr)!important;gap:24px}
+  .vehicle-demo-layout .lower-layout{display:grid!important;grid-template-columns:minmax(0,1.35fr) minmax(320px,.7fr)!important;gap:24px}
+  .vehicle-demo-layout .summary-column{position:sticky;top:96px;align-self:start}
+  .detail-cta{display:flex;justify-content:center}
+  .detail-cta-inner,.vehicle-demo-layout .detail-cta-inner,[data-page="vehicle"].vehicle-detail-page.vehicle-demo-layout .detail-cta-inner{max-width:720px!important}
+
+  [data-page="seller"]{max-width:1200px;margin-inline:auto}
+  [data-page="sell"],[data-page="sell-step"],[data-page="account"],[data-page="account-edit"],[data-page="dealership-edit"],[data-page="qa"]{max-width:860px;margin-inline:auto}
+  [data-page="messages"]{max-width:900px;margin-inline:auto}
+  .mr-msg-screen{max-width:900px!important;margin-inline:auto}
+  .mr-cv{max-width:860px!important}
+  .mr-cv-composer{max-width:836px!important;bottom:28px!important}
+  body:has(#pageContent > [data-page="sell-step"]) [data-slot="actions"].sell-actions-dock{width:min(100%,860px)!important}
+
+  .brand-sheet-panel{max-width:720px!important}
+  .filter-overlay-panel{max-width:760px!important;margin:0 auto}
+  #genericModal .modal-sheet{max-width:560px!important;border-radius:26px!important;border-width:1px!important;margin-block:auto}
+  .search-overlay-panel{max-width:1100px;margin-inline:auto;width:100%}
+  .login-modal-card{width:min(100%,460px)}
+
+  a,button,[role="button"],[data-action]{cursor:pointer}
+  .explore-list>*,.cm-home-featured-rail>*,.sr-rail>*{transition:transform .25s ease,box-shadow .25s ease}
+  .explore-list>*:hover,.cm-home-featured-rail>*:hover,.sr-rail>*:hover{transform:translateY(-3px)}
+  ::-webkit-scrollbar{width:10px;height:10px}
+  ::-webkit-scrollbar-thumb{background:#262628;border-radius:10px}
+  ::-webkit-scrollbar-track{background:#1D1D1F}
+}
+@media (min-width:1500px){
+  #pageContent,#siteHeader .header-home-row,#siteHeader .non-home-header-row,.cm-home-page,[data-page="vehicle"] .page-shell,.vehicle-demo-layout .page-shell{max-width:1440px!important}
+  .explore-list,[data-page="dealers"] [data-slot="cards"],[data-page="saved"] [data-slot="cards"],[data-page="manage-listings"] [data-slot="cards"]{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .cm-home-featured-rail{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .sr-rail{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media (min-width:1024px) and (max-width:1279px){
+  #pageContent{padding-inline:24px}
+  .explore-list,[data-page="dealers"] [data-slot="cards"],[data-page="saved"] [data-slot="cards"],[data-page="manage-listings"] [data-slot="cards"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cm-home-featured-rail{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .sr-rail{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* fixes v2 */
+@media (min-width:1024px){
+  html body #appViewport,
+  html body:has(#pageContent > [data-page="home"]) #appViewport,
+  html body:has(#pageContent > [data-page="listings"]) #appViewport,
+  html body:has(#pageContent > section > .explore-list) #appViewport{
+    width:100%!important;max-width:100%!important;margin:0!important;
+    border-inline:0!important;background:#1D1D1F!important;
+  }
+  #siteHeader.home-nav-active .non-home-header-row,
+  #siteHeader.home-page-active .non-home-header-row{display:none!important}
+  #siteHeader.non-home-active .non-home-header-row{display:flex!important;align-items:center;gap:20px}
+}
+
+/* fixes v3 — bottom dock */
+@media (min-width:1024px){
+  body::after{width:100%!important;left:0!important;transform:none!important;height:110px!important;
+    background:linear-gradient(to top,rgba(29,29,31,.9) 0%,rgba(29,29,31,.55) 45%,rgba(29,29,31,0) 100%)!important}
+  #bottomDock .bottom-dock-inner{max-width:620px!important;width:100%!important;margin-inline:auto}
+}
+
+/* fixes v4 — banner + boxes side by side, story rail underneath */
+@media (min-width:1024px){
+  .cm-home-page .cm-hb{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)!important;grid-auto-flow:row}
+  .cm-home-page .cm-hb>.cm-hb-banner{grid-column:1;grid-row:1;order:1}
+  .cm-home-page .cm-hb>.cm-hb-grid{grid-column:2;grid-row:1;order:1}
+  .cm-home-page .cm-hb>.cm-ts{grid-column:1/-1!important;grid-row:2;order:2;width:100%;margin:8px 0 0!important}
+  .cm-ts-rail{margin-inline:0!important;padding:6px 2px 14px!important;gap:22px!important;overflow-x:auto}
+  .cm-ts-item{width:92px!important}
+  .cm-ts-ring{width:84px!important;height:84px!important}
+  .cm-ts-name{max-width:92px!important;font-size:12.5px!important}
+}
+
+/* fixes v5 — story rail directly under the search bar */
+@media (min-width:1024px){
+  .cm-home-page .cm-hb>.cm-ts{grid-row:1!important;order:0;margin:0 0 6px!important}
+  .cm-home-page .cm-hb>.cm-hb-banner,.cm-home-page .cm-hb>.cm-hb-grid{grid-row:2!important}
+}
+
+
+
+/* ================================================================
+   CarMaa usability pass: fixed white bottom dock, story handles,
+   clearer document fields, and a quieter vehicle-spec layout.
+   Loaded last intentionally so legacy page-specific rules cannot hide it.
+   ================================================================ */
+html body #bottomDock.bottom-dock {
+  position: fixed !important; inset-inline: 0 !important; bottom: 0 !important;
+  z-index: 120 !important; display: flex !important; justify-content: center !important;
+  padding: 0 !important; pointer-events: none !important;
+}
+#bottomDock .bottom-dock-inner {
+  pointer-events: auto !important; width: 100% !important; max-width: none !important;
+  margin: 0 !important; border-radius: 17px 17px 0 0 !important;
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 0px)) !important;
+  gap: 2px !important; background: #fff !important; color: #262628 !important;
+  border: 1px solid rgba(29,29,31,.10) !important; border-bottom: 0 !important;
+  box-shadow: 0 -5px 24px rgba(15,23,42,.12) !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+  overflow: visible !important;
+}
+#bottomDock .bottom-dock-inner::before { display: none !important; content: none !important; }
+#bottomDock .dock-item { color: #737780 !important; border-radius: 13px !important; min-height: 46px !important; }
+#bottomDock .dock-item.is-active { color: #1D1D1F !important; background: #f0f2f5 !important; }
+#bottomDock .dock-item svg { stroke: currentColor !important; }
+#bottomDock .dock-label { font-size: 10.5px !important; }
+html body #pageContent { padding-bottom: calc(86px + env(safe-area-inset-bottom, 0px)) !important; }
+
+/* Hide only on screens where a bottom tab bar competes with a focused task. */
+html body[data-dock-page="conversation"] #bottomDock,
+html body[data-dock-page="notifications"] #bottomDock,
+html body[data-dock-page="sell"] #bottomDock,
+html body[data-dock-page="sell-step"] #bottomDock,
+html body[data-dock-page="accountEdit"] #bottomDock,
+html body[data-dock-page="dealershipEdit"] #bottomDock,
+html body[data-dock-page="qaAsk"] #bottomDock,
+html body[data-dock-page="qaQuestion"] #bottomDock,
+html body:has(#pageContent > [data-page="conversation"]) #bottomDock,
+html body:has(#pageContent > [data-page="notifications"]) #bottomDock,
+html body:has(#pageContent > [data-page="sell-step"]) #bottomDock,
+html body:has(#pageContent > [data-page="account-edit"]) #bottomDock,
+html body:has(#pageContent > [data-page="dealership-edit"]) #bottomDock,
+html body:has(#pageContent > [data-page="qa-ask"]) #bottomDock,
+html body:has(#pageContent > [data-page="qa-question"]) #bottomDock {
+  display: none !important;
+}
+/* Fixed mobile action tray must sit above the dock instead of being covered. */
+.vehicle-cta-dock { bottom: calc(74px + env(safe-area-inset-bottom, 0px)) !important; }
+
+/* Story owner IDs/handles should read as account identifiers, not category labels. */
+.cm-ts-handle { display: block !important; max-width: 100% !important; font-size: 9px !important; line-height: 1.2 !important; color: #858b93 !important; direction: ltr !important; unicode-bidi: plaintext; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cm-ts-name { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* An obvious, tappable disclosure control for vehicle documents. */
+.sell-ownership-more { margin-top: 12px !important; padding-top: 0 !important; border-top: 0 !important; }
+.sell-ownership-more > summary {
+  list-style: none !important; cursor: pointer !important; display: flex !important;
+  align-items: center !important; justify-content: space-between !important; gap: 12px !important;
+  padding: 14px 15px !important; border-radius: 15px !important;
+  border: 1px solid rgba(142,124,245,.42) !important;
+  background: linear-gradient(120deg, rgba(142,124,245,.13), rgba(142,124,245,.045)) !important;
+  color: var(--sm-text,#F5F5F7) !important; text-align: right !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.045) !important; transition: border-color .16s ease, background .16s ease;
+}
+.sell-ownership-more > summary::-webkit-details-marker { display: none !important; }
+.sell-ownership-summary-copy { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.sell-ownership-summary-copy strong { font-size: 13px; font-weight: 800; }
+.sell-ownership-summary-copy small { font-size: 11px; font-weight: 500; color: var(--sm-muted,#9ca3aa); line-height: 1.7; }
+.sell-ownership-summary-icon { flex: 0 0 29px; width: 29px; height: 29px; display: grid; place-items: center; border-radius: 9px; background: rgba(142,124,245,.18); color: #a99aff; }
+.sell-ownership-summary-icon svg { width: 18px; height: 18px; transition: transform .18s ease; }
+.sell-ownership-more[open] > summary { border-color: rgba(142,124,245,.72) !important; background: rgba(142,124,245,.13) !important; border-radius: 15px 15px 10px 10px !important; }
+.sell-ownership-more[open] .sell-ownership-summary-icon svg { transform: rotate(180deg); }
+.sell-ownership-more > summary:focus-visible { outline: 2px solid #a99aff; outline-offset: 2px; }
+.sell-ownership-intro { padding-inline: 3px; margin-top: 12px !important; }
+
+/* Vehicle information: lighter hierarchy, no oversized empty tiles or heavy panels. */
+.vehicle-demo-layout .vehicle-detail-specs-layout { gap: 22px 16px !important; }
+.vehicle-demo-layout .vehicle-detail-spec-group .section-header { margin-bottom: 9px !important; }
+.vehicle-demo-layout .vehicle-detail-spec-group .section-title,
+.vehicle-demo-layout .body-condition-card .section-title { font-size: 14px !important; font-weight: 750 !important; }
+.vehicle-demo-layout .vehicle-detail-spec-group .section-caption { font-size: 10px !important; color: var(--muted) !important; }
+.vehicle-demo-layout .vds-grid { gap: 0 !important; border-radius: 15px !important; background: transparent !important; border: 1px solid var(--line) !important; }
+.vehicle-demo-layout .vds-tile { min-height: 64px !important; padding: 10px 12px !important; gap: 7px !important; background: var(--surface-1,var(--surface-2)) !important; }
+.vehicle-demo-layout .vds-tile-label { font-size: 10.5px !important; }
+.vehicle-demo-layout .vds-tile-value { font-size: 13px !important; font-weight: 750 !important; }
+.vehicle-demo-layout .vds-tile.is-empty .vds-tile-value { font-size: 11px !important; }
+.vehicle-demo-layout .vds-tile-mark .icon { width: 48px !important; height: 48px !important; }
+.vehicle-demo-layout .vds-docs { border-radius: 15px !important; }
+.vehicle-demo-layout .vds-doc { gap: 10px !important; padding: 10px 12px !important; }
+.vehicle-demo-layout .vds-doc-badge { width: 32px !important; height: 32px !important; border-radius: 10px !important; }
+.vehicle-demo-layout .vds-doc-label { font-size: 10px !important; }
+.vehicle-demo-layout .vds-doc-value { font-size: 12px !important; }
+.vehicle-demo-layout .vds-note { font-size: 10.5px !important; }
+@media (max-width: 700px) {
+  #bottomDock .bottom-dock-inner { border-radius: 14px 14px 0 0 !important; }
+  #bottomDock .dock-item { min-height: 44px !important; padding: 4px 1px !important; }
+  #bottomDock .dock-label { font-size: 10px !important; }
+  .vehicle-demo-layout .vehicle-detail-specs-layout { gap: 18px !important; }
+  .vehicle-demo-layout .vds-tile { min-height: 60px !important; padding: 9px 10px !important; }
+}

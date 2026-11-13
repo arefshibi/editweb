@@ -1,0 +1,113 @@
+name: carma
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    environment:
+      SITE_ADDRESS: ${SITE_ADDRESS:-:80}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - api
+  api:
+    build: ./backend
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    env_file: backend/.env
+    environment:
+      DB_HOST: db
+      REDIS_HOST: redis
+      MEDIA_ROOT: /app/var/media
+    volumes:
+      - carmaa_media:/app/var/media
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    healthcheck:  # SEC2-PATCH (R8)
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/health/live').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,noexec,nosuid
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+  migrate:
+    build: ./backend
+    restart: "no"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    env_file: backend/.env
+    environment:
+      DB_HOST: db
+      REDIS_HOST: redis
+    command: ["node", "src/migrate.js"]
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    env_file: backend/.env
+    environment:
+      POSTGRES_DB: carmaa
+      POSTGRES_USER: carmaa
+    volumes:
+      - carmaa_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U carmaa -d carmaa"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    env_file: backend/.env
+    command: ["sh", "-c", "exec redis-server --appendonly yes --requirepass \"$$REDIS_PASSWORD\""]
+    volumes:
+      - carmaa_redis:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$${REDIS_PASSWORD}\" ping | grep PONG"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+volumes:
+  carmaa_db:
+  carmaa_redis:
+  carmaa_media:
+  caddy_data:
+  caddy_config:

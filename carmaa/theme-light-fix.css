@@ -1,0 +1,46 @@
+/* اصلاحات دستی لایت‌مود (بعد از theme-light-auto.css بارگذاری می‌شود) */
+
+/* متن روی عکس: سفید بماند */
+html.theme-light .cm-uc-card,html.theme-light .cm-uc-card b,
+html.theme-light .cm-uc-card .cm-uc-body{color:#fff!important}
+html.theme-light .cm-uc-tags i{background:rgba(0,0,0,.45)!important;color:#fff!important}
+html.theme-light .cm-pf-card b{color:#fff!important}
+html.theme-light .cm-pf-card .cm-pf-ic{color:#fff!important;background:rgba(0,0,0,.35)!important;border-color:rgba(255,255,255,.4)!important}
+html.theme-light .cm-pf-card::after{background:linear-gradient(to bottom,rgba(0,0,0,.55) 0,rgba(0,0,0,0) 38%)!important}
+html.theme-light .cm-uc-card::after{background:linear-gradient(to top,rgba(0,0,0,.78) 0,rgba(0,0,0,.35) 38%,rgba(0,0,0,0) 62%)!important}
+
+/* لوگوی برندها: سیاه (در تیره سفید بود) */
+html.theme-light .cm-pb-logo img{filter:brightness(0)!important}
+html.theme-light .cm-pb-logo img.cm-pb-raw{filter:none!important}
+
+/* دکمه‌ی «مشاهده همه»: دایره‌ی تیره با فلش سفید */
+html.theme-light .cm-lt-all svg{stroke:#fff!important;color:#fff!important}
+
+/* ریل نوع بدنه: کارت روشن */
+html.theme-light body .cm-home-page .cm-bt .cm-bt-tile{background:#fff!important;color:#1D1D1F!important;border:1px solid rgba(0,0,0,.08)!important}
+html.theme-light .cm-uc-card,html.theme-light .cm-uc-card b,html.theme-light .cm-uc-tags i,html.theme-light .cm-pf-card b,html.theme-light .cm-pf-card .cm-pf-ic{-webkit-text-fill-color:#fff!important}
+
+/* ===== تکمیل لایت‌مود (lt4) ===== */
+
+/* سایهٔ پایین صفحه: در لایت‌مود روشن باشد، نه مشکی */
+html.theme-light body::after{background:linear-gradient(to top,rgba(245,245,247,.92) 0%,rgba(245,245,247,.6) 35%,rgba(245,245,247,.25) 70%,rgba(245,245,247,0) 100%)!important}
+
+/* لوگوی برندها: فایل‌ها سفیدند (مخصوص تیره) */
+html.theme-light .filter-brand-logo img{filter:brightness(0)!important}
+html.theme-light .filter-brand-logo img[src$="ford.webp"]{filter:none!important}
+html.theme-light .filter-brand-logo img[src$="kia.webp"]{filter:invert(1) brightness(1.3)!important}
+html.theme-light .home-demo-card-bg.dark-logo{filter:none!important}
+html.theme-light .home-demo-card-bg[data-logo-src$="maserati.webp"],
+html.theme-light .home-demo-card-bg[data-logo-src$="kia.webp"],
+html.theme-light .home-demo-card-bg[data-logo-src$="mitsubishi.webp"]{filter:brightness(0)!important}
+
+/* متن‌های کم‌کنتراست */
+html.theme-light .price-unit{color:#5b606a!important}
+html.theme-light .xcd-chip .xcd-city-text{color:#0b5563!important}
+html.theme-light .sr-footnote,html.theme-light .vx-sec>small,html.theme-light .vx-head>span{color:rgba(0,0,0,.55)!important}
+html.theme-light .cm-hfs-move.is-up{color:#15a34a!important}
+html.theme-light .sr-rank-movement-value{color:#15803d!important}
+html.theme-light .sr-chip.is-active{color:#0a5fc2!important}
+html.theme-light .sell-media-link{color:#5b3fd6!important}
+html.theme-light .sell-media-warn{color:#8a5a00!important}
+html.theme-light .cm-feed-footer-note{color:#6e6e73!important}

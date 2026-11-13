@@ -1,0 +1,83 @@
+/* Filter sheet additions: brand / city / price selects / origin flags / segmented / visual cards.
+   Uses the sheet's existing palette (dark default, .theme-light overrides). */
+.filter-section-title-note{margin-inline-start:6px;font-size:11.5px;font-weight:500;color:#888b8f}
+.filter-section-clear{color:#aab0ff;font-size:12.5px;font-weight:600;max-width:none}
+.filter-section-clear-icon{width:auto;height:auto;background:none;border-radius:0}
+.filter-section-clear-icon svg{display:block}
+
+.filter-more-btn{width:100%;min-height:44px;margin-top:14px;display:flex;align-items:center;justify-content:center;gap:8px;border:1.5px solid #4a5058;border-radius:14px;background:transparent;color:#F5F5F7;font:inherit;font-size:13.5px;font-weight:600;-webkit-tap-highlight-color:transparent}
+.filter-more-btn:active{background:rgba(233,236,239,.06)}
+.filter-more-plus{font-size:20px;font-weight:400;line-height:1}
+
+/* brand logos */
+.filter-brand-grid,.filter-flag-grid,.filter-swatch-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 8px}
+.filter-brand-item,.filter-flag-item{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0;background:none;border:0;padding:0;color:inherit;-webkit-tap-highlight-color:transparent}
+.filter-brand-logo{width:58px;height:58px;border-radius:18px;background:#262628;display:grid;place-items:center;padding:10px;box-sizing:border-box;border:2px solid transparent;transition:border-color .15s,box-shadow .15s}
+.filter-brand-logo img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.filter-brand-fallback{font-size:15px;font-weight:800;color:#F5F5F7}
+.filter-brand-logo img[src$="kia.webp"]{filter:invert(1)}
+.filter-brand-name,.filter-flag-name{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;color:#E8E8ED}
+.filter-brand-item.is-active .filter-brand-logo{border-color:#F5F5F7;box-shadow:0 0 0 2px rgba(233,236,239,.22)}
+.filter-brand-item.is-active .filter-brand-name,.filter-flag-item.is-active .filter-flag-name{color:#fff;font-weight:700}
+
+/* flags */
+.filter-flag{width:60px;height:40px;border-radius:6px;overflow:hidden;display:block;border:2px solid transparent;box-sizing:content-box;box-shadow:0 0 0 1px rgba(255,255,255,.12);transition:border-color .15s,box-shadow .15s}
+.filter-flag svg{display:block;width:100%;height:100%}
+.filter-flag-item.is-active .filter-flag{border-color:#F5F5F7;box-shadow:0 0 0 2px rgba(233,236,239,.22)}
+
+/* selected city chip */
+.filter-chip-selected{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:52px;padding:0 16px;border-radius:14px;background:rgba(233,236,239,.1);color:#F5F5F7;font-size:14px;font-weight:600;margin-bottom:12px}
+.filter-chip-selected button{display:flex;background:none;border:0;padding:4px;color:inherit}
+.filter-city-box .filter-pill-grid{margin-bottom:2px}
+.filter-city-box .filter-more-btn{margin-top:14px}
+
+/* price */
+.filter-price-fields{display:flex;flex-direction:column;gap:12px}
+.filter-select{position:relative;display:block}
+.filter-select select{width:100%;height:52px;border:0;border-radius:14px;background:#262628;color:#F5F5F7;font:inherit;font-size:14px;padding:0 16px;-webkit-appearance:none;appearance:none;outline:none;text-overflow:ellipsis}
+.filter-select select:focus-visible{box-shadow:0 0 0 2px rgba(233,236,239,.35)}
+.filter-select-chev{position:absolute;inset-inline-end:auto;left:16px;top:50%;transform:translateY(-50%);pointer-events:none;color:#aab0b5;display:flex}
+.filter-check{display:flex;align-items:center;gap:9px;background:none;border:0;padding:2px 0;color:#F5F5F7;font:inherit;font-size:14px;font-weight:600;-webkit-tap-highlight-color:transparent}
+.filter-check-box{width:24px;height:24px;border-radius:8px;border:2px solid #F5F5F7;display:grid;place-items:center;box-sizing:border-box;transition:background .15s}
+.filter-check.is-active .filter-check-box{background:#F5F5F7;color:#1D1D1F}
+.filter-check.is-active .filter-check-box svg{stroke:#1D1D1F}
+
+/* segmented */
+.filter-seg{display:flex;padding:4px;border-radius:16px;background:#262628;gap:2px}
+.filter-seg-btn{flex:1 1 0;min-width:0;height:44px;border:0;border-radius:12px;background:transparent;color:#E8E8ED;font:inherit;font-size:13.5px;font-weight:600;padding:0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:background .15s,color .15s;-webkit-tap-highlight-color:transparent}
+.filter-seg-btn.is-active{background:#F5F5F7;color:#1D1D1F;font-weight:800}
+
+/* visual cards */
+.filter-vgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 10px}
+.filter-vitem{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0;background:none;border:0;padding:0;color:inherit;-webkit-tap-highlight-color:transparent}
+.filter-vitem-pic{width:100%;height:74px;border-radius:16px;background:#f4f5f7;display:grid;place-items:center;padding:8px;box-sizing:border-box;border:2px solid transparent;color:#333336;transition:border-color .15s,box-shadow .15s}
+.filter-vitem-pic img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.filter-vitem-label{font-size:13px;color:#E8E8ED;text-align:center}
+.filter-vitem.is-active .filter-vitem-pic{border-color:#F5F5F7;box-shadow:0 0 0 2px rgba(233,236,239,.22)}
+.filter-vitem.is-active .filter-vitem-label{color:#fff;font-weight:700}
+
+/* swatches (4-up) */
+.filter-swatch-grid .filter-swatch-item{min-width:0}
+.filter-swatch-grid .filter-swatch{width:46px;height:46px}
+.filter-swatch-grid .filter-swatch-name{font-size:12px;color:#E8E8ED}
+
+/* light theme */
+.theme-light .filter-more-btn{border-color:#9aa0a6;color:#262628}
+.theme-light .filter-more-btn:active{background:rgba(38,38,40,.06)}
+.theme-light .filter-brand-logo{background:#262628}
+.theme-light .filter-brand-name,.theme-light .filter-flag-name,.theme-light .filter-vitem-label,.theme-light .filter-swatch-grid .filter-swatch-name{color:#53575b}
+.theme-light .filter-brand-item.is-active .filter-brand-name,.theme-light .filter-flag-item.is-active .filter-flag-name,.theme-light .filter-vitem.is-active .filter-vitem-label{color:#262628}
+.theme-light .filter-brand-item.is-active .filter-brand-logo,.theme-light .filter-flag-item.is-active .filter-flag,.theme-light .filter-vitem.is-active .filter-vitem-pic{border-color:#262628;box-shadow:0 0 0 2px rgba(38,38,40,.18)}
+.theme-light .filter-flag{box-shadow:0 0 0 1px rgba(0,0,0,.12)}
+.theme-light .filter-chip-selected{background:rgba(38,38,40,.08);color:#262628}
+.theme-light .filter-select select{background:#dfe3e6;color:#262628}
+.theme-light .filter-check{color:#262628}
+.theme-light .filter-check-box{border-color:#262628}
+.theme-light .filter-check.is-active .filter-check-box{background:#262628;color:#F5F5F7}
+.theme-light .filter-check.is-active .filter-check-box svg{stroke:#F5F5F7}
+.theme-light .filter-seg{background:#dfe3e6}
+.theme-light .filter-seg-btn{color:#53575b}
+.theme-light .filter-seg-btn.is-active{background:#262628;color:#fff}
+.theme-light .filter-vitem-pic{background:#fff}
+.theme-light .filter-section-clear{color:#4f46e5}
+.theme-light .filter-section-title-note{color:#7a7e82}

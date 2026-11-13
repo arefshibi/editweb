@@ -1,0 +1,41 @@
+/* Vehicle detail footer — minimal, centred, no dead space. Loaded last. */
+[data-page="vehicle"].vehicle-detail-page .footer,
+.vehicle-demo-layout .footer{
+  display:flex !important;flex-direction:column !important;align-items:center !important;justify-content:center !important;
+  gap:10px !important;margin:22px 0 0 !important;padding:0 !important;border:0 !important;text-align:center;
+}
+.footer .footer-links{display:flex;align-items:center;justify-content:center;gap:14px}
+.footer .footer-links a{display:inline-flex;align-items:center;gap:5px;color:#8b9098;font-size:12px;font-weight:600;text-decoration:none;padding:4px 2px}
+.footer .footer-links a:active{color:#fff}
+.footer .footer-links i{width:3px;height:3px;border-radius:50%;background:#4a4f56}
+.footer .footer-copy{color:#5d636b;font-size:11px;font-weight:500;letter-spacing:.01em}
+
+/* only reserve room for the fixed contact bar (bar ≈ 75px + 12px offset) */
+body:has(.vehicle-detail-page) #pageContent{padding-bottom:0 !important}
+[data-page="vehicle"].vehicle-detail-page{padding-bottom:calc(98px + env(safe-area-inset-bottom,0px)) !important}
+[data-page="vehicle"].vehicle-detail-page .page-shell,
+.vehicle-demo-layout .page-shell{padding-bottom:0 !important}
+
+/* Giant «Carma» wordmark: only its top half shows, the lower half sinks into the page behind a black fade. */
+.footer .footer-mark{
+  --fs:min(26vw,120px);
+  align-self:stretch;margin:8px 0 0;height:calc(var(--fs) * .56);overflow:hidden;
+  font-family:'Fredoka','Baloo 2','Nunito','Varela Round',ui-rounded,'SF Pro Rounded',system-ui,sans-serif;
+  font-weight:600;font-size:var(--fs);line-height:1;letter-spacing:-.02em;text-align:center;direction:ltr;unicode-bidi:isolate;
+  color:#eef0f2;user-select:none;-webkit-user-select:none;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.92) 30%,rgba(0,0,0,.35) 72%,transparent 100%);
+          mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.92) 30%,rgba(0,0,0,.35) 72%,transparent 100%);
+}
+
+/* «Carma» wordmark: same position as before, but it rises out of the shadow a bit more —
+   glyphs sit slightly higher in the box and the black fade at the bottom is lighter. */
+.footer .footer-mark{
+  height:calc(var(--fs) * .64);line-height:.84;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 38%,rgba(0,0,0,.62) 70%,transparent 100%);
+          mask-image:linear-gradient(to bottom,#000 0%,#000 38%,rgba(0,0,0,.62) 70%,transparent 100%);
+}
+
+/* cm-seller-ava — دکمه‌ی «این آگهی مشکل دارد؟» وسط، بالای لینک‌های فوتر */
+.footer .mr-report-slot{display:flex;justify-content:center;width:100%;padding:0;margin:0}
+.footer .mr-report-slot:empty{display:none}
+.footer .mr-report-slot .mr-trust-report{align-self:center;padding:4px 6px;font-size:12px;font-weight:600}

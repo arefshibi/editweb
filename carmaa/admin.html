@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="fa" dir="rtl" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#08080a">
+<title>پنل مدیریت کارما</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="admin-panel.css?v=nova1">
+</head>
+<body>
+
+<!-- بررسی دسترسی / خطا -->
+<section id="gate" class="auth">
+  <div class="auth-card">
+    <div class="auth-mark"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.4 3.2 7.6 8 9 4.8-1.4 8-4.6 8-9V6l-8-3Z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg></div>
+    <h1>بررسی دسترسی</h1>
+    <p class="muted">پنل مدیریت فقط برای نشست احراز هویت‌شده با نقش مدیریتی باز می‌شود.</p>
+    <p id="gateMessage" class="gate-msg">در حال بررسی دسترسی…</p>
+    <button id="gateLogout" class="lg-link" type="button" hidden>خروج از این حساب</button>
+    <a class="lg-link" href="/">بازگشت به سایت</a>
+  </div>
+</section>
+
+<!-- ورود با کد تأیید -->
+<section id="login" class="auth" hidden>
+  <div class="auth-card">
+    <div class="auth-mark"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.4 3.2 7.6 8 9 4.8-1.4 8-4.6 8-9V6l-8-3Z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg></div>
+    <h1>ورود به پنل مدیریت</h1>
+    <div id="lgStep1">
+      <p class="muted">شماره موبایل مدیر را وارد کنید تا کد تأیید ارسال شود.</p>
+      <label class="lg-label" for="lgPhone">شماره موبایل</label>
+      <div class="lg-phone"><span>🇮🇷 +98</span><input id="lgPhone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="9xx xxx xxxx" maxlength="13"></div>
+      <button id="lgSend" class="lg-btn" type="button" disabled>دریافت کد تأیید</button>
+    </div>
+    <div id="lgStep2" hidden>
+      <p id="lgSub" class="muted">کد ۶ رقمی ارسال‌شده را وارد کنید.</p>
+      <div id="lgOtp" class="lg-otp"><input inputmode="numeric" autocomplete="one-time-code" maxlength="1"><input inputmode="numeric" maxlength="1"><input inputmode="numeric" maxlength="1"><input inputmode="numeric" maxlength="1"><input inputmode="numeric" maxlength="1"><input inputmode="numeric" maxlength="1"></div>
+      <button id="lgVerify" class="lg-btn" type="button" disabled>ورود</button>
+      <button id="lgResend" class="lg-link" type="button" disabled></button><br>
+      <button id="lgBack" class="lg-link" type="button">تغییر شماره</button>
+    </div>
+    <div id="lgErr" class="lg-err" role="alert"></div>
+  </div>
+</section>
+
+<!-- پنل -->
+<div id="app" class="shell" hidden>
+  <div id="scrim" class="scrim" hidden></div>
+
+  <!-- منوی کناری (در موبایل کشویی) -->
+  <aside id="side" class="side" aria-label="منوی مدیریت">
+    <div class="side-brand">
+      <span class="logo"><b>C</b><i class="dot"></i></span>
+      <span class="brand-t"><b>کارما</b><small>پنل مدیریت بازار خودرو</small></span>
+      <button id="sideClose" class="side-x" type="button" aria-label="بستن منو"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    </div>
+    <nav class="nav" aria-label="بخش‌های مدیریت">
+      <div class="nav-h">اصلی</div>
+      <button data-tab="overview" class="active"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="8" rx="2"/><rect x="13.5" y="3.5" width="7" height="5" rx="2"/><rect x="13.5" y="11.5" width="7" height="9" rx="2"/><rect x="3.5" y="14.5" width="7" height="6" rx="2"/></svg><span>داشبورد</span></button>
+      <button data-tab="listings" data-perm="listings"><svg viewBox="0 0 24 24"><path d="M5 16.5V13l1.6-4.2A2 2 0 0 1 8.5 7.5h7a2 2 0 0 1 1.9 1.3L19 13v3.5"/><path d="M3.5 13h17M7 16.5v2M17 16.5v2"/></svg><span>بررسی آگهی‌ها</span><em class="cnt" data-count="listings" hidden></em></button>
+      <button data-tab="allads" data-perm="listings"><svg viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg><span>همه آگهی‌ها</span></button>
+      <button data-tab="showrooms" data-perm="showrooms"><svg viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12v8h14v-8"/></svg><span>نمایشگاه‌ها</span><em class="cnt" data-count="showrooms" hidden></em></button>
+      <div class="nav-h">مدیریت</div>
+      <button data-tab="reports" data-perm="reports"><svg viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg><span>گزارش‌ها</span><em class="cnt is-red" data-count="reports" hidden></em></button>
+      <button data-tab="banners" data-perm="banners"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="10.5" r="1.6"/><path d="m4 17 5-4.5 3.5 3 3-2.5L20 17"/></svg><span>بنرهای صفحه اصلی</span></button>
+      <button data-tab="ads" data-perm="banners"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="M7.5 15l2.2-6 2.2 6M8.2 13h3M14.5 9v6M14.5 12h1.8a1.5 1.5 0 0 0 0-3h-1.8"/></svg><span>تبلیغات</span></button>
+      <button data-tab="staff" data-perm="staff"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.4 3.2 7.6 8 9 4.8-1.4 8-4.6 8-9V6l-8-3Z"/><path d="M9.5 12a2.5 2.5 0 1 0 5 0 2.5 2.5 0 0 0-5 0M8.5 17c.6-1.7 1.9-2.5 3.5-2.5s2.9.8 3.5 2.5"/></svg><span>مدیران و دسترسی‌ها</span></button>
+      <button data-tab="audit" data-perm="audit"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span>رویدادها</span></button>
+    </nav>
+    <div class="promo">
+      <svg viewBox="0 0 24 24"><path d="m12 3 1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15v4M17 17h4"/></svg>
+      <h4>مشاهده‌ی سایت</h4>
+      <p>سایت را همان‌طور که کاربران می‌بینند باز کنید و تغییرات را بررسی کنید.</p>
+      <a class="promo-btn" href="/" target="_blank" rel="noopener">باز کردن سایت</a>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <button id="menuBtn" class="icon-btn menu-btn" type="button" aria-label="باز کردن منو"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <form id="searchForm" class="search" role="search" autocomplete="off">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+        <input id="searchInput" type="search" placeholder="جستجوی آگهی در پنل…" aria-label="جستجوی آگهی">
+      </form>
+      <div class="top-actions">
+        <div class="pop-wrap">
+          <button id="bellBtn" class="icon-btn" type="button" aria-label="اعلان‌ها" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M6 17h12l-1.4-2V10.5a4.6 4.6 0 0 0-9.2 0V15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><i id="bellDot" class="pdot" hidden></i></button>
+          <div id="bellPop" class="pop pop-notif" hidden>
+            <div class="pop-h"><b>اعلان‌ها</b><button id="markAll" type="button">علامت‌گذاری همه</button></div>
+            <div id="notifList"></div>
+          </div>
+        </div>
+        <div class="pop-wrap">
+          <button id="avBtn" class="av-btn" type="button" aria-label="منوی حساب" aria-expanded="false"><span id="whoAv" class="av-in">M</span><i class="pdot on"></i></button>
+          <div id="avPop" class="pop pop-menu" hidden>
+            <div class="pm-who"><b id="whoRole">مدیر</b><small id="sessionBadge">در حال بررسی نشست…</small></div>
+            <a href="/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></svg>مشاهده‌ی سایت</a>
+            <button type="button" data-tab="audit" data-perm="audit"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>رویدادهای مدیریتی</button>
+            <hr>
+            <button id="logoutButton" type="button" class="danger"><svg viewBox="0 0 24 24"><path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4"/><path d="M15 8l4 4-4 4M19 12H9"/></svg>خروج</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-head">
+      <div class="crumb"><button type="button" data-tab="overview">داشبورد</button><span id="crumbSep" hidden>›</span><span id="crumbCur" hidden></span></div>
+      <div class="ph-row">
+        <div>
+          <h1 id="pageTitle">داشبورد</h1>
+          <p id="pageSub" class="muted"></p>
+        </div>
+      </div>
+      <div class="ph-actions" id="pageActions">
+        <button id="refreshBtn" class="btn" type="button"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.6-5.9L20 8"/><path d="M20 3.5V8h-4.5"/></svg>تازه‌سازی</button>
+      </div>
+    </div>
+    <main id="view" class="view" aria-live="polite"></main>
+  </div>
+</div>
+
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<script src="js/admin-panel.js?v=nova1" defer></script>
+</body>
+</html>

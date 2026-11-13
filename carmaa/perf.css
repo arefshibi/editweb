@@ -1,0 +1,84 @@
+/* ==========================================================================
+   perf.css — performance overrides (load LAST). Visual result is kept the
+   same; only GPU/CPU-expensive effects are made cheaper. Delete a block to
+   restore the original behaviour.
+   ========================================================================== */
+
+/* 1) Skeleton shimmer: the old animation changed background-color on ~100
+      elements every frame (a repaint each frame, janky on phones). Now one
+      compositor-only opacity pulse on the whole skeleton container. */
+@keyframes cm-sk-pulse { 0%,100% { opacity:1 } 50% { opacity:.55 } }
+.cm-skeleton-screen .skeleton-block,
+.xc.is-skeleton .skeleton-block,
+.explore-list .xcard.is-skeleton .skeleton-block { animation:none !important; }
+.cm-skeleton-screen,
+.xc.is-skeleton,
+.explore-list .xcard.is-skeleton { animation:cm-sk-pulse 1.4s ease-in-out infinite; }
+.cm-skeleton-screen { will-change:opacity; }
+@media (prefers-reduced-motion: reduce) {
+  .cm-skeleton-screen, .xc.is-skeleton, .explore-list .xcard.is-skeleton { animation:none; }
+}
+
+/* 2) Bottom dock sits above scrolling content, so its backdrop blur is
+      recomputed on every scroll frame. 36px + saturate + brightness is the
+      single most expensive effect on the home page; a light blur looks the
+      same on this dark glass. */
+#bottomDock .bottom-dock-inner {
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+}
+
+/* 3) Small badges drawn over images: replace per-badge backdrop blur with a
+      slightly more opaque flat tint (no extra GPU passes per card). */
+.sr-rank { -webkit-backdrop-filter:none !important; backdrop-filter:none !important; background:rgba(29,29,31,.8) !important; }
+.cm-hb-kicker { -webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(29,29,31,.62); }
+.cm-hb-price-badge { -webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(29,29,31,.82); }
+.header-search-box { -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
+
+/* 4) Tiny SVG medals/stars: a drop-shadow filter on each one creates a
+      filter pass per icon (20+ on the home page). */
+.sr-award-mini-medal svg, .sp-honor-medal svg { filter:none; }
+
+/* 5) Below-the-fold home sections are not laid out / painted until they
+      approach the viewport. */
+.cm-home-promos, .cm-home-showrooms, .cm-home-trust-strip, .cm-home-sell-cta, .cm-home-footer-note {
+  content-visibility:auto; contain-intrinsic-size:auto 360px;
+}
+
+/* 5) SEARCH OVERLAY — the full-screen blur(22px) over the whole live page was
+      the main cause of the laggy search (re-blurred every frame while typing
+      and while the rail scrolls). Same dark/light look with a flat tint. */
+.search-overlay-backdrop { -webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(29,29,31,.93); }
+.theme-light .search-overlay-backdrop { background:rgba(246,247,249,.96); }
+/* open/close: opacity only (no scale+translate of the whole panel) */
+@keyframes search-overlay-panel-enter { from { opacity:0; } to { opacity:1; } }
+@keyframes search-overlay-panel-exit  { from { opacity:1; } to { opacity:0; } }
+.search-overlay.is-open .search-overlay-panel { animation-duration:.2s; }
+.search-overlay:not(.is-open) .search-overlay-panel { animation-duration:.16s; }
+/* rail cards: no staggered entrance animation, isolated paint */
+.search-overlay-rail .card-fade-in { animation:none !important; contain:layout paint style; }
+.search-overlay-rail { overscroll-behavior-x:contain; }
+.search-overlay-rail .smart-photo-bg { filter:brightness(.55); transform:none; }
+
+
+/* 6) Loading comfort: route changes no longer use a full-page skeleton.
+      Keep genuine component-level skeletons calm and respect reduced motion
+      for every skeleton variant, including older page-specific selectors. */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-block,
+  .qa-skel,
+  .qa-sk,
+  .cm-home-skeleton,
+  .cm-home-skeleton *,
+  .cm-showroom-skeleton-list,
+  .cm-showroom-skeleton-list *,
+  .xc.is-skeleton,
+  .xcard.is-skeleton,
+  .xcd.is-skeleton {
+    animation:none !important;
+    transition:none !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+/* Avoid a permanent compositor layer after the initial skeleton is gone. */
+.cm-skeleton-screen:not([aria-busy="true"]) { will-change:auto; }

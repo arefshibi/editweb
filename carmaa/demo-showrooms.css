@@ -1,0 +1,11 @@
+/* نمایشگاه‌های نمایشی: بنر در فرم نمایشگاه + جزئیات پروفایل */
+.dealer-banner-edit { display:flex; flex-direction:column; align-items:center; gap:10px; margin-bottom:6px; }
+.dealer-banner-pick2 { position:relative; display:block; width:100%; max-width:420px; cursor:pointer; }
+/* SB-FIX */
+.dealer-banner-preview2 { width:100%; aspect-ratio:4/3; border-radius:18px; overflow:hidden; background:#1D1D1F; border:1px solid rgba(255,255,255,.1); display:flex; align-items:center; justify-content:center; color:#8c8d93; font-size:12px; }
+.dealer-banner-preview2 img { width:100%; height:100%; object-fit:cover; display:block; }
+.dealer-banner-badge { position:absolute; inset-inline-start:10px; bottom:10px; padding:6px 12px; border-radius:999px; background:rgba(0,0,0,.6); color:#fff; font-size:11.5px; font-weight:700; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+.dealer-banner-random { height:36px; padding:0 16px; border-radius:999px; border:1px solid rgba(255,255,255,.16); background:transparent; color:#e4e4e7; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; }
+.dealer-banner-random:active { transform:scale(.97); }
+.theme-light .dealer-banner-random { border-color:rgba(0,0,0,.16); color:#333336; }
+.sp-page .sp-tagline { margin:6px 0 0; font-size:12.5px; font-weight:700; color:var(--cm-home-accent,#b9a9ff); text-align:center; }

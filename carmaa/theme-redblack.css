@@ -1,0 +1,23 @@
+/* CarMaa — تم مشکی + قرمز دارک (سیستم دیزاین یکپارچه) */
+:root{--cm-red:#ffffff;--cm-red-2:#ffffff;--cm-red-deep:#ffffff;--cm-accent:#ffffff;--cm-page:#1D1D1F}
+html{accent-color:#ffffff}
+::selection{background:rgba(255,255,255,.9);color:#1D1D1F}
+/* پس‌زمینه‌ی همه‌ی صفحه‌ها و هدر: یک رنگ ساده و یکدست (بدون گرادیان) */
+html:not(.theme-light):not(#x),html:not(.theme-light):not(#x) body:not(#y){background:#1D1D1F!important;--bg:#1D1D1F;--bg-2:#1D1D1F}
+html:not(.theme-light):not(#x) body:not(#y) #appFrame,html:not(.theme-light):not(#x) body:not(#y) #appViewport,html:not(.theme-light):not(#x) body:not(#y) #pageContent,html:not(.theme-light):not(#x) body:not(#y) .cm-home-page,html:not(.theme-light):not(#x) body:not(#y) .cm-lh{background:transparent!important}
+html:not(.theme-light):not(#x) body:not(#y) #siteHeader{background:#1D1D1F!important;border-color:transparent!important}
+/* متن/آیکن روی سطوح قرمز: سفید */
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"],
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"].is-active{color:#fff!important}
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"] svg,
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"].is-active svg{stroke:#fff!important;color:#fff!important}
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-inner .detail-cta-price-value,
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-inner .detail-cta-price-unit,
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-inner .detail-cta-phone{color:#fff!important}
+html body #sellCityPicker .sell-trim-option.is-selected b::after{border-color:#fff!important}
+.sell-center-circle.is-confirmed .leaflet-app-pin svg{color:#fff!important}
+.cm-actions button[type=submit],.cm-cs-send,.cm-cs-meta em{color:#fff!important}
+/* آیکن‌های رستری سبز (اپ‌آیکن در تور معرفی) → قرمز */
+#mrTour .tr-appicon{filter:hue-rotate(-78deg) saturate(1.1)}
+/* کارت‌های داشبورد آگهی‌ها: مشکی با لبه‌ی ظریف */
+.cm-home-page .cm-lt-rail .cm-lt-card{box-shadow:inset 0 0 0 .5px rgba(255,255,255,.08)!important}

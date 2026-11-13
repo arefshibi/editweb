@@ -1,0 +1,4 @@
+/* founding-badge.css — step 1 */
+.sr-award-mini-medal--founding, .sp-honor-medal--founding, .sp-hex--founding { --award-hi:#fff1b8; --award-mid:#d9a441; --award-low:#7a5416; }
+.sr-award-chip:has(.sr-award-mini-medal--founding) { border-color: rgba(217,164,65,.55); }
+.sr-award-chip:has(.sr-award-mini-medal--founding) .sr-award-label { color:#f3d58a; font-weight:800; }

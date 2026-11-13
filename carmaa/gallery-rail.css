@@ -1,0 +1,75 @@
+/* Vehicle gallery: thumbnails are one horizontally scrolling rail (no "gallery" box). */
+.vehicle-demo-layout .thumb-row {
+  display:flex; grid-template-columns:none; gap:8px; padding:9px 3px 6px;
+  overflow-x:auto; overflow-y:hidden; scroll-snap-type:x proximity; scroll-padding-inline:3px;
+  -webkit-overflow-scrolling:touch; overscroll-behavior-x:contain; scrollbar-width:none;
+}
+.vehicle-demo-layout .thumb-row::-webkit-scrollbar { display:none; }
+.vehicle-demo-layout .thumb { flex:0 0 auto; width:auto; aspect-ratio:4 / 3; scroll-snap-align:center; }
+.vehicle-demo-layout .thumb-more { display:none; }
+.cm-vehicle-sk-thumb { flex:0 0 auto; width:84px; height:62px; }
+
+/* Save / share: iOS-style line icons (SF-Symbols look) in system blue, on the breadcrumb line. */
+.vehicle-demo-layout .vehicle-topbar { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.vehicle-demo-layout .vehicle-topbar .breadcrumbs { flex:1 1 auto; min-width:0; }
+.vehicle-demo-layout .vehicle-icon-actions { flex:none; display:flex; gap:0; padding-inline:2px; }
+.vehicle-demo-layout .vehicle-icon-actions .round-action {
+  position:relative; width:40px; height:40px; display:grid; place-items:center; padding:0; border:0; border-radius:50%;
+  background:none; box-shadow:none; -webkit-backdrop-filter:none; backdrop-filter:none; color:#0071E3; cursor:pointer;
+  -webkit-tap-highlight-color:transparent; transition:background-color .18s ease, transform .18s cubic-bezier(.2,.8,.2,1);
+}
+.vehicle-demo-layout .vehicle-icon-actions .round-action .icon {
+  width:23px; height:23px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round;
+  transition:fill .18s ease, transform .25s cubic-bezier(.3,1.6,.5,1);
+}
+.vehicle-demo-layout .vehicle-icon-actions .round-action:hover { background:rgba(0,113,227,.1); }
+.vehicle-demo-layout .vehicle-icon-actions .round-action:active { background:rgba(0,113,227,.18); transform:scale(.92); }
+.vehicle-demo-layout .vehicle-icon-actions .round-action.is-active { background:none; color:#0071E3; }
+.vehicle-demo-layout .vehicle-icon-actions .round-action.is-active .icon { fill:currentColor; transform:scale(1.06); }
+.theme-light .vehicle-demo-layout .vehicle-icon-actions .round-action,
+.theme-light .vehicle-demo-layout .vehicle-icon-actions .round-action.is-active { color:#0066CC; }
+
+/* Share = light pill with a curved forward arrow + "Share" label; a small Instagram badge on the arrow says it makes an Instagram story. */
+.vehicle-demo-layout .vehicle-icon-actions { align-items:center; gap:6px; }
+.vehicle-demo-layout .vehicle-icon-actions .ig-story-btn {
+  width:auto; height:36px; display:inline-flex; align-items:center; gap:9px; padding:0 14px 0 12px; border-radius:999px;
+  color:#1D1D1F; background:#f3f3f4; border:0; box-shadow:0 1px 2px rgba(0,0,0,.25);
+  font:inherit; font-size:13px; font-weight:800; white-space:nowrap;
+}
+.vehicle-demo-layout .vehicle-icon-actions .ig-story-btn:hover { background:#fff; }
+.vehicle-demo-layout .vehicle-icon-actions .ig-story-btn:active { transform:scale(.95); background:#e4e4e6; }
+.vehicle-demo-layout .vehicle-icon-actions .ig-story-btn .ig-ico { position:relative; width:22px; height:22px; flex:none; display:block; }
+.vehicle-demo-layout .vehicle-icon-actions .ig-story-btn .ig-arrow { position:absolute; inset:0; width:22px; height:22px; stroke:currentColor; }
+.vehicle-demo-layout .vehicle-icon-actions .ig-story-btn .ig-badge { position:absolute; right:-5px; bottom:-2px; width:12px; height:12px; border-radius:4px; box-shadow:0 0 0 1.6px #f3f3f4; }
+.vehicle-demo-layout .vehicle-topbar .breadcrumbs { flex-wrap:nowrap; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.vehicle-demo-layout .vehicle-icon-actions .ig-story-btn { height:34px; padding:0 12px 0 10px; gap:8px; }
+
+/* Dark glass look for the share pill; save icon in neutral white instead of blue. */
+.vehicle-demo-layout .vehicle-icon-actions .ig-story-btn {
+  color:#f4f4f6; border:1px solid rgba(255,255,255,.16);
+  background:linear-gradient(180deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.05) 100%), rgba(29,29,31,.72);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22), inset 0 -1px 0 rgba(0,0,0,.35), 0 6px 16px rgba(0,0,0,.4);
+}
+.vehicle-demo-layout .vehicle-icon-actions .ig-story-btn:hover { background:linear-gradient(180deg, rgba(255,255,255,.2) 0%, rgba(255,255,255,.08) 100%), rgba(38,38,40,.78); }
+.vehicle-demo-layout .vehicle-icon-actions .ig-story-btn:active { background:linear-gradient(180deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.03) 100%), rgba(29,29,31,.85); }
+.vehicle-demo-layout .vehicle-icon-actions .ig-story-btn .ig-badge { box-shadow:0 0 0 1.6px #262628; }
+.vehicle-demo-layout .vehicle-icon-actions .round-action:not(.ig-story-btn),
+.vehicle-demo-layout .vehicle-icon-actions .round-action.is-active:not(.ig-story-btn) { color:#e9e9ed; }
+.vehicle-demo-layout .vehicle-icon-actions .round-action:not(.ig-story-btn):hover { background:rgba(255,255,255,.08); }
+.vehicle-demo-layout .vehicle-icon-actions .round-action:not(.ig-story-btn):active { background:rgba(255,255,255,.14); }
+.vehicle-demo-layout .vehicle-icon-actions .round-action.is-active:not(.ig-story-btn) { color:#fff; }
+.theme-light .vehicle-demo-layout .vehicle-icon-actions .ig-story-btn { color:#1D1D1F; border-color:rgba(0,0,0,.1); background:linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.6)), rgba(235,236,240,.9); box-shadow:inset 0 1px 0 #fff, 0 4px 12px rgba(51,51,54,.16); }
+.theme-light .vehicle-demo-layout .vehicle-icon-actions .round-action:not(.ig-story-btn),
+.theme-light .vehicle-demo-layout .vehicle-icon-actions .round-action.is-active:not(.ig-story-btn) { color:#262628; }
+.theme-light .vehicle-demo-layout .vehicle-icon-actions .ig-story-btn .ig-badge { box-shadow:0 0 0 1.6px #f1f2f5; }
+
+/* Compact: same visual weight as the breadcrumb text, with breathing room above the photo box. */
+.vehicle-demo-layout .vehicle-topbar { margin-bottom:10px; min-height:28px; }
+.vehicle-demo-layout .vehicle-icon-actions { gap:4px; padding-inline:0; }
+.vehicle-demo-layout .vehicle-icon-actions .ig-story-btn { height:26px; padding:0 10px 0 8px; gap:6px; font-size:11.5px; font-weight:700; box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 3px 8px rgba(0,0,0,.35); }
+.vehicle-demo-layout .vehicle-icon-actions .ig-story-btn .ig-ico, .vehicle-demo-layout .vehicle-icon-actions .ig-story-btn .ig-arrow { width:16px; height:16px; }
+.vehicle-demo-layout .vehicle-icon-actions .ig-story-btn .ig-badge { width:9px; height:9px; border-radius:3px; right:-4px; bottom:-2px; box-shadow:0 0 0 1.2px #262628; }
+.vehicle-demo-layout .vehicle-icon-actions .round-action:not(.ig-story-btn) { width:28px; height:28px; }
+.vehicle-demo-layout .vehicle-icon-actions .round-action:not(.ig-story-btn) .icon { width:17px; height:17px; stroke-width:1.8; }
+.vehicle-demo-layout .vehicle-topbar { margin-bottom:14px; }
+.vehicle-demo-layout .vehicle-topbar .breadcrumbs { margin:0; }

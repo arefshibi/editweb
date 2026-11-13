@@ -1,0 +1,3 @@
+FROM caddy:2-alpine
+COPY . /srv
+RUN mv /srv/deploy/Caddyfile /etc/caddy/Caddyfile && rm -rf /srv/deploy

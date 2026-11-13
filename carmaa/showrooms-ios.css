@@ -1,0 +1,944 @@
+/* =====================================================================
+   CarMaa · Showrooms — iOS-style design system
+   Self-contained (sr-*) — loaded last, independent of older showroom CSS.
+   Principles: large title, inset-grouped surfaces, hairline separators,
+   one accent (system blue), generous 8-pt spacing, no decorative effects.
+   ===================================================================== */
+:root {
+  --sr-bg:#1D1D1F;
+  --sr-card:#1D1D1F;
+  --sr-fill:rgba(255,255,255,.07);
+  --sr-fill-2:rgba(255,255,255,.11);
+  --sr-sep:rgba(255,255,255,.09);
+  --sr-label:#fff;
+  --sr-label-2:rgba(235,235,245,.62);
+  --sr-label-3:rgba(235,235,245,.34);
+  --sr-blue:#0071E3;
+  --sr-star:#ff9f0a;
+  --sr-chip-on-bg:#fff;
+  --sr-chip-on-fg:#000;
+  --sr-shadow:0 0 0 .5px rgba(255,255,255,.07);
+  --sr-glass:rgba(38,38,40,.62);
+}
+html.theme-light {
+  --sr-bg:#f2f2f7;
+  --sr-card:#fff;
+  --sr-fill:rgba(120,120,128,.12);
+  --sr-fill-2:rgba(120,120,128,.18);
+  --sr-sep:rgba(51,51,54,.13);
+  --sr-label:#000;
+  --sr-label-2:rgba(51,51,54,.62);
+  --sr-label-3:rgba(51,51,54,.32);
+  --sr-blue:#0066CC;
+  --sr-chip-on-bg:#000;
+  --sr-chip-on-fg:#fff;
+  --sr-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.05);
+  --sr-glass:rgba(255,255,255,.7);
+}
+
+/* ---------- Page canvas ---------- */
+[data-page="dealers"].sr-page,
+[data-page="news"].sr-page,
+html:not(.theme-light) body:has([data-page="news"]) #appViewport,
+html:not(.theme-light) body:has([data-page="news"]) #siteHeader,
+html:not(.theme-light) body:has([data-page="news"]) #stickyHeaderGroup,
+html.theme-light body:has([data-page="news"]) #appViewport,
+html.theme-light body:has([data-page="news"]) #siteHeader,
+html.theme-light body:has([data-page="news"]) #stickyHeaderGroup,
+html:not(.theme-light) body:has([data-page="dealers"]) #appViewport,
+html:not(.theme-light) body:has([data-page="dealers"]) #siteHeader,
+html:not(.theme-light) body:has([data-page="dealers"]) #stickyHeaderGroup,
+html:not(.theme-light) body:has([data-page="dealers"]) .page-header-sticky.explore-header {
+  background-color:var(--sr-bg) !important;
+}
+html.theme-light body:has([data-page="dealers"]) #appViewport,
+html.theme-light body:has([data-page="dealers"]) #siteHeader,
+html.theme-light body:has([data-page="dealers"]) #stickyHeaderGroup,
+html.theme-light body:has([data-page="dealers"]) .page-header-sticky.explore-header {
+  background-color:var(--sr-bg) !important;
+}
+.sr-page {
+  width:100%; min-height:100%; padding:0 0 120px;
+  background:var(--sr-bg) !important; color:var(--sr-label);
+  font-family:"Vazirmatn","SF Pro Text",-apple-system,"Segoe UI",Tahoma,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.sr-page * { box-sizing:border-box; }
+@media (min-width:560px) { .sr-page { max-width:760px; margin:0 auto; } }
+
+/* ---------- Large title ---------- */
+.sr-hero { padding:14px 20px 4px; }
+.sr-hero h1 { margin:0; font-size:34px; line-height:1.3; font-weight:700; letter-spacing:0; color:var(--sr-label); }
+.sr-hero p { margin:2px 0 0; font-size:15px; line-height:1.6; color:var(--sr-label-2); font-weight:400; }
+
+/* ---------- Inset grouped summary ---------- */
+.sr-group { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); margin:16px 16px 0; background:var(--sr-card); border-radius:16px; box-shadow:var(--sr-shadow); overflow:hidden; }
+.sr-group>div { padding:14px 6px 13px; text-align:center; }
+.sr-group>div+div { border-inline-start:.5px solid var(--sr-sep); }
+.sr-group strong { display:block; font-size:22px; line-height:1.2; font-weight:700; color:var(--sr-label); font-variant-numeric:tabular-nums; }
+.sr-group span { display:block; margin-top:3px; font-size:12px; color:var(--sr-label-2); }
+
+/* ---------- Search + chips ---------- */
+.sr-search { position:relative; display:flex; align-items:center; gap:8px; height:40px; margin:16px 16px 0; padding:0 12px; border-radius:12px; background:var(--sr-fill); color:var(--sr-label-2); }
+.sr-search svg { flex:0 0 18px; width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; }
+.sr-search input { flex:1; min-width:0; height:100%; border:0; outline:0; background:transparent; color:var(--sr-label); font:inherit; font-size:16px; direction:rtl; -webkit-appearance:none; appearance:none; }
+.sr-search input::placeholder { color:var(--sr-label-2); }
+.sr-search input::-webkit-search-cancel-button { display:none; }
+.sr-chips { display:flex; gap:8px; padding:12px 16px 4px; overflow-x:auto; scrollbar-width:none; scroll-padding-inline:16px; -webkit-overflow-scrolling:touch; }
+.sr-chips::-webkit-scrollbar { display:none; }
+.sr-chip, .sr-select { flex:0 0 auto; height:34px; padding:0 14px; border:0; border-radius:999px; background:var(--sr-fill); color:var(--sr-label); font:inherit; font-size:14px; font-weight:500; white-space:nowrap; transition:background .2s,color .2s,transform .12s; cursor:pointer; }
+.sr-chip:active, .sr-select:active { transform:scale(.97); }
+.sr-chip.is-active { background:var(--sr-chip-on-bg); color:var(--sr-chip-on-fg); }
+.sr-select { position:relative; display:inline-flex; align-items:center; gap:6px; padding-inline:12px 10px; }
+.sr-select svg { width:12px; height:12px; fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; opacity:.6; }
+.sr-select select { position:absolute; inset:0; width:100%; height:100%; opacity:0; font-size:16px; cursor:pointer; }
+.sr-chips-sep { flex:0 0 1px; align-self:center; height:18px; background:var(--sr-sep); }
+.sr-count { padding:14px 20px 8px; font-size:13px; color:var(--sr-label-2); }
+
+/* ---------- Section heading (home) ---------- */
+.sr-section-head { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin:0 4px 12px; }
+.sr-section-head h2 { margin:0; font-size:22px; line-height:1.4; font-weight:700; letter-spacing:0; color:var(--sr-label, #fff); }
+.sr-section-head button { flex:0 0 auto; display:inline-flex; align-items:center; gap:3px; border:0; background:none; padding:4px 0; color:var(--sr-blue); font:inherit; font-size:15px; font-weight:400; }
+.sr-section-head button svg { width:9px; height:14px; fill:none; stroke:currentColor; stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round; }
+
+/* ---------- Card ---------- */
+.sr-card { position:relative; min-width:0; overflow:hidden; border-radius:22px; background:var(--sr-card); box-shadow:var(--sr-shadow); color:var(--sr-label); }
+.sr-media { position:relative; display:block; width:100%; aspect-ratio:16/10; padding:0; border:0; overflow:hidden; background:var(--sr-fill); cursor:pointer; isolation:isolate; -webkit-tap-highlight-color:transparent; }
+.sr-media img.sr-photo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 55%; transition:transform .5s cubic-bezier(.2,.8,.2,1); }
+.sr-media img.sr-photo.is-logo { inset:22% 28%; width:44%; height:56%; object-fit:contain; }
+.sr-media:active img.sr-photo:not(.is-logo) { transform:scale(1.02); }
+.sr-media-empty { position:absolute; inset:0; display:grid; place-items:center; color:var(--sr-label-3); }
+.sr-media-empty svg { width:44px; height:44px; fill:none; stroke:currentColor; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
+.sr-rank { position:absolute; z-index:2; top:12px; inset-inline-start:12px; display:inline-flex; align-items:center; gap:5px; height:26px; padding:0 10px; border-radius:999px; background:var(--sr-glass); -webkit-backdrop-filter:saturate(180%) blur(20px); backdrop-filter:saturate(180%) blur(20px); color:var(--sr-label); font-size:12px; font-weight:600; }
+.sr-rank b { font-weight:700; font-variant-numeric:tabular-nums; }
+.sr-rank span { color:var(--sr-label); font-weight:500; }
+/* Rank trend: green for upward movement, red for decline. The previous/current
+   positions stay available in the tooltip for a clear, non-decorative signal. */
+.sr-rank { height:auto; min-height:26px; max-width:calc(100% - 24px); flex-wrap:wrap; padding-block:4px; row-gap:3px; }
+.sr-rank .sr-rank-movement { display:inline-flex; align-items:center; justify-content:center; gap:2px; flex:0 0 auto; min-height:18px; padding:1px 5px; border-radius:999px; font-size:10px; line-height:1.2; font-weight:850; white-space:nowrap; direction:ltr; font-variant-numeric:tabular-nums; }
+.sr-rank .sr-rank-movement b { font-size:12px; line-height:1; font-weight:950; }
+.sr-rank .sr-rank-movement.is-up { color:#a7f3c4; background:rgba(22,163,74,.19); border:1px solid rgba(74,222,128,.24); }
+.sr-rank .sr-rank-movement.is-down { color:#ffffff; background:rgba(255,255,255,.108); border:1px solid rgba(255,255,255,.15); }
+@media (max-width:390px) {
+  .sr-rank { gap:4px; padding-inline:7px; font-size:10px; }
+  .sr-rank .sr-rank-movement { min-height:17px; padding-inline:4px; font-size:9px; }
+}
+
+.sr-body { padding:14px 16px 16px; }
+.sr-id { display:flex; align-items:center; gap:12px; width:100%; min-width:0; padding:0; border:0; background:none; text-align:start; color:inherit; font:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.sr-avatar { flex:0 0 44px; width:44px; height:44px; display:grid; place-items:center; border-radius:13px; background:var(--sr-fill); color:var(--sr-label-2); overflow:hidden; }
+.sr-avatar img { width:100%; height:100%; object-fit:cover; }
+.sr-avatar svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+.sr-meta { flex:1; min-width:0; }
+.sr-meta h3 { display:flex; align-items:center; gap:5px; margin:0; font-size:17px; line-height:1.5; font-weight:600; letter-spacing:0; color:var(--sr-label); }
+.sr-meta h3 span.sr-name { overflow:hidden; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; line-clamp:2; }
+.sr-meta p { display:flex; align-items:center; gap:6px; }
+.sr-meta p>span:first-child { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.sr-meta p>span:last-child:not(:first-child) { flex:0 0 auto; }
+.sr-dot { flex:0 0 3px; width:3px; height:3px; border-radius:50%; background:var(--sr-label-3); }
+.sr-meta p { margin:1px 0 0; font-size:14px; line-height:1.5; color:var(--sr-label-2); }
+.sr-chev { flex:0 0 auto; width:9px; height:15px; fill:none; stroke:var(--sr-label-3); stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round; }
+.sr-verified { flex:0 0 auto; width:16px; height:16px; color:var(--sr-blue); }
+.sr-verified svg { display:block; width:100%; height:100%; fill:currentColor; }
+.sr-verified svg path+path { fill:none; stroke:#fff; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+.sr-pill-rating { flex:0 0 auto; display:inline-flex; align-items:center; gap:3px; height:24px; padding:0 9px; border-radius:999px; background:var(--sr-fill); font-size:13px; font-weight:600; color:var(--sr-label); font-variant-numeric:tabular-nums; }
+.sr-pill-rating i { color:var(--sr-star); font-style:normal; font-size:12px; }
+
+/* Stats: inset grouped */
+.sr-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); margin:14px 0 0; background:var(--sr-fill); border-radius:14px; }
+.sr-stats>div { padding:11px 6px 10px; text-align:center; min-width:0; }
+.sr-stats>div+div { border-inline-start:.5px solid var(--sr-sep); }
+.sr-stats dd { margin:0; font-size:17px; line-height:1.3; font-weight:600; color:var(--sr-label); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.sr-stats dd small { font-size:12px; font-weight:400; color:var(--sr-label-2); }
+.sr-stats dt { margin-top:2px; font-size:12px; color:var(--sr-label-2); white-space:nowrap; }
+
+/* Rating row */
+.sr-rate { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:14px; }
+.sr-rate-sum { display:flex; align-items:baseline; gap:6px; min-width:0; font-size:14px; color:var(--sr-label-2); }
+.sr-rate-sum b { font-size:17px; font-weight:600; color:var(--sr-label); font-variant-numeric:tabular-nums; }
+.sr-stars { display:flex; align-items:center; gap:0; margin-inline-end:-6px; }
+.sr-star { width:34px; height:34px; display:grid; place-items:center; padding:0; border:0; background:none; color:var(--sr-label-3); font-size:21px; line-height:1; transition:color .15s,transform .12s; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.sr-star.is-filled { color:var(--sr-star); }
+.sr-star:active { transform:scale(.82); }
+.sr-star:focus-visible, .sr-chip:focus-visible, .sr-id:focus-visible, .sr-media:focus-visible { outline:2px solid var(--sr-blue); outline-offset:2px; border-radius:12px; }
+
+/* ---------- Grid (directory) ---------- */
+.sr-grid { display:grid; grid-template-columns:minmax(0,1fr); gap:16px; padding:0 16px; }
+@media (min-width:640px) { .sr-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
+/* ---------- Rail (home) ---------- */
+.sr-rail { display:flex; gap:12px; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; scrollbar-width:none; overscroll-behavior-x:contain; padding:2px 14px 6px; margin-inline:-14px; scroll-padding-inline:14px; -webkit-overflow-scrolling:touch; }
+.sr-rail::-webkit-scrollbar { display:none; }
+.sr-rail .sr-card { flex:0 0 76%; width:76%; max-width:310px; scroll-snap-align:start; }
+.sr-rail .sr-media { aspect-ratio:4/3; }
+.sr-rail .sr-body { padding:12px 14px 14px; }
+.sr-rail .sr-avatar { flex-basis:38px; width:38px; height:38px; border-radius:11px; }
+.sr-rail .sr-avatar svg { width:19px; height:19px; }
+.sr-rail .sr-meta h3 { font-size:16px; }
+.sr-rail .sr-meta p { font-size:13px; }
+.sr-home-empty { flex:0 0 100%; padding:28px 16px; border-radius:20px; background:var(--sr-card); text-align:center; font-size:14px; color:var(--sr-label-2); }
+
+/* ---------- Empty / footnote ---------- */
+.sr-empty { grid-column:1/-1; display:flex; flex-direction:column; align-items:center; gap:6px; padding:56px 24px; text-align:center; }
+.sr-empty svg { width:44px; height:44px; fill:none; stroke:var(--sr-label-3); stroke-width:1.5; stroke-linecap:round; margin-bottom:6px; }
+.sr-empty strong { font-size:19px; font-weight:600; color:var(--sr-label); }
+.sr-empty p { margin:0; font-size:15px; color:var(--sr-label-2); }
+.sr-empty button { margin-top:12px; height:36px; padding:0 18px; border:0; border-radius:999px; background:var(--sr-fill-2); color:var(--sr-blue); font:inherit; font-size:15px; font-weight:500; }
+.sr-footnote { margin:22px 24px 0; text-align:center; font-size:12px; line-height:1.8; color:var(--sr-label-3); }
+
+@media (prefers-reduced-motion:reduce) { .sr-media img.sr-photo, .sr-chip, .sr-star { transition:none; } }
+
+/* The home screen keeps its own graphite canvas in every theme,
+   so the home rail always uses the dark token set. */
+.sr-home {
+  --sr-card:#1D1D1F; --sr-fill:rgba(255,255,255,.07); --sr-fill-2:rgba(255,255,255,.11);
+  --sr-sep:rgba(255,255,255,.09); --sr-label:#fff; --sr-label-2:rgba(235,235,245,.62);
+  --sr-label-3:rgba(235,235,245,.34); --sr-blue:#0071E3; --sr-shadow:0 0 0 .5px rgba(255,255,255,.07);
+  --sr-glass:rgba(38,38,40,.62);
+}
+
+/* =====================================================================
+   Showroom / seller profile page (sp-*)
+   ===================================================================== */
+html:not(.theme-light) body:has([data-page="seller"]) #appViewport,
+html:not(.theme-light) body:has([data-page="seller"]) #siteHeader,
+html:not(.theme-light) body:has([data-page="seller"]) #stickyHeaderGroup,
+html.theme-light body:has([data-page="seller"]) #appViewport,
+html.theme-light body:has([data-page="seller"]) #siteHeader,
+html.theme-light body:has([data-page="seller"]) #stickyHeaderGroup { background-color:var(--sr-bg) !important; }
+
+.sp-page { width:100%; min-height:100%; padding:0 0 120px; background:var(--sr-bg) !important; color:var(--sr-label);
+  font-family:"Vazirmatn","SF Pro Text",-apple-system,"Segoe UI",Tahoma,sans-serif; -webkit-font-smoothing:antialiased; }
+.sp-page * { box-sizing:border-box; }
+@media (min-width:560px) { .sp-page { max-width:640px; margin:0 auto; } }
+
+.sp-page .pf-hero.sp-hero { --pf-bg:transparent; background:transparent; color:var(--sr-label); overflow:visible; border-radius:0; padding:0 16px; }
+
+/* Public showroom cover: reuse the banner saved in showroom settings, behind the logo and profile details. */
+.sp-page .pf-hero.sp-hero { position:relative; isolation:isolate; }
+.sp-page .sp-banner-cover { position:absolute; z-index:0; top:0; left:0; right:0; height:clamp(340px, 112vw, 500px); display:none; pointer-events:none; background:#1D1D1F center 38% / cover no-repeat; }
+.sp-page .sp-banner-cover.has-banner { display:block; }
+.sp-page .sp-banner-cover.has-banner::after { content:""; position:absolute; inset:0; background:linear-gradient(to bottom,rgba(0,0,0,.14) 0%,rgba(0,0,0,.18) 34%,rgba(29,29,31,.76) 72%,var(--sr-bg) 100%); }
+.sp-page .pf-hero.sp-hero > :not(.sp-banner-cover) { position:relative; z-index:1; }
+.sp-page .pf-hero.sp-hero--has-banner .sp-id { padding-top:24px; }
+@media (min-width:560px) { .sp-page .sp-banner-cover { height:420px; } }
+
+.sp-nav { display:flex; justify-content:space-between; align-items:center; padding:calc(10px + env(safe-area-inset-top,0px)) 0 4px; }
+.sp-round { width:36px; height:36px; display:grid; place-items:center; padding:0; border:0; border-radius:50%; background:var(--sr-fill); color:var(--sr-blue); cursor:pointer; transition:background .2s,transform .12s; -webkit-tap-highlight-color:transparent; }
+.sp-round:active { transform:scale(.92); background:var(--sr-fill-2); }
+
+.sp-id { display:flex; flex-direction:column; align-items:center; text-align:center; padding:10px 8px 0; }
+.sp-avatar { width:92px; height:92px; display:grid; place-items:center; overflow:hidden; border-radius:26px; background:var(--sr-card); box-shadow:var(--sr-shadow); color:var(--sr-label-2); }
+.sp-avatar img { width:100%; height:100%; object-fit:cover; }
+.sp-avatar svg { width:40px; height:40px; fill:none; stroke:currentColor; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
+.sp-avatar span { font-size:38px; font-weight:600; color:var(--sr-label); }
+.sp-name { display:flex; align-items:center; justify-content:center; gap:7px; max-width:100%; margin:14px 0 0; font-size:24px; line-height:1.45; font-weight:700; letter-spacing:0; color:var(--sr-label); text-shadow:none; }
+.sp-verified { width:20px; height:20px; }
+.sp-sub { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:8px; margin:2px 0 0; font-size:15px; line-height:1.6; color:var(--sr-label-2); }
+
+.sp-actions { display:flex; gap:10px; margin-top:18px; }
+.sp-actions--share { margin-top:10px; }
+.sp-page .pf-follow { flex:1; height:48px; border:0; border-radius:14px; background:var(--sr-blue); color:#fff; font:inherit; font-size:16px; font-weight:600; transition:transform .12s,background .2s,opacity .2s; cursor:pointer; }
+.sp-page .pf-follow:active { transform:scale(.98); opacity:.85; }
+.sp-page .pf-follow.is-following, .sp-page .pf-follow[data-action^="pfEdit"] { background:var(--sr-fill); color:var(--sr-label); box-shadow:none; }
+.sp-page .pf-chat { flex:0 0 48px; width:48px; height:48px; display:grid; place-items:center; border:0; border-radius:14px; background:var(--sr-fill); color:var(--sr-blue); cursor:pointer; transition:transform .12s; }
+.sp-page .pf-chat:active { transform:scale(.94); }
+.sp-page .pf-follow:focus-visible, .sp-page .pf-chat:focus-visible, .sp-round:focus-visible { outline:2px solid var(--sr-blue); outline-offset:2px; }
+
+.sp-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); margin-top:16px; background:var(--sr-card); border-radius:16px; box-shadow:var(--sr-shadow); }
+.sp-stats>div { padding:14px 6px 12px; text-align:center; }
+.sp-stats>div+div { border-inline-start:.5px solid var(--sr-sep); }
+.sp-stats strong { display:block; font-size:22px; line-height:1.2; font-weight:700; color:var(--sr-label); font-variant-numeric:tabular-nums; }
+.sp-stats span { display:block; margin-top:3px; font-size:12px; color:var(--sr-label-2); }
+
+.sp-list { margin-top:12px; background:var(--sr-card); border-radius:16px; box-shadow:var(--sr-shadow); overflow:hidden; }
+.sp-row { display:flex; align-items:flex-start; gap:16px; padding:13px 16px; }
+.sp-row+.sp-row { border-top:.5px solid var(--sr-sep); }
+.sp-row>span { flex:0 0 56px; font-size:15px; line-height:1.7; color:var(--sr-label-2); }
+.sp-row>p { flex:1; min-width:0; margin:0; font-size:15px; line-height:1.7; color:var(--sr-label); }
+
+.sp-section { display:flex; align-items:baseline; gap:8px; margin:28px 4px 4px; }
+.sp-section h2 { margin:0; font-size:22px; line-height:1.4; font-weight:700; letter-spacing:0; color:var(--sr-label); }
+.sp-section span { font-size:15px; color:var(--sr-label-2); font-variant-numeric:tabular-nums; }
+.sp-page .explore-list { padding-top:12px; }
+.sp-page .seller-empty { padding:40px 16px; text-align:center; font-size:15px; color:var(--sr-label-2); }
+
+/* =====================================================================
+   Home · latest listings — the compact listing card, scaled up into a
+   vertical "feature" layout (photo with a slanted foot, then details).
+   ===================================================================== */
+.cm-home-featured-rail > .xcd-wrap { flex:0 0 86%; max-width:380px; margin:0; scroll-snap-align:start; }
+.cm-home-featured-rail { padding-inline:2px; gap:14px; }
+
+.xcd-wrap--home .xcd { flex-direction:column; min-height:0; padding:2.6cqw; border-radius:7.4cqw; gap:0;
+  background:linear-gradient(165deg,#262628 0%,#1D1D1F 70%); box-shadow:0 14px 34px rgba(0,0,0,.38); }
+.xcd-wrap--home .xcd-photo { flex:none; width:100%; aspect-ratio:16/11.5; border-radius:5.4cqw; clip-path:polygon(0 0,100% 0,100% 90%,0 100%); }
+.xcd-wrap--home .xcd-count { left:3cqw; bottom:3.2cqw; height:6.4cqw; padding:0 3cqw; gap:2.6cqw; font-size:max(10px,2.9cqw); }
+.xcd-wrap--home .xcd-count-text .xcd-ic { font-size:max(12px,3.2cqw); }
+.xcd-wrap--home .xcd-dots i { width:1.5cqw; height:1.5cqw; }
+.xcd-wrap--home .xcd-flag { height:5.6cqw; padding:0 2.6cqw; font-size:max(9px,2.7cqw); top:3cqw; right:3cqw; }
+
+.xcd-wrap--home .xcd-info { padding:3.4cqw 2.8cqw 1.6cqw; gap:2.6cqw; justify-content:flex-start; }
+.xcd-wrap--home .xcd-head { min-height:0; justify-content:flex-start; }
+.xcd-wrap--home .xcd-logo { transform:scale(1.35); transform-origin:right center; }
+.xcd-wrap--home .xcd-titlerow { margin-top:.6cqw; }
+.xcd-wrap--home .xcd-title { font-size:max(18px,6.2cqw); line-height:1.25; font-weight:800; }
+.xcd-wrap--home .xcd-kmrow { font-size:max(12px,3.4cqw); gap:1.6cqw; }
+.xcd-wrap--home .xcd-kmrow .xcd-ic { font-size:max(14px,3.9cqw); }
+.xcd-wrap--home .xcd-chips { gap:1.8cqw; row-gap:1.8cqw; }
+.xcd-wrap--home .xcd-chip { height:6.4cqw; padding:0 3cqw; font-size:max(10px,3cqw); }
+.xcd-wrap--home .xcd-chip--trade, .xcd-wrap--home .xcd-chip--paint, .xcd-wrap--home .xcd-chip--ribbon { font-size:max(9px,2.6cqw); padding:0 2.6cqw; }
+.xcd-wrap--home .xcd-foot { margin-top:1.4cqw; }
+.xcd-wrap--home .xcd-price { flex:1; margin:0; border-radius:4.6cqw; transform:none; }
+.xcd-wrap--home .xcd-price-in { transform:none; flex-direction:row; align-items:center; justify-content:space-between; padding:2.6cqw 4cqw; }
+.xcd-wrap--home .xcd-price-label { order:2; }
+.xcd-wrap--home .xcd-tagic { width:max(14px,4.2cqw); height:max(14px,4.2cqw); }
+.xcd-wrap--home .xcd-price-row { order:1; gap:1.6cqw; align-items:baseline; }
+.xcd-wrap--home .xcd-price-amount { font-size:max(22px,8cqw); }
+.xcd-wrap--home .xcd-price--text .xcd-price-amount { font-size:max(16px,5.4cqw); }
+.xcd-wrap--home .xcd-price-unit { font-size:max(11px,3.2cqw); }
+.theme-light .xcd-wrap--home .xcd { background:#fff; }
+.xcd-wrap--home .xcd-head, .xcd-wrap--home .xcd-titlerow, .xcd-wrap--home .xcd-chips, .xcd-wrap--home .xcd-foot { margin-left:0; }
+.xcd-wrap--home .xcd-price-amount { color:#fff; }
+.xcd-wrap--home .xcd-price-unit { color:rgba(255,255,255,.62); }
+.xcd-wrap--home .xcd-price-label, .xcd-wrap--home .xcd-tagic { color:rgba(255,255,255,.7); fill:rgba(255,255,255,.7); }
+.theme-light .xcd-wrap--home .xcd-price-amount { color:#1D1D1F; }
+
+/* Home · account tile — glass avatar artwork, or the user's own photo */
+.cm-home-acc-glass { position:absolute; z-index:1; top:50%; left:50%; height:132%; width:auto; aspect-ratio:1; transform:translate(-50%,-52%);
+  mix-blend-mode:screen; opacity:.95; pointer-events:none;
+  -webkit-mask-image:radial-gradient(closest-side,#000 64%,transparent 100%); mask-image:radial-gradient(closest-side,#000 64%,transparent 100%); }
+.cm-home-acc-photo { position:absolute; z-index:1; top:50%; left:50%; width:62px; height:62px; transform:translate(-50%,-62%); border-radius:50%; overflow:hidden;
+  box-shadow:0 0 0 2px rgba(255,255,255,.16),0 8px 22px rgba(0,0,0,.45); background:#262628; }
+.cm-home-acc-photo img { width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Home · messages tile — chrome speech-bubble artwork (square, black backdrop → screen blend) */
+.cm-home-tile-messages .cm-home-plane { inset:auto; top:50%; left:50%; height:118%; width:auto; aspect-ratio:1; transform:translate(-50%,-50%); opacity:.96;
+  -webkit-mask-image:radial-gradient(closest-side,#000 66%,transparent 100%); mask-image:radial-gradient(closest-side,#000 66%,transparent 100%); }
+
+/* Home · showrooms tile — glass showroom artwork */
+.cm-home-showrooms-glass { position:absolute; z-index:1; top:50%; left:50%; height:128%; width:auto; aspect-ratio:1; transform:translate(-50%,-50%);
+  mix-blend-mode:screen; opacity:.95; pointer-events:none;
+  -webkit-mask-image:radial-gradient(closest-side,#000 68%,transparent 100%); mask-image:radial-gradient(closest-side,#000 68%,transparent 100%); }
+.cm-home-tile-dealers .cm-home-showroom-badge { display:none; }
+
+
+/* Premium glass artwork for the home quick-access tiles */
+.cm-home-listings-glass { position:absolute; z-index:1; top:50%; left:50%; height:128%; width:auto; aspect-ratio:1; transform:translate(-50%,-50%); mix-blend-mode:screen; opacity:.96; pointer-events:none; -webkit-mask-image:radial-gradient(closest-side,#000 67%,transparent 100%); mask-image:radial-gradient(closest-side,#000 67%,transparent 100%); }
+.cm-home-sell-icon { overflow:hidden; position:relative; }
+.cm-home-sell-icon img { display:block; width:150%; height:150%; max-width:none; object-fit:cover; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); mix-blend-mode:screen; -webkit-mask-image:radial-gradient(closest-side,#000 58%,transparent 100%); mask-image:radial-gradient(closest-side,#000 58%,transparent 100%); }
+
+/* Showroom hashtags + story ring */
+.sp-tags { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-top:12px; padding:0 4px; }
+.sp-tag { font-size:12.5px; font-weight:600; padding:5px 11px; border-radius:99px; background:var(--sr-card); box-shadow:var(--sr-shadow); color:var(--sr-label); direction:rtl; }
+.sp-avatar-story, .dealership-card-logo.sp-avatar-story { cursor:pointer; outline:3px solid #fff; outline-offset:3px; }
+.sp-avatar-story.is-seen { outline-color:rgba(255,255,255,.35); }
+.sp-add-listing { display:inline-flex; align-items:center; gap:6px; height:34px; padding:0 14px; border-radius:99px; border:0; background:#fff; color:#262628; font-size:12.5px; font-weight:800; cursor:pointer; }
+.sp-add-listing:active { opacity:.75; }
+
+/* ---------- Showroom honor badges ---------- */
+.sr-awards-row { display:flex; align-items:center; flex-wrap:wrap; gap:6px; min-width:0; margin:10px 0 0; }
+.sr-award-chip { display:inline-flex; align-items:center; gap:5px; min-height:25px; max-width:100%; padding:3px 9px; border:1px solid var(--sr-sep); border-radius:999px; background:var(--sr-fill); color:var(--sr-label); font-size:11px; line-height:1.35; font-weight:650; white-space:nowrap; }
+.sr-award-chip>span { display:inline-grid; place-items:center; color:var(--sr-label); font-size:13px; font-weight:800; line-height:1; }
+.sr-award-more { display:inline-flex; align-items:center; min-height:25px; padding:0 3px; color:var(--sr-label-2); font-size:11px; font-weight:700; }
+.sr-rail .sr-awards-row { gap:5px; margin-top:9px; }
+.sr-rail .sr-award-chip { min-height:23px; padding:2px 7px; font-size:10px; }
+
+.sp-honors { margin-top:18px; }
+.sp-honors-heading { display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin:0 4px 10px; }
+.sp-honors-heading h2 { margin:0; color:var(--sr-label); font-size:19px; line-height:1.4; font-weight:750; }
+.sp-honors-heading>span { color:var(--sr-label-2); font-size:12px; font-variant-numeric:tabular-nums; }
+.sp-honors-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+.sp-honor-card { display:flex; align-items:flex-start; gap:10px; min-width:0; min-height:76px; padding:12px 11px; border:1px solid var(--sr-sep); border-radius:15px; background:var(--sr-card); }
+.sp-honor-symbol { flex:0 0 30px; width:30px; height:30px; display:grid; place-items:center; border-radius:10px; background:var(--sr-fill-2); color:var(--sr-label); font-size:17px; font-weight:800; }
+.sp-honor-copy { display:flex; flex:1; flex-direction:column; gap:3px; min-width:0; }
+.sp-honor-copy strong { color:var(--sr-label); font-size:13px; line-height:1.5; font-weight:750; }
+.sp-honor-copy small { color:var(--sr-label-2); font-size:11px; line-height:1.55; }
+.sp-honors-empty { padding:15px 16px; border:1px solid var(--sr-sep); border-radius:15px; background:var(--sr-card); }
+.sp-honors-empty strong { display:block; color:var(--sr-label); font-size:14px; font-weight:700; }
+.sp-honors-empty p { margin:4px 0 0; color:var(--sr-label-2); font-size:12px; line-height:1.8; }
+@media (max-width:360px) { .sp-honors-grid { grid-template-columns:minmax(0,1fr); } }
+
+
+
+/* ---------- Honor badges v2: dimensional medallions + horizontal rails ---------- */
+.sr-awards-row {
+  display:flex; align-items:center; flex-wrap:nowrap; gap:8px; min-width:0; width:100%;
+  margin:10px 0 0; padding:2px 1px 7px; overflow-x:auto; overflow-y:hidden;
+  direction:rtl; overscroll-behavior-inline:contain; touch-action:pan-x pan-y; -webkit-overflow-scrolling:touch;
+  scroll-snap-type:x proximity; scrollbar-width:none; mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 12px),transparent 100%);
+}
+.sr-awards-row::-webkit-scrollbar, .sp-honors-rail::-webkit-scrollbar { display:none; }
+.sr-award-chip {
+  display:inline-flex; flex:0 0 auto; align-items:center; gap:7px; min-height:42px; max-width:none;
+  padding:5px 10px 5px 12px; border:1px solid rgba(255,255,255,.09); border-radius:14px;
+  background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));
+  box-shadow:0 5px 12px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.07);
+  color:var(--sr-label); font-size:11px; line-height:1.35; font-weight:750; white-space:nowrap; scroll-snap-align:start;
+}
+.sr-award-label { display:block; }
+.sr-award-mini-medal, .sp-honor-medal {
+  position:relative; display:grid; place-items:center; flex:0 0 auto; overflow:hidden; color:#fff;
+  background:radial-gradient(circle at 28% 20%,rgba(255,255,255,.95) 0,rgba(255,255,255,.32) 9%,transparent 25%),linear-gradient(145deg,var(--award-hi,#ffd76c),var(--award-mid,#cc861e) 52%,var(--award-low,#72400a));
+  border:1px solid rgba(255,255,255,.62); box-shadow:inset 0 1px 1px rgba(255,255,255,.85),inset 0 -3px 4px rgba(34,17,0,.32),0 3px 0 rgba(96,57,12,.65),0 5px 8px rgba(0,0,0,.34);
+  text-shadow:0 1px 1px rgba(0,0,0,.28);
+}
+.sr-award-mini-medal { width:27px; height:27px; border-radius:9px; }
+.sr-award-mini-medal::after, .sp-honor-medal::after { content:""; position:absolute; inset:1px; border-radius:inherit; background:linear-gradient(145deg,rgba(255,255,255,.3),transparent 42%,rgba(0,0,0,.12)); pointer-events:none; }
+.sr-award-mini-medal svg { width:16px; height:16px; filter:drop-shadow(0 1px 1px rgba(0,0,0,.48)); }
+.sr-award-mini-medal--activity, .sp-honor-medal--activity { --award-hi:#74e0ff; --award-mid:#278fd7; --award-low:#164379; }
+.sr-award-mini-medal--inventory, .sp-honor-medal--inventory { --award-hi:#ffe99a; --award-mid:#d99a2b; --award-low:#81500f; }
+.sr-award-mini-medal--fresh, .sp-honor-medal--fresh { --award-hi:#b5ff9b; --award-mid:#39b875; --award-low:#176348; }
+.sr-award-mini-medal--quality, .sp-honor-medal--quality { --award-hi:#c8b2ff; --award-mid:#8b61e8; --award-low:#4c2b9b; }
+.sr-award-mini-medal--rating, .sp-honor-medal--rating { --award-hi:#fff0a3; --award-mid:#edaf35; --award-low:#a65b18; }
+.sr-award-mini-medal--popular, .sp-honor-medal--popular { --award-hi:#ffb8d8; --award-mid:#e05291; --award-low:#842750; }
+.sr-award-mini-medal--profile, .sp-honor-medal--profile { --award-hi:#9cf4df; --award-mid:#269c98; --award-low:#14545d; }
+.sr-rail .sr-awards-row { gap:7px; margin-top:9px; padding-bottom:6px; }
+.sr-rail .sr-award-chip { min-height:38px; padding:4px 9px; font-size:10px; }
+.sr-rail .sr-award-mini-medal { width:24px; height:24px; border-radius:8px; }
+.sr-rail .sr-award-mini-medal svg { width:14px; height:14px; }
+
+.sp-honors { margin-top:20px; }
+.sp-honors-heading { align-items:center; }
+.sp-honors-heading h2 { letter-spacing:-.2px; }
+.sp-honors-rail {
+  display:flex; flex-wrap:nowrap; align-items:stretch; gap:12px; width:100%; min-width:0;
+  padding:5px 3px 13px; overflow-x:auto; overflow-y:hidden; direction:rtl;
+  overscroll-behavior-inline:contain; touch-action:pan-x pan-y; -webkit-overflow-scrolling:touch;
+  scroll-snap-type:x mandatory; scrollbar-width:none;
+  mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 12px),transparent 100%);
+}
+.sp-honor-card {
+  position:relative; display:flex; flex:0 0 190px; flex-direction:column; align-items:stretch; gap:11px;
+  min-width:0; min-height:164px; padding:13px 13px 14px; overflow:hidden;
+  border:1px solid rgba(255,255,255,.10); border-radius:19px;
+  background:radial-gradient(circle at 100% 0%,rgba(112,94,255,.12),transparent 50%),linear-gradient(150deg,rgba(255,255,255,.075),rgba(255,255,255,.022) 65%),var(--sr-card);
+  box-shadow:0 9px 18px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.055);
+  scroll-snap-align:start;
+}
+html.theme-light .sp-honor-card { border-color:rgba(51,51,54,.12); background:radial-gradient(circle at 100% 0%,rgba(112,94,255,.09),transparent 52%),linear-gradient(150deg,#fff,#f7f7fb); box-shadow:0 8px 18px rgba(38,38,40,.08),inset 0 1px 0 #fff; }
+.sp-honor-card::before { content:""; position:absolute; width:100px; height:100px; left:-48px; bottom:-58px; border-radius:50%; background:radial-gradient(circle,rgba(255,255,255,.06),transparent 70%); pointer-events:none; }
+.sp-honor-card-top { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.sp-honor-medal { width:48px; height:48px; border-radius:16px; }
+.sp-honor-medal svg { position:relative; z-index:1; width:25px; height:25px; filter:drop-shadow(0 1px 1px rgba(0,0,0,.4)); }
+.sp-honor-kicker { padding:4px 8px; border:1px solid var(--sr-sep); border-radius:999px; color:var(--sr-label-2); background:var(--sr-fill); font-size:9px; line-height:1.3; white-space:nowrap; }
+.sp-honor-copy { display:flex; flex:1; flex-direction:column; align-items:flex-start; gap:4px; min-width:0; }
+.sp-honor-copy strong { color:var(--sr-label); font-size:13px; line-height:1.55; font-weight:800; }
+.sp-honor-copy small { display:-webkit-box; overflow:hidden; -webkit-box-orient:vertical; -webkit-line-clamp:2; color:var(--sr-label-2); font-size:10.5px; line-height:1.65; }
+.sp-honors-empty { width:100%; }
+@media (max-width:380px) {
+  .sp-honor-card { flex-basis:166px; min-height:158px; padding:11px; }
+  .sp-honors-rail { gap:9px; }
+  .sr-award-chip { gap:6px; padding-inline:8px; }
+}
+@media (prefers-reduced-motion:no-preference) {
+  .sr-award-chip, .sp-honor-card { transition:transform .18s ease,box-shadow .18s ease; }
+  .sr-award-chip:active, .sp-honor-card:active { transform:translateY(1px) scale(.99); }
+}
+
+/* Small dashed outline distinguishes illustrative rank movement in the demo build. */
+.sr-rank .sr-rank-movement.is-demo { border-style:dashed; }
+
+
+/* Compact, attached rank + movement: keep the trend chip snug beside the rank number. */
+.sr-rank {
+  display:inline-flex; align-items:center; flex-wrap:nowrap; gap:2px;
+  height:27px; min-height:27px; max-width:calc(100% - 24px);
+  padding:0 8px; border-radius:999px; white-space:nowrap;
+}
+.sr-rank > b { display:inline-flex; align-items:center; justify-content:center; font-size:13px; line-height:1; font-weight:900; font-variant-numeric:tabular-nums; }
+.sr-rank > span:not(.sr-rank-movement) { font-size:10px; line-height:1; font-weight:600; white-space:nowrap; }
+.sr-rank .sr-rank-movement {
+  display:inline-flex; align-items:center; justify-content:center; gap:3px; flex:0 0 auto; margin-inline-start:0;
+  min-height:19px; padding:1px 5px; border-radius:999px; font-size:10px; line-height:1;
+  font-weight:800; white-space:nowrap; direction:ltr; font-variant-numeric:tabular-nums;
+  box-shadow:none; text-shadow:none; border:1px solid transparent;
+}
+.sr-rank .sr-rank-trend-icon {
+  display:block; flex:0 0 13px; width:13px; height:13px; padding:0;
+  fill:none; stroke:currentColor; stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round;
+  filter:none;
+}
+.sr-rank .sr-rank-movement-label, .sr-rank .sr-rank-demo-label { display:none !important; }
+.sr-rank .sr-rank-movement-value {
+  display:inline; min-width:0; min-height:0; padding:0; border-radius:0;
+  color:inherit; background:none; font-size:12px; line-height:1; font-weight:950;
+  letter-spacing:0; font-variant-numeric:tabular-nums; text-shadow:none;
+}
+.sr-rank .sr-rank-movement.is-up {
+  color:#8ce7ad; background:rgba(22,163,74,.16); border-color:rgba(74,222,128,.28);
+}
+.sr-rank .sr-rank-movement.is-down {
+  color:#ffffff; background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.168);
+}
+.sr-rank .sr-rank-movement.is-demo { border-style:dashed; }
+html.theme-light .sr-rank .sr-rank-movement.is-up { color:#14783d; background:rgba(22,163,74,.09); border-color:rgba(22,163,74,.24); }
+html.theme-light .sr-rank .sr-rank-movement.is-down { color:#9b1b30; background:rgba(155,27,48,.08); border-color:rgba(155,27,48,.22); }
+@media (max-width:390px) {
+  .sr-rank { height:25px; min-height:25px; gap:1px; padding-inline:6px; }
+  .sr-rank > b { font-size:12px; }
+  .sr-rank .sr-rank-movement { min-height:18px; gap:2px; padding-inline:4px; }
+  .sr-rank .sr-rank-trend-icon { flex-basis:12px; width:12px; height:12px; }
+  .sr-rank .sr-rank-movement-value { font-size:11px; }
+}
+
+
+/* Universal back button for secondary pages that do not have their own. */
+.cm-universal-back {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 38px; margin: 12px 14px 8px auto; padding: 0 14px;
+  border: 1px solid rgba(255,255,255,.12); border-radius: 13px;
+  color: var(--text, #F5F5F7); background: rgba(255,255,255,.055);
+  font: inherit; font-size: 13px; font-weight: 750; line-height: 1;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
+.cm-universal-back:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.22); }
+.cm-universal-back:active { transform: scale(.97); }
+.cm-universal-back__arrow { display: inline-grid; place-items: center; font-size: 19px; line-height: 1; }
+html.theme-light .cm-universal-back { color: #262628; background: rgba(29,29,31,.045); border-color: rgba(29,29,31,.12); }
+
+/* CarMaa shared header for account + individual showroom profiles. */
+.account-header-active .header-home-row { direction:ltr !important; }
+.account-header-active .header-home-row > div:last-child { display:flex !important; align-items:center !important; justify-content:flex-end !important; }
+.account-header-active .header-home-row .brand-mark.header-center-notifications {
+  position:relative !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  justify-self:center !important;
+  width:38px !important;
+  height:38px !important;
+  padding:0 !important;
+  border:1px solid rgba(255,255,255,.09) !important;
+  border-radius:999px !important;
+  background:#262628 !important;
+  color:#f3f4f6 !important;
+  box-shadow:none !important;
+  line-height:1 !important;
+}
+.account-header-active .header-home-row .brand-mark.header-center-notifications svg { width:22px; height:22px; flex:0 0 auto; }
+.account-header-active .header-home-row .brand-mark.header-center-notifications .mr-bell-badge { top:-4px; inset-inline-end:-4px; }
+.account-header-active .header-home-row > div:last-child > button[data-action="vehicleBack"] {
+  background:#262628 !important;
+  border:1px solid rgba(255,255,255,.09) !important;
+  color:#f3f4f6 !important;
+}
+.theme-light .account-header-active .header-home-row .brand-mark.header-center-notifications,
+.theme-light .account-header-active .header-home-row > div:last-child > button[data-action="vehicleBack"] {
+  background:#f0f0f2 !important;
+  border-color:rgba(0,0,0,.09) !important;
+  color:#262628 !important;
+}
+
+/* Match the two homepage section titles to the main slogan's typography. */
+.cm-home-section-heading,
+.cm-home-showrooms .sr-section-head {
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+  gap:8px !important;
+}
+.cm-home-section-heading > div,
+.cm-home-showrooms .sr-section-head > div { width:100%; min-width:0; }
+.cm-home-section-heading h2,
+.cm-home-showrooms .sr-section-head h2 {
+  font-size:clamp(27px, 7.2vw, 38px) !important;
+  line-height:1.35 !important;
+  font-weight:950 !important;
+  letter-spacing:-.045em !important;
+  overflow-wrap:anywhere;
+}
+.cm-home-section-heading button,
+.cm-home-showrooms .sr-section-head button { align-self:flex-start !important; margin-top:1px; }
+@media (min-width:700px) {
+  .cm-home-section-heading h2,
+  .cm-home-showrooms .sr-section-head h2 { font-size:42px !important; }
+}
+
+/* Fix: keep logo centered, notifications on the left and back button visible on the right. */
+.account-header-active .header-home-row > div:last-child > button[data-action="vehicleBack"] {
+  display:inline-flex !important; align-items:center !important; justify-content:center !important;
+  width:38px !important; height:38px !important; min-width:38px !important;
+  padding:0 !important; border-radius:999px !important;
+  background:#262628 !important; border:1px solid rgba(255,255,255,.09) !important;
+  color:#f3f4f6 !important; box-shadow:none !important;
+}
+.theme-light .account-header-active .header-home-row > div:last-child > button[data-action="vehicleBack"] {
+  background:#f0f0f2 !important; border-color:rgba(0,0,0,.09) !important; color:#262628 !important;
+}
+
+/* Showroom cover: same pinned page-level cover as the account page. */
+body:has(#pageContent > [data-page="seller"].sp-has-cover) #pageBlurWrap { position:relative; isolation:isolate; }
+body:has(#pageContent > [data-page="seller"].sp-has-cover) #pageContent { position:relative; z-index:1; }
+body:not(:has(#pageContent > [data-page="seller"].sp-has-cover)) #pageBlurWrap > .sp-cover-banner-layer { display:none !important; }
+/* While the cover is still inside the hero (before it is moved to the page level), keep it hidden. */
+.sp-page.sp-has-cover .pf-hero .sp-banner-cover { display:none !important; }
+#pageBlurWrap > .sp-banner-cover.sp-cover-banner-layer {
+  position:absolute !important; left:0 !important; right:0 !important; z-index:0 !important;
+  display:block !important; height:420px; box-sizing:border-box; pointer-events:none;
+  background:#1D1D1F center 38% / cover no-repeat;
+  transform:none !important; transition:none !important; animation:none !important;
+}
+#pageBlurWrap > .sp-banner-cover.sp-cover-banner-layer::after {
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,.16) 0%,rgba(0,0,0,.22) 34%,rgba(29,29,31,.72) 70%,var(--sr-bg,#1D1D1F) 100%);
+}
+/* Header floats transparently over the cover. */
+html:not(.theme-light) body:has(#pageContent > [data-page="seller"].sp-has-cover) #siteHeader,
+html:not(.theme-light) body:has(#pageContent > [data-page="seller"].sp-has-cover) #stickyHeaderGroup,
+html.theme-light body:has(#pageContent > [data-page="seller"].sp-has-cover) #siteHeader,
+html.theme-light body:has(#pageContent > [data-page="seller"].sp-has-cover) #stickyHeaderGroup,
+body:has(#pageContent > [data-page="seller"].sp-has-cover) #siteHeader,
+body:has(#pageContent > [data-page="seller"].sp-has-cover) #stickyHeaderGroup { background:transparent !important; background-color:transparent !important; }
+body:has(#pageContent > [data-page="seller"].sp-has-cover) #stickyHeaderGroup::after { display:none !important; }
+/* Page itself is transparent so the cover shows through; the content below the stats row gets a solid backdrop. */
+.sp-page.sp-has-cover { background:transparent !important; padding-bottom:0; }
+.sp-page.sp-has-cover .sp-below { position:relative; z-index:1; margin:0 -16px; padding:0 16px; background:var(--sr-bg); }
+.sp-page.sp-has-cover [data-slot="cards"] { position:relative; z-index:1; background:var(--sr-bg); padding-bottom:120px; }
+
+/* Showroom cover: ends at the middle of the avatar, then fades, blurs and darkens. */
+#pageBlurWrap > .sp-banner-cover.sp-cover-banner-layer::after {
+  z-index:2;
+  background:linear-gradient(to bottom,rgba(0,0,0,.08) 0%,rgba(0,0,0,.12) 30%,rgba(29,29,31,.5) 62%,rgba(29,29,31,.88) 86%,var(--sr-bg,#1D1D1F) 100%);
+}
+#pageBlurWrap > .sp-banner-cover.sp-cover-banner-layer::before {
+  content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 35%,#000 100%);
+  mask-image:linear-gradient(to bottom,transparent 35%,#000 100%);
+}
+
+/* Showroom list: back button sits in the header's left slot (replaces the old in-page "بازگشت" pill). */
+[data-page="dealers"] .cm-showroom-page-header .cm-showroom-back { display:inline-flex; align-items:center; justify-content:center; }
+[data-page="dealers"] > .cm-universal-back,
+[data-page="dealers"] .cm-showroom-page-header > .cm-universal-back { display:none !important; }
+
+/* Showroom (dealer) profile page: no bottom dock, and no space reserved for it. */
+body:has([data-page="seller"].sp-dealer) #bottomDock,
+body[data-dock-page="seller"]:has([data-page="seller"].sp-dealer) #bottomDock { display:none !important; }
+body:has([data-page="seller"].sp-dealer) #pageContent { padding-bottom:0; }
+.sp-page.sp-dealer { padding-bottom:32px; }
+.sp-page.sp-dealer.sp-has-cover [data-slot="cards"] { padding-bottom:32px; }
+
+/* Showroom cover: the whole photo is fitted to the (avatar-middle) banner box instead of being cropped. */
+#pageBlurWrap > .sp-banner-cover.sp-cover-banner-layer { background-size:100% 100% !important; background-position:center center !important; }
+
+/* ---------------------------------------------------------------
+   Header buttons: dark "clear liquid glass" (iOS-style) for the shared header
+   on account, showroom profile and vehicle pages. Applies to the back and
+   notification buttons; the logo gets a soft shadow so it stays readable over bright covers.
+--------------------------------------------------------------- */
+#siteHeader.account-header-active .header-home-row > div:first-child > button,
+#siteHeader.account-header-active .header-home-row > div:last-child > button[data-action="vehicleBack"] {
+  position: relative !important;
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  width: 36px !important; height: 36px !important; min-width: 36px !important; padding: 0 !important;
+  border-radius: 999px !important;
+  color: #f5f6f8 !important;
+  background:
+    radial-gradient(120% 90% at 30% 0%, rgba(255,255,255,.20) 0%, rgba(255,255,255,0) 55%),
+    rgba(29,29,31,.34) !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(190%) brightness(.82);
+  backdrop-filter: blur(18px) saturate(190%) brightness(.82);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.38),
+    inset 0 -1px 0 rgba(255,255,255,.07),
+    inset 0 0 14px rgba(255,255,255,.07),
+    0 8px 22px rgba(0,0,0,.32),
+    0 1px 3px rgba(0,0,0,.28) !important;
+  transition: transform .16s ease, background-color .2s ease, box-shadow .2s ease !important;
+  -webkit-tap-highlight-color: transparent;
+}
+/* thin specular sheen on the upper edge, like the iOS lens highlight */
+#siteHeader.account-header-active .header-home-row > div:first-child > button::before,
+#siteHeader.account-header-active .header-home-row > div:last-child > button[data-action="vehicleBack"]::before {
+  content: ""; position: absolute; inset: 1px; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(255,255,255,.22) 0%, rgba(255,255,255,0) 42%);
+  -webkit-mask: radial-gradient(closest-side, #000 60%, transparent 100%);
+  mask: radial-gradient(closest-side, #000 60%, transparent 100%);
+  opacity: .8;
+}
+#siteHeader.account-header-active .header-home-row > div:first-child > button:active,
+#siteHeader.account-header-active .header-home-row > div:last-child > button[data-action="vehicleBack"]:active {
+  transform: scale(.92);
+  background-color: rgba(29,29,31,.46) !important;
+}
+#siteHeader.account-header-active .header-home-row > div:first-child > button svg,
+#siteHeader.account-header-active .header-home-row > div:last-child > button[data-action="vehicleBack"] svg {
+  position: relative; z-index: 1; width: 18px; height: 18px;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.35));
+}
+#siteHeader.account-header-active .header-home-row > div:first-child > button .mr-bell-badge { z-index: 2; }
+/* logo stays legible over white / bright covers */
+#siteHeader.account-header-active .header-home-row .brand-mark img { filter: drop-shadow(0 1px 6px rgba(0,0,0,.55)) drop-shadow(0 0 1px rgba(0,0,0,.6)); }
+
+/* light theme: same glass, light-tinted */
+.theme-light #siteHeader.account-header-active .header-home-row > div:first-child > button,
+.theme-light #siteHeader.account-header-active .header-home-row > div:last-child > button[data-action="vehicleBack"] {
+  color: #262628 !important;
+  background:
+    radial-gradient(120% 90% at 30% 0%, rgba(255,255,255,.7) 0%, rgba(255,255,255,0) 55%),
+    rgba(255,255,255,.34) !important;
+  border-color: rgba(255,255,255,.55) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(190%);
+  backdrop-filter: blur(18px) saturate(190%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 0 rgba(0,0,0,.05), 0 8px 22px rgba(0,0,0,.14) !important;
+}
+.theme-light #siteHeader.account-header-active .header-home-row > div:first-child > button svg,
+.theme-light #siteHeader.account-header-active .header-home-row > div:last-child > button[data-action="vehicleBack"] svg { filter: none; }
+
+/* ---------------------------------------------------------------
+   Header buttons on EVERY page get the same dark clear-liquid-glass look:
+   shared header (home / listings / search rows), page-level explore headers
+   (showroom list, listings, sell…) and the conversation header's back button.
+   Only header buttons — body buttons are untouched.
+--------------------------------------------------------------- */
+#siteHeader .header-home-row button:not(.brand-mark):not([hidden]),
+#siteHeader .non-home-header-row .header-menu-button,
+.explore-header button.explore-icon-btn,
+.mr-cv-head .mr-cv-back {
+  color: #f5f6f8 !important;
+  background:
+    radial-gradient(120% 90% at 30% 0%, rgba(255,255,255,.20) 0%, rgba(255,255,255,0) 55%),
+    rgba(29,29,31,.34) !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(190%) brightness(.82);
+  backdrop-filter: blur(18px) saturate(190%) brightness(.82);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.38),
+    inset 0 -1px 0 rgba(255,255,255,.07),
+    inset 0 0 14px rgba(255,255,255,.07),
+    0 8px 22px rgba(0,0,0,.32),
+    0 1px 3px rgba(0,0,0,.28) !important;
+  transition: transform .16s ease, background-color .2s ease, box-shadow .2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+#siteHeader .header-home-row button:not(.brand-mark):not([hidden]):active,
+#siteHeader .non-home-header-row .header-menu-button:active,
+.explore-header button.explore-icon-btn:active,
+.mr-cv-head .mr-cv-back:active { transform: scale(.92); background-color: rgba(29,29,31,.46) !important; }
+
+/* Shared header row: round 40px glass buttons (the account/showroom/vehicle pages keep their 44px version above). */
+#siteHeader .header-home-row button:not(.brand-mark):not([hidden]) {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  width: 36px; height: 36px; min-width: 36px; padding: 0 !important; border-radius: 999px !important;
+  position: relative; overflow: visible;
+}
+#siteHeader .header-home-row #headerAccountBtn { overflow: hidden; }
+#siteHeader .header-home-row button:not(.brand-mark) svg { width: 18px; height: 18px; }
+#siteHeader .header-home-row button:not(.brand-mark) svg,
+.explore-header button.explore-icon-btn svg { filter: drop-shadow(0 1px 2px rgba(0,0,0,.35)); }
+
+/* Light theme: light-tinted glass with dark icons. */
+.theme-light #siteHeader .header-home-row button:not(.brand-mark):not([hidden]),
+.theme-light #siteHeader .non-home-header-row .header-menu-button,
+.theme-light .explore-header button.explore-icon-btn,
+.theme-light .mr-cv-head .mr-cv-back {
+  color: #262628 !important;
+  background:
+    radial-gradient(120% 90% at 30% 0%, rgba(255,255,255,.7) 0%, rgba(255,255,255,0) 55%),
+    rgba(255,255,255,.34) !important;
+  border-color: rgba(255,255,255,.55) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(190%);
+  backdrop-filter: blur(18px) saturate(190%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 0 rgba(0,0,0,.05), 0 8px 22px rgba(0,0,0,.14) !important;
+}
+.theme-light #siteHeader .header-home-row button:not(.brand-mark) svg,
+.theme-light .explore-header button.explore-icon-btn svg { filter: none; }
+
+/* Same compact size for page-level header buttons. */
+.explore-header button.explore-icon-btn { width: 36px; height: 36px; }
+.explore-header button.explore-icon-btn svg { width: 18px; height: 18px; }
+
+/* ---------------------------------------------------------------
+   Home page dock: listings · sell · messages · saved · account.
+   (The shared dock has 6 items; on home the sell and Q&A items are hidden and the rest are re-ordered.)
+--------------------------------------------------------------- */
+body:has(#pageContent > [data-page="home"]) #bottomDock,
+body[data-dock-page="home"] #bottomDock { display: flex !important; }
+body:has(#pageContent > [data-page="home"]) #bottomDock [data-dock="qa"],
+body[data-dock-page="home"] #bottomDock [data-dock="qa"] { display: none !important; }
+/* «ثبت آگهی»: درست سمت چپِ «آگهی‌ها» */
+body:has(#pageContent > [data-page="home"]) #bottomDock [data-dock="sell"],
+body[data-dock-page="home"] #bottomDock [data-dock="sell"] { order: 2; }
+body:has(#pageContent > [data-page="home"]) #bottomDock [data-dock="listings"],
+body[data-dock-page="home"] #bottomDock [data-dock="listings"] { order: 1; }
+body:has(#pageContent > [data-page="home"]) #bottomDock [data-dock="messages"],
+body[data-dock-page="home"] #bottomDock [data-dock="messages"] { order: 3; }
+body:has(#pageContent > [data-page="home"]) #bottomDock [data-dock="saved"],
+body[data-dock-page="home"] #bottomDock [data-dock="saved"] { order: 4; }
+body:has(#pageContent > [data-page="home"]) #bottomDock [data-dock="account"],
+body[data-dock-page="home"] #bottomDock [data-dock="account"] { order: 5; }
+body:has(#pageContent > [data-page="home"]) #pageContent { padding-bottom: 0; }
+
+
+/* =====================================================================
+   Showroom page v2 — banner (= showroom avatar) that fades to dark, centred
+   name + stats, [share][follow][message] row and a hexagon trophy carousel.
+   Loaded last so it wins over the older sp-* rules above.
+   ===================================================================== */
+
+/* --- Banner: the avatar photo, cropped to cover, fading + darkening into the page --- */
+#pageBlurWrap > .sp-banner-cover.sp-cover-banner-layer {
+  background-size:cover !important; background-position:center 20% !important; background-color:#1D1D1F;
+}
+#pageBlurWrap > .sp-banner-cover.sp-cover-banner-layer::before {
+  -webkit-backdrop-filter:blur(5px); backdrop-filter:blur(5px);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 55%,#000 100%);
+  mask-image:linear-gradient(to bottom,transparent 55%,#000 100%);
+}
+#pageBlurWrap > .sp-banner-cover.sp-cover-banner-layer::after {
+  background:linear-gradient(to bottom,
+    rgba(0,0,0,.34) 0%, rgba(0,0,0,.04) 22%, rgba(0,0,0,.10) 46%,
+    rgba(29,29,31,.56) 68%, rgba(29,29,31,.90) 88%, var(--sr-bg,#1D1D1F) 100%);
+}
+
+/* --- Identity block: no avatar, name sits low on the banner --- */
+.sp-page.sp-dealer .pf-hero.sp-hero .sp-id { padding:clamp(215px,66vw,320px) 8px 0; }
+.sp-page.sp-dealer .sp-name { margin:0; font-size:23px; font-weight:800; gap:6px; color:#fff; text-shadow:0 1px 14px rgba(0,0,0,.55); }
+.sp-page.sp-dealer .sp-sub { margin-top:3px; font-size:14px; color:rgba(255,255,255,.62); }
+.sp-page.sp-dealer .sp-verified { width:19px; height:19px; flex:0 0 auto; }
+.sp-story-chip { display:inline-flex; align-items:center; gap:7px; height:30px; margin-top:12px; padding:0 13px 0 11px; border:1px solid rgba(255,255,255,.16); border-radius:999px; background:rgba(255,255,255,.1); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); color:#fff; font:inherit; font-size:12.5px; font-weight:650; cursor:pointer; }
+.sp-story-chip i { width:10px; height:10px; border-radius:50%; background:conic-gradient(#f9ce34,#ee2a7b,#6228d7,#f9ce34); }
+
+/* --- Stats: plain columns on the dark page, label above the number --- */
+.sp-page.sp-dealer .sp-stats { margin-top:18px; background:transparent; box-shadow:none; border-radius:0; padding:0 4px; }
+.sp-page.sp-dealer .sp-stats>div { display:flex; flex-direction:column-reverse; align-items:center; gap:5px; padding:6px 4px; }
+.sp-page.sp-dealer .sp-stats>div+div { border-inline-start:0; }
+.sp-page.sp-dealer .sp-stats strong { font-size:19px; font-weight:800; }
+.sp-page.sp-dealer .sp-stats span { margin:0; font-size:12.5px; color:var(--sr-label-2); }
+
+/* --- Action row: [share] [Follow pill] [message] --- */
+.sp-page.sp-dealer .sp-actions--dealer { display:flex; align-items:center; gap:12px; margin-top:16px; padding:0 4px; }
+.sp-page.sp-dealer .sp-icon-btn,
+.sp-page.sp-dealer .sp-actions--dealer .pf-chat {
+  flex:0 0 54px; width:54px; height:54px; display:grid; place-items:center; padding:0; border-radius:50%;
+  border:1px solid var(--sr-sep); background:var(--sr-fill-2); color:var(--sr-label); cursor:pointer;
+  transition:transform .12s, background .2s; -webkit-tap-highlight-color:transparent;
+}
+.sp-page.sp-dealer .sp-icon-btn:active, .sp-page.sp-dealer .sp-actions--dealer .pf-chat:active { transform:scale(.93); }
+.sp-page.sp-dealer .sp-actions--dealer .pf-follow {
+  flex:1 1 auto; min-width:0; height:54px; display:flex; align-items:center; justify-content:center; gap:9px;
+  border-radius:999px; background:var(--sr-label); color:var(--sr-bg); font-size:16px; font-weight:800; box-shadow:none;
+}
+.sp-page.sp-dealer .sp-actions--dealer .pf-follow:not([data-action^="pfEdit"])::before {
+  content:""; width:20px; height:20px; flex:0 0 20px; background:currentColor;
+  -webkit-mask:var(--sp-ic-follow) center/contain no-repeat; mask:var(--sp-ic-follow) center/contain no-repeat;
+}
+.sp-page.sp-dealer .sp-actions--dealer .pf-follow.is-following { background:var(--sr-fill-2); color:var(--sr-label); box-shadow:inset 0 0 0 1px var(--sr-sep); }
+.sp-page.sp-dealer .sp-actions--dealer .pf-follow.is-following::before { -webkit-mask-image:var(--sp-ic-check); mask-image:var(--sp-ic-check); }
+.sp-page.sp-dealer .sp-actions--dealer .pf-follow[data-action^="pfEdit"] { background:var(--sr-label); color:var(--sr-bg); box-shadow:none; }
+.sp-page.sp-dealer { --sp-ic-follow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='8' r='3.6'/%3E%3Cpath d='M2.8 20c.4-3.6 3-5.6 6.2-5.6s5.8 2 6.2 5.6'/%3E%3Cpath d='M19 8v6M16 11h6'/%3E%3C/svg%3E");
+  --sp-ic-check:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='8' r='3.6'/%3E%3Cpath d='M2.8 20c.4-3.6 3-5.6 6.2-5.6s5.8 2 6.2 5.6'/%3E%3Cpath d='m16 11.5 2 2 4-4'/%3E%3C/svg%3E"); }
+
+/* --- Trophies: hexagon carousel + caption --- */
+.sp-troph { margin:26px -16px 0; }
+.sp-troph-rail {
+  display:flex; align-items:center; gap:10px; direction:rtl; overflow-x:auto; overflow-y:hidden;
+  padding:18px calc(50% - 46px) 14px; scroll-snap-type:x mandatory; scrollbar-width:none;
+  -webkit-overflow-scrolling:touch; overscroll-behavior-inline:contain; outline:none;
+}
+.sp-troph-rail::-webkit-scrollbar { display:none; }
+.sp-hex {
+  position:relative; flex:0 0 92px; width:92px; height:106px; padding:0; border:0; background:none; cursor:pointer;
+  scroll-snap-align:center; scroll-snap-stop:always; color:#fff; -webkit-tap-highlight-color:transparent;
+  transform:scale(.8); opacity:.6; transition:transform .28s cubic-bezier(.2,.8,.2,1), opacity .28s, filter .28s;
+  filter:drop-shadow(0 6px 10px rgba(0,0,0,.35));
+}
+.sp-hex.is-active { transform:scale(1); opacity:1; filter:drop-shadow(0 12px 20px rgba(0,0,0,.5)); }
+.sp-hex:focus-visible { outline:none; }
+.sp-hex:focus-visible .sp-hex-in { box-shadow:inset 0 0 0 2px #fff; }
+.sp-hex::before, .sp-hex-in { clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%); }
+.sp-hex::before { content:""; position:absolute; inset:0; background:linear-gradient(150deg,var(--award-hi,#ffd76c),var(--award-mid,#cc861e) 48%,var(--award-low,#72400a)); }
+.sp-hex-in {
+  position:absolute; inset:6px; display:grid; place-items:center;
+  background:linear-gradient(158deg,rgba(255,255,255,.62),rgba(255,255,255,0) 42%),linear-gradient(205deg,var(--award-hi,#ffd76c),var(--award-mid,#cc861e) 72%);
+}
+.sp-hex-in svg { width:36px; height:36px; stroke-width:1.7; filter:drop-shadow(0 1px 1px rgba(0,0,0,.4)); }
+.sp-hex--activity  { --award-hi:#d9e6f2; --award-mid:#8da6bd; --award-low:#4d6178; }
+.sp-hex--inventory { --award-hi:#ffe3b8; --award-mid:#e0965a; --award-low:#8a4a22; }
+.sp-hex--fresh     { --award-hi:#b5ff9b; --award-mid:#39b875; --award-low:#176348; }
+.sp-hex--quality   { --award-hi:#c8b2ff; --award-mid:#8b61e8; --award-low:#4c2b9b; }
+.sp-hex--rating    { --award-hi:#fff0a3; --award-mid:#edaf35; --award-low:#a65b18; }
+.sp-hex--popular   { --award-hi:#ffb8d8; --award-mid:#e05291; --award-low:#842750; }
+.sp-hex--profile   { --award-hi:#9cf4df; --award-mid:#269c98; --award-low:#14545d; }
+.sp-hex.is-locked::before { background:linear-gradient(150deg,#262628,#262628 55%,#1D1D1F); }
+.sp-hex.is-locked .sp-hex-in { background:linear-gradient(158deg,rgba(255,255,255,.07),rgba(255,255,255,0) 45%),linear-gradient(205deg,#262628,#1D1D1F 80%); color:rgba(255,255,255,.26); }
+.sp-hex.is-locked .sp-hex-in svg { filter:none; }
+.sp-hex.is-locked { opacity:.5; }
+.sp-hex.is-locked.is-active { opacity:.95; }
+
+.sp-troph-cap { max-width:300px; margin:0 auto; padding:0 20px; text-align:center; transition:opacity .18s; }
+.sp-troph-cap.is-swap { opacity:0; }
+.sp-troph-cap strong { display:block; font-size:15.5px; line-height:1.6; font-weight:750; color:var(--sr-label); }
+.sp-troph-cap p { min-height:3.3em; margin:3px 0 0; font-size:12.5px; line-height:1.75; color:var(--sr-label-2); }
+
+@media (prefers-reduced-motion:reduce) { .sp-hex, .sp-troph-cap { transition:none; } }
+
+/* Header: transparent over the banner, solid once the banner has scrolled away. */
+html body.sp-hdr-solid:has(#pageContent > [data-page="seller"].sp-has-cover) #siteHeader,
+html body.sp-hdr-solid:has(#pageContent > [data-page="seller"].sp-has-cover) #stickyHeaderGroup {
+  background:var(--sr-bg) !important; background-color:var(--sr-bg) !important;
+}
+body:has(#pageContent > [data-page="seller"].sp-has-cover) #siteHeader,
+body:has(#pageContent > [data-page="seller"].sp-has-cover) #stickyHeaderGroup { transition:background-color .2s ease; }
+
+.sr-pill-member { font-size:12px; font-weight:500; white-space:nowrap; }
+
+/* دکمه‌ی «همه …» روبروی عنوان بخش (به‌جای فوتر زیر ریل) */
+.cm-home-latest .cm-home-section-heading,
+.cm-home-showrooms .sr-section-head {
+  flex-direction:row !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:10px !important;
+  direction:rtl;
+}
+.cm-home-latest .cm-home-section-heading > div,
+.cm-home-showrooms .sr-section-head > div { flex:1 1 auto; width:auto; min-width:0; }
+.cm-home-section-link {
+  flex:0 0 auto !important;
+  align-self:center !important;
+  margin:0 !important;
+  display:inline-flex !important;
+  align-items:center; justify-content:center; gap:6px;
+  min-height:32px; padding:6px 12px !important;
+  border:1px solid rgba(237,242,248,.14) !important;
+  border-radius:999px !important;
+  background:#1D1D1F !important;
+  color:#e2e5e9 !important;
+  font-size:11px !important; font-weight:800 !important;
+  white-space:nowrap;
+}
+.cm-home-section-link span { font-size:13px; line-height:1; }
+.cm-home-section-link svg { width:9px; height:15px; flex:0 0 auto; fill:none; stroke:currentColor; stroke-width:1.7; }
+
+/* کارت‌های «تازه‌ترین آگهی‌ها» در صفحه اصلی: همه هم‌ارتفاع (به بلندترین کارت) و قیمت چسبیده به پایین */
+.cm-home-featured-rail > .xcd-wrap--home { display:flex; align-self:stretch; }
+.cm-home-featured-rail > .xcd-wrap--home > .xcd { flex:1 1 auto; width:100%; min-height:0; }
+.cm-home-featured-rail > .xcd-wrap--home .xcd-foot { margin-top:auto; }
+.sr-stats dd.sr-stat-date { font-size:14px; }
+
+/* ---------------------------------------------------------------
+   Dock: the 6-item version (with «ثبت آگهی» and «پرسش‌وپاسخ») is never shown.
+   Everywhere except the listings page (which has its own compact dock) the dock is the
+   4-item home version: listings · messages · saved · account — also while a page is loading.
+--------------------------------------------------------------- */
+body:not([data-dock-page="listings"]) #bottomDock [data-dock="qa"] { display: none !important; }
+body:not([data-dock-page="listings"]) #bottomDock [data-dock="sell"] { order: 2; }
+body:not([data-dock-page="listings"]) #bottomDock [data-dock="listings"] { order: 1; }
+body:not([data-dock-page="listings"]) #bottomDock [data-dock="messages"] { order: 3; }
+body:not([data-dock-page="listings"]) #bottomDock [data-dock="saved"] { order: 4; }
+body:not([data-dock-page="listings"]) #bottomDock [data-dock="account"] { order: 5; }
+
+/* Showroom list page: no bottom dock (also while the page is loading). */
+body[data-dock-page="dealers"] #bottomDock,
+body:has(#pageContent > [data-page="dealers"]) #bottomDock { display: none !important; }
+body[data-dock-page="dealers"] #pageContent,
+body:has(#pageContent > [data-page="dealers"]) #pageContent { padding-bottom: 0; }
+
+
+/* ---------- News — cards/detail styles live in news-social.css ---------- */
+body:has(#pageContent > [data-page="news"]) .cm-lh .sr-chips { padding-bottom:0; }

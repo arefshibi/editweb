@@ -1,0 +1,191 @@
+/* نوار قیمت و تماس صفحه‌ی آگهی — پس‌زمینه‌ی فسفری همرنگ «C» لوگو (#9b1b30)، متن و دکمه‌ها مشکی برای کنتراست بالا
+   ترتیب (راست‌به‌چپ): قیمت ← تماس (آیکون) ← گفت‌وگو (دکمه‌ی اصلی، سمت چپ) */
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta {
+  left:0; right:0; bottom:0;
+  padding:10px 10px calc(10px + env(safe-area-inset-bottom, 0px)) !important;
+  background:none !important;
+}
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-inner {
+  max-width:488px; min-height:0 !important;
+  display:flex; align-items:center; gap:8px;
+  padding:8px 20px 8px 8px !important;
+  background:#ffffff !important;
+  border:0 !important;
+  border-radius:14px !important;
+  box-shadow:0 8px 22px rgba(0,0,0,.45) !important;
+  backdrop-filter:none !important; -webkit-backdrop-filter:none !important;
+color:#1D1D1F !important}
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-price {
+  flex:1 1 0 !important; min-width:0; max-width:none !important;
+  direction:rtl; text-align:right; display:flex; flex-direction:column; align-items:flex-start; line-height:1.25;
+}
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-price-value {
+  font-size:27px !important; font-weight:900 !important; color:#1D1D1F !important; letter-spacing:-.5px; line-height:1.1;
+  font-variant-numeric:tabular-nums;
+}
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-price-unit {
+  font-size:14px !important; font-weight:800 !important; color:#1c2600 !important; margin-top:1px;
+}
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-actions { display:flex; align-items:center; gap:8px; flex:none; }
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-phone {
+  width:46px !important; height:46px !important; border-radius:8px !important;
+  background:rgba(29,29,31,.14) !important; border:0 !important; color:#1D1D1F !important;
+  display:flex; align-items:center; justify-content:center; padding:0;
+}
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-phone span { display:none !important; }
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-phone .icon { width:20px; height:20px; }
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-btn {
+  height:46px; padding:0 18px !important; border-radius:8px !important;
+  background:#1D1D1F !important; color:#fff !important; border:0 !important; box-shadow:none !important;
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font-size:14px !important; font-weight:800 !important; white-space:nowrap;
+}
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-btn:hover { background:#262628 !important; }
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-phone:active { background:rgba(29,29,31,.24) !important; }
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-btn,
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-btn * { color:#fff !important; }
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-phone,
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-phone * { color:#1D1D1F !important; }
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-btn .icon { width:19px; height:19px; }
+
+/* ── پاپ‌آپ تماس با فروشنده (از پایین، مشکی مات) ── */
+.callsheet { position:fixed; inset:0; z-index:2000; display:flex; align-items:flex-end; justify-content:center; }
+.callsheet-backdrop { position:absolute; inset:0; background:rgba(0,0,0,.6); animation:ui-fade-in .25s ease both; }
+.callsheet-card {
+  position:relative; width:100%; max-width:520px; box-sizing:border-box;
+  background:#1D1D1F; border:1px solid rgba(255,255,255,.07); border-bottom:0;
+  border-radius:26px 26px 0 0; padding:10px 18px calc(18px + env(safe-area-inset-bottom,0px));
+  box-shadow:0 -10px 40px rgba(0,0,0,.55); animation:sheet-up .34s cubic-bezier(.22,1,.36,1) both;
+}
+.callsheet.is-closing .callsheet-card { animation:sheet-down .26s cubic-bezier(.4,0,1,1) both; }
+.callsheet.is-closing .callsheet-backdrop { animation:ui-fade-out .26s ease both; }
+.callsheet-handle { width:36px; height:4px; border-radius:2px; background:rgba(255,255,255,.18); margin:0 auto 14px; }
+.callsheet-note { display:flex; align-items:center; gap:12px; background:#1D1D1F; border-radius:20px; padding:14px; margin-bottom:14px; }
+.callsheet-logo {
+  flex:none; width:46px; height:46px; border-radius:13px; background:#000; color:#fff;
+  border:1px solid rgba(255,255,255,.14); display:flex; align-items:center; justify-content:center;
+  font:900 26px/1 Inter, system-ui, sans-serif;
+}
+.callsheet-note p { margin:0; color:#e9e9ec; font-size:13.5px; line-height:1.9; text-align:right; }
+.callsheet-note b { font-weight:800; color:#fff; }
+.callsheet-phone {
+  display:flex; align-items:center; justify-content:center; gap:10px; height:56px; border-radius:28px;
+  background:#F5F5F7; color:#1D1D1F; text-decoration:none; font-weight:800;
+}
+.callsheet-num { font-size:20px; letter-spacing:.5px; }
+.callsheet-cancel { display:block; width:100%; margin-top:8px; height:44px; background:none; border:0; color:#8c8d93; font:600 14px inherit; font-family:inherit; }
+@media (prefers-reduced-motion: reduce) { .callsheet-card, .callsheet.is-closing .callsheet-card { animation-duration:.01s; } }
+
+/* CM-SPLIT-CTA — نوار پایین: دو دکمه‌ی هم‌اندازه + پاپ‌آپ‌ها */
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-inner.detail-cta-split{direction:rtl;gap:10px;padding:0 !important;background:none !important;border:0 !important;box-shadow:none !important}
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-split .detail-cta-hidden{display:none !important}
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-split .detail-cta-btn{flex:1 1 0;min-width:0;height:52px;padding:0 12px !important;border-radius:16px !important;font-size:14.5px !important;font-weight:800 !important;gap:8px;box-shadow:0 8px 22px rgba(0,0,0,.45) !important}
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-split .detail-cta-btn[hidden]{display:none !important}
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-split .detail-cta-contact,html body [data-page="vehicle"].vehicle-detail-page .detail-cta-split .detail-cta-contact *{background:#ffffff !important;color:#1D1D1F !important}
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-split .detail-cta-contact *{background:none !important}
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-split .detail-cta-offer{background:#1D1D1F !important;border:1px solid rgba(255,255,255,.16) !important}
+html body [data-page="vehicle"].vehicle-detail-page .detail-cta-split .detail-cta-offer,html body [data-page="vehicle"].vehicle-detail-page .detail-cta-split .detail-cta-offer *{color:#fff !important}
+.cm-sheet{position:fixed;inset:0;z-index:2000;display:flex;align-items:flex-end;justify-content:center}
+.cm-sheet-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.6);animation:ui-fade-in .25s ease both}
+.cm-sheet-card{position:relative;width:100%;max-width:520px;box-sizing:border-box;max-height:94dvh;overflow:auto;background:#1D1D1F;color:#F5F5F7;border:1px solid rgba(255,255,255,.07);border-bottom:0;border-radius:26px 26px 0 0;padding:10px 18px calc(18px + env(safe-area-inset-bottom,0px));box-shadow:0 -10px 40px rgba(0,0,0,.55);animation:sheet-up .34s cubic-bezier(.22,1,.36,1) both}
+.cm-sheet.is-closing .cm-sheet-card{animation:sheet-down .26s cubic-bezier(.4,0,1,1) both}
+.cm-sheet.is-closing .cm-sheet-backdrop{animation:ui-fade-out .26s ease both}
+.cm-sheet-handle{width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,.18);margin:0 auto 16px}
+.cm-sheet-title{margin:0 0 16px;text-align:center;font-size:19px;font-weight:800}
+.cm-opt{display:flex;align-items:center;gap:14px;width:100%;margin-bottom:10px;padding:14px;border-radius:20px;border:1px solid rgba(255,255,255,.08);background:#1D1D1F;color:inherit;font:inherit;text-align:right;cursor:pointer}
+.cm-opt:active{background:#262628}
+.cm-opt-ic{flex:none;width:46px;height:46px;border-radius:14px;background:#262628;display:grid;place-items:center}
+.cm-opt-tx{display:flex;flex-direction:column;gap:3px;min-width:0}
+.cm-opt-tx b{font-size:15px;font-weight:800}
+.cm-opt-tx small{font-size:12px;color:#8c8d93}
+.cm-cancel{display:block;width:100%;margin-top:4px;height:44px;background:none;border:0;color:#8c8d93;font:600 14px inherit;font-family:inherit;cursor:pointer}
+.cm-modes{display:flex;gap:12px;margin-bottom:16px}
+.cm-mode{flex:1 1 0;display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.1);background:#1D1D1F;color:#8c8d93;font:inherit;cursor:pointer;text-align:center}
+.cm-mode b{font-size:16px;font-weight:800}
+.cm-mode small{font-size:12px;line-height:1.6}
+.cm-mode.is-on{background:#262628;border-color:#F5F5F7;color:#F5F5F7}
+.cm-field{display:block;margin-bottom:14px;padding:10px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:#1D1D1F}
+.cm-field>span{display:block;font-size:12.5px;color:#9b9ca2;margin-bottom:4px}
+.cm-field>span i{color:#ffffff;font-style:normal}
+.cm-field input,.cm-field textarea{display:block;width:100%;box-sizing:border-box;background:none;border:0;outline:0;color:#fff;font:600 19px inherit;font-family:inherit;padding:2px 0;resize:none}
+.cm-field textarea{font-size:15px;font-weight:500;min-height:92px}
+.cm-field input::-webkit-outer-spin-button,.cm-field input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.cm-field input[type=number]{-moz-appearance:textfield}
+.cm-field input::placeholder,.cm-field textarea::placeholder{color:#5f6066;font-weight:500}
+.cm-hint{display:block;min-height:16px;margin:-6px 4px 12px;font-size:12px;color:#8c8d93}
+.cm-actions{display:flex;gap:12px;margin-top:6px}
+.cm-actions button{flex:1 1 0;height:54px;border-radius:27px;font:800 15.5px inherit;font-family:inherit;cursor:pointer;border:1px solid rgba(255,255,255,.12);background:#1D1D1F;color:#fff}
+.cm-actions button[type=submit]{background:#F5F5F7;color:#1D1D1F;border-color:#F5F5F7}
+.cm-actions button:disabled{opacity:.55}
+.cm-offer-body .mr-inline-offer-result{margin:6px 0 10px}
+@media (prefers-reduced-motion:reduce){.cm-sheet-card,.cm-sheet.is-closing .cm-sheet-card{animation-duration:.01s}}
+
+/* CM-SPLIT-CTA2 */
+html body .toast,html body .vehicle-demo-layout .toast{z-index:2100 !important}
+.cm-kinds{display:flex;gap:8px;margin:-4px 0 14px}
+.cm-kinds[hidden],.cm-field[hidden],.cm-err[hidden]{display:none !important}
+.cm-kind{flex:1 1 0;height:44px;padding:0 4px;white-space:nowrap;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:#1D1D1F;color:#8c8d93;font:700 12px inherit;font-family:inherit;cursor:pointer}
+.cm-kind.is-on{background:#262628;border-color:#F5F5F7;color:#F5F5F7}
+.cm-err{margin:0 2px 12px;padding:11px 14px;border-radius:12px;background:rgba(255,255,255,.072);border:1px solid rgba(255,255,255,.21);color:#ffffff;font-size:13px;line-height:1.8}
+
+/* CM-SPLIT-CTA3 — هم‌رنگ‌سازی پاپ‌آپ‌ها با تم سایت: کارت مات #1D1D1F + سبز فسفری #9b1b30 */
+.cm-sheet-backdrop{background:rgba(0,0,0,.62)}
+.cm-sheet-card{background:linear-gradient(145deg,#262628 0%,#1D1D1F 52%,#1D1D1F 100%) !important;background-color:#1D1D1F !important;border:1px solid rgba(255,255,255,.09);border-bottom:0;color:#F5F5F7;box-shadow:0 -14px 44px rgba(0,0,0,.6)}
+.cm-sheet-handle{background:rgba(255,255,255,.2)}
+.cm-sheet-title{color:#f1f2f4}
+.cm-opt{background:#1D1D1F;border-color:rgba(255,255,255,.09)}
+.cm-opt:active{background:#262628}
+.cm-opt-ic{background:rgba(255,255,255,.072);color:#ffffff}
+.cm-opt-tx b{color:#f1f2f4}
+.cm-opt-tx small,.cm-hint,.cm-cancel{color:rgba(255,255,255,.56)}
+.cm-mode,.cm-kind{background:#1D1D1F;border-color:rgba(255,255,255,.09);color:rgba(255,255,255,.56)}
+.cm-mode.is-on,.cm-kind.is-on{background:rgba(255,255,255,.06);border-color:#ffffff;color:#fff}
+.cm-mode.is-on svg{color:#ffffff}
+.cm-field{background:#1D1D1F;border-color:rgba(255,255,255,.09)}
+.cm-field:focus-within{border-color:rgba(255,255,255,.36)}
+.cm-field>span{color:rgba(255,255,255,.56)}
+.cm-field>span i{color:#ffffff}
+.cm-field input,.cm-field textarea{color:#f1f2f4}
+.cm-field input::placeholder,.cm-field textarea::placeholder{color:rgba(255,255,255,.28)}
+.cm-actions button{background:#1D1D1F;border-color:rgba(255,255,255,.12);color:#F5F5F7}
+.cm-actions button[type=submit]{background:#ffffff;border-color:#ffffff;color:#1D1D1F}
+.cm-offer-body .mr-inline-offer-result{padding:14px;border-radius:16px;background:#1D1D1F;border:1px solid rgba(255,255,255,.168)}
+.cm-offer-body .mr-inline-offer-result strong{font-size:15px;color:#f1f2f4}
+.cm-offer-body .mr-inline-offer-result p{font-size:12.5px;color:rgba(255,255,255,.56)}
+.cm-offer-body .mr-inline-offer-result-icon{background:rgba(255,255,255,.084);color:#ffffff}
+
+/* CM-OFFER-V2 — پاپ‌آپ «پیشنهاد قیمت»: انتخاب‌شده‌ها سفید + انیمیشن روان؛ هیچ عنصر فسفری (#9b1b30) در این پاپ‌آپ نیست */
+.cm-sheet.cm-offer{--cm-ease:cubic-bezier(.22,1,.36,1);--cm-spring:cubic-bezier(.34,1.45,.64,1)}
+.cm-sheet.cm-offer .cm-sheet-card{overflow-x:hidden;overscroll-behavior:contain}
+.cm-sheet.cm-offer button,.cm-sheet.cm-offer .cm-field{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+/* انتخاب خرید/معاوضه و نوع معاوضه */
+.cm-sheet.cm-offer .cm-mode,.cm-sheet.cm-offer .cm-kind{transform:scale(.97);will-change:transform;transition:background-color .28s var(--cm-ease),border-color .28s var(--cm-ease),color .28s var(--cm-ease),transform .36s var(--cm-spring),box-shadow .28s var(--cm-ease)}
+.cm-sheet.cm-offer .cm-mode svg{color:inherit;transition:transform .36s var(--cm-spring)}
+.cm-sheet.cm-offer .cm-mode small{transition:opacity .28s ease}
+.cm-sheet.cm-offer .cm-mode.is-on,.cm-sheet.cm-offer .cm-kind.is-on{background:#fff !important;border-color:#fff !important;color:#1D1D1F !important;transform:scale(1);box-shadow:0 8px 22px rgba(255,255,255,.07)}
+.cm-sheet.cm-offer .cm-mode.is-on svg{color:inherit !important;transform:scale(1.1)}
+.cm-sheet.cm-offer .cm-mode.is-on small{opacity:.7}
+.cm-sheet.cm-offer .cm-mode:active,.cm-sheet.cm-offer .cm-kind:active,.cm-sheet.cm-offer .cm-mode.is-on:active,.cm-sheet.cm-offer .cm-kind.is-on:active{transform:scale(.95)}
+/* باز و بسته شدن نرمِ «نوع معاوضه» و «مبلغ» (به‌جای ناپدید شدن ناگهانی) */
+.cm-sheet.cm-offer .cm-kinds,.cm-sheet.cm-offer .cm-field[data-cm-amount]{overflow:hidden;transition:max-height .36s var(--cm-ease),opacity .28s ease,margin .36s var(--cm-ease),padding .36s var(--cm-ease),border-width .36s var(--cm-ease),transform .36s var(--cm-ease),border-color .22s ease,visibility 0s}
+.cm-sheet.cm-offer .cm-kinds{max-height:64px}
+.cm-sheet.cm-offer .cm-field[data-cm-amount]{max-height:130px}
+.cm-sheet.cm-offer .cm-kinds[hidden],.cm-sheet.cm-offer .cm-field[data-cm-amount][hidden]{max-height:0;opacity:0;margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;border-top-width:0;border-bottom-width:0;transform:translateY(-8px);visibility:hidden;pointer-events:none;transition:max-height .36s var(--cm-ease),opacity .22s ease,margin .36s var(--cm-ease),padding .36s var(--cm-ease),border-width .36s var(--cm-ease),transform .36s var(--cm-ease),visibility 0s linear .36s}
+.cm-sheet.cm-offer .cm-kinds[hidden]{display:flex !important}
+.cm-sheet.cm-offer .cm-field[data-cm-amount][hidden]{display:block !important}
+.cm-sheet.cm-offer .cm-err{animation:cmOfferErr .28s var(--cm-ease) both}
+@keyframes cmOfferErr{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+/* فیلدها و دکمه‌ها */
+.cm-sheet.cm-offer .cm-field{transition:border-color .22s ease,background-color .22s ease}
+.cm-sheet.cm-offer .cm-field:focus-within{border-color:#fff !important}
+.cm-sheet.cm-offer .cm-field>span i{color:#fff !important}
+.cm-sheet.cm-offer .cm-field input,.cm-sheet.cm-offer .cm-field textarea{caret-color:#fff}
+.cm-sheet.cm-offer ::selection{background:rgba(255,255,255,.28);color:#fff}
+.cm-sheet.cm-offer .cm-actions button{transition:transform .22s var(--cm-spring),background-color .2s ease,opacity .2s ease}
+.cm-sheet.cm-offer .cm-actions button:active{transform:scale(.97)}
+.cm-sheet.cm-offer .cm-actions button[type=submit]{background:#fff !important;border-color:#fff !important;color:#1D1D1F !important}
+.cm-sheet.cm-offer .cm-actions button[type=submit]:active{background:#e9e9ec !important}
+.cm-sheet.cm-offer button:focus-visible,.cm-sheet.cm-offer input:focus-visible,.cm-sheet.cm-offer textarea:focus-visible{outline:2px solid rgba(255,255,255,.7) !important;outline-offset:2px}
+.cm-sheet.cm-offer .mr-inline-offer-result,.cm-sheet.cm-offer .cm-offer-body .mr-inline-offer-result{border-color:rgba(255,255,255,.18) !important;animation:cmOfferErr .32s var(--cm-ease) both}
+.cm-sheet.cm-offer .mr-inline-offer-result-icon{background:rgba(255,255,255,.12) !important;color:#fff !important}
+@media (prefers-reduced-motion:reduce){.cm-sheet.cm-offer *{transition-duration:.01s !important;animation-duration:.01s !important}}

@@ -1,0 +1,26 @@
+/* Ad cards between listing cards (listings page) */
+.explore-list > .adc { position: relative; display: block; width: 100%; box-sizing: border-box; overflow: hidden; border-radius: 22px; background: var(--cm-matte-card-bg, #1D1D1F); border: 1px solid var(--cm-matte-card-border, rgba(255,255,255,.09)); box-shadow: var(--cm-matte-card-shadow, 0 5px 14px rgba(0,0,0,.22)); color: #f4f5f7; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+.adc-photo { aspect-ratio: 16 / 8; background: #1D1D1F; overflow: hidden; }
+.adc-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.adc-badge { position: absolute; top: 10px; inset-inline-start: 10px; height: 24px; padding: 0 10px; display: inline-flex; align-items: center; border-radius: 99px; font-size: 11px; font-weight: 700; color: #e9eaee; background: rgba(0,0,0,.55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,.14); }
+.adc-body { display: flex; flex-direction: column; gap: 6px; padding: 14px 16px 16px; }
+.adc-title { margin: 0; font-size: 16px; font-weight: 800; line-height: 1.6; }
+.adc-desc { margin: 0; font-size: 13px; line-height: 1.8; color: #a9adb6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.adc-cta { align-self: flex-start; margin-top: 6px; height: 36px; padding: 0 18px; display: inline-flex; align-items: center; border-radius: 12px; font-size: 13px; font-weight: 800; color: #1D1D1F; background: #c6f432; }
+.adc:active { transform: scale(.985); transition: transform .12s; }
+@media (min-width: 900px) { .explore-list > .adc { grid-column: 1 / -1; display: flex; } .adc-photo { width: 38%; aspect-ratio: auto; min-height: 150px; } .adc-body { flex: 1; justify-content: center; } }
+
+/* >>> ACCOUNT-PIN-FRAME START */
+html body .account-pin-grid { gap: 12px; padding: 4px 14px 32px; }
+html body .account-pin-card {
+  padding: 7px 7px 11px; border-radius: 22px; overflow: hidden; box-sizing: border-box;
+  border: 1px solid var(--cm-matte-card-border, rgba(255,255,255,.09));
+}
+html body .account-pin-card .account-pin-image { border-radius: 16px; }
+html body .account-pin-card .account-pin-avatar { left: 7px; bottom: 7px; }
+html body .account-pin-card .account-pin-caption { padding: 10px 5px 0; flex: 1 1 auto; }
+html body .account-pin-card .account-pin-owner { margin-bottom: 3px; font-size: 11px; }
+html body .account-pin-card .account-pin-title { line-height: 1.45; }
+html body .account-pin-card .account-pin-actions { padding: 0 3px; margin-top: 10px; }
+html body .account-pin-card:active { transform: scale(.985); transition: transform .12s; }
+/* <<< ACCOUNT-PIN-FRAME END */

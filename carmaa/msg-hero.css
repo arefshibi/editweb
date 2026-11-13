@@ -1,0 +1,18 @@
+.mr-msg-screen .mr-msg-hero{
+  position:relative;
+  margin:calc(-16px - env(safe-area-inset-top,0px)) -16px 0;
+  padding:calc(16px + env(safe-area-inset-top,0px)) 16px 26px;
+  border-radius:0 0 44px 44px;
+  background:
+    radial-gradient(120% 90% at 85% 0%, rgba(255,255,255,.168) 0%, rgba(255,255,255,0) 60%),
+    linear-gradient(180deg,#ffffff 0%,#e7e8ea 55%,#cfd0d5 100%);
+color:#1D1D1F}
+.mr-msg-screen .mr-msg-hero .mr-msg-search,
+.mr-msg-screen .mr-msg-hero .mr-msg-back{background:#000;box-shadow:none}
+.mr-msg-screen .mr-msg-hero .mr-msg-search input::placeholder{color:rgba(255,255,255,.55)}
+.mr-msg-screen .mr-msg-hero .mr-stories-title{margin-top:20px}
+.mr-msg-screen .mr-msg-hero .mr-msg-story,
+.mr-msg-screen .mr-msg-hero .mr-story-in{--msg-bg:#ffffff}
+.mr-msg-screen .mr-msg-hero .mr-msg-stories > *{background-color:rgba(0,0,0,.28)}
+.mr-msg-screen .mr-msg-title{margin-top:26px}
+.theme-light .mr-msg-screen .mr-msg-hero{--msg-text:#fff}

@@ -1,0 +1,32 @@
+{
+  "name": "carmaa-marketplace-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Security-first API for the CarMaa automotive marketplace",
+  "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "migrate": "node src/migrate.js",
+    "admin:promote": "node src/scripts/promote-admin.js",
+    "test": "node --test",
+    "check": "find src test -type f -name '*.js' -print0 | xargs -0 -n1 node --check"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.900.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "file-type": "^21.0.0",
+    "helmet": "^8.1.0",
+    "ioredis": "^5.6.1",
+    "multer": "^2.0.2",
+    "pg": "^8.16.3",
+    "pino-http": "^10.5.0",
+    "sharp": "^0.34.4",
+    "zod": "^4.1.5"
+  }
+}

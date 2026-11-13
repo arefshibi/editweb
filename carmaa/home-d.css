@@ -1,0 +1,366 @@
+/* CarMaa home: banner carousel + boxes (cm-hb-*). The header is untouched. */
+.cm-home-page .cm-home-hero{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.cm-hb{padding:6px 14px 16px;direction:rtl}
+.cm-hb-banner{position:relative}
+.cm-hb-track{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;border-radius:24px}
+.cm-hb-track::-webkit-scrollbar{display:none}
+.cm-hb-track:focus-visible{outline:2px solid #f1f3f5;outline-offset:3px}
+.cm-hb-slide{position:relative;flex:0 0 100%;height:176px;scroll-snap-align:center;padding:0;border:1px solid rgba(255,255,255,.10);border-radius:24px;overflow:hidden;background:#1D1D1F;color:#f3f5f7;text-align:right;font:inherit;cursor:pointer;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 22px 34px -14px rgba(0,0,0,.95)}
+.cm-hb-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:0% 50%}
+.cm-hb-slide::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to left,rgba(4,4,4,.55),transparent 62%),linear-gradient(to top,rgba(0,0,0,.5),transparent 42%)}
+.cm-hb-copy{position:absolute;z-index:1;top:0;bottom:0;right:0;left:auto;width:50%;max-width:260px;padding:16px 18px 20px 6px;text-align:right;display:flex;flex-direction:column;justify-content:center;gap:3px;align-items:flex-start}
+.cm-hb-kicker{font-size:10px;font-weight:800;padding:2px 9px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#eceef2}
+.cm-hb-title{font-size:20px;font-weight:900;letter-spacing:-.02em;line-height:1.28;margin-top:3px;color:#fff;text-shadow:0 3px 10px rgba(0,0,0,.7)}
+.cm-hb-title-accent{color:#66e7bd;text-shadow:0 0 18px rgba(36,218,157,.18)}
+.cm-hb-slide--direct .cm-hb-title-accent{color:#78baff;text-shadow:0 0 18px rgba(51,141,255,.22)}
+.cm-hb-slide--showroom .cm-hb-title-accent{color:#ffd477;text-shadow:0 0 18px rgba(255,190,60,.22)}
+.cm-hb-copy{gap:2px}
+.cm-hb-kicker{font-size:9px;letter-spacing:-.01em;padding:3px 8px;background:rgba(29,29,31,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.cm-hb-cap{font-size:10px;line-height:1.5;color:rgba(239,243,249,.82);margin-top:2px}
+.cm-hb-cta{display:inline-flex;align-items:center;gap:8px;margin-top:6px;padding:6px 11px;font-size:10px;background:#f5f7fa;color:#1D1D1F}
+.cm-hb-cta b{font-size:14px;font-weight:900;line-height:1}
+.cm-hb-slide--free .cm-hb-cta{background:#48e0b0;color:#062116}
+.cm-hb-slide--direct .cm-hb-cta{background:#5aa8ff;color:#06172a}
+.cm-hb-slide--showroom .cm-hb-cta{background:#ffd064;color:#271900}
+.cm-hb-price-badge{position:absolute;z-index:2;left:12px;bottom:12px;display:flex;align-items:center;gap:5px;padding:5px 9px;border:1px solid rgba(91,237,188,.35);border-radius:999px;background:rgba(29,29,31,.72);color:#66e7bd;font-size:11px;font-weight:950;box-shadow:0 8px 24px rgba(0,0,0,.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.cm-hb-price-badge small{font-size:8px;font-weight:750;color:rgba(236,255,249,.76)}
+.cm-hb-cap{font-size:11px;line-height:1.6;color:rgba(235,238,243,.78)}
+.cm-hb-cta{margin-top:8px;padding:6px 14px;border-radius:999px;font-size:11.5px;font-weight:800;background:#f4f5f7;color:#1D1D1F;box-shadow:0 8px 16px -6px rgba(0,0,0,.8)}
+.cm-hb-dots{position:absolute;z-index:2;bottom:11px;right:18px;left:auto;display:flex;gap:5px;align-items:center;pointer-events:none}
+.cm-hb-dot{position:relative;width:6px;height:6px;padding:0;border:0;border-radius:99px;background:rgba(255,255,255,.4);pointer-events:auto;transition:width .35s cubic-bezier(.16,1,.3,1),background .25s}
+.cm-hb-dot::after{content:"";position:absolute;inset:-9px -4px}
+.cm-hb-dot.is-on{width:20px;background:#fff}
+
+.cm-hb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.cm-hb-box{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:2px;height:132px;padding:14px;overflow:hidden;border:1px solid rgba(255,255,255,.10);border-radius:22px;color:#f3f5f7;text-align:right;font:inherit;cursor:pointer;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.22) 50%,transparent) top center/52% 1px no-repeat,radial-gradient(120% 90% at 100% 0%,rgba(255,255,255,.06),transparent 55%),linear-gradient(155deg,#262628 0%,#1D1D1F 52%,#1D1D1F 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -26px 34px -16px rgba(0,0,0,.85),inset 0 0 0 1px rgba(0,0,0,.55),0 22px 38px -12px rgba(0,0,0,.95),0 8px 14px -4px rgba(0,0,0,.75);transition:transform .14s}
+.cm-hb-box:active,.cm-hb-slide:active{transform:scale(.98)}
+.cm-hb-box:focus-visible,.cm-hb-slide:focus-visible{outline:2px solid #f1f3f5;outline-offset:3px}
+.cm-hb-name{position:relative;z-index:1;align-self:stretch;text-align:right;font-size:14px;font-weight:900;letter-spacing:-.01em;line-height:1.4;color:#fff}
+.cm-hb-sub{position:relative;z-index:1;align-self:stretch;text-align:right;font-size:10.5px;line-height:1.5;color:rgba(224,228,234,.55)}
+.cm-hb-art{position:absolute;left:-4px;right:auto;bottom:-6px;width:64px;height:64px;object-fit:contain;mix-blend-mode:screen;pointer-events:none}
+.cm-hb-wide{grid-column:span 2}
+.cm-hb-wide .cm-hb-name{font-size:17px}
+.cm-hb-wide .cm-hb-art{width:104px;height:104px;left:8px;bottom:-10px}
+.cm-hb-light{background:linear-gradient(160deg,#fbfbfc,#d5d9df);border-color:#fff;color:#1D1D1F;box-shadow:0 18px 30px -12px rgba(0,0,0,.9)}
+.cm-hb-light .cm-hb-name{color:#1D1D1F}
+.cm-hb-light .cm-hb-sub{color:rgba(29,29,31,.6)}
+.cm-hb-go{position:absolute;left:14px;right:auto;bottom:14px;width:30px;height:30px;fill:none;stroke:#1D1D1F;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media (min-width:760px){.cm-hb{max-width:520px;margin-inline:auto}}
+@media (max-width:390px){.cm-hb-slide{height:178px}.cm-hb-copy{width:57%;padding:12px 13px 18px 5px}.cm-hb-title{font-size:17px;line-height:1.25}.cm-hb-kicker{font-size:8px;padding:3px 7px}.cm-hb-cap{font-size:9px;line-height:1.45}.cm-hb-cta{font-size:9px;padding:6px 9px;margin-top:5px}.cm-hb-price-badge{left:9px;bottom:10px;font-size:10px;padding:4px 7px}}
+@media (min-width:560px){.cm-hb-slide{height:204px}.cm-hb-copy{width:48%;max-width:330px;padding:20px 24px 24px 8px}.cm-hb-title{font-size:25px}.cm-hb-cap{font-size:12px}.cm-hb-cta{font-size:11px;padding:8px 13px}.cm-hb-price-badge{left:18px;bottom:16px}}
+@media (prefers-reduced-motion:reduce){.cm-hb-box,.cm-hb-dot{transition:none}.cm-hb-track{scroll-behavior:auto}}
+
+/* ===== Listings page: new top (title + round buttons) and pill chips ===== */
+html body .cm-lh{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px 10px;direction:rtl;background:#1D1D1F}
+.cm-lh-text h1{margin:0;font-size:30px;font-weight:900;letter-spacing:-.03em;line-height:1.25;color:#f3f5f7;font-family:inherit}
+.cm-lh-text p{margin:2px 0 0;font-size:12px;color:rgba(224,228,234,.6)}
+.cm-lh-btns{display:flex;gap:10px;flex:0 0 auto}
+html body .cm-lh .cm-lh-btn{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;padding:0;border:0;background:#f4f5f7;color:#1D1D1F;box-shadow:0 10px 18px -8px rgba(0,0,0,.9);cursor:pointer;transition:transform .12s}
+.cm-lh-btn:active{transform:scale(.94)}
+.cm-lh-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.cm-lh-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+html.theme-light body .cm-lh{background:#f4f5f7}
+html.theme-light .cm-lh-text h1{color:#1D1D1F}
+html.theme-light .cm-lh-text p{color:rgba(29,29,31,.55)}
+html.theme-light body .cm-lh .cm-lh-btn{background:#1D1D1F;color:#fff}
+
+/* filter bubbles: dark pills, white when a value is chosen */
+html body .toolbox-filter-row{padding:0 18px 8px}
+html body .toolbox-filter-chips{gap:8px;padding:2px 0 4px}
+html body .toolbox-chip,html body .toolbox-filter-main{height:38px!important;min-height:38px!important;width:auto;min-width:0!important;flex:0 0 auto!important;padding:0 16px!important;border-radius:999px!important;gap:7px!important;font-size:13px!important;font-weight:600!important;line-height:1;border:1px solid transparent!important;background:#262628!important;color:#8d9096!important;box-shadow:none!important;-webkit-backdrop-filter:none;backdrop-filter:none}
+html body .toolbox-chip.is-set,html body .toolbox-filter-main{background:#f4f5f7!important;color:#1D1D1F!important}
+html body .toolbox-chip.is-set .toolbox-chip-arrow svg{color:#1D1D1F!important}
+html body .toolbox-chip-arrow svg{width:14px;height:14px}
+html body .toolbox-filter-main .toolbox-filter-icon svg{width:16px;height:16px}
+html body .toolbox-filter-count{min-width:20px;height:20px;padding:0 6px;font-size:11px;border:0;background:#1D1D1F;color:#fff}
+html body .toolbox-chip-disabled{opacity:.45}
+html.theme-light body .toolbox-chip,html.theme-light body .toolbox-filter-main{background:rgba(0,0,0,.07)!important;color:#5b5f66!important}
+html.theme-light body .toolbox-chip.is-set,html.theme-light body .toolbox-filter-main{background:#1D1D1F!important;color:#fff!important}
+html.theme-light body .toolbox-chip.is-set .toolbox-chip-arrow svg{color:#fff!important}
+html.theme-light body .toolbox-filter-count{background:#fff;color:#1D1D1F}
+@media (prefers-reduced-motion:reduce){.cm-lh-btn{transition:none}}
+
+/* Premium hide/show for the sticky header group (listings + showrooms) (transform + opacity only).
+   JS (js/38-*) toggles .cm-hdr-hidden; this file only animates it.
+   hide: quick, decisive slide + fade   |   show: long soft deceleration, then children settle one after another */
+#stickyHeaderGroup.cm-hdr-anim{--cm-ease-out:cubic-bezier(.16,1,.3,1);--cm-ease-in:cubic-bezier(.55,0,.8,.3);--cm-spring:cubic-bezier(.34,1.45,.64,1);
+  transform:translate3d(0,0,0);opacity:1;will-change:transform,opacity;transition:transform .62s var(--cm-ease-out),opacity .35s ease-out}
+#stickyHeaderGroup.cm-hdr-anim.cm-hdr-hidden{transform:translate3d(0,-104%,0);opacity:0;pointer-events:none;transition:transform .36s var(--cm-ease-in),opacity .28s ease-in .04s}
+#stickyHeaderGroup.cm-hdr-anim #siteHeader .header-home-row > *,
+#stickyHeaderGroup.cm-hdr-anim #siteHeader .non-home-header-row > *,
+#stickyHeaderGroup.cm-hdr-anim .page-header-sticky:not(.cm-lh) > *,
+#stickyHeaderGroup.cm-hdr-anim .cm-lh .cm-lh-text,
+#stickyHeaderGroup.cm-hdr-anim .cm-lh .cm-lh-btn,
+#stickyHeaderGroup.cm-hdr-anim .toolbox-filter-chips > *,
+#stickyHeaderGroup.cm-hdr-anim .cm-lh .sr-chips > *{opacity:1;transform:translate3d(0,0,0) scale(1);transition:transform .6s var(--cm-spring),opacity .4s ease-out}
+#stickyHeaderGroup.cm-hdr-anim.cm-hdr-hidden #siteHeader .header-home-row > *,
+#stickyHeaderGroup.cm-hdr-anim.cm-hdr-hidden #siteHeader .non-home-header-row > *,
+#stickyHeaderGroup.cm-hdr-anim.cm-hdr-hidden .page-header-sticky:not(.cm-lh) > *,
+#stickyHeaderGroup.cm-hdr-anim.cm-hdr-hidden .cm-lh .cm-lh-text,
+#stickyHeaderGroup.cm-hdr-anim.cm-hdr-hidden .cm-lh .cm-lh-btn,
+#stickyHeaderGroup.cm-hdr-anim.cm-hdr-hidden .toolbox-filter-chips > *,
+#stickyHeaderGroup.cm-hdr-anim.cm-hdr-hidden .cm-lh .sr-chips > *{opacity:0;transform:translate3d(0,-14px,0) scale(.94);transition:transform .3s var(--cm-ease-in),opacity .2s ease-in;transition-delay:0s}
+#stickyHeaderGroup.cm-hdr-anim #siteHeader .header-home-row > :nth-child(1),
+#stickyHeaderGroup.cm-hdr-anim #siteHeader .non-home-header-row > :nth-child(1),
+#stickyHeaderGroup.cm-hdr-anim .page-header-sticky:not(.cm-lh) > :nth-child(1),
+#stickyHeaderGroup.cm-hdr-anim .toolbox-filter-chips > :nth-child(1),
+#stickyHeaderGroup.cm-hdr-anim .cm-lh .sr-chips > :nth-child(1),
+#stickyHeaderGroup.cm-hdr-anim .cm-lh .cm-lh-text,
+#stickyHeaderGroup.cm-hdr-anim .cm-lh .cm-lh-btn:nth-child(1){transition-delay:0.06s}
+#stickyHeaderGroup.cm-hdr-anim #siteHeader .header-home-row > :nth-child(2),
+#stickyHeaderGroup.cm-hdr-anim #siteHeader .non-home-header-row > :nth-child(2),
+#stickyHeaderGroup.cm-hdr-anim .page-header-sticky:not(.cm-lh) > :nth-child(2),
+#stickyHeaderGroup.cm-hdr-anim .toolbox-filter-chips > :nth-child(2),
+#stickyHeaderGroup.cm-hdr-anim .cm-lh .sr-chips > :nth-child(2),
+#stickyHeaderGroup.cm-hdr-anim .cm-lh .cm-lh-btn:nth-child(2){transition-delay:0.11s}
+#stickyHeaderGroup.cm-hdr-anim #siteHeader .header-home-row > :nth-child(3),
+#stickyHeaderGroup.cm-hdr-anim #siteHeader .non-home-header-row > :nth-child(3),
+#stickyHeaderGroup.cm-hdr-anim .page-header-sticky:not(.cm-lh) > :nth-child(3),
+#stickyHeaderGroup.cm-hdr-anim .toolbox-filter-chips > :nth-child(3),
+#stickyHeaderGroup.cm-hdr-anim .cm-lh .sr-chips > :nth-child(3){transition-delay:0.16s}
+#stickyHeaderGroup.cm-hdr-anim #siteHeader .header-home-row > :nth-child(4),
+#stickyHeaderGroup.cm-hdr-anim #siteHeader .non-home-header-row > :nth-child(4),
+#stickyHeaderGroup.cm-hdr-anim .page-header-sticky:not(.cm-lh) > :nth-child(4),
+#stickyHeaderGroup.cm-hdr-anim .toolbox-filter-chips > :nth-child(4),
+#stickyHeaderGroup.cm-hdr-anim .cm-lh .sr-chips > :nth-child(4){transition-delay:0.21s}
+#stickyHeaderGroup.cm-hdr-anim #siteHeader .header-home-row > :nth-child(5),
+#stickyHeaderGroup.cm-hdr-anim #siteHeader .non-home-header-row > :nth-child(5),
+#stickyHeaderGroup.cm-hdr-anim .page-header-sticky:not(.cm-lh) > :nth-child(5),
+#stickyHeaderGroup.cm-hdr-anim .toolbox-filter-chips > :nth-child(5),
+#stickyHeaderGroup.cm-hdr-anim .cm-lh .sr-chips > :nth-child(5){transition-delay:0.26s}
+#stickyHeaderGroup.cm-hdr-anim.cm-hdr-hidden *{transition-delay:0s!important}
+#stickyHeaderGroup.cm-hdr-anim .cm-lh .cm-lh-btn:active{transform:scale(.92);transition-duration:.12s;transition-delay:0s}
+@media (prefers-reduced-motion:reduce){#stickyHeaderGroup.cm-hdr-anim,#stickyHeaderGroup.cm-hdr-anim *{transition-duration:.01s!important;transition-delay:0s!important}}
+
+/* Showrooms page: filter pills live inside the header (same look as the listings pills) */
+html body .cm-lh{flex-wrap:wrap}
+html body .cm-lh .sr-chips{flex:0 0 calc(100% + 36px);margin:0 -18px;padding:8px 18px 2px;gap:8px;scroll-padding-inline:18px}
+html body .cm-lh .sr-chip,html body .cm-lh .sr-select{height:38px;padding:0 16px;border:0;border-radius:999px;font-size:13px;font-weight:600;background:#262628;color:#8d9096;box-shadow:none}
+html body .cm-lh .sr-select{gap:7px;padding-inline:14px 12px}
+html body .cm-lh .sr-chip.is-active,html body .cm-lh .sr-select.is-set{background:#f4f5f7;color:#1D1D1F}
+html body .cm-lh .sr-chips-sep{background:rgba(255,255,255,.14)}
+html body .cm-lh .sr-chip:focus-visible,html body .cm-lh .sr-select:focus-within{outline:2px solid #fff;outline-offset:2px}
+html.theme-light body .cm-lh .sr-chip,html.theme-light body .cm-lh .sr-select{background:rgba(0,0,0,.07);color:#5b5f66}
+html.theme-light body .cm-lh .sr-chip.is-active,html.theme-light body .cm-lh .sr-select.is-set{background:#1D1D1F;color:#fff}
+html.theme-light body .cm-lh .sr-chips-sep{background:rgba(0,0,0,.14)}
+
+/* Campaign-specific visual polish for the three homepage offers. */
+.cm-hb-slide--free { border-color:rgba(44,226,171,.25);background:#1D1D1F; }
+.cm-hb-slide--direct { border-color:rgba(73,158,255,.25);background:#071321; }
+.cm-hb-slide--showroom { border-color:rgba(247,190,73,.28);background:#171106; }
+.cm-hb-slide--free::after { background:linear-gradient(270deg,rgba(29,29,31,.98) 0%,rgba(29,29,31,.91) 37%,rgba(29,29,31,.48) 56%,rgba(29,29,31,.02) 83%),linear-gradient(0deg,rgba(0,0,0,.25),transparent 45%); }
+.cm-hb-slide--direct::after { background:linear-gradient(270deg,rgba(29,29,31,.98) 0%,rgba(29,29,31,.91) 38%,rgba(29,29,31,.45) 58%,rgba(29,29,31,.02) 84%),linear-gradient(0deg,rgba(0,0,0,.22),transparent 45%); }
+.cm-hb-slide--showroom::after { background:linear-gradient(270deg,rgba(29,29,31,.98) 0%,rgba(29,29,31,.9) 39%,rgba(29,29,31,.45) 60%,rgba(29,29,31,.02) 85%),linear-gradient(0deg,rgba(0,0,0,.28),transparent 45%); }
+.cm-hb-slide--free img,.cm-hb-slide--direct img,.cm-hb-slide--showroom img { object-position:left center; }
+
+/* Campaign banners: keep the complete card and its top/bottom borders visible on every screen. */
+.cm-home-page .cm-hb-banner{width:100%;min-width:0;overflow:hidden;border-radius:24px;}
+.cm-home-page .cm-hb-track{width:100%;height:clamp(158px,24.5vw,204px);box-sizing:border-box;overflow-x:auto;overflow-y:hidden;align-items:stretch;border:0;border-radius:24px;clip-path:inset(0 round 24px);}
+.cm-home-page .cm-hb-slide{box-sizing:border-box;flex:0 0 100%;width:100%;min-width:100%;height:100%;min-height:0;max-height:100%;margin:0;align-self:stretch;overflow:hidden;border-width:1px;border-radius:24px;}
+.cm-home-page .cm-hb-slide img{inset:1px;width:calc(100% - 2px);height:calc(100% - 2px);max-width:none;max-height:none;object-fit:cover;object-position:center;display:block;border-radius:22px;}
+.cm-home-page .cm-hb-slide::after{inset:1px;border-radius:22px;}
+.cm-home-page .cm-hb-copy{box-sizing:border-box;max-height:100%;overflow:hidden;}
+@media(max-width:390px){.cm-home-page .cm-hb-track{height:clamp(158px,43vw,176px)}.cm-home-page .cm-hb-slide{height:100%}.cm-home-page .cm-hb-copy{padding-top:10px;padding-bottom:18px}.cm-home-page .cm-hb-title{font-size:clamp(16px,4.5vw,18px);line-height:1.22}.cm-home-page .cm-hb-cap{font-size:9px;line-height:1.4}.cm-home-page .cm-hb-cta{margin-top:5px;padding:5px 9px;font-size:9px}}
+@media(min-width:560px){.cm-home-page .cm-hb-track{height:204px}.cm-home-page .cm-hb-slide{height:100%}}
+
+
+/* Fix: keep campaign artwork fully inside the rounded banner frame */
+.cm-home-page .cm-hb-track{overflow:hidden!important}
+.cm-home-page .cm-hb-slide{position:relative!important;overflow:hidden!important;isolation:isolate}
+.cm-home-page .cm-hb-slide img{
+  position:absolute!important;
+  top:1px!important;right:1px!important;bottom:1px!important;left:1px!important;
+  width:auto!important;height:auto!important;
+  max-width:none!important;max-height:none!important;
+  object-fit:fill!important;
+  object-position:center!important;
+  border-radius:22px!important;
+}
+.cm-home-page .cm-hb-slide::after{inset:1px!important;border-radius:22px!important}
+
+
+/* Banner fit fix: banner images are pre-built at exactly the box ratio (1600x660), so the box uses the same
+   aspect-ratio and the image fills it 1:1 — no crop, no zoom, no stretch. Artwork sits in the left ~60%,
+   the copy sits on the clean area at the right. Text scales with the banner width (cqw). */
+.cm-home-page .cm-hb-banner{container-type:inline-size}
+.cm-home-page .cm-hb-track{height:auto!important;aspect-ratio:1600/660}
+.cm-home-page .cm-hb-slide{height:100%!important}
+.cm-home-page .cm-hb-slide img{top:0!important;right:0!important;bottom:0!important;left:0!important;width:100%!important;height:100%!important;object-fit:fill!important;border-radius:inherit!important}
+.cm-home-page .cm-hb-slide::after{display:none!important}
+.cm-home-page .cm-hb-copy{width:40%!important;max-width:none!important;padding:0 3.6cqw 5.5cqw 0!important;gap:0}
+.cm-home-page .cm-hb-kicker,.cm-home-page .cm-hb-cap,.cm-home-page .cm-hb-price-badge{display:none!important}
+.cm-home-page .cm-hb-title{font-size:3.6cqw!important;line-height:1.35!important;margin-top:0!important;white-space:nowrap}
+.cm-home-page .cm-hb-cta{font-size:2.6cqw!important;padding:1.5cqw 2.6cqw!important;margin-top:2.2cqw!important;gap:1.4cqw;white-space:nowrap}
+.cm-home-page .cm-hb-cta b{font-size:3.4cqw!important}
+.cm-home-page .cm-hb-dots{bottom:2.2cqw;right:3.6cqw}
+@media(min-width:560px){.cm-home-page .cm-hb-track{height:auto!important}.cm-home-page .cm-hb-slide{height:100%!important}}
+
+/* Scroll + performance fix.
+   1) An earlier rule set overflow:hidden!important on the track, which made it impossible to swipe by hand.
+   2) Removed per-frame GPU work while swiping: big drop shadows, clip-path, CSS image filters. */
+.cm-home-page .cm-hb-track{overflow-x:auto!important;overflow-y:hidden!important;clip-path:none!important;touch-action:pan-x pan-y;overscroll-behavior-x:contain;scroll-behavior:auto;-webkit-overflow-scrolling:touch}
+.cm-home-page .cm-hb-slide{box-shadow:none!important;contain:layout paint;scroll-snap-stop:normal;transition:none}
+.cm-home-page .cm-hb-slide img{-webkit-user-drag:none;user-select:none;pointer-events:none}
+.cm-home-promo-editorial .cm-home-promo-image{filter:none!important}
+
+/* Home banners: full-artwork 16:9 images (text is baked into the image) */
+.cm-home-page .cm-hb-track{aspect-ratio:1672/941}
+.cm-home-page .cm-hb-slide--img{border-color:rgba(255,255,255,.08);background:#1D1D1F}
+.cm-home-page .cm-hb-slide--img .cm-hb-copy,.cm-home-page .cm-hb-slide--img .cm-hb-price-badge{display:none!important}
+
+/* ریل بی‌توقف لوگوی برندها (جایگزین بنر «قبل از تصمیم…») */
+.cm-home-brand-marquee { position:relative; margin:44px 0 52px; padding:14px 0; overflow:hidden; min-width:0; direction:ltr;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12%,#000 88%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 12%,#000 88%,transparent 100%); }
+.cm-bm-track { display:flex; width:max-content; will-change:transform; animation:cm-bm-scroll 46s linear infinite; }
+.cm-bm-group { display:flex; flex:0 0 auto; align-items:center; margin:0; padding:0; list-style:none; }
+.cm-bm-item { flex:0 0 auto; display:flex; align-items:center; justify-content:center; height:68px; padding:0 24px; }
+.cm-bm-logo { width:auto; max-width:130px; object-fit:contain; filter:brightness(0) invert(1); opacity:.82; -webkit-user-drag:none; user-select:none; pointer-events:none; }
+.cm-bm-logo--color, .theme-light .cm-bm-logo--color { filter:none; opacity:1; }
+.theme-light .cm-bm-logo:not(.cm-bm-logo--color) { filter:brightness(0); opacity:.7; }
+@keyframes cm-bm-scroll { from { transform:translate3d(0,0,0); } to { transform:translate3d(-50%,0,0); } }
+@media (min-width:700px) { .cm-bm-item { padding:0 32px; } .cm-home-brand-marquee { max-width:720px; margin-inline:auto; margin-top:56px; margin-bottom:64px; } }
+
+/* ریل برندها: حالا درست بالای فوتر است — فاصله‌ی بالا تا بخش نمایشگاه‌ها، پایین کم تا فوتر */
+.cm-home-brand-marquee { margin-top:48px; margin-bottom:20px; }
+@media (min-width:700px) { .cm-home-brand-marquee { margin-top:56px; margin-bottom:28px; } }
+
+
+/* Home search field above the banner — shares the same rotating hint as the header. */
+.cm-home-search-wrap{padding:12px 14px 8px;direction:rtl}
+.cm-home-search{box-sizing:border-box;display:flex;align-items:center;gap:11px;width:100%;min-height:54px;padding:0 15px;border:1px solid rgba(255,255,255,.10);border-radius:19px;background:#1D1D1F;color:#e1e6ed;text-align:right;direction:rtl;font:inherit;box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 8px 22px rgba(0,0,0,.16);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .18s ease,transform .16s ease,background .18s ease}
+.cm-home-search:active{transform:scale(.992)}
+.cm-home-search:focus-visible{outline:2px solid #68adff;outline-offset:3px}
+.cm-home-search-icon{flex:0 0 auto;color:#b6c0ce}
+.cm-home-search .bar-search-field{flex:1;align-self:stretch;min-width:0;display:flex;align-items:center}
+.cm-home-search .bar-search-field input{min-width:0;flex:1;width:100%;border:0;outline:0;background:transparent;color:transparent;font:700 14px 'Vazirmatn',Tahoma,'Segoe UI',sans-serif;text-align:right;pointer-events:none}
+.cm-home-search .bar-search-copy{font-size:14px;font-weight:700}
+.cm-home-search .bar-search-label{color:#a9b2bf}
+.cm-home-search .bar-search-rotator{min-width:34px;color:#f0f4f9}
+.theme-light .cm-home-search{background:#fff;border-color:rgba(38,38,40,.12);color:#262628;box-shadow:0 7px 20px rgba(20,30,45,.06)}
+.theme-light .cm-home-search-icon{color:#737d89}
+.theme-light .cm-home-search .bar-search-label{color:#777f89}
+.theme-light .cm-home-search .bar-search-rotator{color:#262628}
+@media (max-width:365px){.cm-home-search-wrap{padding-inline:12px}.cm-home-search{min-height:51px;padding-inline:13px;border-radius:17px}.cm-home-search .bar-search-copy{font-size:13px}}
+@media (prefers-reduced-motion:reduce){.cm-home-search{transition:none}}
+
+
+/* Compact matte home search: centered, narrower, and slightly closer to the top. */
+.cm-home-page .cm-home-search-wrap,
+.cm-home-skeleton .cm-home-search-wrap {
+  display:flex !important;
+  align-items:center;
+  justify-content:center;
+  direction:rtl;
+  padding:0 12px 4px !important;
+  margin-top:-6px;
+}
+.cm-home-page .cm-home-search,
+.cm-home-skeleton .cm-home-search {
+  box-sizing:border-box !important;
+  display:flex !important;
+  align-items:center;
+  gap:10px !important;
+  width:min(84%, 420px) !important;
+  min-width:0 !important;
+  min-height:49px !important;
+  margin:0 auto 15px !important;
+  padding:0 14px !important;
+  border:1px solid rgba(255,255,255,.075) !important;
+  border-radius:15px !important;
+  background:#1D1D1F !important;
+  background-image:none !important;
+  color:#e1e6ed !important;
+  box-shadow:none !important;
+  text-align:right;
+  direction:rtl;
+}
+.cm-home-page .cm-home-search::before,
+.cm-home-skeleton .cm-home-search::before {
+  content:none !important;
+  display:none !important;
+  background:none !important;
+}
+.cm-home-page .cm-home-search-icon,
+.cm-home-skeleton .cm-home-search-icon {
+  width:21px !important;
+  height:21px !important;
+  flex:0 0 21px !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  color:#aeb8c6 !important;
+}
+.cm-home-page .cm-home-search .bar-search-copy,
+.cm-home-skeleton .cm-home-search .bar-search-copy {
+  font-size:13px !important;
+  font-weight:600 !important;
+}
+.cm-home-page .cm-home-search .bar-search-label,
+.cm-home-skeleton .cm-home-search .bar-search-label { color:#a9b2bf !important; }
+.cm-home-page .cm-home-search .bar-search-rotator,
+.cm-home-skeleton .cm-home-search .bar-search-rotator { color:#f0f4f9 !important; }
+@media (max-width:365px) {
+  .cm-home-page .cm-home-search-wrap,
+  .cm-home-skeleton .cm-home-search-wrap { padding-inline:8px !important; }
+  .cm-home-page .cm-home-search,
+  .cm-home-skeleton .cm-home-search { width:86% !important; min-height:47px !important; padding-inline:12px !important; border-radius:14px !important; }
+}
+
+/* Strict single-item carousel movement on the homepage.
+   `scroll-snap-stop: always` prevents a fast finger flick from skipping cards. */
+.cm-home-page .cm-hb-track,
+.cm-home-page .cm-home-featured-rail,
+.cm-home-page .cm-home-showrooms .sr-rail {
+  scroll-snap-type: x mandatory !important;
+  overscroll-behavior-x: contain !important;
+}
+.cm-home-page .cm-hb-slide {
+  scroll-snap-align: center !important;
+  scroll-snap-stop: always !important;
+}
+.cm-home-page .cm-home-featured-rail > .xcd-wrap,
+.cm-home-page .cm-home-featured-rail > .xcd-wrap--home,
+.cm-home-page .cm-home-featured-rail > .xc {
+  scroll-snap-align: start !important;
+  scroll-snap-stop: always !important;
+}
+.cm-home-page .cm-home-showrooms .sr-rail > .sr-card {
+  scroll-snap-align: start !important;
+  scroll-snap-stop: always !important;
+}
+
+
+/* Listings: the title block hides with NATIVE sticky positioning (top:-H, set from js/38 as --cm-h), so it is
+   synced to the scroll by the browser itself (no JS per frame). Scrolling up slides it back with one light
+   transform transition (.cm-hdr-show). */
+body:has(#pageContent > [data-page="listings"]) #stickyHeaderGroup,
+body:has(#pageContent > [data-page="dealers"]) #stickyHeaderGroup{top:calc(var(--cm-h,0px) * -1);transition:transform .34s cubic-bezier(.22,1,.36,1)}
+body:has(#pageContent > [data-page="listings"]) #stickyHeaderGroup.cm-hdr-show,
+body:has(#pageContent > [data-page="dealers"]) #stickyHeaderGroup.cm-hdr-show{transform:translate3d(0,var(--cm-h,0px),0)}
+/* keeps the status-bar area solid while the title block is scrolled up behind it */
+body:has(#pageContent > [data-page="listings"]) #stickyHeaderGroup::after,
+body:has(#pageContent > [data-page="dealers"]) #stickyHeaderGroup::after{display:block;content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:#1D1D1F;z-index:5;pointer-events:none}
+html.theme-light body:has(#pageContent > [data-page="listings"]) #stickyHeaderGroup::after,
+body:has(#pageContent > [data-page="dealers"]) #stickyHeaderGroup::after{background:#fff}
+@media (prefers-reduced-motion:reduce){body:has(#pageContent > [data-page="listings"]) #stickyHeaderGroup,body:has(#pageContent > [data-page="dealers"]) #stickyHeaderGroup{transition-duration:.01s}}
+
+/* Listings: tighter space under the filter pills */
+body:has(#pageContent > [data-page="listings"]) #toolbarSlot .toolbox-shell{padding-bottom:2px}
+body:has(#pageContent > [data-page="listings"]) #toolbarSlot .toolbox-filter-chips{padding-bottom:0}
+
+/* Showrooms: tighter space under the pills (same as listings) */
+body:has(#pageContent > [data-page="dealers"]) .cm-lh .sr-chips{padding-bottom:0}
+
+/* News list: same collapse-on-scroll title block as the listings / showrooms pages (js/38 publishes --cm-h) */
+body:has(#pageContent > [data-page="news"]) #stickyHeaderGroup{top:calc(var(--cm-h,0px) * -1);transition:transform .34s cubic-bezier(.22,1,.36,1)}
+body:has(#pageContent > [data-page="news"]) #stickyHeaderGroup.cm-hdr-show{transform:translate3d(0,var(--cm-h,0px),0)}
+body:has(#pageContent > [data-page="news"]) #stickyHeaderGroup::after{display:block;content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:#1D1D1F;z-index:5;pointer-events:none}
+html.theme-light body:has(#pageContent > [data-page="news"]) #stickyHeaderGroup::after{background:#fff}
+@media (prefers-reduced-motion:reduce){body:has(#pageContent > [data-page="news"]) #stickyHeaderGroup{transition-duration:.01s}}
+.cm-hb-slide--static{cursor:default}

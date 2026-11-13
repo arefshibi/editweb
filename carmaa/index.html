@@ -1,0 +1,1272 @@
+<!doctype html>
+<html lang="fa" dir="rtl" class="theme-light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no, interactive-widget=resizes-content" />
+    <title>Carma | پلتفرم جامع خودرو</title>
+    <!-- آدرس آگهی: carma.ir/<آیدی نمایشگاه یا حساب>/<آیدی آگهی> — مسیرهای نسبی (js/، css) باید از ریشه‌ی سایت بارگذاری شوند -->
+    <script>(function(){try{if(/^https?:$/.test(location.protocol)&&location.pathname!=="/"&&location.pathname!=="/index.html"){document.write('<base href="/">');document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;var h=a.getAttribute('href');if(h.length<2||h.charAt(1)==='/')return;var t=document.getElementById(decodeURIComponent(h.slice(1)));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}},true);}}catch(e){}})();</script>
+
+    <!-- PWA / fullscreen install support -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#F5F5F7" />
+
+    <!-- iOS: run fullscreen (no Safari chrome) when added to Home Screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Carma" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.v2.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="icons/favicon-48.v2.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.v2.png" />
+
+    <!-- Android/Chrome: run fullscreen when added to Home Screen -->
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- PERF: open the connection to the photo host early so the first listing photos start sooner. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Inter:wght@700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Inter:wght@700;800;900&display=swap" rel="stylesheet" /></noscript>
+    <link rel="stylesheet" href="carmaa-core.min.css?v=pal7-20261113" />
+    
+    <!-- Q&A disabled (temporary): <link rel="stylesheet" href="qa.css?v=pal7-20261113" /> -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&text=Carma&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&text=Carma&display=swap" rel="stylesheet" /></noscript>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <style id="carma-safe-top">
+      /* Header glued to the very top edge of the phone (PWA / fullscreen).
+         styles.css already adds env(safe-area-inset-top) padding to #stickyHeaderGroup in
+         standalone mode; the strip below paints that padding in the header colour so
+         scrolled content never shows through behind the status bar.
+         On Dynamic-Island phones (JS below adds html.has-island when inset-top >= 51px)
+         the header elements sit beside the island, in the status-bar band, instead of
+         under it. Tweak --hdr-island-top (home) / --hdr-lift (inner pages) to nudge them. */
+      @media all and (display-mode: fullscreen), all and (display-mode: standalone) {
+        #stickyHeaderGroup::before{
+          content:""; position:absolute; top:0; left:0; right:0; z-index:0; pointer-events:none;
+          height:env(safe-area-inset-top,0px); background:var(--chrome-fade-bg,#1D1D1F);
+        }
+        /* Default: header row starts right under the island (no overlap with the clock / battery / island).
+           To put the controls beside the island, in the status-bar band, use instead:
+           --hdr-island-top:11px; --hdr-lift:calc(env(safe-area-inset-top,0px) - 1px);  (they then sit over iOS's clock + battery) */
+        html.has-island{ --hdr-island-top:50px; --hdr-lift:12px; }
+
+        /* Home + nav pages (home row = bell / messages / account / logo, all at the sides):
+           drop the safe-area padding and let the row itself start at island height. */
+        html.has-island #stickyHeaderGroup:has(#siteHeader:is(.home-page-active,.home-nav-active):not(.listings-header-hidden):not(.account-header-active)){
+          padding-top:0;
+        }
+        html.has-island #siteHeader:is(.home-page-active,.home-nav-active):not(.listings-header-hidden):not(.account-header-active) .header-home-row{
+          padding-top:var(--hdr-island-top) !important; padding-bottom:10px !important; min-height:0 !important;
+        }
+
+        /* Inner pages (shield logo | search box | bell): the search box stays below the
+           island, the two side elements are lifted up beside it. */
+        html.has-island #siteHeader.non-home-active:not(.home-nav-active):not(.listings-header-hidden):not(.account-header-active) .non-home-header-row > .header-shield-logo,
+        html.has-island #siteHeader.non-home-active:not(.home-nav-active):not(.listings-header-hidden):not(.account-header-active) .non-home-header-row > .header-menu-button{
+          translate:0 calc(-1 * var(--hdr-lift));
+        }
+      }
+    </style>
+    <script>
+      /* Detect a Dynamic Island: portrait safe-area top inset is >= 51px
+         (notch phones are 44-50px, no-cutout phones 0-20px, Safari tabs 0). */
+      (function(){
+        function check(){
+          try{
+            var d=document.createElement('div');
+            d.style.cssText='position:fixed;top:0;left:0;width:0;height:0;visibility:hidden;padding-top:env(safe-area-inset-top,0px)';
+            document.documentElement.appendChild(d);
+            var t=parseFloat(getComputedStyle(d).paddingTop)||0;
+            document.documentElement.removeChild(d);
+            document.documentElement.classList.toggle('has-island',t>=51);
+          }catch(e){}
+        }
+        check();
+        window.addEventListener('resize',check);
+        window.addEventListener('orientationchange',check);
+      })();
+    </script>
+      <style id="carma-brand-inline">
+      /* Carma brand colours (inline so they never depend on cached CSS files) */
+      .header-wordmark .hw-c{background-color:#ffffff !important;color:#1D1D1F !important}
+      html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"],
+      html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"].is-active{background:#ffffff !important;background-color:#ffffff !important;color:#1D1D1F !important}
+      html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"] svg{stroke:#000 !important;color:#000 !important}
+    </style>
+      <link rel="stylesheet" href="carmaa-layers.min.css?v=pal7-20261113" />
+
+      
+      
+    
+    
+    
+    
+      
+    
+    
+    
+    
+      
+      
+      <link rel="stylesheet" href="perf-final.css?v=pal7-20261113" />
+  
+    <link rel="stylesheet" href="dock-compact.css?v=pal7-20261113" />
+  <link rel="stylesheet" href="msg-hero-sticky.css?v=pal7-20261113" />
+  <link rel="stylesheet" href="theme-bw-luxury.css?v=pal7-20261113" />
+  <script defer src="theme-bw-luxury.js?v=pal7-20261113"></script>
+    <link rel="stylesheet" href="theme-bw-blue.css?v=pal7-20261113" />
+  <script defer src="theme-bw-blue.js?v=pal7-20261113"></script>
+    <link rel="stylesheet" href="theme-bw-card.css?v=pal7-20261113" />
+    <link rel="stylesheet" href="showroom-promo.css?v=pal7-20261113" />
+    <link rel="stylesheet" href="founding-badge.css?v=pal7-20261113" />
+    <link rel="stylesheet" href="msg-empty-ios.css?v=pal7-20261113" />
+  <style id="cm-auth-critical">.auth-flow .auth-keypad{display:none!important}html:root .auth-flow.auth-flow{--auth-bg:#262628;--auth-shell-bg:#262628;--auth-sheet-bg:#262628;--auth-text:#F5F5F7;--auth-text-dim:rgba(245,245,247,.55);--auth-text-faint:rgba(245,245,247,.4);--auth-placeholder:rgba(245,245,247,.35);--auth-input-bg:#333336;--auth-input-border:#333336;--auth-chip-bg:#333336;--auth-btn-disabled-bg:#333336;--auth-btn-disabled-text:#636366;--auth-accent:#fff;--auth-accent-ink:#000;--auth-backdrop-tint:rgba(0,0,0,.35);--auth-handle:rgba(128,128,128,.4)}html.theme-light:root .auth-flow.auth-flow{--auth-bg:#f7f7f8;--auth-shell-bg:#f7f7f8;--auth-sheet-bg:#f7f7f8;--auth-text:#262628;--auth-text-dim:rgba(38,38,40,.55);--auth-text-faint:rgba(38,38,40,.4);--auth-placeholder:rgba(38,38,40,.35);--auth-input-bg:#ececee;--auth-input-border:#dcdcdf;--auth-chip-bg:#ececee;--auth-btn-disabled-bg:#e6e6e9;--auth-btn-disabled-text:#a5a5aa;--auth-accent:#000;--auth-accent-ink:#fff}html:root .auth-flow .auth-app-shell{left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px));width:auto;max-width:460px;margin:0 auto;padding-bottom:0;border-radius:32px;box-shadow:none;transform:translateY(calc(100% + 40px))}html:root .auth-flow.is-open .auth-app-shell{transform:none}html:root .auth-flow.is-closing .auth-app-shell{transform:translateY(calc(100% + 40px))}html:root .auth-flow .auth-primary-button{height:56px;border-radius:28px;font-size:15px;font-weight:600}</style>    <link rel="stylesheet" href="story-offer-lux.css?v=pal7-20261113" />
+    <link rel="stylesheet" href="showroom-hero3d.css?v=pal7-20261113" />
+    <link rel="stylesheet" href="home-hero.css?v=wf7" />
+    <link rel="stylesheet" href="theme-light-auto.css?v=lt4" />
+    <link rel="stylesheet" href="theme-light-fix.css?v=lt4" />
+</head>
+  <body>
+    <div id="app">
+      <div id="appFrame" class="min-h-screen bg-black flex justify-center font-sans text-neutral-100">
+        <div id="appViewport" class="w-full max-w-[520px] bg-neutral-950 min-h-screen border-x border-neutral-800 relative overflow-x-clip">
+          <!-- FIX 4: horizontal clipping is back on #appViewport (this is what
+               stops wide/animated content — e.g. the vehicle gallery — from
+               bleeding past the boxed viewport and exposing the page's
+               white background on the left). It uses `overflow-x: clip`
+               instead of `overflow-x: hidden` on purpose: unlike `hidden`,
+               `clip` does not establish a scroll container, so per the CSS
+               Overflow spec it does NOT force the other axis (overflow-y)
+               to be promoted to `auto`. That promotion is exactly what
+               broke #stickyHeaderGroup's stickiness in FIX 3 above — so
+               `clip` gives the same visual clipping as the old
+               `overflow-x-hidden` utility without reintroducing that bug.
+               Do not swap this back to `.overflow-x-hidden`. -->
+          <!-- FIX 3: removed `overflow-x-hidden` from #appViewport. Per the
+               CSS overflow spec, when overflow-x is anything other than
+               `visible` and overflow-y is left as `visible`, the browser
+               silently promotes overflow-y to `auto` too (an axis can't
+               stay `visible` while its sibling axis is clipped) — so this
+               single class was quietly turning #appViewport into a scroll
+               container on the Y axis as well, even though it never
+               actually scrolls internally (its height just grows with
+               content). That makes #appViewport, not the real page
+               viewport, the reference box `position: sticky` measures
+               against — so #stickyHeaderGroup (a child of this element)
+               just sat at the container's own top edge and rode away with
+               the page instead of pinning to the screen. The off-canvas
+               menu drawer this was added to guard (#menuOverlayInner) is
+               `position: fixed`, so it was never actually clipped by this
+               anyway; `html { overflow-x: hidden }` in the base rules
+               already prevents any page-wide horizontal scrollbar. -->
+          <!-- FIX: #stickyHeaderGroup must be a SIBLING of #pageBlurWrap, not
+               nested inside it. #pageBlurWrap gets a filter/transform class
+               during page-transition loading (see render() in script.js),
+               and a filter/transform on an ancestor breaks position:sticky
+               on its descendants. See styles.css "FIX 2" comment above
+               .page-header-sticky for the full explanation. -->
+          <!-- FIX: no bg-neutral-950 here on purpose. This wrapper used to
+               paint an opaque background across the whole sticky group,
+               which would sit directly behind #stickyHeaderGroup::after's
+               fade-out gradient (see styles.css) and hide it completely.
+               Each real chrome child carries its own opaque background
+               instead (#siteHeader, .page-header-sticky, .toolbar-sticky
+               all already have bg-neutral-950), so the ::after strip
+               appended past whichever of them renders last can actually
+               fade to reveal the real scrolled content behind it. -->
+          <div id="stickyHeaderGroup" class="sticky top-0 z-30">
+            <header id="siteHeader" class="bg-neutral-950 home-page-active">
+              <div class="header-home-row grid grid-cols-3 items-center px-4 py-1">
+                <div class="flex items-center gap-5 justify-self-start">
+                  <button aria-label="اعلان‌ها" class="text-neutral-100 mr-bell-btn" data-action="openNotifications"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg><span class="mr-bell-badge" hidden></span></button>
+                </div>
+                <button data-action="goHome" class="brand-mark text-center leading-none justify-self-center">
+                  <span class="header-wordmark" dir="ltr" lang="en" aria-label="Carma"><i class="hw-c" aria-hidden="true"></i>arma</span>
+                </button>
+                <div class="flex items-center gap-4 justify-self-end">
+                  <button aria-label="پیام‌ها" class="text-neutral-100" data-action="openMessages">
+                    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l-2 2v-7.5A7.5 7.5 0 1 1 20 11.5Z"/><path d="M8 11h8M8 14h5"/></svg>
+                  </button>
+                  <button aria-label="حساب کاربری" id="headerAccountBtn" class="text-neutral-100" data-action="openAccount">
+                    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="non-home-header-row" aria-label="جستجو">
+                <button data-action="goHome" class="header-shield-logo" aria-label="خانه"><span class="header-wordmark header-wordmark--small" dir="ltr" lang="en" aria-label="Carma"><i class="hw-c" aria-hidden="true"></i>arma</span></button>
+                <div data-action="openSearchOverlay" role="button" tabindex="0" class="header-search-box" aria-label="جستجو در خودروها، برندها و مدل‌ها">
+                  <svg class="header-search-icon" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+                  <span class="bar-search-field">
+                    <input id="toolSearchInput" type="text" tabindex="-1" readonly autocomplete="off" placeholder="" aria-hidden="true"/>
+                    <span class="bar-search-copy" aria-hidden="true">
+                      <span class="bar-search-label">جستجو خودرو بر اساس</span>
+                      <span class="bar-search-rotator" id="toolSearchRotator"></span>
+                    </span>
+                  </span>
+                  <button type="button" data-action="clearToolSearch" class="header-search-clear" aria-label="پاک کردن جستجو" hidden>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+                  </button>
+                </div>
+                <button aria-label="اعلان‌ها" class="header-menu-button text-neutral-100 mr-bell-btn" data-action="openNotifications"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg><span class="mr-bell-badge" hidden></span></button>
+              </div>
+            </header>
+            <script>
+              /* Before first paint: match the header to the route being restored
+                 (see updateHeader() in js/05) so no wrong header flashes while
+                 the app scripts load. Default route is the listings page. */
+              (function () {
+                try {
+                  var r = history.state && history.state.marqueRoute, page = (r && r.page) || "home";
+                  var seg = location.pathname.split("/")[1] || "";
+                  if (!r) { var map = { news: "news", sell: "sell", showrooms: "dealers", saved: "saved", messages: "messages", account: "account" }; if (map[seg]) page = map[seg]; else if (seg === "cars") page = location.pathname.split("/")[2] ? "vehicle" : "listings"; }
+                  var h = document.getElementById("siteHeader");
+                  if (seg === "feed") page = "feed";
+                  if (page === "feed" && document.body) document.body.setAttribute("data-dock-page", "feed");
+                  var nav = ["vehicle", "account", "accountEdit", "dealershipEdit", "sell", "saved", "messages", "conversation", "seller", "feed"].indexOf(page) !== -1;
+                  var hide = page === "listings" || page === "sell" || page === "dealers" || page === "news" || page === "feed";
+                  h.classList.toggle("non-home-active", page !== "home");
+                  h.classList.toggle("home-page-active", page === "home");
+                  h.classList.toggle("home-nav-active", nav);
+                  h.classList.toggle("account-header-active", page === "account" || page === "seller");
+                  h.classList.toggle("listings-header-hidden", hide);
+                  if (page !== "home") { var bs = document.getElementById("bootSkeleton"); if (bs) bs.hidden = true; }
+                } catch (e) {}
+              })();
+            </script>
+            <div id="pageHeaderSlot"></div>
+            <div id="toolbarSlot"></div>
+          </div>
+          <div id="pageBlurWrap">
+            <main id="pageContent">
+<!-- Boot skeleton: painted with the very first frame while the JS files load; render() replaces it (replaceChildren) with the real page. Hidden for non-home routes by the pre-paint script in the header. -->
+<style>#bootSkeleton[hidden]{display:none!important}</style>
+<!-- CM-SK2:BEGIN home skeleton = real element order -->
+<style id="cm-sk2-css">.cm-sk2{--sk2-b:var(--cm-sk-bg,rgba(255,255,255,.065));--sk2-s:#17171c;--sk2-s2:#202027;--sk2-bd:rgba(255,255,255,.08);--sk2-f:rgba(255,255,255,.05);pointer-events:none;-webkit-user-select:none;user-select:none;overflow-x:hidden}
+.theme-light .cm-sk2{--sk2-b:rgba(29,29,31,.085);--sk2-s:#fff;--sk2-s2:#eceef1;--sk2-bd:rgba(0,0,0,.08);--sk2-f:rgba(0,0,0,.04)}
+.cm-sk2 .sk2b{display:block;flex:none;background:var(--sk2-b);max-width:100%}
+.cm-sk2 .sk2-ts{margin:4px 0 0;height:118px;overflow:hidden}
+.cm-sk2 .sk2-ts-rail{display:flex;gap:12px;padding:10px 16px 0}
+.cm-sk2 .sk2-st{flex:0 0 76px;display:flex;flex-direction:column;align-items:center}
+.cm-sk2 .sk2-head{display:flex;align-items:center;justify-content:space-between;gap:12px;height:34px}
+.cm-sk2 .sk2-lt{margin:18px 0 0;padding:0 16px}
+.cm-sk2 .sk2-lt-rail{display:flex;gap:12px;margin-top:12px;padding:2px 2px 8px;height:312px;box-sizing:border-box;overflow:hidden}
+.cm-sk2 .sk2-lc{flex:0 0 265px;height:302px;box-sizing:border-box;padding:6px;border-radius:22px;background:var(--sk2-s);border:1px solid var(--sk2-bd)}
+.cm-sk2 .sk2-lc-photo{width:100%;height:188px;border-radius:16px;background:var(--sk2-s2)}
+.cm-sk2 .sk2-lc-body{height:100px;padding:14px 6px 0;box-sizing:border-box}
+.cm-sk2 .sk2-lc-info{height:36px}
+.cm-sk2 .sk2-lc-end{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+.cm-sk2 .sk2-dc{margin:20px 0 0;padding:14px 16px 16px;height:160px;box-sizing:border-box;background:linear-gradient(180deg,#19161b 0%,#0f0d11 100%);border-top:1px solid rgba(255,255,255,.09);border-bottom:1px solid rgba(255,255,255,.09);overflow:hidden}
+.theme-light .cm-sk2 .sk2-dc{background:#fff;border-color:rgba(0,0,0,.08)}
+.cm-sk2 .sk2-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;height:52px;box-sizing:border-box;border-radius:999px;background:var(--sk2-f);border:1px solid var(--sk2-bd)}
+.cm-sk2 .sk2-tab{border-radius:999px;background:transparent}
+.cm-sk2 .sk2-tab.on{background:var(--sk2-b)}
+.cm-sk2 .sk2-chips{display:flex;gap:10px;margin-top:16px;padding:0 2px;overflow:hidden}
+.cm-sk2 .sk2-chip{flex:0 0 auto;display:flex;align-items:center;direction:ltr;gap:10px;height:60px;box-sizing:border-box;padding:0 20px 0 6px;border-radius:999px;background:var(--sk2-f);border:1px solid var(--sk2-bd)}
+.cm-sk2 .sk2-chip-th{width:70px;height:44px;border-radius:999px}
+.cm-sk2 .sk2-hb{position:relative;margin:14px 0 0;padding:6px 14px 16px}
+.cm-sk2 .sk2-hb-art{width:100%;height:204px;border-radius:24px}
+.cm-sk2 .sk2-dots{position:absolute;left:0;right:0;bottom:30px;display:flex;justify-content:center;gap:5px}
+.cm-sk2 .sk2-dots i,.cm-sk2 .sk2-sc-dots i{display:block;width:6px;height:6px;border-radius:999px;background:rgba(255,255,255,.28)}
+.cm-sk2 .sk2-dots i.on,.cm-sk2 .sk2-sc-dots i.on{width:16px;background:rgba(255,255,255,.6)}
+.theme-light .cm-sk2 .sk2-dots i,.theme-light .cm-sk2 .sk2-sc-dots i{background:rgba(0,0,0,.2)}
+.theme-light .cm-sk2 .sk2-dots i.on,.theme-light .cm-sk2 .sk2-sc-dots i.on{background:rgba(0,0,0,.45)}
+.cm-sk2 .sk2-sr{margin:34px 0 0;padding:0 16px}
+.cm-sk2 .sk2-head-sr{height:56px;align-items:flex-start}
+.cm-sk2 .sk2-head-col{display:flex;flex-direction:column;padding-top:2px}
+.cm-sk2 .sk2-intro{width:342px;max-width:100%;height:281px;box-sizing:border-box;margin:26px auto 0;padding-top:14px;display:flex;flex-direction:column;align-items:center;overflow:hidden}
+.cm-sk2 .sk2-intro-tx{width:308px;max-width:100%;margin-top:22px}
+.cm-sk2 .sk2-intro-ch{display:flex;align-items:center;justify-content:center;gap:20px;width:300px;max-width:100%;margin-top:34px}
+.cm-sk2 .sk2-intro>.sk2b:last-child{margin-top:20px}
+.cm-sk2 .sk2-sc-rail{display:flex;gap:13px;margin:14px -16px 0;padding:2px 16px 17px;height:348px;box-sizing:border-box;overflow:hidden}
+.cm-sk2 .sk2-sc{flex:0 0 311px;height:329px;box-sizing:border-box;border-radius:26px;overflow:hidden;background:#1D1D1F;border:1px solid rgba(255,255,255,.1);box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.theme-light .cm-sk2 .sk2-sc{background:#fff;border-color:rgba(0,0,0,.08);box-shadow:0 6px 16px rgba(0,0,0,.08)}
+.cm-sk2 .sk2-sc-media{width:100%;height:174px;border-radius:0;background:var(--sk2-s2)}
+.cm-sk2 .sk2-sc-body{padding:12px 12px 0}
+.cm-sk2 .sk2-sc-row{display:flex;align-items:center;gap:12px;height:50px}
+.cm-sk2 .sk2-sc-copy{flex:1;min-width:0}
+.cm-sk2 .sk2-sc-div{display:block;height:1px;margin-top:14px;background:var(--sk2-bd)}
+.cm-sk2 .sk2-sc-stats{display:flex;justify-content:space-around;padding-top:10px}
+.cm-sk2 .sk2-sc-st{display:flex;flex-direction:column;align-items:center}
+.cm-sk2 .sk2-sc-dots{display:flex;justify-content:center;gap:5px;height:24px;padding-top:4px;box-sizing:border-box}
+.cm-sk2 .sk2-nws{margin:34px 0 0;padding:0 16px}
+.cm-sk2 .sk2-nw{margin-top:14px;padding:12px;border-radius:22px;background:var(--sk2-s);border:1px solid var(--sk2-bd);overflow:hidden}
+.cm-sk2 .sk2-nw-h{display:flex;align-items:center;gap:10px}
+.cm-sk2 .sk2-nw-w{flex:1;min-width:0}
+.cm-sk2 .sk2-nw-cover{width:100%;height:190px;margin-top:12px;border-radius:16px;background:var(--sk2-s2)}
+.cm-sk2 .sk2-nw-b{padding:12px 4px 0}
+.cm-sk2 .sk2-nw-a{display:flex;gap:14px;margin-top:16px}
+.cm-sk2 .sk2-ft{margin-top:14px;padding:52px 16px 68px;height:580px;box-sizing:border-box;overflow:hidden}
+.cm-sk2 .sk2-ft-hero{width:100%;height:211px;border-radius:30px;background:var(--sk2-s2)}
+.cm-sk2 .sk2-ft-soc{display:flex;justify-content:center;gap:12px;margin-top:16px}</style>
+<section id="bootSkeleton" data-page="home" class="cm-home-page cm-home-skeleton cm-skeleton-screen cm-sk2" aria-busy="true" aria-label="در حال بارگذاری"><div class="cm-home-search-wrap" aria-hidden="true"><div class="cm-home-search"><svg class="cm-home-search-icon" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span class="bar-search-field"><span class="bar-search-copy"><span class="bar-search-label">جستجو خودرو بر اساس</span><span class="bar-search-rotator"><span class="word active">برند</span></span></span></span></div></div><section class="sk2-ts"><div class="sk2-ts-rail"><div class="sk2-st"><span class="sk2b" style="width:72px;height:72px;border-radius:50%"></span><span class="sk2b" style="width:52px;height:10px;border-radius:999px;margin-top:10px"></span></div><div class="sk2-st"><span class="sk2b" style="width:72px;height:72px;border-radius:50%"></span><span class="sk2b" style="width:52px;height:10px;border-radius:999px;margin-top:10px"></span></div><div class="sk2-st"><span class="sk2b" style="width:72px;height:72px;border-radius:50%"></span><span class="sk2b" style="width:52px;height:10px;border-radius:999px;margin-top:10px"></span></div><div class="sk2-st"><span class="sk2b" style="width:72px;height:72px;border-radius:50%"></span><span class="sk2b" style="width:52px;height:10px;border-radius:999px;margin-top:10px"></span></div><div class="sk2-st"><span class="sk2b" style="width:72px;height:72px;border-radius:50%"></span><span class="sk2b" style="width:52px;height:10px;border-radius:999px;margin-top:10px"></span></div><div class="sk2-st"><span class="sk2b" style="width:72px;height:72px;border-radius:50%"></span><span class="sk2b" style="width:52px;height:10px;border-radius:999px;margin-top:10px"></span></div></div></section><section class="sk2-lt"><div class="sk2-head"><span class="sk2b" style="width:163px;height:28px;border-radius:8px"></span><span class="sk2b" style="width:116px;height:34px;border-radius:999px"></span></div><div class="sk2-lt-rail"><div class="sk2-lc"><span class="sk2b sk2-lc-photo"></span><div class="sk2-lc-body"><div class="sk2-lc-info"><span class="sk2b" style="width:64%;height:16px;border-radius:999px"></span><span class="sk2b" style="width:40%;height:12px;border-radius:999px;margin-top:9px"></span></div><div class="sk2-lc-end"><span class="sk2b" style="width:119px;height:20px;border-radius:999px"></span><span class="sk2b" style="width:26px;height:26px;border-radius:50%"></span></div></div></div><div class="sk2-lc"><span class="sk2b sk2-lc-photo"></span><div class="sk2-lc-body"><div class="sk2-lc-info"><span class="sk2b" style="width:64%;height:16px;border-radius:999px"></span><span class="sk2b" style="width:40%;height:12px;border-radius:999px;margin-top:9px"></span></div><div class="sk2-lc-end"><span class="sk2b" style="width:119px;height:20px;border-radius:999px"></span><span class="sk2b" style="width:26px;height:26px;border-radius:50%"></span></div></div></div></div></section><section class="sk2-dc"><div class="sk2-tabs"><span class="sk2-tab on"></span><span class="sk2-tab"></span></div><div class="sk2-chips"><span class="sk2-chip" style="width:153px"><span class="sk2b sk2-chip-th"></span><span class="sk2b" style="width:46px;height:11px;border-radius:999px"></span></span><span class="sk2-chip" style="width:139px"><span class="sk2b sk2-chip-th"></span><span class="sk2b" style="width:46px;height:11px;border-radius:999px"></span></span><span class="sk2-chip" style="width:185px"><span class="sk2b sk2-chip-th"></span><span class="sk2b" style="width:46px;height:11px;border-radius:999px"></span></span><span class="sk2-chip" style="width:150px"><span class="sk2b sk2-chip-th"></span><span class="sk2b" style="width:46px;height:11px;border-radius:999px"></span></span></div></section><section class="sk2-hb"><span class="sk2b sk2-hb-art"></span><span class="sk2-dots"><i class="on"></i><i></i><i></i><i></i></span></section><section class="sk2-sr"><div class="sk2-head sk2-head-sr"><div class="sk2-head-col"><span class="sk2b" style="width:118px;height:26px;border-radius:8px"></span><span class="sk2b" style="width:190px;height:11px;border-radius:6px;margin-top:9px"></span></div><span class="sk2b" style="width:128px;height:36px;border-radius:999px"></span></div><div class="sk2-intro"><span class="sk2b" style="width:118px;height:30px;border-radius:999px"></span><div class="sk2-intro-tx"><span class="sk2b" style="width:86%;height:20px;border-radius:8px"></span><span class="sk2b" style="width:74%;height:20px;border-radius:8px;margin-top:12px"></span><span class="sk2b" style="width:52%;height:20px;border-radius:8px;margin-top:12px"></span></div><div class="sk2-intro-ch"><span class="sk2b" style="width:107px;height:14px;border-radius:999px"></span><span class="sk2b" style="width:93px;height:14px;border-radius:999px"></span><span class="sk2b" style="width:87px;height:14px;border-radius:999px"></span></div><span class="sk2b" style="width:280px;height:48px;border-radius:16px"></span></div><div class="sk2-sc-rail"><article class="sk2-sc"><span class="sk2b sk2-sc-media"></span><div class="sk2-sc-body"><div class="sk2-sc-row"><span class="sk2b" style="width:50px;height:50px;border-radius:50%"></span><div class="sk2-sc-copy"><span class="sk2b" style="width:150px;height:13px;border-radius:999px"></span><span class="sk2b" style="width:90px;height:9px;border-radius:999px;margin-top:8px"></span></div><span class="sk2b" style="width:40px;height:40px;border-radius:50%"></span></div><i class="sk2-sc-div"></i><div class="sk2-sc-stats"><div class="sk2-sc-st"><span class="sk2b" style="width:40px;height:13px;border-radius:999px"></span><span class="sk2b" style="width:56px;height:8px;border-radius:999px;margin-top:9px"></span></div><div class="sk2-sc-st"><span class="sk2b" style="width:40px;height:13px;border-radius:999px"></span><span class="sk2b" style="width:56px;height:8px;border-radius:999px;margin-top:9px"></span></div><div class="sk2-sc-st"><span class="sk2b" style="width:40px;height:13px;border-radius:999px"></span><span class="sk2b" style="width:56px;height:8px;border-radius:999px;margin-top:9px"></span></div></div></div></article><article class="sk2-sc"><span class="sk2b sk2-sc-media"></span><div class="sk2-sc-body"><div class="sk2-sc-row"><span class="sk2b" style="width:50px;height:50px;border-radius:50%"></span><div class="sk2-sc-copy"><span class="sk2b" style="width:150px;height:13px;border-radius:999px"></span><span class="sk2b" style="width:90px;height:9px;border-radius:999px;margin-top:8px"></span></div><span class="sk2b" style="width:40px;height:40px;border-radius:50%"></span></div><i class="sk2-sc-div"></i><div class="sk2-sc-stats"><div class="sk2-sc-st"><span class="sk2b" style="width:40px;height:13px;border-radius:999px"></span><span class="sk2b" style="width:56px;height:8px;border-radius:999px;margin-top:9px"></span></div><div class="sk2-sc-st"><span class="sk2b" style="width:40px;height:13px;border-radius:999px"></span><span class="sk2b" style="width:56px;height:8px;border-radius:999px;margin-top:9px"></span></div><div class="sk2-sc-st"><span class="sk2b" style="width:40px;height:13px;border-radius:999px"></span><span class="sk2b" style="width:56px;height:8px;border-radius:999px;margin-top:9px"></span></div></div></div></article></div><span class="sk2-sc-dots"><i class="on"></i><i></i><i></i></span></section><section class="sk2-nws"><div class="sk2-head"><span class="sk2b" style="width:160px;height:28px;border-radius:8px"></span><span class="sk2b" style="width:116px;height:34px;border-radius:999px"></span></div><article class="sk2-nw"><div class="sk2-nw-h"><span class="sk2b" style="width:38px;height:38px;border-radius:50%"></span><div class="sk2-nw-w"><span class="sk2b" style="width:90px;height:12px;border-radius:999px"></span><span class="sk2b" style="width:140px;height:9px;border-radius:999px;margin-top:7px"></span></div></div><span class="sk2b sk2-nw-cover"></span><div class="sk2-nw-b"><span class="sk2b" style="width:90%;height:16px;border-radius:999px"></span><span class="sk2b" style="width:100%;height:11px;border-radius:999px;margin-top:12px"></span><span class="sk2b" style="width:66%;height:11px;border-radius:999px;margin-top:8px"></span></div><div class="sk2-nw-a"><span class="sk2b" style="width:48px;height:22px;border-radius:999px"></span><span class="sk2b" style="width:48px;height:22px;border-radius:999px"></span><span class="sk2b" style="width:48px;height:22px;border-radius:999px"></span></div></article></section><footer class="sk2-ft"><span class="sk2b sk2-ft-hero"></span><span class="sk2b" style="width:86px;height:12px;border-radius:999px;margin:26px auto 0"></span><div class="sk2-ft-soc"><span class="sk2b" style="width:48px;height:48px;border-radius:50%"></span><span class="sk2b" style="width:48px;height:48px;border-radius:50%"></span><span class="sk2b" style="width:48px;height:48px;border-radius:50%"></span><span class="sk2b" style="width:48px;height:48px;border-radius:50%"></span><span class="sk2b" style="width:48px;height:48px;border-radius:50%"></span></div><span class="sk2b" style="width:123px;height:38px;border-radius:999px;margin:40px auto 0"></span><span class="sk2b" style="width:200px;height:65px;border-radius:14px;margin:2px auto 0"></span></footer></section>
+<!-- CM-SK2:END -->
+</main>
+          </div>
+<template id="tpl-brand-models">
+            <section data-page="brand-models">
+              <div class="page-header-sticky bg-neutral-950">
+                <div data-slot="breadcrumbs"></div>
+                <h1 data-slot="title" class="font-serif font-bold text-[18px] px-4 pt-1 pb-0 tracking-tight leading-tight"></h1>
+              </div>
+              <div data-slot="toolbar"></div>
+              <div data-slot="models" class="grid grid-cols-2 gap-3.5 p-4"></div>
+            </section>
+          </template>
+
+          <template id="tpl-listings">
+            <section data-page="listings">
+              <div class="page-header-sticky bg-neutral-950 cm-lh">
+                <div class="cm-lh-text"><h1>آگهی‌ها</h1><p>خودروی مناسبت را پیدا و مقایسه کن</p></div>
+                <div class="cm-lh-btns">
+                  <button type="button" data-action="openSearchOverlay" class="cm-lh-btn" aria-label="جستجو"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></button>
+                  <button type="button" data-action="goSell" class="cm-lh-btn" aria-label="ثبت آگهی"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                </div>
+              </div>
+              <div data-slot="toolbar"></div>
+              <div data-slot="refreshTop"></div>
+              <div data-slot="cards" class="explore-list"></div>
+              <div data-slot="footer"></div>
+            </section>
+          </template>
+
+          <template id="tpl-saved">
+            <section data-page="saved">
+              <div class="page-header-sticky bg-neutral-950">
+                <div data-slot="breadcrumbs"></div>
+                <h1 data-slot="title" class="font-serif font-bold text-[18px] px-4 pt-1 pb-0 tracking-tight leading-tight"></h1>
+              </div>
+              <div data-slot="toolbar"></div>
+              <div data-slot="cards" class="grid grid-cols-2 gap-3.5 p-4"></div>
+              <div data-slot="footer"></div>
+            </section>
+          </template>
+
+          <template id="tpl-manage-listings">
+            <section data-page="manage-listings">
+              <div class="page-header-sticky bg-neutral-950">
+                <div data-slot="breadcrumbs"></div>
+                <h1 data-slot="title" class="font-serif font-bold text-[18px] px-4 pt-1 pb-0 tracking-tight leading-tight"></h1>
+              </div>
+              <div data-slot="toolbar"></div>
+              <div data-slot="login-gate" class="mx-4 mt-4 rounded-2xl border border-neutral-800 bg-neutral-900 p-5 flex flex-col items-center gap-3 text-center" hidden>
+                <div class="text-[13.5px] text-neutral-300">برای مدیریت و ثبت آگهی، ابتدا وارد حساب کاربری خود شوید.</div>
+                <button type="button" data-action="promptLoginSell" class="bg-violet-300 text-neutral-950 text-[13px] font-semibold rounded-full px-5 py-2.5">ورود به حساب کاربری</button>
+              </div>
+              <div data-slot="cards" class="flex flex-col gap-3 px-4 pt-4 pb-8"></div>
+            </section>
+          </template>
+
+          <template id="tpl-dealers">
+            <section data-page="dealers">
+              <div class="page-header-sticky bg-neutral-950">
+                <div data-slot="breadcrumbs"></div>
+                <h1 class="font-serif font-bold text-2xl px-4 pt-2 pb-3 tracking-tight">نمایشگاه‌های خودرو</h1>
+              </div>
+              <div data-slot="toolbar"></div>
+              <div data-slot="dealers" class="px-4 pb-8 flex flex-col gap-3"></div>
+            </section>
+          </template>
+
+          <template id="tpl-seller">
+            <section data-page="seller" class="pf-page sp-page">
+              <div data-slot="hero"></div>
+              <div data-slot="cards" class="explore-list"></div>
+            </section>
+          </template>
+
+          <template id="tpl-dealership-edit">
+            <section data-page="dealership-edit">
+              <div class="page-header-sticky bg-neutral-950">
+                <div data-slot="breadcrumbs"></div>
+                <h1 data-slot="title" class="font-serif font-bold text-2xl px-4 pt-2 pb-1 tracking-tight">ایجاد نمایشگاه</h1>
+                <p class="px-4 text-[13px] text-neutral-400 pb-3">آگهی‌های نمایشگاه در یک صفحه‌ی عمومی جمع می‌شوند و روی آگهی‌ها برچسب «نمایشگاه» دارند. ثبت آگهی در پنل نمایشگاه پس از تأیید مدیریت فعال می‌شود.</p>
+              </div>
+              <form data-action="saveDealership" class="px-4 flex flex-col gap-4 pb-10">
+                <!-- SB-FIX -->
+                <div class="dealer-banner-edit">
+                  <label class="dealer-banner-pick2" aria-label="تغییر عکس بنر نمایشگاه"><input type="file" id="dealerBannerInput" accept="image/*" class="hidden"/><div data-slot="banner" class="dealer-banner-preview2"></div><span class="dealer-banner-badge">عکس بنر</span></label>
+                </div>
+                <div class="dealer-media-edit">
+                  <label class="dealer-avatar-pick" aria-label="تغییر عکس پروفایل نمایشگاه"><input type="file" id="dealerLogoInput" accept="image/*" class="hidden"/><div data-slot="logo" class="dealer-avatar-preview"></div><span class="account-avatar-badge dealer-media-badge" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></label>
+                </div>
+                <div class="text-[12px] text-neutral-500 text-center">عکس بنر (مستطیلی، بالا): همان عکس بزرگ کارت نمایشگاه در صفحهٔ اصلی و بنر بالای صفحهٔ عمومی نمایشگاه است. عکس پروفایل (دایره‌ای، پایین): آواتار کوچک نمایشگاه در کارت‌ها، آگهی‌ها و چت است. هر دو را با عکس باکیفیت و وسط‌چین انتخاب کنید.</div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[12.5px] font-semibold text-neutral-400">نام نمایشگاه</label>
+                  <input name="dealerName" maxlength="40" placeholder="مثلاً نمایشگاه آریا" dir="auto" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 focus:border-violet-400"/>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[12.5px] font-semibold text-neutral-400">نام کاربری نمایشگاه <span class="text-neutral-500">(اختیاری)</span></label>
+                  <input name="dealerUsername" maxlength="21" autocomplete="off" autocapitalize="none" placeholder="مثلاً arya.motors" dir="ltr" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 focus:border-violet-400"/>
+                  <div class="text-[11.5px] text-neutral-500">جدا از نام کاربری حساب شخصی شماست. ۳ تا ۲۰ حرف انگلیسی کوچک، عدد، _ یا .</div>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[12.5px] font-semibold text-neutral-400">شهر نمایشگاه</label>
+                  <datalist id="khuzCityList"><option value="آبادان"><option value="اهواز"><option value="خرمشهر"><option value="دزفول"><option value="ماهشهر"><option value="امیدیه"><option value="شوش"><option value="ایذه"><option value="شوشتر"><option value="بهبهان"><option value="اندیمشک"><option value="بندر امام خمینی"><option value="مسجدسلیمان"><option value="سوسنگرد"><option value="رامهرمز"><option value="باغ‌ملک"><option value="هندیجان"><option value="شادگان"><option value="لالی"><option value="گتوند"><option value="رامشیر"><option value="حمیدیه"><option value="ملاثانی"><option value="هفتگل"><option value="دهدز"><option value="آغاجاری"><option value="دارخوین"><option value="ویس"></datalist><input name="dealerCity" list="khuzCityList" maxlength="60" placeholder="شهر را از لیست انتخاب کنید" autocomplete="off" dir="auto" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 focus:border-violet-400"/>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[12.5px] font-semibold text-neutral-400">آدرس نمایشگاه</label>
+                  <textarea name="dealerAddress" rows="2" maxlength="200" placeholder="آدرس کامل نمایشگاه" dir="auto" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 focus:border-violet-400 resize-none"></textarea>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[12.5px] font-semibold text-neutral-400">هشتگ‌های نمایشگاه <span class="text-neutral-500">(اختیاری)</span></label>
+                  <input name="dealerTags" maxlength="200" autocomplete="off" placeholder="مثلاً #خودرو_صفر #وارداتی #تهران" dir="auto" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 focus:border-violet-400"/>
+                  <div class="text-[11.5px] text-neutral-500">حداکثر ۱۰ هشتگ؛ با فاصله یا ویرگول جدا کنید. در صفحه‌ی عمومی نمایشگاه نمایش داده می‌شود.</div>
+                </div>
+                <div class="flex flex-col gap-3 rounded-2xl border border-neutral-800 p-3.5">
+                  <div class="text-[12.5px] font-semibold text-neutral-300">احراز هویت (فقط برای مدیریت)</div>
+                  <div class="flex flex-col gap-1.5">
+                    <label class="text-[12.5px] font-semibold text-neutral-400">نام مالک</label>
+                    <input name="ownerName" maxlength="60" placeholder="نام و نام خانوادگی مالک نمایشگاه" dir="auto" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 focus:border-violet-400"/>
+                  </div>
+                  <div class="flex flex-col gap-1.5">
+                    <label class="text-[12.5px] font-semibold text-neutral-400">کد ملی مالک نمایشگاه</label>
+                    <input name="nationalId" inputmode="numeric" maxlength="10" autocomplete="off" placeholder="۱۰ رقم" dir="ltr" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 focus:border-violet-400"/>
+                    <div data-slot="nid-hint" class="text-[11.5px] text-neutral-500">کد ملی فقط برای مدیریت قابل مشاهده است و به کاربران دیگر نمایش داده نمی‌شود.</div>
+                  </div>
+                </div>
+                <div data-slot="form-error" class="bg-red-950/50 border border-red-800 text-red-300 text-[12.5px] rounded-xl px-3.5 py-2.5" hidden></div>
+                <button type="submit" data-slot="submit" class="bg-violet-300 text-neutral-950 font-bold rounded-full py-3.5 text-[14.5px] mt-2">ایجاد نمایشگاه</button>
+              </form>
+            </section>
+          </template>
+
+          <template id="tpl-sell">
+            <section data-page="sell">
+              <div class="page-header-sticky bg-neutral-950">
+                <div data-slot="breadcrumbs"></div>
+                <h1 class="font-serif font-bold text-2xl px-4 pt-2 pb-1 tracking-tight">فروش خودرو</h1>
+                <p class="px-4 text-[13px] text-neutral-400 pb-3">خودروی خود را مرحله‌به‌مرحله ثبت کنید؛ لازم نیست همه اطلاعات را یک‌جا وارد کنید.</p>
+              </div>
+              <div data-slot="sell-content"></div>
+            </section>
+          </template>
+
+          <template id="tpl-vehicle">
+  <section data-page="vehicle" class="vehicle-detail-page vehicle-demo-layout">
+    <svg aria-hidden="true" class="vehicle-demo-icon-defs" xmlns="http://www.w3.org/2000/svg">
+<symbol id="vd-i-car" viewbox="0 0 24 24"><path d="m5 11 1.4-4.1A2.5 2.5 0 0 1 8.8 5h6.4a2.5 2.5 0 0 1 2.4 1.9L19 11"></path><path d="M3.5 11.5A2.5 2.5 0 0 0 2 13.8V17h20v-3.2a2.5 2.5 0 0 0-1.5-2.3l-2-1H5.5l-2 1Z"></path><path d="M5 17v2m14-2v2M5 14h.01M19 14h.01"></path></symbol>
+<symbol id="vd-i-search" viewbox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></symbol>
+<symbol id="vd-i-plus" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></symbol>
+<symbol id="vd-i-heart" viewbox="0 0 24 24"><path d="M20.8 8.8c0 5.2-8.8 10.1-8.8 10.1S3.2 14 3.2 8.8A4.7 4.7 0 0 1 12 6.5a4.7 4.7 0 0 1 8.8 2.3Z"></path></symbol>
+<symbol id="vd-i-share" viewbox="0 0 24 24"><circle cx="18" cy="5" r="2.5"></circle><circle cx="6" cy="12" r="2.5"></circle><circle cx="18" cy="19" r="2.5"></circle><path d="m8.2 10.8 7.5-4.4m-7.5 8.8 7.5 4.4"></path></symbol>
+<symbol id="vd-i-bookmark" viewbox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"></path></symbol>
+<symbol id="vd-i-ios-share" viewbox="0 0 24 24"><path d="M8.4 9.6H7.3A2.3 2.3 0 0 0 5 11.9v6.8A2.3 2.3 0 0 0 7.3 21h9.4a2.3 2.3 0 0 0 2.3-2.3v-6.8a2.3 2.3 0 0 0-2.3-2.3h-1.1"></path><path d="M12 14.6V3.4"></path><path d="M8.3 6.9 12 3.2l3.7 3.7"></path></symbol>
+<symbol id="vd-i-ios-bookmark" viewbox="0 0 24 24"><path d="M7.2 3.5h9.6A1.7 1.7 0 0 1 18.5 5.2v15.1a.4.4 0 0 1-.64.32L12 16.4l-5.86 4.22a.4.4 0 0 1-.64-.32V5.2A1.7 1.7 0 0 1 7.2 3.5Z"></path></symbol>
+<symbol id="vd-i-check-badge" viewbox="0 0 24 24"><path d="M12 2.8 14.3 4l2.6-.1 1 2.4 2.2 1.4-.5 2.5.5 2.5-2.2 1.4-1 2.4-2.6-.1-2.3 1.2-2.3-1.2-2.6.1-1-2.4-2.2-1.4.5-2.5-.5-2.5 2.2-1.4 1-2.4 2.6.1L12 2.8Z"></path><path d="m8.5 11.8 2.2 2.2 4.8-4.8"></path></symbol>
+<symbol id="vd-i-calendar" viewbox="0 0 24 24"><rect height="16" rx="2.5" width="17" x="3.5" y="5"></rect><path d="M7.5 3v4M16.5 3v4M3.5 9.5h17"></path></symbol>
+<symbol id="vd-i-gauge" viewbox="0 0 24 24"><path d="M4 18a9 9 0 1 1 16 0"></path><path d="m12 13 4-4M7 18h10"></path><circle cx="12" cy="13" r="1"></circle></symbol>
+<symbol id="vd-i-palette" viewbox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18h1.1a2.2 2.2 0 0 0 1.6-3.7 1.6 1.6 0 0 1 1.2-2.7H17a4 4 0 0 0 4-4c0-4.2-4-7.6-9-7.6Z"></path><circle cx="7.5" cy="11" r="1"></circle><circle cx="10" cy="7.5" r="1"></circle><circle cx="15" cy="8" r="1"></circle></symbol>
+<symbol id="vd-i-pin" viewbox="0 0 24 24"><path d="M20 10c0 5.2-8 11-8 11S4 15.2 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></symbol>
+<symbol id="vd-i-clock" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3.5 2"></path></symbol>
+<symbol id="vd-i-phone" viewbox="0 0 24 24"><path d="M7.2 3.5 10 7.8 8.3 10a15 15 0 0 0 5.7 5.7l2.2-1.7 4.3 2.8-.7 3a2 2 0 0 1-2.2 1.5A18.5 18.5 0 0 1 3.1 6.4a2 2 0 0 1 1.5-2.2l2.6-.7Z"></path></symbol>
+<symbol id="vd-i-chat" viewbox="0 0 24 24"><path d="M20.5 11.5a8 8 0 0 1-8.5 8 9.8 9.8 0 0 1-4-.8L3 20l1.4-4.1A7.5 7.5 0 0 1 3.5 12a8 8 0 0 1 8.5-8 8 8 0 0 1 8.5 7.5Z"></path><path d="M8 12h.01M12 12h.01M16 12h.01"></path></symbol>
+<symbol id="vd-i-shield" viewbox="0 0 24 24"><path d="M12 3 20 6v5.5c0 4.5-3.1 7.5-8 9.5-4.9-2-8-5-8-9.5V6l8-3Z"></path><path d="m8.5 12 2.3 2.3 4.8-4.8"></path></symbol>
+<symbol id="vd-i-arrow-left" viewbox="0 0 24 24"><path d="M19 12H5m7-7-7 7 7 7"></path></symbol>
+<symbol id="vd-i-chevron-left" viewbox="0 0 24 24"><path d="m14.5 5-7 7 7 7"></path></symbol>
+<symbol id="vd-i-chevron-down" viewbox="0 0 24 24"><path d="m5 9 7 7 7-7"></path></symbol>
+<symbol id="vd-i-camera" viewbox="0 0 24 24"><path d="M4 7.5h3L9 5h6l2 2.5h3A1.5 1.5 0 0 1 21.5 9v9A1.5 1.5 0 0 1 20 19.5H4A1.5 1.5 0 0 1 2.5 18V9A1.5 1.5 0 0 1 4 7.5Z"></path><circle cx="12" cy="13" r="3.5"></circle></symbol>
+<symbol id="vd-i-engine" viewbox="0 0 24 24"><path d="M5 9h11l2 3h3v5h-3l-2 2H7l-2-2H3V9h2Zm3 0V6h5v3M9 13v3m4-3v3"></path><path d="M18 12V9h2"></path></symbol>
+<symbol id="vd-i-settings" viewbox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="m19.4 15 .1.1 1.2.9-1.5 2.6-1.4-.6a8 8 0 0 1-1.8 1l-.2 1.5h-3l-.2-1.5a8 8 0 0 1-1.8-1l-1.4.6-1.5-2.6 1.2-.9a7 7 0 0 1 0-2.1l-1.2-.9 1.5-2.6 1.4.6a8 8 0 0 1 1.8-1l.2-1.5h3l.2 1.5a8 8 0 0 1 1.8 1l1.4-.6 1.5 2.6-1.2.9a7 7 0 0 1-.1 2Z" transform="translate(-1 -1)"></path></symbol>
+<symbol id="vd-i-sparkle" viewbox="0 0 24 24"><path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3Z"></path><path d="m19 16 .9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9L19 16Z"></path></symbol>
+<symbol id="vd-i-info" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5m0-8h.01"></path></symbol>
+<symbol id="vd-i-sun" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></symbol>
+<symbol id="vd-i-moon" viewbox="0 0 24 24"><path d="M20.5 14.3A8.5 8.5 0 0 1 9.7 3.5 8.5 8.5 0 1 0 20.5 14.3Z"></path></symbol>
+<symbol id="vd-i-message-square" viewbox="0 0 24 24"><path d="M4 4.5h16v12H9l-5 3v-15Z"></path><path d="M8 9h8M8 12.5h5"></path></symbol>
+<symbol id="vd-i-badge-check" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.5 2.5L16 9"></path></symbol>
+<symbol id="vd-i-gearbox" viewbox="0 0 24 24"><path d="M7 5v14M12 5v14M17 5v14M7 12h10"></path><circle cx="7" cy="5" r="1.6"></circle><circle cx="12" cy="5" r="1.6"></circle><circle cx="17" cy="5" r="1.6"></circle></symbol>
+<symbol id="vd-i-fuel" viewbox="0 0 24 24"><path d="M5 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M4 21h12M7.5 8h5"></path><path d="M15 9h2a2 2 0 0 1 2 2v5a1.7 1.7 0 0 0 3.4 0V8.5L19.5 6"></path></symbol>
+<symbol id="vd-i-drivetrain" viewbox="0 0 24 24"><path d="M9 4h6a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"></path><path d="M4.5 6.5v3.5M19.5 6.5v3.5M4.5 14v3.5M19.5 14v3.5M8 8h-3.5M16 8h3.5M8 16H4.5M16 16h3.5"></path></symbol>
+<symbol id="vd-i-file-text" viewbox="0 0 24 24"><path d="M7 3h7l4 4v14H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"></path><path d="M14 3v4h4M9.5 12h5M9.5 15.5h5"></path></symbol>
+<symbol id="vd-i-cyl" viewbox="0 0 24 24"><rect x="4" y="9" width="16" height="10" rx="2"></rect><path d="M8 9V5h8v4M9 14h6"></path></symbol>
+<symbol id="vd-i-pen-sign" viewbox="0 0 24 24"><path d="M14.5 5.5 18.5 9.5 8.5 19.5H4.5v-4l10-10Z"></path><path d="M13 7l4 4M13 20.5h7.5"></path></symbol>
+</svg>
+    <div class="page-shell" id="top">
+      <div class="vehicle-topbar">
+        <nav class="breadcrumbs" aria-label="مسیر صفحه" data-slot="vehicle-breadcrumbs"></nav>
+        <div class="gallery-actions vehicle-icon-actions">
+          <button type="button" class="round-action" data-action="toggleLike" data-slot-id="like" aria-label="علاقه‌مندی" aria-pressed="false" title="ذخیره آگهی"><svg class="icon" data-icon="bookmark"><use href="#vd-i-ios-bookmark"></use></svg></button>
+          <button type="button" class="round-action ig-story-btn" data-action="shareVehicle" aria-label="اشتراک‌گذاری در استوری اینستاگرام" title="اشتراک‌گذاری در استوری اینستاگرام"><span class="ig-ico" aria-hidden="true"><svg class="ig-arrow" viewBox="0 0 24 24"><path d="M20.6 10.1 14 4.5v3.4c-5.7.4-9.5 3.8-10.4 9.6 2.4-3 5.7-4.5 10.4-4.6v3.5l6.6-6.3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></svg><svg class="ig-badge" viewBox="0 0 24 24"><defs><linearGradient id="igBadgeGrad" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#feda75"/><stop offset=".3" stop-color="#fa7e1e"/><stop offset=".6" stop-color="#d62976"/><stop offset=".85" stop-color="#962fbf"/><stop offset="1" stop-color="#4f5bd5"/></linearGradient></defs><rect width="24" height="24" rx="7" fill="url(#igBadgeGrad)"/><rect x="5" y="5" width="14" height="14" rx="4.3" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12" r="3.3" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="16.1" cy="7.9" r="1.1" fill="#fff"/></svg></span><span class="ig-label">اشتراک</span></button>
+        </div>
+      </div>
+      <section class="listing-layout" aria-label="تصاویر و اطلاعات آگهی">
+        <div class="gallery-column">
+        <div class="gallery-card glass-card">
+          <div class="hero-photo-wrap" id="galleryMain">
+            <div class="hero-photo-host" data-slot="hero" data-action="openPhotoViewer"></div>
+            <div class="gallery-top">
+              <div class="photo-badges">
+                <span class="photo-badge light"><svg class="icon"><use href="#vd-i-check-badge"></use></svg> تصاویر آگهی</span>
+                <span class="photo-badge"><svg class="icon"><use href="#vd-i-camera"></use></svg><span data-slot="photo-count-mini">۱ تصویر</span></span>
+              </div>
+            </div>
+            <div class="gallery-bottom">
+              <div class="photo-caption"><span class="camera-count" data-slot="photo-count">۱ / ۱</span></div>
+            </div>
+          </div>
+          <div class="thumb-row" aria-label="انتخاب تصویر" data-slot="thumbs"></div>
+        </div>
+        </div>
+
+        <aside class="summary-column">
+          <div class="price-card glass-card">
+            <div class="listing-topline">
+              <span class="tag featured" data-slot="featured" hidden><svg class="icon"><use href="#vd-i-sparkle"></use></svg> آگهی ویژه</span>
+              <div class="detail-status-patches" data-slot="status-patches" hidden></div>
+            </div>
+            <div class="listing-heading price-heading">
+              <h1 id="listing-title"><span data-slot="title"></span><span class="title-en" data-slot="title-en"></span></h1>
+              <p class="ad-title-line" data-slot="ad-title" hidden></p>
+               <p class="heading-sub" data-slot="city"></p>
+            </div>
+            <div class="price-label-row">
+              <span class="price-kicker"><svg class="icon"><use href="#vd-i-sparkle"></use></svg> قیمت اعلام‌شده فروشنده</span>
+              <span class="negotiable"><span class="green-dot"></span><span data-slot="negotiation-label">قیمت فروشنده</span></span>
+            </div>
+            <div class="price-line">
+              <span class="price-number" data-slot="price-main">—</span>
+              <span class="price-unit" data-slot="price-unit">تومان</span>
+            </div>
+            <div class="price-hint" data-slot="price-hint">برای اطلاع از قیمت نهایی و شرایط معامله با فروشنده هماهنگ کنید.</div>
+            <div class="thin-rule"></div>
+            <div class="summary-facts" data-slot="quick-facts"></div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="lower-layout vx-lower">
+        <div class="content-stack">
+          <section class="vx glass-card" id="description" aria-label="اطلاعات خودرو">
+            <div class="vx-tabs" role="tablist" data-slot="vx-tabs">
+              <button type="button" class="vx-tab" role="tab" id="vx-t1" aria-selected="true" aria-controls="vx-p1" data-vx-tab="0"><svg class="icon"><use href="#vd-i-engine"></use></svg>مشخصات</button>
+              <button type="button" class="vx-tab" role="tab" id="vx-t2" aria-selected="false" aria-controls="vx-p2" tabindex="-1" data-vx-tab="1"><svg class="icon"><use href="#vd-i-shield"></use></svg>مدارک</button>
+              <button type="button" class="vx-tab" role="tab" id="vx-t3" aria-selected="false" aria-controls="vx-p3" tabindex="-1" data-vx-tab="2"><svg class="icon"><use href="#vd-i-pin"></use></svg>بدنه و موقعیت</button>
+            </div>
+            <div class="vx-panel">
+              <div class="vx-pane on" id="vx-p1" role="tabpanel" aria-labelledby="vx-t1">
+                <div class="vx-sec"><span class="vx-m"><svg class="icon"><use href="#vd-i-message-square"></use></svg></span>درباره این خودرو<small>توضیحات فروشنده</small></div>
+                <p class="vx-desc description" data-slot="vehicle-description"></p>
+                <hr class="vx-sep">
+                <div class="vx-head" id="vehicle-data"><b>اطلاعات خودرو</b><span data-slot="technical-count"></span></div>
+                <div class="vx-grid" data-slot="technical-specs"></div>
+              </div>
+              <div class="vx-pane" id="vx-p2" role="tabpanel" aria-labelledby="vx-t2">
+                <div class="vx-head"><b>وضعیت مدارک</b><span data-slot="ownership-caption"></span></div>
+                <div class="vx-docs" data-slot="ownership-specs"></div>
+                <p class="vx-warn" data-slot="ownership-note" hidden><svg class="icon"><use href="#vd-i-info"></use></svg><span>موارد ثبت‌نشده را پیش از قرارداد از فروشنده بپرسید.</span></p>
+              </div>
+              <div class="vx-pane" id="vx-p3" role="tabpanel" aria-labelledby="vx-t3">
+                <div class="vx-sec" id="specifications"><span class="vx-m"><svg class="icon"><use href="#vd-i-palette"></use></svg></span>وضعیت بدنه و رنگ<small>اطلاعات ثبت‌شده</small></div>
+                <div class="detail-tab-panels" data-slot="tab-content"></div>
+                <hr class="vx-sep">
+                <div class="vx-sec" id="location"><span class="vx-m"><svg class="icon"><use href="#vd-i-pin"></use></svg></span>موقعیت خودرو<small data-slot="location-city"></small></div>
+                <div class="vmap-body" data-slot="detail-map"></div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <footer class="footer"><div class="mr-report-slot" data-slot="report-slot"></div><nav class="footer-links" aria-label="پیوندهای پاورقی"><a href="#description">راهنمای خرید امن</a><i aria-hidden="true"></i><a href="#top">بازگشت به بالا<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></nav><span class="footer-copy">© ۲۰۲۶ Carma · بازار تخصصی خودرو</span><div class="footer-mark" aria-hidden="true">Carma</div></footer>
+    </div>
+    <div class="detail-cta">
+      <div class="detail-cta-inner detail-cta-split">
+        <button type="button" data-action="openContactChooser" data-slot-id="contact-sticky" class="detail-cta-btn detail-cta-contact"><svg class="icon"><use href="#vd-i-chat"></use></svg><span>گفت‌وگو و تماس</span></button>
+        <button type="button" data-action="openCarOffer" data-slot-id="offer-sticky" class="detail-cta-btn detail-cta-offer" hidden><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.3"/></svg><span>پیشنهاد قیمت</span></button>
+        <div class="detail-cta-hidden" hidden><div class="detail-cta-price-value" data-slot="price-sticky"></div><div class="detail-cta-price-unit"></div><a data-slot="phone-sticky" data-action="clickContact" class="detail-cta-phone"></a></div>
+      </div>
+    </div>
+  </section>
+</template>
+
+          <template id="tpl-sell-step">
+            <section data-page="sell-step">
+              <div class="page-header-sticky bg-neutral-950 explore-header">
+                <button type="button" data-action="goHome" aria-label="بازگشت" class="explore-icon-btn">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6 8 12l7 6"/></svg>
+                </button>
+                <div class="explore-title" data-slot="title">فروش خودرو</div>
+                <span class="explore-icon-btn" style="visibility:hidden" aria-hidden="true"></span>
+              </div>
+              <div data-slot="progress"></div>
+              <form data-action="submitSell" class="px-4 flex flex-col pb-10">
+                <input type="hidden" name="sellStep" data-slot="step-input" />
+                <div data-slot="step-content"></div>
+                <div data-slot="form-error" class="bg-red-950/50 border border-red-800 text-red-300 text-[12.5px] rounded-xl px-3.5 py-2.5 mt-3.5" hidden></div>
+                <div data-slot="actions" class="sell-actions-dock flex gap-2"></div>
+                <p data-slot="terms" class="text-[11.5px] text-neutral-500 text-center mt-3" hidden>با ثبت آگهی، شرایط فروشندگان C♻️RMA را می‌پذیرید.</p>
+              </form>
+            </section>
+          </template>
+
+          <template id="tpl-account">
+            <section data-page="account">
+              <div class="page-header-sticky bg-neutral-950">
+                <div data-slot="breadcrumbs"></div>
+              </div>
+              <div dir="rtl" class="account-body">
+                <div data-slot="profile"></div>
+                <div data-slot="tabs"></div>
+                <div data-slot="tab-content" class="pt-4"></div>
+              </div>
+            </section>
+          </template>
+
+
+          <template id="tpl-menu-buy"><div data-template-root><button data-action="toggleBuy" class="w-full flex items-center gap-3 rounded-xl border px-4 py-3 mb-2 transition-colors"><span class="font-semibold text-[15px]">خرید</span><span data-slot="bag"></span><span data-slot="chevron" class="mr-auto"></span></button><div data-slot="buy-content" class="pt-2 pb-1 menu-submenu-motion" hidden></div></div></template>
+          <template id="tpl-menu-item"><button data-template-root data-action="menuNavItem" class="menu-link"><span data-slot="icon" class="menu-link-icon"></span><span data-slot="label" class="menu-link-label"></span></button></template>
+          <template id="tpl-menu-promo"><div data-template-root class="border border-neutral-700 rounded-2xl px-4 py-4 mb-4"><div data-slot="title" class="font-semibold text-[15px] mb-1.5"></div><div data-slot="desc" class="text-[12.5px] text-neutral-400 leading-snug mb-3"></div><button data-action="promo" class="flex items-center gap-1.5 text-violet-300 font-semibold text-[14px] underline underline-offset-2"><span data-slot="cta"></span><span data-slot="arrow"></span></button></div></template>
+          <template id="tpl-skeleton-card"><div data-template-root class="rounded-2xl border border-neutral-800 overflow-hidden bg-neutral-950 flex flex-col"><div class="relative aspect-[3/2] bg-neutral-900"><div class="absolute inset-0 skeleton-block rounded-none"></div></div><div class="p-3 flex flex-col gap-1"><div class="h-3.5 skeleton-block rounded-full w-full"></div><div class="h-3.5 skeleton-block rounded-full w-3/5 mt-0.5"></div><div class="h-4 skeleton-block rounded-full w-2/5 mt-1"></div><div class="flex items-center justify-between mb-1.5 mt-1"><div class="h-2.5 skeleton-block rounded-full w-1/4"></div><div class="h-2.5 skeleton-block rounded-full w-1/5"></div></div><div class="h-9 skeleton-block rounded-full mt-0.5"></div><div class="h-2.5 skeleton-block rounded-full w-1/3 mx-auto mt-2"></div></div></div></template>
+          <template id="tpl-skeleton-grid"><div data-template-root class="grid grid-cols-2 gap-3.5 p-4" data-slot="cards"></div></template>
+          <template id="tpl-skeleton-explore-card-compact"><div data-template-root class="xcd-wrap"><article class="xcd is-skeleton" aria-hidden="true"><div class="xcd-photo"><div class="xcd-photo-img"><span class="skeleton-block xcd-sk-photo"></span></div><span class="skeleton-block xcd-sk-count"></span></div><div class="xcd-info"><div class="xcd-head"><span class="skeleton-block xcd-sk-logo"></span></div><div class="xcd-titlerow"><span class="skeleton-block xcd-sk-title"></span></div><div class="xcd-kmrow"><span class="skeleton-block xcd-sk-km"></span></div><div class="xcd-chips"><span class="skeleton-block xcd-sk-chip" style="width:9cqw"></span><span class="skeleton-block xcd-sk-chip" style="width:11cqw"></span><span class="skeleton-block xcd-sk-chip" style="width:15cqw"></span></div><div class="xcd-foot"><div class="xcd-price"><div class="xcd-price-in"><span class="skeleton-block xcd-sk-plabel"></span><span class="skeleton-block xcd-sk-pamount"></span></div></div></div></div></article></div></template>
+          <template id="tpl-skeleton-explore-card"><article data-template-root class="xc is-skeleton" aria-hidden="true"><div class="xc-media"><div class="xc-photo"><div class="absolute inset-0 skeleton-block rounded-none"></div></div><div class="xc-glass xc-glass--tab"><div class="xc-glass-text"><div class="xc-b-head"><span class="xc-sk xc-sk-title skeleton-block rounded-full"></span><span class="xc-sk xc-sk-year skeleton-block rounded-full"></span></div><div class="xc-b-meta"><span class="xc-sk xc-sk-pill skeleton-block rounded-full"></span><span class="xc-sk xc-sk-pill xc-sk-pill-sm skeleton-block rounded-full"></span></div></div><div class="xc-price xc-price--tab"><span class="xc-sk xc-sk-amount skeleton-block rounded-full"></span><span class="xc-sk xc-sk-unit skeleton-block rounded-full"></span></div></div></div></article></template>
+          <template id="tpl-skeleton-shell"><section data-template-root><div class="page-header-sticky bg-neutral-950"><div data-slot="breadcrumbs"></div><h1 data-slot="title" class="font-serif font-bold text-xl px-4 pt-1 pb-0 tracking-tight leading-tight"></h1></div><div data-slot="extra"></div><div data-slot="grid"></div></section></template>
+          <template id="tpl-breadcrumbs"><nav data-template-root class="px-4 pt-0.5 text-[12px] leading-tight text-neutral-400 flex flex-wrap items-center gap-1"></nav></template>
+          <template id="tpl-toolbox">
+            <div data-template-root class="toolbar-sticky bg-neutral-950 toolbox-shell">
+              <div class="toolbox-filter-row">
+                <div data-slot="filter-chips" class="toolbox-filter-chips">
+                  <button data-action="toggleToolFilters" class="toolbox-filter-main">
+                    <span class="toolbox-filter-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg></span>
+                    <span>فیلترها</span>
+                    <span data-slot="filter-count" class="toolbox-filter-count">0</span>
+                  </button>
+                </div>
+              </div>
+              <div data-slot="chip-dropdown-layer" class="toolbox-chip-dropdown-layer"></div>
+              <div data-slot="filter-panel" class="toolbox-filter-panel" hidden></div>
+            </div>
+          </template>
+          <template id="tpl-listing-toolbar"><div data-template-root class="toolbar-sticky bg-neutral-950"></div></template>
+          <template id="tpl-page-toolbar"><div data-template-root class="toolbar-sticky bg-neutral-950"></div></template>
+
+          <template id="tpl-home-brand-chip">
+            <button data-template-root data-action="goBrand" class="flex flex-col items-center gap-1.5 shrink-0 w-[60px] promo-card">
+              <span data-slot="mark" class="h-14 w-14 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center overflow-hidden p-2.5"></span>
+              <span data-slot="name" class="text-[10.5px] text-neutral-400 font-medium leading-tight text-center w-full truncate"></span>
+            </button>
+          </template>
+<template id="tpl-model-card"><button data-template-root data-action="goListingsModel" class="rounded-2xl border border-neutral-800 overflow-hidden bg-neutral-950 flex flex-col text-right"><div data-slot="visual" class="aspect-[4/3] bg-neutral-900"></div><div class="p-3"><div data-slot="model" class="text-[13.5px] font-bold mb-1 leading-tight"></div><div data-slot="count" class="text-[12.5px] text-violet-400 font-medium"></div></div></button></template>
+          <template id="tpl-model-all-card"><button data-template-root data-action="goListings" class="home-brand-card flex flex-col items-center justify-center text-center rounded-2xl aspect-[4/3] p-4 gap-3"><div data-slot="mark" class="w-14 h-14 rounded-full border-2 border-neutral-700 flex items-center justify-center"></div><div><div class="text-[14px] font-bold mb-1">همه مدل‌ها</div><div data-slot="count" class="text-[12.5px] text-violet-400 font-medium"></div></div></button></template>
+          <template id="tpl-filter-panel"><div data-template-root class="border-t border-neutral-800 px-4 pb-8" data-slot="filters"></div></template>
+          <template id="tpl-filter-group"><div data-template-root class="border-b border-neutral-800 last:border-none"><button data-action="toggleFilter" class="w-full flex items-center justify-between py-4"><span data-slot="label" class="text-[14px] font-bold text-left"></span><span data-slot="icon"></span></button><div data-slot="options" class="flex flex-wrap gap-2 pb-4" hidden></div></div></template>
+          <template id="tpl-filter-option"><button data-template-root data-action="setFilterValue" class="px-3 py-1.5 rounded-full text-[12.5px] border"></button></template>
+          <template id="tpl-vehicle-tab"><button data-template-root data-action="setTab" class="py-3.5 mr-5 text-sm font-semibold border-b-2 whitespace-nowrap"></button></template>
+          <template id="tpl-vehicle-fact"><div data-template-root class="flex flex-col items-center justify-center gap-1 shrink-0 w-[84px] rounded-xl bg-neutral-900 py-2.5"><span data-slot="icon"></span><div data-slot="value" class="text-[12.5px] font-bold text-neutral-100 leading-tight text-center"></div><div data-slot="label" class="text-[10px] text-neutral-500 leading-none"></div></div></template>
+          <template id="tpl-vehicle-thumb"><button data-template-root data-action="setThumb" class="shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2"><div data-slot="image"></div></button></template>
+          <template id="tpl-vehicle-service-row"><div data-template-root class="flex items-center gap-2.5 text-[13.5px] text-neutral-200"><span data-slot="label"></span><span data-slot="icon"></span></div></template>
+          <template id="tpl-vehicle-dealer"><div data-template-root class="p-4 flex flex-col gap-3"><div class="rounded-xl bg-neutral-900 px-4 py-3.5"><div data-slot="name" class="font-bold text-[15px] mb-1"></div><div class="flex items-center gap-1.5 text-[12.5px] text-neutral-400 mb-2"><span data-slot="city"></span><span data-slot="icon"></span></div><div data-slot="rating" class="flex items-center gap-2 text-[13px] text-neutral-400"></div></div><button data-action="openContactSeller" class="w-full flex items-center justify-center gap-2 bg-violet-300 text-neutral-950 text-[14.5px] font-bold rounded-full py-3"><span data-slot="contact-icon"></span>اطلاعات تماس</button></div></template>
+          <template id="tpl-vehicle-overview"><div data-template-root class="p-4 text-[13.5px] text-neutral-300 leading-relaxed"></div></template>
+          <template id="tpl-vehicle-spec-section"><div data-template-root class="mb-5"><div data-slot="title" class="text-[12px] font-bold text-neutral-500 mb-1.5"></div><div data-slot="rows" class="rounded-xl bg-neutral-900 px-4"></div></div></template>
+          <template id="tpl-vehicle-spec-row"><div data-template-root class="flex items-center justify-between py-3"><span data-slot="label" class="text-[13px] text-neutral-400"></span><span data-slot="value" class="text-[13.5px] font-bold text-neutral-100 text-left"></span></div></template>
+          <template id="tpl-list-empty"><div data-template-root class="col-span-2 text-center text-neutral-400 text-[13.5px] py-16 px-6"><span data-slot="message"></span></div></template>
+          <template id="tpl-list-end"><div data-template-root class="px-4 pb-7 text-center text-neutral-500 text-[13px] py-2">به انتهای لیست رسیدید</div></template>
+          <template id="tpl-dealer-row"><button data-template-root data-action="goListings" class="w-full flex items-center justify-between py-4 border-b border-neutral-800 text-left"><div><div data-slot="name" class="font-bold text-[14.5px] mb-0.5"></div><div class="flex items-center gap-1.5 text-[12.5px] text-neutral-400"><span data-slot="city"></span><span data-slot="icon"></span></div></div><div data-slot="count" class="text-[12.5px] text-violet-300 font-medium whitespace-nowrap"></div></button></template>
+          <template id="tpl-sell-step1"><div data-template-root class="sell-step2"><div data-slot="note"></div><div class="sell-list"><div class="sell-row-wrap"><input type="hidden" name="brand" required value=""/><button type="button" data-action="openSellBrandPicker" class="sell-row" aria-haspopup="dialog" aria-expanded="false"><span class="sell-row-label">برند</span><span class="sell-row-value"><span data-slot="brand-mark" class="sell-row-mark"></span><span data-slot="brand-label" class="sell-row-text">انتخاب برند</span></span><svg class="sell-row-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 9 12l6 6"/></svg></button></div><div class="sell-row-wrap"><input type="hidden" name="model" required value=""/><button type="button" data-action="openSellModelPicker" class="sell-row" aria-haspopup="dialog" aria-expanded="false"><span class="sell-row-label">مدل / زیرمدل</span><span class="sell-row-value"><span data-slot="model-label" class="sell-row-text">انتخاب مدل</span></span><svg class="sell-row-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 9 12l6 6"/></svg></button></div><div class="sell-row-wrap"><input type="hidden" name="year" required value=""/><button type="button" data-action="openSellYearPicker" class="sell-row" aria-haspopup="dialog" aria-expanded="false"><span class="sell-row-label">سال ساخت</span><span class="sell-row-value"><span data-slot="year-label" class="sell-row-text">انتخاب سال</span></span><svg class="sell-row-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 9 12l6 6"/></svg></button></div></div></div></template>
+          <template id="tpl-sell-step2"><div data-template-root class="sell-step2"><div data-slot="note"></div><div class="sell-section sell-adtitle"><div class="sell-section-head"><label class="sell-section-title" for="sellAdTitleInput">عنوان آگهی</label><span class="sell-adtitle-opt">اختیاری</span></div><div class="sell-adtitle-box"><input id="sellAdTitleInput" name="adTitle" type="text" maxlength="70" autocomplete="off" placeholder="مثال: سراتو ۲۰۲۲ فول، کم‌کارکرد" class="sell-adtitle-input" aria-label="عنوان آگهی"/><span class="sell-adtitle-count" data-slot="adtitle-count"></span></div></div><div class="sell-section" data-slot="price-section"><label class="sell-section-title" for="sellPriceInput">قیمت خودرو</label><div class="sell-price-box"><input id="sellPriceInput" name="price" required type="text" inputmode="numeric" autocomplete="off" placeholder="0" class="sell-price-input" aria-label="قیمت خودرو به تومان"/><span class="sell-price-unit" id="sellPriceUnit" data-unit="toman">تومان</span></div><section class="mr-sell-offer-option"><label class="mr-sell-offer-toggle"><span><b>دریافت پیشنهاد قیمت</b><small>خریدار می‌تواند پیشنهاد بفرستد؛ حداقل قیمت شما در رابط کاربری نمایش داده نمی‌شود.</small></span><input type="checkbox" name="acceptsOffers" aria-label="دریافت پیشنهاد قیمت"/></label><label class="mr-sell-min-price mr-trust-field" data-trust-min-wrap><span>حداقل قیمت قابل قبول شما (تومان)</span><input type="number" name="minPrice" inputmode="numeric" min="1" placeholder="اختیاری؛ فقط برای آزمایش فرانت‌اند"/></label><p class="mr-trust-muted">نکته: مخفی‌ماندن واقعی حداقل قیمت فقط با بررسی سمت سرور امکان‌پذیر است.</p></section></div><div class="sell-list sell-toggles"><label class="sell-toggle"><span class="sell-toggle-text">قیمت توافقی</span><input type="checkbox" name="negotiable"/><i class="sell-switch" aria-hidden="true"></i></label><label class="sell-toggle"><span class="sell-toggle-text">مایل به معاوضه</span><input type="checkbox" name="tradeIn"/><i class="sell-switch" aria-hidden="true"></i></label></div><div class="sell-section sell-mileage" role="radiogroup" aria-label="کارکرد خودرو"><div class="sell-section-head"><span class="sell-section-title">وضعیت کارکرد خودرو</span><span class="sell-mileage-req">الزامی</span></div><p class="sell-mileage-sub">خودروی شما صفر است، کارکرده یا حواله/پیش‌فروش؟ یکی را انتخاب کنید.</p><input type="hidden" name="mileageType" value="used"/><button type="button" role="radio" aria-checked="false" class="sell-radio" data-action="setSellMileage" data-value="zero"><i class="sell-radio-dot" aria-hidden="true"></i><span class="sell-radio-label">صفر</span></button><button type="button" role="radio" aria-checked="false" class="sell-radio" data-action="setSellMileage" data-value="used"><i class="sell-radio-dot" aria-hidden="true"></i><span class="sell-radio-label">کارکرده</span></button><div class="sell-mileage-panel" data-slot="mileage-used"><label class="sell-mileage-field" for="sellMilesInput">مقدار کارکرد را وارد کنید</label><input id="sellMilesInput" name="miles" type="text" inputmode="numeric" autocomplete="off" placeholder="مثال: ۱۲٬۰۰۰" class="sell-mileage-input" aria-label="کارکرد خودرو به کیلومتر"/><span class="sell-mileage-hint" data-slot="miles-hint"></span></div><button type="button" role="radio" aria-checked="false" class="sell-radio" data-action="setSellMileage" data-value="presale"><i class="sell-radio-dot" aria-hidden="true"></i><span class="sell-radio-label">حواله یا پیش فروش</span></button><div class="sell-mileage-panel" data-slot="mileage-presale" hidden><span class="sell-mileage-field">زمان تحویل را انتخاب کنید</span><input type="hidden" name="deliveryTime" value=""/><div class="sell-opt-grid sell-cols-2" data-slot="delivery-grid" role="group" aria-label="زمان تحویل"></div></div></div><div class="sell-list"><div class="sell-row-wrap"><input type="hidden" name="color" value=""/><button type="button" data-action="openSellColorPicker" class="sell-row" aria-haspopup="dialog" aria-expanded="false"><span class="sell-row-label">رنگ بیرونی</span><span class="sell-row-value"><span data-slot="color-swatch" class="sell-row-swatch is-empty"></span><span data-slot="color-label" class="sell-row-text">انتخاب رنگ</span></span><svg class="sell-row-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 9 12l6 6"/></svg></button></div><div class="sell-row-wrap"><input type="hidden" name="trim" required value="full"/><button type="button" data-action="openSellTrimPicker" class="sell-row"><span class="sell-row-label">وضعیت خودرو</span><span class="sell-row-value"><span data-slot="trim-icon" class="sell-row-badge"></span><span data-slot="trim-label" class="sell-row-text">فول</span></span><svg class="sell-row-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 9 12l6 6"/></svg></button></div></div></div></template>
+          <template id="tpl-sell-step3"><div data-template-root class="flex flex-col gap-4"><div data-slot="note"></div><div class="sell-block-grid"><div class="sell-block-field"><label class="sell-block-label"><span>شهر شما</span><small>محل نگهداری خودرو</small></label><input type="hidden" name="city" required value=""/><button type="button" data-action="openSellCityPicker" class="sell-trim-trigger" aria-haspopup="dialog" aria-expanded="false"><span class="sell-trim-trigger-icon" aria-hidden="true">📍</span><span data-slot="city-label" class="sell-trim-trigger-label">انتخاب شهر</span><span class="sell-brand-trigger-arrow" aria-hidden="true">⌄</span></button></div><div class="sell-block-field"><label class="sell-block-label"><span>منطقه</span><small>نقشه را بکشید تا دایره روی منطقه قرار بگیرد</small></label><div class="sell-location-map" data-slot="locationMap"><div class="detail-map-visual" data-slot="locationMapEl"></div></div><span class="text-[11px] text-neutral-500 leading-relaxed" data-slot="locationHint">منطقه انتخاب‌شده: <b data-slot="locationLabel">مرکز شهر</b></span></div><div class="sell-block-field"><label class="sell-block-label"><span>شماره تماس</span><small>ثابت و غیرقابل تغییر</small></label><input name="phone" required type="tel" readonly aria-readonly="true" tabindex="-1" class="bg-neutral-900 border border-neutral-800 rounded-xl px-3.5 py-3 text-[14px] outline-none text-neutral-400 cursor-not-allowed"/><span class="text-[11px] text-neutral-500 leading-relaxed">شماره تماس آگهی همان شماره حساب کاربری شماست و قابل تغییر نیست.</span></div></div></div></template>
+          <template id="tpl-sell-step4"><div data-template-root class="flex flex-col gap-4"><div data-slot="note"></div><div class="sell-block-grid"><div class="sell-media" data-slot="media"><div class="sell-media-head"><span class="sell-media-title">تصاویر یا ویدیو را بارگذاری کنید</span><span class="sell-media-opt">(اختیاری)</span></div><div class="sell-media-tiles"><label class="sell-media-tile" data-slot="photo-tile"><input id="sellPhotoInput" type="file" accept="image/*" multiple class="hidden"/><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8.5A1.5 1.5 0 0 1 5.5 7H8l1.2-2h5.6L16 7h2.5A1.5 1.5 0 0 1 20 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z"/><circle cx="12" cy="13" r="3.2"/></svg><span class="sell-media-tile-label">افزودن عکس</span><span class="sell-media-tile-count" data-slot="photo-count"></span></label><label class="sell-media-tile" data-slot="video-tile"><input id="sellVideoInput" type="file" accept="video/*" class="hidden"/><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6.5" width="12.5" height="11" rx="2"/><path d="m15.5 11 5-2.8v7.6l-5-2.8z"/></svg><span class="sell-media-tile-label">افزودن ویدیو</span><span class="sell-media-tile-count" data-slot="video-count"></span></label></div><div class="sell-media-rules"><p>تا ۴ عکس و هر عکس حداکثر ۲۰ مگابایت</p><p>زمان ویدئو حداقل ۳۰ ثانیه تا حداکثر ۳ دقیقه است.</p><p>بارگذاری ویدیو به‌معنای پذیرش <button type="button" class="sell-media-link" data-action="showVideoRules">قوانین</button> مربوط به آن است.</p></div><div data-slot="video-preview" hidden></div><div data-slot="photos" class="grid grid-cols-2 gap-2"></div><div class="sell-media-warn" data-slot="media-warn" role="note">آگهی بدون عکس، توجه بسیار کمتری جلب می‌کند!</div></div><div class="sell-block-field"><label class="sell-block-label"><span>توضیحات</span><small>الزامی</small></label><textarea name="description" required rows="4" minlength="1" placeholder="وضعیت، تاریخچه سرویس، آپشن‌ها…" aria-required="true" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 resize-none"></textarea></div></div></div></template>
+          <template id="tpl-sell-step-damage"><div data-template-root class="sell-step2"><div data-slot="note"></div><div class="sell-section"><div class="sell-section-head"><span class="sell-section-title">روی بخش‌های آسیب‌دیده بزنید</span></div><div data-slot="diagram" class="sell-diagram"></div><div class="sell-legend" aria-hidden="true"><span><i style="background:#3b82f6"></i>رنگ شده</span><span><i style="background:#a855f7"></i>تعویض شده</span><span><i style="background:#f59e0b"></i>ضربه دیده</span></div><div data-slot="summary" class="sell-summary"></div><details class="sell-more"><summary>انتخاب از لیست قطعات</summary><div data-slot="panel-chips" class="sell-chip-wrap"></div></details></div></div></template>
+          <template id="tpl-sell-action-prev"><button data-template-root type="button" data-action="sellPrev" class="flex-1 bg-neutral-800 text-neutral-200 font-semibold rounded-full py-3.5 text-[14px]">بازگشت</button></template>
+          <template id="tpl-sell-action-cancel"><button data-template-root type="button" data-action="goHome" class="flex-1 bg-neutral-800 text-neutral-200 font-semibold rounded-full py-3.5 text-[14px]">انصراف</button></template>
+          <template id="tpl-sell-action-next"><button data-template-root type="button" data-action="sellNext" class="flex-1 bg-violet-300 text-neutral-950 font-bold rounded-full py-3.5 text-[14px]">مرحله بعد</button></template>
+          <template id="tpl-sell-action-submit"><button data-template-root type="submit" class="flex-1 bg-violet-300 text-neutral-950 font-bold rounded-full py-3.5 text-[14px]">ثبت آگهی خودرو</button></template>
+          <template id="tpl-account-profile"><div data-template-root class="account-profile"><div class="account-profile-banner" data-slot="profile-banner" aria-hidden="true"></div><div class="account-avatar-wrap" aria-label="عکس پروفایل"><div data-slot="avatar" class="account-avatar bg-violet-600 text-white"></div></div><div data-slot="name" class="account-name text-neutral-100"></div><div class="flex items-center gap-2.5"><button data-slot="action" type="button" class="account-edit-btn bg-neutral-800 text-neutral-100"><span data-slot="action-label"></span></button><button data-slot="logout" type="button" data-action="logout" class="account-edit-btn text-red-400 border border-red-900/60 bg-transparent" hidden>خروج از حساب</button></div></div></template>
+
+          <template id="tpl-account-edit">
+            <section data-page="account-edit">
+              <div class="page-header-sticky bg-neutral-950">
+                <div data-slot="breadcrumbs"></div>
+                <h1 class="font-serif font-bold text-2xl px-4 pt-2 pb-1 tracking-tight">ویرایش اطلاعات</h1>
+                <p class="px-4 text-[13px] text-neutral-400 pb-3">اطلاعات حساب کاربری خود را به‌روزرسانی کنید.</p>
+              </div>
+              <form data-action="saveAccountInfo" dir="ltr" class="px-4 flex flex-col gap-4 pb-10">
+                <div class="flex flex-col items-center gap-2 py-2">
+                  <label class="account-edit-avatar-wrap" aria-label="تغییر عکس پروفایل">
+                    <input type="file" id="accountAvatarInput" accept="image/*" class="hidden"/>
+                    <div data-slot="avatar-preview" class="account-edit-avatar bg-violet-600 text-white"></div>
+                    <span class="account-edit-avatar-badge" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2Z"/><circle cx="12" cy="13" r="4"/></svg></span>
+                  </label>
+                  <span class="text-[12px] text-neutral-500">تغییر عکس پروفایل</span>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[12.5px] font-semibold text-neutral-400">نام نمایشی (Nickname)</label>
+                  <input name="nickname" maxlength="40" autocomplete="off" placeholder="مثلاً علی موتورز" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 focus:border-violet-400"/>
+                  <span class="text-[11px] text-neutral-500 leading-relaxed">این نام به‌عنوان اسم شما به بقیه کاربران نشان داده می‌شود (استوری، گفتگو، آگهی). نام و نام خانوادگی واقعی نمایش داده نمی‌شود. خالی بگذارید تا نام واقعی نمایش داده شود.</span>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[12.5px] font-semibold text-neutral-400">نام</label>
+                  <input name="firstName" placeholder="نام" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 focus:border-violet-400"/>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[12.5px] font-semibold text-neutral-400">نام خانوادگی</label>
+                  <input name="lastName" placeholder="نام خانوادگی" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 focus:border-violet-400"/>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[12.5px] font-semibold text-neutral-400">نام کاربری (یکتا)</label>
+                  <input name="username" dir="ltr" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="مثلاً ali_motors" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 focus:border-violet-400"/>
+                  <span class="text-[11px] text-neutral-500 leading-relaxed">۳ تا ۲۰ حرف انگلیسی کوچک، عدد، _ یا . — در صفحه‌ی عمومی شما به‌صورت @نام_کاربری نمایش داده می‌شود و فقط به شما تعلق دارد.</span>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[12.5px] font-semibold text-neutral-400">ایمیل</label>
+                  <input name="email" type="email" placeholder="[email protected]" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 focus:border-violet-400"/>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[12.5px] font-semibold text-neutral-400 flex items-center gap-1">شماره تماس<svg width="14" height="14" viewBox="0 0 24 24" style="display:inline-block;vertical-align:middle"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" fill="#3897f0" stroke="none"/><path d="m9 12 2 2 4-4" stroke="#ffffff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></label>
+                  <input name="phone" type="tel" readonly aria-readonly="true" tabindex="-1" class="bg-neutral-900 border border-neutral-800 rounded-xl px-3.5 py-3 text-[14px] outline-none text-neutral-400 cursor-not-allowed"/>
+                  <span class="text-[11px] text-neutral-500 leading-relaxed">شماره تماس همان شماره ورود شماست و قابل تغییر نیست.</span>
+                </div>
+                <div data-slot="form-error" class="bg-red-950/50 border border-red-800 text-red-300 text-[12.5px] rounded-xl px-3.5 py-2.5" hidden></div>
+                <button type="submit" class="bg-violet-300 text-neutral-950 font-bold rounded-full py-3.5 text-[14.5px] mt-2">ذخیره تغییرات</button>
+                <button type="button" data-action="logout" class="text-[13px] text-red-400 font-semibold py-2 text-center">خروج از حساب</button>
+              </form>
+            </section>
+          </template>
+          <template id="tpl-card-grid"><div data-template-root class="grid grid-cols-2 gap-3.5 px-4" data-slot="items"></div></template>
+          <template id="tpl-account-section"><div data-template-root><button type="button" data-slot="header" class="w-full px-4 mt-7 mb-2 flex items-center justify-between"><span class="flex items-center gap-1"><h2 data-slot="title" class="font-serif font-bold text-[17px]"></h2><span data-slot="chevron" class="text-neutral-500"></span></span><span data-slot="count" class="text-[12px] text-neutral-500"></span></button><div data-slot="content"></div></div></template>
+          <template id="tpl-account-empty"><div data-template-root class="mx-4 text-center text-neutral-400 text-[13px] py-8 border border-dashed border-neutral-800 rounded-2xl"></div></template>
+          <template id="tpl-sell-progress"><div data-template-root class="px-4 pb-4 toolbar-sticky bg-neutral-950"></div></template>
+          <template id="tpl-sell-note-1"><div data-template-root class="sell-step-heading">عکس و توضیحات آگهی</div></template>
+          <template id="tpl-sell-note-2"><div data-template-root class="sell-step-heading">مشخصات خودرو</div></template>
+          <template id="tpl-sell-note-3"><div data-template-root class="sell-step-heading">قیمت و کارکرد</div></template>
+          <template id="tpl-sell-note-4"><div data-template-root class="sell-step-heading">وضعیت بدنه و مدارک</div></template>
+          <template id="tpl-sell-note-5"><div data-template-root class="sell-step-heading">موقعیت و تماس</div></template>
+          <template id="tpl-sell-note"><div data-template-root class="sell-step-heading" data-slot="title"></div></template>
+          <template id="tpl-sell-input"><input data-template-root class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 focus:border-violet-400"/></template>
+          <template id="tpl-sell-select"><select data-template-root class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none focus:border-violet-400"></select></template>
+          <template id="tpl-sell-textarea"><textarea data-template-root rows="4" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 resize-none"></textarea></template>
+          <template id="tpl-sell-field"><div data-template-root class="flex flex-col gap-1.5"><label data-slot="label" class="text-[12.5px] font-semibold text-neutral-400"></label><div data-slot="control"></div></div></template>
+          <template id="tpl-sell-photo"><div data-template-root class="relative aspect-[4/3] rounded-xl overflow-hidden border border-neutral-700 bg-neutral-900"><img data-slot="img" alt="" class="w-full h-full object-cover"/><button type="button" data-action="removeSellPhoto" class="absolute top-1.5 right-1.5 w-7 h-7 rounded-full bg-black/70 text-white flex items-center justify-center"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button><div data-slot="primary" class="absolute bottom-1.5 right-1.5 bg-black/70 text-[9.5px] px-2 py-1 rounded-full" hidden>تصویر اصلی</div><button type="button" data-slot="makePrimary" data-action="makeSellPhotoPrimary" class="absolute bottom-1.5 right-1.5 bg-black/70 hover:bg-black/85 text-white text-[9.5px] px-2 py-1 rounded-full" hidden>تصویر اصلی کن</button></div></template>
+          <template id="tpl-sell-photo-input"><label data-template-root class="rounded-2xl border border-dashed border-neutral-700 bg-neutral-900/70 px-4 py-6 flex flex-col items-center gap-2 text-center cursor-pointer"><input id="sellPhotoInput" type="file" accept="image/*" multiple class="hidden"/><div class="w-12 h-12 rounded-full bg-neutral-800 flex items-center justify-center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8" cy="10" r="1.5"/><path d="m4 17 5-5 4 4 2-2 5 5"/></svg></div><div class="font-semibold text-[13.5px]">افزودن عکس‌های خودرو</div><div class="text-[11.5px] text-neutral-500">JPG، PNG یا WEBP — چند عکس را همزمان انتخاب کنید</div></label></template>
+          <template id="tpl-modal-login-body"><div data-template-root class="mb-5"><div data-slot="reason" class="mb-4 rounded-2xl border border-violet-900/50 bg-violet-950/25 px-4 py-3.5 text-[12.5px] leading-6 text-neutral-200" hidden></div><form data-slot="phoneStep" data-action="sendOtp" class="flex flex-col gap-3.5"><div><label class="block text-[12px] font-semibold text-neutral-400 mb-2">شماره موبایل</label><input data-role="loginPhone" required type="tel" inputmode="numeric" autocomplete="tel" placeholder="09xxxxxxxxx" class="login-modal-input" dir="ltr" /></div><button type="submit" class="login-modal-primary mt-1">دریافت کد تایید</button></form><form data-slot="codeStep" data-action="verifyOtp" class="flex flex-col gap-3.5" hidden><div class="text-[12.5px] text-neutral-400 -mt-1">کد تایید به شماره <span data-slot="phoneDisplay" class="text-neutral-200 font-semibold" dir="ltr"></span> پیامک شد.</div><div><label class="block text-[12px] font-semibold text-neutral-400 mb-2">کد تایید</label><input data-role="loginCode" required type="tel" inputmode="numeric" maxlength="5" placeholder="− − − − −" class="login-modal-input text-center tracking-[0.5em]" dir="ltr" /></div><button type="submit" class="login-modal-primary mt-1">ورود</button><button type="button" data-action="resendOtp" class="text-[12px] text-violet-300 self-center">ویرایش شماره یا ارسال مجدد کد</button></form></div></template>
+          <template id="tpl-modal-logged"><div data-template-root class="rounded-2xl border border-neutral-800 bg-neutral-900/80 p-4 mb-4"><div class="text-[12px] text-neutral-500 mb-1">حساب فعال</div><div data-slot="account" class="text-[14px] font-semibold truncate" dir="ltr"></div></div></template>
+          <template id="tpl-modal-action-button"><button data-template-root data-action="logout" class="login-modal-primary">خروج از حساب</button></template>
+          <template id="tpl-modal-getstarted"><form data-template-root data-action="submitGetStarted" class="flex flex-col gap-3"><input data-slot="name" required placeholder="نام کامل" class="bg-neutral-900 border border-neutral-700 rounded-full px-4 py-3 text-[14px] outline-none placeholder:text-neutral-500"/><input data-slot="email" required type="email" placeholder="آدرس ایمیل" class="bg-neutral-900 border border-neutral-700 rounded-full px-4 py-3 text-[14px] outline-none placeholder:text-neutral-500"/><button type="submit" class="bg-violet-300 text-neutral-950 font-bold rounded-full py-3 text-[14.5px] mt-1">ثبت</button></form></template>
+          <template id="tpl-modal-pricing"><div data-template-root class="flex flex-col gap-2.5 text-[13.5px]"><div class="flex justify-between"><span class="text-neutral-400">قیمت خودرو</span><span data-slot="price" class="font-semibold"></span></div><div class="flex justify-between"><span class="text-neutral-400">مالیات تخمینی (7.25%)</span><span data-slot="tax" class="font-semibold"></span></div><div class="flex justify-between"><span class="text-neutral-400">هزینه اسناد</span><span class="font-semibold">$599</span></div><div class="border-t border-neutral-800 my-1"></div><div class="flex justify-between text-[15px]"><span class="font-bold">مجموع تخمینی</span><span data-slot="total" class="font-bold text-emerald-400"></span></div><div data-slot="estimate" class="text-neutral-500 text-[12px] mt-1" hidden></div></div></template>
+          <template id="tpl-modal-info"><div data-template-root class="text-[14px] text-neutral-300"></div></template>
+          <template id="tpl-modal-manage-ad"><div data-template-root class="ma"><div data-slot="status" class="ma-status"><div class="ma-head"><span class="ma-thumb" data-slot="thumb"></span><span class="ma-head-text"><span class="ma-title" data-slot="adTitle"></span><span class="ma-price" data-slot="adPrice"></span></span></div><div class="ma-state"><span class="ma-pill"><i aria-hidden="true"></i><span data-slot="statusTitle"></span></span><span data-slot="statusDesc" class="ma-desc"></span></div></div><div class="ma-group" data-slot="mainGroup"><button type="button" data-action="manageAdPreview" class="ma-row"><span class="ma-row-ic" data-c="green" data-slot="iconPreview"></span><span class="ma-row-label">پیش‌نمایش</span><span class="ma-row-chev" data-slot="chevPreview"></span></button><button type="button" data-action="manageAdEdit" class="ma-row"><span class="ma-row-ic" data-c="orange" data-slot="iconEdit"></span><span class="ma-row-label">ویرایش</span><span class="ma-row-chev" data-slot="chevEdit"></span></button></div><div class="ma-group"><button type="button" data-action="manageAdDeleteAsk" class="ma-row ma-row--danger"><span class="ma-row-ic" data-c="red" data-slot="iconDelete"></span><span class="ma-row-label">حذف آگهی</span><span class="ma-row-chev" data-slot="chevDelete"></span></button></div><div class="ma-group"><button type="button" data-action="contactSupport" class="ma-row"><span class="ma-row-ic" data-c="gray" data-slot="iconSupport"></span><span class="ma-row-label">تماس با پشتیبانی</span><span class="ma-row-chev" data-slot="chevSupport"></span></button></div></div></template>
+          <template id="tpl-modal-manage-ad-delete"><div data-template-root class="flex flex-col gap-3"><div class="manageAd-delete-sub">لطفاً دلیل حذف این آگهی را انتخاب کنید</div><div data-slot="reasons" class="flex flex-col gap-2"></div><div class="manageAd-delete-warn">آیا مطمئنید می‌خواهید این آگهی را حذف کنید؟ این عملیات غیرقابل بازگشت است.</div><div class="flex gap-2.5 mt-1"><button type="button" data-action="closeModal" class="flex-1 bg-neutral-800 text-neutral-200 font-semibold rounded-full py-3 text-[14px]">انصراف</button><button type="button" data-action="confirmDeleteListing" data-slot="confirmBtn" class="manageAd-confirm-delete-btn flex-1 font-bold rounded-full py-3 text-[14px]">بله، حذف شود</button></div></div></template>
+          <template id="tpl-modal-manage-ad-confirm"><div data-template-root class="flex flex-col"><div class="manageAd-delete-warn"><span data-slot="warnIcon" class="manageAd-delete-warn-icon"></span><div><div class="manageAd-delete-warn-title">مطمئنی می‌خوای این آگهی رو حذف کنی؟</div><div class="manageAd-delete-warn-desc">این کار قابل بازگشت نیست. لطفاً دلیل حذف را انتخاب کن:</div></div></div><div data-slot="reasons" class="manageAd-reason-list"></div><div class="ma-actions"><button type="button" data-action="manageAdDeleteCancel" class="manageAd-cancel-btn">انصراف</button><button type="button" data-action="manageAdDeleteConfirm" data-slot="confirmBtn" class="manageAd-delete-confirm-btn is-unarmed">حذف آگهی</button></div></div></template>
+          <template id="tpl-modal-contact"><div data-template-root><div class="rounded-xl bg-neutral-900 px-4 py-3 mb-4"><div data-slot="dealer" class="font-bold text-[14.5px] mb-1"></div><div class="flex items-center gap-1.5 text-[12px] text-neutral-400"><span data-slot="city"></span><span data-slot="icon"></span></div></div><div data-slot="phone-area"></div><a data-slot="sms" data-action="clickContact" class="w-full flex items-center justify-center gap-2 border border-neutral-700 text-neutral-100 text-[14px] font-bold rounded-full py-3.5"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-4.8 7.6 8.5 8.5 0 0 1-8.9-.9L3 21l1.9-4.3a8.38 8.38 0 0 1-.9-3.7 8.5 8.5 0 0 1 9.4-6.6c.13.56.2 1.14.2 1.7z"/></svg> ارسال پیام</a></div></template>
+
+          <div id="modalWrap" aria-live="polite">
+            <div id="sellYearPicker" class="sell-year-picker" hidden aria-hidden="true">
+              <div class="sell-year-picker-backdrop" data-action="closeSellYearPicker"></div>
+              <section class="sell-year-picker-sheet" role="dialog" aria-modal="true" aria-labelledby="sellYearPickerTitle">
+                <div class="sell-year-picker-handle" aria-hidden="true"><span></span></div>
+                <div class="sell-year-picker-head">
+                  <div><div id="sellYearPickerTitle" class="text-[15px] font-bold">سال خودرو</div><div class="text-[11px] text-neutral-500 mt-1">سال موردنظر را در چرخ انتخاب کنید</div></div>
+                  <button type="button" data-action="closeSellYearPicker" aria-label="بستن" class="sell-year-picker-close">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+                  </button>
+                </div>
+                <div class="sell-year-wheel-wrap">
+                  <div class="sell-year-wheel-fade sell-year-wheel-fade-top" aria-hidden="true"></div>
+                  <div class="sell-year-wheel-highlight" aria-hidden="true"></div>
+                  <div id="sellYearWheel" class="sell-year-wheel" role="listbox" aria-label="انتخاب سال"></div>
+                  <div class="sell-year-wheel-fade sell-year-wheel-fade-bottom" aria-hidden="true"></div>
+                </div>
+                <div class="sell-year-picker-actions">
+                  <button type="button" id="sellYearPickerConfirm" data-action="confirmSellYear" class="sell-year-picker-confirm">انتخاب سال</button>
+                </div>
+              </section>
+            </div>
+
+            <div id="sellBrandPicker" class="sell-brand-picker" hidden aria-hidden="true">
+              <div class="sell-brand-picker-backdrop" data-action="closeSellBrandPicker"></div>
+              <section class="sell-brand-picker-sheet" role="dialog" aria-modal="true" aria-labelledby="sellBrandPickerTitle">
+                <div class="sell-year-picker-handle" aria-hidden="true"><span></span></div>
+                <div class="sell-brand-picker-head">
+                  <div><div id="sellBrandPickerTitle" class="text-[16px] font-bold">برند خودرو</div><div class="text-[11px] text-neutral-500 mt-1">برند موردنظر را از بین گزینه‌ها انتخاب کنید</div></div>
+                  <button type="button" data-action="closeSellBrandPicker" aria-label="بستن" class="sell-year-picker-close">✕</button>
+                </div>
+                <div id="sellBrandPickerGrid" class="sell-brand-picker-grid"></div>
+              </section>
+            </div>
+
+            <div id="sellModelPicker" class="sell-brand-picker" hidden aria-hidden="true">
+              <div class="sell-brand-picker-backdrop" data-action="closeSellModelPicker"></div>
+              <section class="sell-brand-picker-sheet sell-model-picker-sheet" role="dialog" aria-modal="true" aria-labelledby="sellModelPickerTitle">
+                <div class="sell-year-picker-handle" aria-hidden="true"><span></span></div>
+                <div class="smp-head">
+                  <button type="button" id="sellModelPickerBack" class="smp-iconbtn" data-action="backSellModelPicker" aria-label="بازگشت به مدل‌ها" hidden><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+                  <span id="sellModelPickerMark" class="smp-mark" aria-hidden="true"></span>
+                  <div class="smp-titles"><div id="sellModelPickerTitle" class="smp-title">انتخاب مدل</div><div class="smp-sub" id="sellModelPickerSubtitle">مدل موردنظر را جستجو یا از لیست انتخاب کنید</div></div>
+                  <button type="button" data-action="closeSellModelPicker" aria-label="بستن" class="smp-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+                </div>
+                <div id="sellModelPickerCrumbs" class="smp-crumbs" aria-label="مسیر انتخاب"></div>
+                <div class="sell-model-picker-search-wrap">
+                  <span class="sell-model-picker-search-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+                  <input id="sellModelPickerSearch" type="text" inputmode="search" placeholder="جستجوی مدل…" autocomplete="off" class="sell-model-picker-search"/>
+                  <button type="button" id="sellModelPickerClear" class="smp-clear" data-action="clearSellModelSearch" aria-label="پاک کردن جستجو" hidden>×</button>
+                </div>
+                <div id="sellModelPickerList" class="sell-model-picker-list" role="listbox" aria-label="مدل‌ها"></div>
+              </section>
+            </div>
+
+            <div id="sellColorPicker" class="sell-color-picker" hidden aria-hidden="true"><div class="sell-color-picker-backdrop" data-action="closeSellColorPicker"></div><section class="sell-color-picker-sheet" role="dialog" aria-modal="true" aria-labelledby="sellColorPickerTitle"><div class="sell-year-picker-handle" aria-hidden="true"><span></span></div><div class="sell-brand-picker-head"><div><div id="sellColorPickerTitle" class="text-[16px] font-bold">رنگ خودرو</div><div class="text-[11px] text-neutral-500 mt-1">رنگ موردنظر را انتخاب کنید</div></div><button type="button" data-action="closeSellColorPicker" class="sell-year-picker-close" aria-label="بستن">✕</button></div><div id="sellColorPickerGrid" class="sell-color-options" role="listbox" aria-label="رنگ‌های خودرو"></div></section></div>
+
+            <div id="sellTrimPicker" class="sell-trim-picker" hidden aria-hidden="true">
+              <div class="sell-trim-picker-backdrop" data-action="closeSellTrimPicker"></div>
+              <section class="sell-trim-picker-sheet" role="dialog" aria-modal="true" aria-labelledby="sellTrimPickerTitle">
+                <div class="sell-year-picker-handle" aria-hidden="true"><span></span></div>
+                <div class="sell-brand-picker-head"><div><div id="sellTrimPickerTitle" class="text-[16px] font-bold">وضعیت خودرو</div><div class="text-[11px] text-neutral-500 mt-1">یکی از سه وضعیت را انتخاب کنید</div></div><button type="button" data-action="closeSellTrimPicker" class="sell-year-picker-close" aria-label="بستن">✕</button></div>
+                <div class="sell-trim-options">
+                  <button type="button" class="sell-trim-option" data-action="chooseSellTrim" data-trim="full"><span class="sell-trim-big">F</span><span><strong>فول</strong><small>Full</small></span><b>✓</b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellTrim" data-trim="half"><span class="sell-trim-big">S</span><span><strong>نیمه‌فول</strong><small>Semi-Full</small></span><b>✓</b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellTrim" data-trim="basic"><span class="sell-trim-big">B</span><span><strong>بیسیک</strong><small>Basic</small></span><b>✓</b></button>
+                </div>
+              </section>
+            </div>
+
+            <div id="sellCityPicker" class="sell-trim-picker" hidden aria-hidden="true">
+              <div class="sell-trim-picker-backdrop" data-action="closeSellCityPicker"></div>
+              <section class="sell-trim-picker-sheet" role="dialog" aria-modal="true" aria-labelledby="sellCityPickerTitle">
+                <div class="sell-year-picker-handle" aria-hidden="true"><span></span></div>
+                <div class="sell-brand-picker-head"><div><div id="sellCityPickerTitle" class="text-[16px] font-bold">شهر شما</div><div class="text-[11px] text-neutral-500 mt-1">شهر محل قرارگیری خودرو را انتخاب کنید</div></div><button type="button" data-action="closeSellCityPicker" class="sell-year-picker-close" aria-label="بستن">✕</button></div>
+                <div class="sell-trim-options">
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="آبادان"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>آبادان</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="اهواز"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>اهواز</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="خرمشهر"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>خرمشهر</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="دزفول"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>دزفول</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="ماهشهر"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>ماهشهر</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="امیدیه"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>امیدیه</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="شوش"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>شوش</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="ایذه"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>ایذه</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="شوشتر"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>شوشتر</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="بهبهان"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>بهبهان</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="اندیمشک"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>اندیمشک</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="بندر امام خمینی"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>بندر امام خمینی</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="مسجدسلیمان"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>مسجدسلیمان</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="سوسنگرد"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>سوسنگرد</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="رامهرمز"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>رامهرمز</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="باغ‌ملک"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>باغ‌ملک</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="هندیجان"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>هندیجان</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="شادگان"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>شادگان</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="لالی"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>لالی</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="گتوند"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>گتوند</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="رامشیر"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>رامشیر</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="حمیدیه"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>حمیدیه</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="ملاثانی"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>ملاثانی</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="هفتگل"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>هفتگل</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="دهدز"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>دهدز</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="آغاجاری"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>آغاجاری</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="دارخوین"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>دارخوین</strong></span><b aria-hidden="true"></b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="ویس"><span class="sell-trim-big" aria-hidden="true"></span><span><strong>ویس</strong></span><b aria-hidden="true"></b></button>
+                </div>
+              </section>
+            </div>
+
+            <div id="partStatusPicker" class="sell-trim-picker" hidden aria-hidden="true">
+              <div class="sell-trim-picker-backdrop" data-action="closePartStatusPicker"></div>
+              <section class="sell-trim-picker-sheet" role="dialog" aria-modal="true" aria-labelledby="partStatusPickerTitle">
+                <div class="sell-year-picker-handle" aria-hidden="true"><span></span></div>
+                <div class="sell-brand-picker-head"><div><div id="partStatusPickerTitle" class="text-[16px] font-bold">قسمت بدنه</div><div class="text-[11px] text-neutral-500 mt-1">وضعیت این قسمت را انتخاب کنید</div></div><button type="button" data-action="closePartStatusPicker" class="sell-year-picker-close" aria-label="بستن">✕</button></div>
+                <div class="sell-trim-options">
+                  <button type="button" class="sell-trim-option part-status-option" data-action="choosePartStatus" data-status="painted" style="--status-color:#3b82f6"><span class="sell-trim-big">🎨</span><span><strong>رنگ شده</strong></span><b>✓</b></button>
+                  <button type="button" class="sell-trim-option part-status-option" data-action="choosePartStatus" data-status="replaced" style="--status-color:#a855f7"><span class="sell-trim-big">🔧</span><span><strong>تعویض شده</strong></span><b>✓</b></button>
+                  <button type="button" class="sell-trim-option part-status-option" data-action="choosePartStatus" data-status="dented" style="--status-color:#f59e0b"><span class="sell-trim-big">💥</span><span><strong>ضربه دیده</strong></span><b>✓</b></button>
+                </div>
+                <button type="button" class="bcond-clear" data-action="clearPartStatus" hidden>پاک کردن وضعیت</button>
+              </section>
+            </div>
+
+            <div id="sellPublishingSheet" class="sell-publishing-sheet" hidden aria-hidden="true">
+              <div class="sell-publishing-backdrop"></div>
+              <section class="sell-publishing-card" role="dialog" aria-modal="true" aria-labelledby="sellPublishingTitle" dir="rtl">
+                <div class="sell-publishing-handle" aria-hidden="true"><span></span></div>
+                <div class="sell-publishing-content">
+                  <div class="sell-publishing-icon" data-slot="statusIcon" aria-hidden="true"><span class="sell-publishing-dash"></span><svg class="spp-svg" viewBox="0 0 96 96" aria-hidden="true"><circle class="spp-track" cx="48" cy="48" r="40"/><circle class="spp-arc" cx="48" cy="48" r="40"/><circle class="spp-fill" cx="48" cy="48" r="40"/><circle class="spp-ring" cx="48" cy="48" r="40"/><path class="spp-check" d="M30 49.5l12.5 12.5L67 36"/></svg></div>
+                  <h3 id="sellPublishingTitle" data-slot="title">درحال ثبت آگهی...</h3>
+                  <p data-slot="message">آگهی شما در حال آماده‌سازی است</p>
+                  <div class="sell-publishing-progress" aria-hidden="true"><span data-slot="progress"></span></div>
+                  <button type="button" class="sell-publishing-stop" data-action="cancelSellPublishing">توقف</button>
+                </div>
+              </section>
+            </div>
+
+            <div id="bodyConditionOverlay" class="bcond-overlay" hidden aria-hidden="true" dir="rtl">
+              <div class="bcond-backdrop" data-action="closeBodyConditionOverlay"></div>
+              <section class="bcond-sheet" role="dialog" aria-modal="true" aria-labelledby="bcondTitle">
+                <div class="bcond-topbar">
+                  <button type="button" class="bcond-back" data-action="closeBodyConditionOverlay" aria-label="بازگشت"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+                </div>
+
+                <div class="bcond-heading">
+                  <h2 id="bcondTitle" class="bcond-title">وضعیت جامع بدنه</h2>
+                  <p class="bcond-subtitle">بدنه خودرو در چه وضعیتی است؟</p>
+                </div>
+
+                <div class="bcond-numeral-wrap">
+                  <span class="bcond-numeral" id="bcondNumeral" data-slot="numeral">5</span>
+                </div>
+
+                <div class="bcond-label" id="bcondLabel" data-slot="label">متوسط</div>
+                <p class="bcond-desc" id="bcondDesc" data-slot="desc">چند خط و خش قابل توجه یا رنگ‌شدگی جزئی روی بدنه دیده می‌شود.</p>
+
+                <div class="bcond-slider-area">
+                  <span class="bcond-range-badge" id="bcondRangeBadge" hidden>خارج از میانگین آگهی‌های مشابه</span>
+                  <div class="bcond-track-wrap">
+                    <div class="bcond-track" id="bcondTrack">
+                      <div class="bcond-usual-band" id="bcondUsualBand"></div>
+                      <button type="button" class="bcond-thumb" id="bcondThumb" role="slider" aria-label="امتیاز وضعیت بدنه" aria-valuemin="1" aria-valuemax="10" aria-valuenow="5" aria-orientation="horizontal"></button>
+                    </div>
+                  </div>
+                  <span class="bcond-usual-caption" id="bcondUsualCaption">میانگین آگهی‌ها</span>
+                </div>
+
+                <button type="button" class="bcond-clear" data-action="clearBodyConditionRating">پاک کردن ورودی</button>
+                <div class="bcond-divider"></div>
+                <button type="button" class="bcond-howto" data-action="openBodyConditionHowTo">راهنمای ارزیابی بدنه ›</button>
+
+                <button type="button" class="bcond-save-big" id="bcondSaveBtn" data-action="saveBodyConditionRating">
+                  <span class="bcond-save-big-text">ثبت</span>
+                  <small class="bcond-save-big-sub" id="bcondSaveSub" hidden>خارج از میانگین آگهی‌های مشابه</small>
+                </button>
+              </section>
+            </div>
+
+            <div id="vehiclePhotoViewer" class="photo-viewer" hidden>
+              <div class="photo-viewer-backdrop" data-action="closePhotoViewer"></div>
+              <div class="photo-viewer-stage" id="photoViewerStage"></div>
+              <button type="button" data-action="closePhotoViewer" aria-label="بستن" class="photo-viewer-close">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+              </button>
+              <div class="photo-viewer-counter" id="photoViewerCounter"></div>
+              <button type="button" data-action="prevPhoto" aria-label="عکس قبلی" class="photo-viewer-nav photo-viewer-prev">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+              </button>
+              <button type="button" data-action="nextPhoto" aria-label="عکس بعدی" class="photo-viewer-nav photo-viewer-next">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+
+            <div id="genericModal" class="modal-shell fixed inset-0 z-[60] flex items-end justify-center" hidden>
+              <div data-action="closeModal" class="modal-backdrop absolute inset-0 bg-black/70"></div>
+              <div class="modal-card modal-sheet relative w-full bg-neutral-950 border border-neutral-800" role="dialog" aria-modal="true">
+                <div class="modal-sheet-handle" aria-hidden="true"></div>
+                <div class="flex items-center justify-between mb-3">
+                  <h3 id="modalTitle" class="text-[17px] font-semibold"></h3>
+                  <button data-action="closeModal" aria-label="بستن" class="w-8 h-8 rounded-full border border-neutral-700 flex items-center justify-center">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+                  </button>
+                </div>
+                <div id="modalBody"></div>
+              </div>
+            </div>
+            <div id="authFlow" class="auth-flow" dir="rtl" hidden aria-live="polite" aria-label="ورود / ثبت‌نام">
+              <div id="authFlowBackdrop" class="auth-flow-backdrop" data-action="closeAuthSheet"></div>
+              <div class="auth-app-shell" role="dialog" aria-modal="true">
+                <div class="auth-sheet-handle" aria-hidden="true"><span></span></div>
+
+                <div id="authScreenPhone" class="auth-screen auth-screen-phone" data-auth-screen="phone">
+                  <div class="auth-sheet-topbar">
+                    <button type="button" class="auth-back" data-action="authBack" aria-label="بازگشت"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+                  </div>
+                  <div class="auth-phone-content">
+                    <h1 class="auth-phone-title" dir="auto">شماره موبایل شما چیست؟</h1>
+                    <p class="auth-otp-subtitle" dir="auto">با کیبورد زیر شماره‌ی خود را وارد کنید</p>
+                    <form id="authPhoneForm" class="auth-phone-form" data-action="sendOtp">
+                      <div class="auth-phone-input-wrap">
+                        <button type="button" id="authCountryButton" class="auth-country-button" data-action="toggleCountryPicker" aria-haspopup="listbox" aria-expanded="false">
+                          <span id="authCountryFlag">🇮🇷</span><span id="authCountryCode">+98</span><svg class="auth-country-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                        </button>
+                        <span class="auth-phone-divider" aria-hidden="true"></span>
+                        <input id="authPhoneInput" data-role="authPhone" type="tel" inputmode="tel" autocomplete="off" maxlength="15" aria-label="شماره موبایل" placeholder="شماره موبایل" dir="ltr" />
+                        <div id="authCountryPicker" class="auth-country-picker" role="listbox" hidden>
+                          <button type="button" role="option" data-action="selectAuthCountry" data-country="US">🇺🇸 <span>+1</span></button>
+                          <button type="button" role="option" data-action="selectAuthCountry" data-country="DE">🇩🇪 <span>+49</span></button>
+                          <button type="button" role="option" data-action="selectAuthCountry" data-country="IR">🇮🇷 <span>+98</span></button>
+                          <button type="button" role="option" data-action="selectAuthCountry" data-country="GB">🇬🇧 <span>+44</span></button>
+                        </div>
+                      </div>
+
+                      
+
+                      <p class="auth-terms" dir="auto">با ثبت‌نام، شرایط استفاده و حریم خصوصی را می‌پذیرید</p>
+                      <div class="auth-bottom-bar">
+                        <button id="authPhoneContinue" type="submit" class="auth-primary-button" disabled><span>ادامه</span><svg class="auth-arrow" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+                <div id="authScreenOtp" class="auth-screen auth-screen-otp" data-auth-screen="otp" hidden>
+                  <div class="auth-sheet-topbar">
+                    <button type="button" class="auth-back" data-action="authBack" aria-label="بازگشت"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+                  </div>
+                  <div class="auth-otp-content">
+                    <h1 class="auth-phone-title" id="authOtpTitle" dir="auto">کد تایید را وارد کنید</h1>
+                    <p class="auth-otp-subtitle" id="authOtpSubtitle" dir="auto">کد ۶ رقمی به شماره‌ی <span id="authOtpPhone" dir="ltr"></span> پیامک شد</p>
+                    <form id="authOtpForm" data-action="verifyOtp">
+                      <div class="auth-otp-stage">
+                        <div id="authOtpInputs" class="auth-otp-inputs" role="group" aria-label="کد ۶ رقمی تأیید">
+                          <div class="otp-cell"><input type="text" maxlength="1" inputmode="numeric" autocomplete="off" data-otp-index="0" aria-label="رقم ۱"><svg class="otp-cell-trace" viewBox="0 0 44 54" preserveAspectRatio="none" aria-hidden="true"><rect x="2" y="2" width="40" height="50" rx="12" pathLength="100"></rect></svg></div>
+                          <div class="otp-cell"><input type="text" maxlength="1" inputmode="numeric" autocomplete="off" data-otp-index="1" aria-label="رقم ۲"><svg class="otp-cell-trace" viewBox="0 0 44 54" preserveAspectRatio="none" aria-hidden="true"><rect x="2" y="2" width="40" height="50" rx="12" pathLength="100"></rect></svg></div>
+                          <div class="otp-cell"><input type="text" maxlength="1" inputmode="numeric" autocomplete="off" data-otp-index="2" aria-label="رقم ۳"><svg class="otp-cell-trace" viewBox="0 0 44 54" preserveAspectRatio="none" aria-hidden="true"><rect x="2" y="2" width="40" height="50" rx="12" pathLength="100"></rect></svg></div>
+                          <div class="otp-cell"><input type="text" maxlength="1" inputmode="numeric" autocomplete="off" data-otp-index="3" aria-label="رقم ۴"><svg class="otp-cell-trace" viewBox="0 0 44 54" preserveAspectRatio="none" aria-hidden="true"><rect x="2" y="2" width="40" height="50" rx="12" pathLength="100"></rect></svg></div>
+                          <div class="otp-cell"><input type="text" maxlength="1" inputmode="numeric" autocomplete="off" data-otp-index="4" aria-label="رقم ۵"><svg class="otp-cell-trace" viewBox="0 0 44 54" preserveAspectRatio="none" aria-hidden="true"><rect x="2" y="2" width="40" height="50" rx="12" pathLength="100"></rect></svg></div>
+                          <div class="otp-cell"><input type="text" maxlength="1" inputmode="numeric" autocomplete="off" data-otp-index="5" aria-label="رقم ۶"><svg class="otp-cell-trace" viewBox="0 0 44 54" preserveAspectRatio="none" aria-hidden="true"><rect x="2" y="2" width="40" height="50" rx="12" pathLength="100"></rect></svg></div>
+                        </div>
+                        <div id="authOtpSuccessIcon" class="auth-otp-success-icon" aria-hidden="true"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 24.5 21 31l14-15"/></svg></div>
+                      </div>
+                      <button type="button" class="auth-resend-button" dir="auto" data-action="resendOtp">دریافت کد از طریق پیامک</button>
+                      <p id="authOtpError" class="auth-error" hidden></p>
+
+                      
+
+                      <div class="auth-bottom-bar">
+                        <button id="authOtpContinue" type="submit" class="auth-primary-button auth-otp-continue" disabled>ادامه</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <div id="authSuccessBackdrop" class="auth-success-overlay" hidden>
+                <div class="auth-success-backdrop" data-action="noop"></div>
+                <div id="authSuccessSheet" class="auth-success-sheet" role="dialog" aria-modal="true" aria-label="ورود موفق">
+                  <div class="auth-sheet-handle" aria-hidden="true"><span></span></div>
+                  <div class="auth-success-icon-wrap"><div class="auth-success-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 24.5 21 31l14-15"/></svg></div></div>
+                  <h2 dir="auto">ورود موفق</h2>
+                  <p dir="auto">با موفقیت وارد حساب C♻️RMA شدید.</p>
+                  <button type="button" class="auth-done-button" data-action="authDone">تمام</button>
+                </div>
+              </div>
+            </div>
+            <div id="loginModal" class="login-modal-shell" hidden role="dialog" aria-modal="true" aria-label="ورود به حساب">
+              <div data-action="closeModal" class="login-modal-backdrop"></div>
+              <div class="login-modal-card" dir="rtl">
+                <div class="flex items-start justify-between gap-3 mb-5">
+                  <div class="flex items-center gap-3 min-w-0">
+                    <div class="login-modal-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div>
+                    <div class="min-w-0">
+                      <div id="loginModalTitle" class="font-bold text-[20px] leading-tight">ورود به حساب</div>
+                      <div class="text-[12.5px] text-neutral-500 mt-1">دسترسی به امکانات شخصی C♻️RMA</div>
+                    </div>
+                  </div>
+                  <button data-action="closeModal" aria-label="بستن" class="w-9 h-9 rounded-full border border-neutral-800 bg-neutral-900 flex items-center justify-center shrink-0 hover:bg-neutral-800">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+                  </button>
+                </div>
+                <div id="loginModalBody"></div>
+              </div>
+            </div>
+          </div>
+          <div id="searchOverlay" class="search-overlay" hidden role="dialog" aria-modal="true" aria-label="جستجوی خودرو">
+            <div id="searchOverlayBackdrop" data-action="closeSearchOverlay" class="search-overlay-backdrop"></div>
+            <div class="search-overlay-panel" data-action="closeSearchOverlay">
+              <div class="search-overlay-shell" data-action="noop">
+                <div class="search-overlay-copy" aria-hidden="true">
+                  <span class="search-overlay-label">جستجو خودرو بر اساس</span>
+                  <span class="search-overlay-rotator" id="searchOverlayRotator"></span>
+                </div>
+                <input id="searchOverlayInput" class="search-overlay-input" type="search" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="جستجو در خودروها، برندها و مدل‌ها" dir="auto" />
+                <button type="button" data-action="clearOrCloseSearchOverlay" class="search-overlay-clear" aria-label="بستن جستجو">
+                  <span>×</span>
+                </button>
+              </div>
+
+              <div class="search-overlay-loading" id="searchOverlayLoading" aria-hidden="true">
+                <div class="search-overlay-toolbar-sk">
+                  <span class="skeleton-block rounded-full"></span>
+                  <span class="skeleton-block rounded-full"></span>
+                  <span class="skeleton-block rounded-full"></span>
+                  <span class="skeleton-block rounded-full"></span>
+                </div>
+                <div class="search-overlay-grid">
+                  <div class="search-overlay-sk-card"><div class="skeleton-block search-overlay-sk-image"></div><div class="skeleton-block rounded-full search-overlay-sk-title"></div><div class="search-overlay-sk-meta"><span class="skeleton-block rounded-full"></span><span class="skeleton-block rounded-full"></span></div><div class="skeleton-block rounded-full search-overlay-sk-line"></div><div class="skeleton-block rounded-full search-overlay-sk-button"></div></div>
+                  <div class="search-overlay-sk-card"><div class="skeleton-block search-overlay-sk-image"></div><div class="skeleton-block rounded-full search-overlay-sk-title"></div><div class="search-overlay-sk-meta"><span class="skeleton-block rounded-full"></span><span class="skeleton-block rounded-full"></span></div><div class="skeleton-block rounded-full search-overlay-sk-line"></div><div class="skeleton-block rounded-full search-overlay-sk-button"></div></div>
+                  <div class="search-overlay-sk-card"><div class="skeleton-block search-overlay-sk-image"></div><div class="skeleton-block rounded-full search-overlay-sk-title"></div><div class="search-overlay-sk-meta"><span class="skeleton-block rounded-full"></span><span class="skeleton-block rounded-full"></span></div><div class="skeleton-block rounded-full search-overlay-sk-line"></div><div class="skeleton-block rounded-full search-overlay-sk-button"></div></div>
+                  <div class="search-overlay-sk-card"><div class="skeleton-block search-overlay-sk-image"></div><div class="skeleton-block rounded-full search-overlay-sk-title"></div><div class="search-overlay-sk-meta"><span class="skeleton-block rounded-full"></span><span class="skeleton-block rounded-full"></span></div><div class="skeleton-block rounded-full search-overlay-sk-line"></div><div class="skeleton-block rounded-full search-overlay-sk-button"></div></div>
+                </div>
+              </div>
+
+              <div class="search-overlay-results is-hidden" id="searchOverlayResults">
+                <div class="search-overlay-rail" id="searchOverlayRail"></div>
+              </div>
+            </div>
+          </div>
+          <div id="filterOverlay" class="filter-overlay" hidden role="dialog" aria-modal="true" aria-label="فیلترها">
+            <div id="filterOverlayBackdrop" data-action="closeFilterOverlay" class="filter-overlay-backdrop"></div>
+            <div class="filter-overlay-panel">
+              <div class="filter-overlay-drag" data-sheet-handle aria-hidden="true"><span></span></div>
+              <div class="filter-overlay-header" data-sheet-handle>
+                <h2 class="filter-overlay-title">فیلترها</h2>
+                <button type="button" data-action="resetFilterOverlay" class="filter-overlay-reset">بازنشانی</button>
+                <button type="button" data-action="closeFilterOverlay" class="filter-overlay-icon-btn" aria-label="بستن">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              </div>
+              <div class="filter-overlay-body" id="filterOverlayBody"></div>
+              <div class="filter-overlay-footer">
+                <button type="button" data-action="closeFilterOverlay" class="filter-overlay-apply" id="filterOverlayApplyBtn">نمایش نتایج</button>
+              </div>
+            </div>
+          </div>
+          <nav id="bottomDock" class="bottom-dock" aria-label="ناوبری پایین صفحه">
+            <div class="bottom-dock-inner">
+              <button type="button" data-action="openSearchOverlay" data-dock="search" class="dock-item dock-search" aria-label="جستجو">
+                <span class="dock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></span>
+                <span class="dock-label">جستجو</span>
+              </button>
+              <div class="dock-pill" role="group">
+                <button type="button" data-action="goHome" data-dock="home" class="dock-item" aria-label="خانه">
+                  <span class="dock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.9 12 4l8 6.9V19a1.5 1.5 0 0 1-1.5 1.5h-3.2V15h-6.6v5.5H5.5A1.5 1.5 0 0 1 4 19z"/></svg></span>
+                  <span class="dock-label">خانه</span>
+                </button>
+                <button type="button" data-action="goListings" data-brand="all" data-dock="listings" class="dock-item" aria-label="آگهی‌ها">
+                  <span class="dock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.2"/><circle cx="16.5" cy="16.5" r="2.2"/></svg></span>
+                  <span class="dock-label">آگهی‌ها</span>
+                </button>
+                <button type="button" data-action="goSaved" data-dock="saved" class="dock-item" aria-label="نشان‌شده‌ها">
+                  <span class="dock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5h11a1 1 0 0 1 1 1V21l-6.5-4-6.5 4V4.5a1 1 0 0 1 1-1z"/></svg></span>
+                  <span class="dock-label">نشان‌شده‌ها</span>
+                </button>
+                <button type="button" data-action="openMessages" data-dock="messages" class="dock-item mr-chat-dock-item" aria-label="پیام‌ها">
+                  <span class="dock-icon mr-chat-dock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.6c-4.7 0-8.4 3.1-8.4 7.1 0 2.2 1.1 4.1 2.9 5.4-.1 1.1-.6 2.2-1.5 3.1-.3.3-.1.8.4.7 1.7-.2 3.2-.9 4.3-1.8.8.2 1.5.3 2.3.3 4.7 0 8.4-3.1 8.4-7.1S16.7 3.6 12 3.6Z"/></svg><span class="mr-chat-dock-badge" hidden></span></span>
+                  <span class="dock-label">پیام‌ها</span>
+                </button>
+                <button type="button" data-action="openAccount" data-dock="account" class="dock-item" aria-label="حساب کاربری"><span class="dock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg></span><span class="dock-label">حساب</span></button>
+              </div>
+              <button type="button" data-action="goSell" data-dock="sell" class="dock-item dock-plus" aria-label="ثبت آگهی">
+                <span class="dock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5.5" x2="12" y2="18.5"/><line x1="5.5" y1="12" x2="18.5" y2="12"/></svg></span>
+                <span class="dock-label">ثبت آگهی</span>
+              </button>
+              <button type="button" data-action="openAccount" data-dock="social-account" class="dock-item dock-social-account" aria-label="حساب کاربری" hidden>
+                <span class="dock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg></span>
+                <span class="dock-label">حساب کاربری</span>
+              </button>
+            </div>
+          </nav>
+          <div id="toastWrap" aria-live="polite"><div id="toastMessage" class="ui-toast fixed bottom-5 left-1/2 -translate-x-1/2 z-[90] bg-neutral-100 text-neutral-950 text-[13.5px] font-semibold px-4 py-2.5 rounded-full shadow-xl" hidden></div></div>
+        </div>
+      </div>
+    </div>
+    <!--
+      The app used to be one big script.js file. It's now split into the
+      files below, each covering one part of the app — see the comment at
+      the top of each file for what lives inside it. They rely on the
+      browser sharing one global scope across <script> tags (classic,
+      non-module scripts), so the LOAD ORDER below matters: keep it as-is,
+      or move a file only if everything it depends on still loads first.
+    -->
+    <script defer src="js/00-api-client.js?v=pal7-20261113"></script>
+    <script defer src="js/00-leaflet-loader.js?v=pal7-20261113"></script>
+<script defer src="js/42-api-marketplace-bridge.js?v=pal7-20261113"></script>
+<script defer src="js/00-demo-showrooms.js?v=pal7-20261113"></script>
+    <script defer src="js/01-data.js?v=pal7-20261113"></script>
+    <script defer src="js/01b-vehicle-specs.js?v=pal7-20261113"></script>
+    <script defer src="js/52-ai-autofill-popup.js?v=pal7-20261113"></script>
+    <script defer src="js/53-hide-dock-on-popups.js?v=pal7-20261113"></script>
+    <script defer src="js/54-dock-instant.js?v=pal7-20261113"></script>
+    <script defer src="js/57-ios-viewport-dock.js?v=pal7-20261113"></script>
+    <script defer src="js/55-ux-motion.js?v=pal7-20261113"></script>
+    <script defer src="js/56-demo-data.js?v=demo1"></script>
+    <script defer src="js/61-vx-tab-indicator.js?v=pal7-20261113"></script>
+    <script defer src="js/02-helpers.js?v=pal7-20261113"></script>
+    <script defer src="js/02a-admin-store.js?v=pal7-20261113"></script>
+    <script defer src="js/03-icons.js?v=pal7-20261113"></script>
+    <script defer src="js/04-state-core.js?v=pf1"></script>
+    <script defer src="js/05-small-render-pieces.js?v=pal7-20261113"></script>
+    <script defer src="js/06-home-cards.js?v=pal7-20261113"></script>
+    <script defer src="js/07-vehicle-account-common.js?v=pal7-20261113"></script>
+    <script defer src="js/08-auth-modal-toast.js?v=pal7-20261113"></script>
+    <script defer src="js/09-search-overlay.js?v=pal7-20261113"></script>
+    <script defer src="js/10-search-bar-rotator.js?v=pal7-20261113"></script>
+    <script defer src="js/11-filters-overlay.js?v=pal7-20261113"></script>
+    <script defer src="js/12-templates-toolbar.js?v=pf1"></script>
+    <script defer src="js/13-pages-home-listings-vehicle.js?v=pal7-20261113"></script>
+    <script defer src="js/14-pages-sell-saved-manage.js?v=pal7-20261113"></script>
+    <script defer src="js/15-pages-account.js?v=pal7-20261113"></script>
+    <script defer src="js/63-social-feed.js?v=pal7-20261113"></script>
+    <script defer src="js/16-app-render-router.js?v=pal7-20261113"></script>
+    <script defer src="js/17-chip-dropdown.js?v=pal7-20261113"></script>
+    <script defer src="js/18-peek-preview-init.js?v=pal7-20261113"></script>
+    <script defer src="js/19-swipe-save-card.js?v=pal7-20261113"></script>
+    <script defer src="js/20-body-condition-overlay.js?v=pal7-20261113"></script>
+    <script defer src="js/21-brand-sheet.js?v=pal7-20261113"></script>
+    <script defer src="js/22a-carmaa-story-share.js?v=pal7-20261113"></script>
+    <script defer src="js/22-share-poster.js?v=pal7-20261113"></script>
+    <script defer src="js/23-admin-sync.js?v=pal7-20261113"></script>
+    <script defer src="js/24-paid-services.js?v=pal7-20261113"></script>
+    <script defer src="js/25-ad-stats.js?v=pal7-20261113"></script>
+    <script defer src="js/26-messaging.js?v=pal7-20261113"></script>
+    <script defer src="js/27-stories.js?v=pal7-20261113"></script>
+    <script defer src="msg-hero-sticky.js?v=pal7-20261113"></script>
+    <script defer src="js/64-first-ad-story.js?v=pal7-20261113"></script>
+    <!-- Q&A disabled (temporary): <script defer src="js/28-qa-store.js?v=pal7-20261113"></script> -->
+    <!-- Q&A disabled (temporary): <script defer src="js/29-qa-components.js?v=pal7-20261113"></script> -->
+    <!-- Q&A disabled (temporary): <script defer src="js/30-qa-pages.js?v=pal7-20261113"></script> -->
+    <!-- Q&A disabled (temporary): <script defer src="js/31-qa-ask.js?v=pal7-20261113"></script> -->
+    <!-- Q&A disabled (temporary): <script defer src="js/32-qa-detail.js?v=pal7-20261113"></script> -->
+    <!-- Q&A disabled (temporary): <script defer src="js/33-qa-mine.js?v=pal7-20261113"></script> -->
+    <script defer src="js/34-trust-marketplace.js?v=pal7-20261113"></script>
+    <script defer src="js/35-home-dashboard.js?v=wf4"></script>
+    <script defer src="js/36-profile-page.js?v=pal7-20261113"></script>
+    <script defer src="js/37-notifications.js?v=pal7-20261113"></script>
+    <script defer src="js/38-listings-header-autohide.js?v=pal7-20261113"></script>
+    <script defer src="js/39-undo-delete.js?v=pal7-20261113"></script>
+    <script defer src="js/40-call-sheet.js?v=pal7-20261113"></script>
+<script defer src="js/46-skeleton-plus.js?v=pal7-20261113"></script>
+<script defer src="js/41-api-bootstrap.js?v=pal7-20261113"></script>
+<script defer src="js/43-api-ui-integration.js?v=pal7-20261113"></script>
+<script defer src="js/44-ui-usability-fixes.js?v=pal7-20261113"></script>
+<script defer src="js/45-news.js?v=pal7-20261113"></script>
+<script defer src="js/47-live.js?v=pal7-20261113"></script>
+<script defer src="js/48-notify-sound.js?v=pal7-20261113"></script>
+<script defer src="js/49-install-prompt.js?v=pal7-20261113"></script>
+<script defer src="js/50-card-morph.js?v=pal7-20261113"></script>
+<script defer src="js/51-detail-close-motion.js?v=pal7-20261113"></script>
+<script defer src="js/56-ad-cards.js?v=pal7-20261113"></script>
+<script defer src="js/57-onboarding-tour.js?v=pal7-20261113"></script>
+      <script defer src="js/59-no-copy.js?v=pal7-20261113"></script>
+      <script defer src="js/60-profile-setup.js?v=pal7-20261113"></script>
+      <script defer src="js/61-edit-sheet.js?v=pal7-20261113"></script>
+      <script defer src="js/62-field-page.js?v=pal7-20261113"></script>
+<!-- cm-seller-ava -->
+    <script defer src="js/64-pwa-fullscreen.js?v=pal7-20261113"></script>
+    <script defer src="js/65-optional-admin-tools.js?v=pal7-20261113"></script>
+    <script defer src="cm-guest-login.js?v=pal7-20261113"></script>
+  <script defer src="js/65-login-gate.js?v=pal7-20261113"></script>
+  <script defer src="js/72-empty-card.js?v=pal7-20261113"></script>
+  <script defer src="js/73-partners.js?v=pal7-20261113"></script>
+  <script defer src="js/73-showroom-kit.js?v=pal7-20261113"></script>
+  <script defer src="js/74-showroom-intro.js?v=pal7-20261113"></script>
+  <script defer src="js/71-auth-otp-auto.js?v=pal7-20261113"></script>
+  <script defer src="js/70-auth-loading.js?v=pal7-20261113"></script>
+  <script defer src="js/69-header-glass.js?v=pal7-20261113"></script>
+  <script defer src="js/68-auth-otp-icon.js?v=pal7-20261113"></script>
+  <script defer src="js/67-auth-otp-colors.js?v=pal7-20261113"></script>
+  <script defer src="js/66-auth-native-keyboard.js?v=pal7-20261113"></script>
+  <script defer src="cm-unread-welcome.js?v=pal7-20261113"></script>
+  <script defer src="showroom-hero3d.js?v=pal7-20261113"></script>
+  <script defer src="cm-404.js?v=pal7-20261113"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+CarMaa Phase 1/2 — validation v5
+
+Changes: personal user follow API + UI, server-backed 24-hour stories, story views, listing event analytics, server price history UI, initial price snapshot, listing owner ID in frontend DTO.
+
+Checks:
+- Changed JavaScript files: node --check passed.
+- Backend test suite: 33/33 passed.
+- npm run check: passed.
+- index.html script references: all resolved.
+- Database migration 004 added: 004_social_stories_listing_stats.sql.
+
+Not run: live PostgreSQL/Redis migration, browser end-to-end, cross-device story tests, production DAST/penetration testing. The current environment has no usable PostgreSQL/Redis/Docker service. Run `cd backend && npm run migrate` against staging before deployment.

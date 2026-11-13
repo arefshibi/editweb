@@ -1,0 +1,71 @@
+/* CarMaa - Khuzestan cities, map confirm, iOS-style publish animation */
+:root{ --spp-color:#30d158; --spp-color-2:#27c24c; }
+
+html body #sellCityPicker .sell-trim-options{ grid-template-columns:1fr 1fr; gap:8px; max-height:min(58vh,520px); overflow-y:auto; -webkit-overflow-scrolling:touch; padding:4px 16px 14px; }
+html body #sellCityPicker .sell-trim-option{ min-height:52px; grid-template-columns:minmax(0,1fr) 22px; gap:6px; padding:8px 14px; border-radius:16px !important; }
+html body #sellCityPicker .sell-trim-option .sell-trim-big{ display:none; }
+html body #sellCityPicker .sell-trim-option strong{ font-size:14px; font-weight:700; }
+html body #sellCityPicker .sell-trim-option b{ width:22px; height:22px; border-radius:50%; border:1.5px solid rgba(255,255,255,.22); font-size:0; position:relative; opacity:1; transition:background .18s ease,border-color .18s ease; }
+html body #sellCityPicker .sell-trim-option.is-selected b{ background:#ffffff; border-color:#ffffff; color:#1D1D1F}
+html body #sellCityPicker .sell-trim-option.is-selected b::after{ content:""; position:absolute; left:50%; top:46%; width:5px; height:9px; border:solid #000; border-width:0 2px 2px 0; transform:translate(-50%,-50%) rotate(45deg); }
+html body #sellCityPicker .sell-trim-option.is-selected{ border-color:rgba(255,255,255,.33) !important; background:rgba(255,255,255,.048) !important; }
+
+.sell-location-map{ position:relative; }
+.sell-location-map .sell-confirm-btn{
+  position:absolute; left:50%; bottom:14px; transform:translateX(-50%); z-index:960;
+  display:inline-flex; align-items:center; justify-content:center; gap:7px; min-width:168px; height:44px; padding:0 22px;
+  border:0; border-radius:999px; font:800 14.5px/1 inherit; font-family:inherit; letter-spacing:0;
+  background:#ffffff; color:#1D1D1F; box-shadow:0 8px 22px rgba(0,0,0,.45), 0 0 0 1px rgba(0,0,0,.25);
+  transition:transform .18s cubic-bezier(.2,.8,.2,1), background .22s ease, color .22s ease, box-shadow .22s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.sell-location-map .sell-confirm-btn:active{ transform:translateX(-50%) scale(.95); }
+.sell-location-map .sell-confirm-btn.is-confirmed{
+  background:rgba(38,38,40,.78); color:#ffffff; -webkit-backdrop-filter:blur(18px) saturate(160%); backdrop-filter:blur(18px) saturate(160%);
+  box-shadow:0 8px 22px rgba(0,0,0,.4), inset 0 0 0 1px rgba(255,255,255,.27);
+}
+.sell-location-map .sell-confirm-btn svg{ animation:khz-pop .35s cubic-bezier(.2,.9,.3,1.3) both; }
+.sell-center-circle{ transition:border-color .25s ease, background .25s ease; }
+.sell-center-circle.is-confirmed{ border-color:#ffffff !important; background:rgba(255,255,255,.096) !important; }
+.sell-center-circle.is-confirmed .leaflet-app-pin{ background:#ffffff !important; color:#1D1D1F !important}
+.sell-center-circle.is-confirmed .leaflet-app-pin svg{ color:#000 !important; }
+.sell-location-map .sell-locate-btn{ top:10px; right:10px; }
+@keyframes khz-pop{ from{ transform:scale(.4); opacity:0 } to{ transform:scale(1); opacity:1 } }
+
+html body .sell-publishing-card{
+  left:10px !important; right:10px !important; bottom:calc(10px + env(safe-area-inset-bottom,0px)) !important;
+  max-width:500px; margin:0 auto !important; border-radius:30px !important;
+  background:rgba(38,38,40,.72) !important; border:0 !important;
+  -webkit-backdrop-filter:blur(30px) saturate(180%) !important; backdrop-filter:blur(30px) saturate(180%) !important;
+  box-shadow:0 24px 60px rgba(0,0,0,.55), inset 0 0 0 .5px rgba(255,255,255,.16) !important;
+}
+html body .sell-publishing-handle{ display:none !important; }
+html body .sell-publishing-content{ padding:34px 24px 20px !important; }
+html body .sell-publishing-icon{
+  width:96px !important; height:96px !important; margin:0 auto 22px !important; border:0 !important; border-radius:50% !important;
+  background:transparent !important; transform:none !important; position:relative;
+}
+html body .sell-publishing-icon .sell-publishing-dash{ display:none !important; }
+html body .sell-publishing-icon.is-success::after, html body .sell-publishing-icon::after{ content:none !important; display:none !important; }
+.spp-svg{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+.spp-svg circle{ fill:none; transform-origin:48px 48px; }
+.spp-track{ stroke:rgba(255,255,255,.12); stroke-width:5; }
+.spp-svg .spp-arc{ transform:rotate(-90deg); stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-dasharray:62 189; animation:spp-spin 1.05s linear infinite; }
+.spp-svg .spp-fill{ fill:var(--spp-color); stroke:none; transform:scale(0); }
+.spp-ring{ stroke:var(--spp-color); stroke-width:3; opacity:0; }
+.spp-check{ fill:none; stroke:#fff; stroke-width:7; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:60; stroke-dashoffset:60; }
+.sell-publishing-icon.is-success .spp-arc, .sell-publishing-icon.is-success .spp-track{ opacity:0; animation:none; transition:opacity .15s ease; }
+.sell-publishing-icon.is-success .spp-fill{ animation:spp-fill .5s cubic-bezier(.2,.9,.25,1.25) forwards; }
+.sell-publishing-icon.is-success .spp-ring{ animation:spp-ring .8s ease-out .12s forwards; }
+.sell-publishing-icon.is-success .spp-check{ animation:spp-check .42s cubic-bezier(.4,0,.2,1) .26s forwards; }
+.sell-publishing-icon.is-success{ filter:drop-shadow(0 8px 22px rgba(48,209,88,.45)); }
+@keyframes spp-spin{ from{ transform:rotate(-90deg) } to{ transform:rotate(270deg) } }
+@keyframes spp-fill{ 0%{ transform:scale(0) } 100%{ transform:scale(1) } }
+@keyframes spp-ring{ 0%{ transform:scale(1); opacity:.75 } 100%{ transform:scale(1.55); opacity:0 } }
+@keyframes spp-check{ to{ stroke-dashoffset:0 } }
+html body .sell-publishing-content h3{ font-size:22px !important; font-weight:700 !important; letter-spacing:-.2px; margin:0 0 8px !important; color:#fff; }
+html body .sell-publishing-content p{ font-size:14px !important; line-height:1.7; color:rgba(235,235,245,.62) !important; margin:0 0 20px !important; }
+html body .sell-publishing-progress{ height:4px !important; max-width:200px !important; background:rgba(255,255,255,.14) !important; margin:0 auto 14px !important; }
+html body .sell-publishing-progress span{ background:#fff !important; }
+html body .sell-publishing-stop{ color:rgba(235,235,245,.55) !important; font-size:14px !important; font-weight:600; padding:8px 18px !important; }
+@media (prefers-reduced-motion:reduce){ .spp-arc{ animation-duration:2.4s } .sell-publishing-icon.is-success .spp-check{ animation-duration:.01s } }

@@ -1,0 +1,16 @@
+# SEC-PATCH (S2)
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+*.pem
+*.key
+_bak*/
+_backup*/
+backup-*/
+*.bak*
+*.pre-rollback*
+node_modules/
+backend/var/

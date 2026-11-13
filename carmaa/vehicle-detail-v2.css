@@ -1,0 +1,295 @@
+/* CarMaa — vehicle detail v2 (from the "car-card-3tabs" demo).
+   Everything from the gallery box downward: price card, 3-tab info card, seller.
+   Uses only the site's own colour variables — no new palette. */
+.vehicle-demo-layout{
+  --vx-panel:var(--surface-3,#262628);
+  /* active-tab colour; the panel under the tabs uses the SAME colour so they read as one surface */
+  --vx-sel:color-mix(in srgb,var(--text,#F5F5F7) 11%,var(--vx-panel));
+  /* tiles are darker than the panel */
+  --vx-tile:color-mix(in srgb,#000 48%,var(--vx-sel));
+  --vx-ok:#7fd8a6;
+}
+html.theme-light .vehicle-demo-layout{--vx-ok:#1f8a54;--vx-tile:color-mix(in srgb,#000 14%,var(--vx-sel))}
+
+/* ---- price card: demo proportions ---- */
+.vehicle-demo-layout .price-card{padding:16px;border-radius:26px}
+.vehicle-demo-layout .price-heading{margin-bottom:0}
+.vehicle-demo-layout .price-heading h1{font-size:21px;font-weight:800;line-height:1.5;letter-spacing:0;margin:0}
+.vehicle-demo-layout .price-heading .heading-sub{margin-top:4px;font-size:11.5px}
+.vehicle-demo-layout .price-label-row{margin-top:16px}
+.vehicle-demo-layout .price-line{margin:6px 0 0}
+.vehicle-demo-layout .price-number{font-size:30px;font-weight:800;letter-spacing:-.3px;line-height:1.3}
+.vehicle-demo-layout .price-unit{font-size:13px;font-weight:500;color:var(--muted)}
+.vehicle-demo-layout .price-hint{font-size:11px;margin-top:4px;line-height:1.8}
+.vehicle-demo-layout .thin-rule{margin:16px 0}
+.vehicle-demo-layout .summary-facts{gap:8px}
+.vehicle-demo-layout .seller-trust{gap:14px;font-size:10.5px;margin-top:14px;padding-top:12px}
+
+/* ---- 3-tab card ---- */
+.vehicle-demo-layout .vx{padding:10px 10px 12px;border-radius:28px;border:1px solid var(--line);min-width:0}
+.vehicle-demo-layout .vx-tabs{display:grid;grid-template-columns:repeat(3,1fr);position:relative}
+.vehicle-demo-layout .vx-tab{appearance:none;border:0;background:none;cursor:pointer;height:50px;display:flex;align-items:center;justify-content:center;gap:8px;font:700 12px "Vazirmatn",sans-serif;color:var(--muted);position:relative;border-radius:20px 20px 0 0;padding:0 4px;text-align:center;transition:color .2s;-webkit-tap-highlight-color:transparent}
+.vehicle-demo-layout .vx-tab .icon{width:17px;height:17px;flex:none}
+.vehicle-demo-layout .vx-tab[aria-selected="true"]{color:var(--text);background:var(--vx-sel);border-radius:18px 18px 0 0;z-index:2}
+.vehicle-demo-layout .vx-tab[aria-selected="true"]::before,
+.vehicle-demo-layout .vx-tab[aria-selected="true"]::after{position:absolute;bottom:0;width:20px;height:20px}
+.vehicle-demo-layout .vx-tab[aria-selected="true"]:not(:last-child)::after{content:none;left:-20px;background:radial-gradient(circle at 0 0,transparent 20px,var(--vx-panel) 20.5px)}
+.vehicle-demo-layout .vx-tab[aria-selected="true"]:not(:first-child)::before{content:none;right:-20px;background:radial-gradient(circle at 100% 0,transparent 20px,var(--vx-panel) 20.5px)}
+.vehicle-demo-layout .vx-tab:focus-visible{outline:2px solid var(--text-2);outline-offset:2px}
+.vehicle-demo-layout .vx-panel{background:var(--vx-sel);border-radius:22px;padding:14px;position:relative;z-index:1;min-height:330px}
+.vehicle-demo-layout .vx-tabs:has(.vx-tab:first-child[aria-selected="true"])+.vx-panel{border-top-right-radius:0}
+.vehicle-demo-layout .vx-tabs:has(.vx-tab:last-child[aria-selected="true"])+.vx-panel{border-top-left-radius:0}
+.vehicle-demo-layout .vx-pane{display:none;animation:vxIn .28s ease both}
+.vehicle-demo-layout .vx-pane.on{display:block}
+@keyframes vxIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.vehicle-demo-layout .vx-pane{animation:none}}
+
+.vehicle-demo-layout .vx-sec{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:800;margin-bottom:12px}
+.vehicle-demo-layout .vx-m{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;border:1px solid var(--line);color:var(--text-2);flex:none}
+.vehicle-demo-layout .vx-m .icon{width:16px;height:16px}
+.vehicle-demo-layout .vx-sec small{margin-inline-start:auto;font-weight:400;font-size:11px;color:var(--muted)}
+.vehicle-demo-layout .vx-desc{font-size:13px;line-height:2;color:var(--text-2);margin:0}
+.vehicle-demo-layout .vx-sep{border:0;height:1px;background:var(--line);margin:16px 0}
+.vehicle-demo-layout .vx-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:11px;color:var(--muted)}
+.vehicle-demo-layout .vx-head b{font-size:14px;color:var(--text)}
+
+/* spec tiles */
+.vehicle-demo-layout .vx-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vehicle-demo-layout .vx-t{background:var(--vx-tile);border:1px solid var(--line);border-radius:16px;padding:12px;display:grid;gap:8px;min-height:84px;align-content:space-between;min-width:0}
+.vehicle-demo-layout .vx-ic{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:var(--vx-sel);color:var(--text-2);flex:none}
+.vehicle-demo-layout .vx-ic .icon{width:16px;height:16px}
+.vehicle-demo-layout .vx-t small{font-size:11px;color:var(--muted);display:block}
+.vehicle-demo-layout .vx-t strong{font-size:14px;font-weight:700;display:block;margin-top:2px;overflow-wrap:anywhere}
+.vehicle-demo-layout .vx-t.is-empty strong{color:var(--muted);font-weight:500;font-size:12.5px}
+
+/* documents */
+.vehicle-demo-layout .vx-docs{display:grid;gap:8px}
+.vehicle-demo-layout .vx-d{display:flex;align-items:center;gap:11px;background:var(--vx-tile);border:1px solid var(--line);border-radius:16px;padding:12px}
+.vehicle-demo-layout .vx-d .vx-ic{width:34px;height:34px;border-radius:11px}
+.vehicle-demo-layout .vx-tx{flex:1;display:grid;gap:2px;min-width:0}
+.vehicle-demo-layout .vx-d small{font-size:11px;color:var(--muted)}
+.vehicle-demo-layout .vx-d strong{font-size:13.5px;overflow-wrap:anywhere}
+.vehicle-demo-layout .vx-ck{width:20px;height:20px;color:var(--vx-ok);flex:none}
+.vehicle-demo-layout .vx-d.off strong{color:var(--muted);font-weight:500}
+.vehicle-demo-layout .vx-meter{display:inline-flex;gap:3px;margin-inline-end:6px;vertical-align:middle}
+.vehicle-demo-layout .vx-meter i{width:14px;height:4px;border-radius:9px;background:var(--line)}
+.vehicle-demo-layout .vx-meter i.on{background:var(--vx-ok)}
+.vehicle-demo-layout .vx-warn{display:flex;gap:8px;align-items:flex-start;font-size:11px;color:var(--muted);margin:12px 0 0;line-height:1.8}
+.vehicle-demo-layout .vx-warn[hidden]{display:none}
+.vehicle-demo-layout .vx-warn .icon{width:15px;height:15px;flex:none;margin-top:3px}
+
+/* body + map inside tab 3 */
+.vehicle-demo-layout .vx .bc-sheet{border-radius:20px}
+.vehicle-demo-layout .vx .bc-chips{margin:12px 0 0}
+.vehicle-demo-layout .vx .vmap{border-radius:22px}
+.vehicle-demo-layout .vx .vmap-canvas{height:190px}
+.vehicle-demo-layout .vx .vmap-panel{position:static;max-width:none;border-radius:0;border:0;border-top:1px solid var(--line);-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none;background:transparent;color:inherit;padding:14px}
+.vehicle-demo-layout .vx .vmap-panel-text strong{font-size:14px}
+.vehicle-demo-layout .vx .vmap-panel-text span{font-size:11px;color:var(--muted)}
+.vehicle-demo-layout .vx .vmap-panel-text small{font-size:10px;line-height:1.7;color:var(--muted)}
+
+/* seller card: same colours as before, demo shape (round avatar) */
+.vehicle-demo-layout .vx-side .seller-mini{border-radius:26px;padding:16px}
+.vehicle-demo-layout .vx-side .seller-avatar{border-radius:50%;overflow:hidden}
+.vehicle-demo-layout .vx-side .seller-avatar img{width:100%;height:100%;object-fit:cover}
+
+/* layout: seller card sits right under the gallery card; the info tabs take the full width below */
+.vehicle-demo-layout .vx-lower{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;margin-top:14px}
+@media (min-width:1024px){
+  .vehicle-demo-layout .vx-lower{grid-template-columns:minmax(0,1fr)!important;gap:24px;margin-top:24px;align-items:start}
+}
+.vehicle-demo-layout .vx-side--gallery{flex:0 0 auto;min-width:0}
+.vehicle-demo-layout .vx-side--gallery:empty,.vehicle-demo-layout .vx-side--gallery .seller-slot:empty{display:none}
+
+/* ---- performance: no GPU-heavy blur / infinite effects below the gallery ---- */
+.vehicle-demo-layout .vx-side .seller-mini,
+.vehicle-demo-layout .vx-side .seller-mini::before,
+.vehicle-demo-layout .price-card,
+.vehicle-demo-layout .vx{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.vehicle-demo-layout .vx-side .seller-mini::before,
+.vehicle-demo-layout .vx-side .seller-mini::after{animation:none!important}
+.vehicle-demo-layout .vx-pane{animation:none}
+.vehicle-demo-layout .summary-facts .fact{transition:none!important}
+.vehicle-demo-layout .vx-lower{content-visibility:auto;contain-intrinsic-size:auto 900px}
+
+/* باکس‌های مشخصات فنی: عکس سه‌بعدی کم‌رنگ سمت چپ به‌جای آیکن (سوخت، موتور، گیربکس، انتقال قدرت) */
+.vehicle-demo-layout .vx-t{position:relative;overflow:hidden}
+.vehicle-demo-layout .vx-t > *{position:relative;z-index:1}
+.vehicle-demo-layout .vx-t strong{text-align:right}
+.vehicle-demo-layout .vx-t.is-engine strong,.vehicle-demo-layout .vx-t.is-drivetrain strong{direction:rtl;unicode-bidi:isolate}
+
+/* ---- Price card: bigger price number, cleaner price block (no footnote line) ---- */
+html body .vehicle-demo-layout .price-card .price-label-row{margin-top:2px}
+html body .vehicle-demo-layout .price-card .price-kicker{font-size:12px;font-weight:700;color:var(--text-2)}
+html body .vehicle-demo-layout .price-card .negotiable{border-radius:8px;padding:5px 9px;font-size:11px;font-weight:700}
+html body .vehicle-demo-layout .price-card .price-line{
+  display:flex;flex-wrap:wrap;align-items:baseline;justify-content:flex-start;gap:6px 10px;
+  margin:12px 0 0;padding:16px 16px 14px;border-radius:16px;
+  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025));
+  border:1px solid var(--line-strong);position:relative;overflow:hidden}
+html body .vehicle-demo-layout .price-card .price-line::before{
+  content:"";position:absolute;inset-block:0;inset-inline-start:0;width:4px;background:#ffffff;border-radius:0 4px 4px 0}
+html body .vehicle-demo-layout .price-card .price-number{
+  font-size:clamp(46px,13vw,60px);line-height:1.05;font-weight:900;letter-spacing:-1.5px;color:var(--text);
+  font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
+html body .vehicle-demo-layout .price-card .price-unit{
+  font-size:16px;font-weight:800;color:var(--text);padding:3px 11px;border-radius:8px;
+  background:rgba(255,255,255,.096);color:#d9ff4d;line-height:1.5}
+html body .vehicle-demo-layout .price-card .price-unit:empty{display:none}
+html body .vehicle-demo-layout .price-card .price-hint[hidden]{display:none}
+html body .vehicle-demo-layout .price-card .price-hint{margin-top:10px;font-size:12px;line-height:1.8}
+html body .vehicle-demo-layout .price-card .thin-rule{margin:16px 0}
+@media (min-width:1024px){html body .vehicle-demo-layout .price-card .price-number{font-size:clamp(46px,4.2vw,58px)}}
+html.theme-light body .vehicle-demo-layout .price-card .price-line{background:linear-gradient(180deg,rgba(0,0,0,.035),rgba(0,0,0,.015))}
+html.theme-light body .vehicle-demo-layout .price-card .price-unit{background:#9b1b30;color:#fff}
+
+/* >>> PRICE-NASTALIQ START */
+html body .vehicle-demo-layout .price-card .price-line{
+  display:flex;flex-wrap:nowrap;align-items:baseline;justify-content:flex-start;gap:0 12px;
+  margin:14px 0 0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;
+  position:static;overflow:visible}
+html body .vehicle-demo-layout .price-card .price-line::before{display:none}
+html.theme-light body .vehicle-demo-layout .price-card .price-line{background:none;border:0}
+html body .vehicle-demo-layout .price-card .price-number{flex:none}
+html body .vehicle-demo-layout .price-card .price-unit,
+html.theme-light body .vehicle-demo-layout .price-card .price-unit{
+  font-family:inherit;font-size:clamp(18px,5.2vw,24px);font-weight:800;line-height:1;color:#d9ff4d;
+  padding:0;border:0;border-radius:0;background:none;white-space:nowrap;
+  display:inline-block;transform:none;margin:0}
+html.theme-light body .vehicle-demo-layout .price-card .price-unit{color:#3f5200}
+html body .vehicle-demo-layout .price-card .price-unit:empty{display:none}
+/* <<< PRICE-NASTALIQ END */
+
+
+/* ===== carmaa-vx-ios-v1 — Apple-style vehicle details ===== */
+html body .vehicle-demo-layout,
+html.theme-light body .vehicle-demo-layout{
+  --ios-label:rgba(255,255,255,.94);
+  --ios-label-2:rgba(235,235,245,.62);
+  --ios-label-3:rgba(235,235,245,.34);
+  --ios-sep:rgba(255,255,255,.09);
+  --ios-group:rgba(255,255,255,.055);
+  --ios-track:rgba(118,118,128,.24);
+  --ios-thumb:#636366;
+}
+html body .vehicle-demo-layout .vx{padding:14px 16px 18px}
+
+html body .vehicle-demo-layout .vx-tabs{background:var(--ios-track);border-radius:11px;padding:2px;gap:0}
+html body .vehicle-demo-layout .vx-tab{height:34px;border-radius:9px;font-size:12.5px;font-weight:600;color:var(--ios-label);background:none;transition:background .2s ease,box-shadow .2s ease}
+html body .vehicle-demo-layout .vx-tab .icon{display:none}
+html body .vehicle-demo-layout .vx-tab[aria-selected="true"]{background:var(--ios-thumb);border-radius:9px;box-shadow:0 3px 8px rgba(0,0,0,.28),0 3px 1px rgba(0,0,0,.04);z-index:1}
+html body .vehicle-demo-layout .vx-tab[aria-selected="true"]::before,
+html body .vehicle-demo-layout .vx-tab[aria-selected="true"]::after{content:none!important}
+
+html body .vehicle-demo-layout .vx-panel{background:none;box-shadow:none;border-radius:0;padding:22px 0 2px;min-height:0}
+
+html body .vehicle-demo-layout .vx-sec,
+html body .vehicle-demo-layout .vx-head{margin:0 4px 10px;font-size:13px;font-weight:600;color:var(--ios-label-2);display:flex;align-items:center;justify-content:space-between;gap:8px}
+html body .vehicle-demo-layout .vx-head b{font-size:13px;font-weight:600;color:var(--ios-label-2)}
+html body .vehicle-demo-layout .vx-sec .vx-m{display:none}
+html body .vehicle-demo-layout .vx-sec small,
+html body .vehicle-demo-layout .vx-head span{font-size:12px;font-weight:400;color:var(--ios-label-3);margin:0}
+html body .vehicle-demo-layout hr.vx-sep{display:none}
+html body .vehicle-demo-layout .vx-sep + .vx-head,
+html body .vehicle-demo-layout .vx-sep + .vx-sec{margin-top:30px}
+
+html body .vehicle-demo-layout .vx-desc{
+  white-space:pre-line;overflow-wrap:anywhere;text-align:start;
+  background:none;border:0;border-radius:0;padding:0 4px;box-shadow:none;
+  font-size:16px;line-height:2;font-weight:400;color:var(--ios-label)}
+
+html body .vehicle-demo-layout .vx-grid,
+html body .vehicle-demo-layout .vx-docs{display:block;background:var(--ios-group);border-radius:14px;overflow:hidden}
+html body .vehicle-demo-layout .vx-t,
+html body .vehicle-demo-layout .vx-d{
+  display:flex;align-items:center;gap:12px;min-height:54px;padding:8px 14px;
+  background:none;border:0;border-radius:0;box-shadow:none}
+html body .vehicle-demo-layout .vx-t + .vx-t,
+html body .vehicle-demo-layout .vx-d + .vx-d{border-top:.5px solid var(--ios-sep)}
+html body .vehicle-demo-layout .vx-t > div{display:flex;flex:1;min-width:0;align-items:center;justify-content:space-between;gap:14px}
+html body .vehicle-demo-layout .vx-t small{font-size:14px;color:var(--ios-label-2);margin:0}
+html body .vehicle-demo-layout .vx-t strong{font-size:15px;font-weight:600;color:var(--ios-label);margin:0;text-align:end}
+html body .vehicle-demo-layout .vx-t.is-empty strong{color:var(--ios-label-3);font-weight:400;font-size:14px}
+html body .vehicle-demo-layout .vx-ic{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.08);color:var(--ios-label-2)}
+
+html body .vehicle-demo-layout .vx-d strong{font-size:15px}
+html body .vehicle-demo-layout .vx-d small{font-size:13px;color:var(--ios-label-2)}
+
+/* ===== carmaa-vx-tabind-v1 — sliding thumb for the segmented tabs (dock-style motion) ===== */
+html body .vehicle-demo-layout .vx-tabs{position:relative}
+html body .vehicle-demo-layout .vx-tabs .cm-vx-ind{
+  position:absolute;left:0;top:0;width:0;height:0;margin:0;padding:0;pointer-events:none;z-index:0;
+  border-radius:9px;opacity:0;background:var(--ios-thumb,#636366);
+  box-shadow:0 3px 8px rgba(0,0,0,.28),0 3px 1px rgba(0,0,0,.04),inset 0 1px 0 rgba(255,255,255,.1);
+  transform:translate3d(0,0,0);will-change:transform,width,opacity;
+  transition:transform .46s cubic-bezier(.3,1.35,.45,1),width .3s cubic-bezier(.2,.8,.2,1),opacity .2s ease}
+html body .vehicle-demo-layout .vx-tabs .cm-vx-ind.cm-snap{transition:none}
+html body .vehicle-demo-layout .vx-tabs.cm-ind-on .vx-tab{position:relative;z-index:1}
+html body .vehicle-demo-layout .vx-tabs.cm-ind-on .vx-tab[aria-selected="true"]{background:transparent!important;box-shadow:none!important}
+html body .vehicle-demo-layout .vx-tab.cm-pop{animation:cmVxTabPop .46s cubic-bezier(.34,1.56,.64,1)}
+@keyframes cmVxTabPop{0%{transform:scale(.9)}55%{transform:scale(1.07)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){
+  html body .vehicle-demo-layout .vx-tabs .cm-vx-ind{transition-duration:.01s}
+  html body .vehicle-demo-layout .vx-tab.cm-pop{animation:none}
+}
+
+/* >>> CM-PRICE-CARD-V2 START */
+/* کارت عنوان و قیمت — چیدمان مرتب: [پروفایل فروشنده | عنوان + شهر] ← خط ← [برچسب قیمت | وضعیت] ← قیمت ← مشخصات */
+html body .vehicle-demo-layout .price-card{padding:18px 16px 16px;border-radius:26px}
+
+/* ردیف بالا (آگهی ویژه) فقط وقتی چیزی دارد جا می‌گیرد */
+html body .vehicle-demo-layout .price-card .listing-topline{display:flex;justify-content:flex-start;margin:0 0 12px}
+html body .vehicle-demo-layout .price-card .listing-topline:not(:has(> :not([hidden]))){display:none}
+html body .vehicle-demo-layout .price-card .listing-topline .tag.featured{font-size:11.5px;padding:5px 11px;border-radius:999px;gap:5px}
+
+/* سربرگ: دایره‌ی فروشنده سمت راست، عنوان و شهر کنار آن */
+html body .vehicle-demo-layout .price-card .price-heading.has-seller-ava{
+  position:static;display:grid;grid-template-columns:64px minmax(0,1fr);
+  grid-template-areas:"ava title" "ava sub";column-gap:14px;row-gap:6px;align-items:center;
+  padding:0;margin:0;min-height:0}
+html body .vehicle-demo-layout .price-card .price-heading.has-seller-ava .cm-seller-ava{grid-area:ava}
+html body .vehicle-demo-layout .price-card .price-heading.has-seller-ava h1{grid-area:title;align-self:end;margin:0;
+  font-size:20px;line-height:1.5;font-weight:800;text-align:right;overflow-wrap:anywhere}
+html body .vehicle-demo-layout .price-card .price-heading.has-seller-ava .ad-title-line{grid-area:title}
+html body .vehicle-demo-layout .price-card .price-heading.has-seller-ava .heading-sub{grid-area:sub;align-self:start;margin:0;
+  font-size:11.5px;gap:4px 7px;flex-wrap:wrap;text-align:right}
+html body .vehicle-demo-layout .price-card .price-heading .heading-sub .icon{width:14px;height:14px;flex:none}
+
+/* دایره‌ی پروفایل + «فروشنده» زیرش */
+html body .vehicle-demo-layout .cm-seller-ava{
+  position:static;inset:auto;width:64px;height:auto;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;
+  display:flex;flex-direction:column;align-items:center;gap:6px;color:inherit;font:inherit;line-height:1;overflow:visible;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;text-align:center;transition:none}
+html body .vehicle-demo-layout span.cm-seller-ava{cursor:default}
+html body .vehicle-demo-layout .cm-seller-ava .cm-sa-circle{
+  width:60px;height:60px;box-sizing:border-box;border-radius:50%;overflow:hidden;display:grid;place-items:center;
+  background:linear-gradient(150deg,#262628,#1D1D1F);color:#c9cbd2;
+  border:1.5px solid rgba(255,255,255,.2);box-shadow:0 0 0 3px rgba(255,255,255,.045),0 8px 16px rgba(0,0,0,.38);
+  transition:transform .14s ease}
+html body .vehicle-demo-layout button.cm-seller-ava:active .cm-sa-circle{transform:scale(.93)}
+html body .vehicle-demo-layout .cm-seller-ava .cm-sa-circle img{width:100%;height:100%;object-fit:cover;display:block}
+html body .vehicle-demo-layout .cm-seller-ava .cm-sa-cap{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+html.theme-light body .vehicle-demo-layout .cm-seller-ava .cm-sa-circle{
+  background:linear-gradient(150deg,#f4f5f7,#e6e8ec);color:#5b5e67;border-color:rgba(0,0,0,.14);
+  box-shadow:0 0 0 3px rgba(0,0,0,.035),0 8px 16px rgba(29,29,31,.12)}
+
+/* بخش قیمت: خط جداکننده، بالا برچسب و وضعیت، پایین عدد */
+html body .vehicle-demo-layout .price-card .price-label-row{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin:16px 0 0;padding-top:14px;border-top:1px solid var(--line)}
+html body .vehicle-demo-layout .price-card .price-kicker{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--text-2);min-width:0}
+html body .vehicle-demo-layout .price-card .price-kicker .icon{width:14px;height:14px;flex:none}
+html body .vehicle-demo-layout .price-card .negotiable{
+  display:inline-flex;align-items:center;gap:6px;flex:none;white-space:nowrap;
+  padding:5px 10px;border-radius:999px;font-size:11px;font-weight:700;
+  border:1px solid var(--line-strong);background:rgba(255,255,255,.04)}
+html.theme-light body .vehicle-demo-layout .price-card .negotiable{background:rgba(0,0,0,.035)}
+html body .vehicle-demo-layout .price-card .price-line{
+  display:flex;flex-wrap:wrap;align-items:baseline;justify-content:flex-start;gap:2px 10px;margin:10px 0 0;padding:0}
+html body .vehicle-demo-layout .price-card .price-number{font-size:clamp(38px,11.5vw,52px);line-height:1.1;font-weight:900;letter-spacing:-1px}
+html body .vehicle-demo-layout .price-card .price-unit,
+html.theme-light body .vehicle-demo-layout .price-card .price-unit{font-size:clamp(16px,4.6vw,20px);font-weight:800;line-height:1.2}
+html body .vehicle-demo-layout .price-card .price-hint{margin-top:8px;font-size:11.5px;line-height:1.9;color:var(--muted)}
+html body .vehicle-demo-layout .price-card .thin-rule{margin:14px 0}
+@media (min-width:1024px){html body .vehicle-demo-layout .price-card .price-number{font-size:clamp(44px,3.8vw,54px)}}
+/* <<< CM-PRICE-CARD-V2 END */

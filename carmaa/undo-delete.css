@@ -1,0 +1,19 @@
+/* نوار بازگردانی آگهی حذف‌شده — حباب تمام‌عرض با حلقه‌ی در حال چرخش و ثانیه‌شمار */
+.cm-undo { position:fixed; inset-inline:0; top:calc(var(--cm-undo-top, 64px) + 8px); z-index:200; display:flex; justify-content:center; padding:0 12px; pointer-events:none; direction:rtl; }
+.cm-undo[hidden] { display:none; }
+.cm-undo-bar { position:relative; box-sizing:border-box; width:100%; max-width:520px; height:58px; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:0 8px 0 10px; border-radius:999px; background:#1D1D1F; color:#F5F5F7; font-family:"Vazirmatn","Segoe UI",Tahoma,sans-serif; box-shadow:0 14px 34px rgba(0,0,0,.55), 0 2px 8px rgba(0,0,0,.4); pointer-events:auto; opacity:0; transform:translateY(-18px) scale(.98); transition:opacity .28s ease, transform .28s cubic-bezier(.2,.8,.2,1); }
+.cm-undo.is-in .cm-undo-bar { opacity:1; transform:none; }
+.cm-undo.is-out .cm-undo-bar { opacity:0; transform:translateY(-18px) scale(.98); }
+.cm-undo-ring { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+.cm-undo-ring path { fill:none; stroke-width:2.5; stroke-linecap:round; }
+.cm-undo-track { stroke:rgba(255,255,255,.12); }
+.cm-undo-start { display:flex; align-items:center; gap:12px; min-width:0; padding-inline-start:10px; }
+.cm-undo-count { flex:none; min-width:30px; font-size:24px; font-weight:800; line-height:1; text-align:center; font-variant-numeric:tabular-nums; color:#F5F5F7; }
+.cm-undo-text { font-size:13.5px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.cm-undo-btn { flex:none; display:inline-flex; align-items:center; gap:7px; height:42px; padding:0 18px; border:0; border-radius:999px; background:#F5F5F7; color:#1D1D1F; font:inherit; font-size:13px; font-weight:800; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.cm-undo-btn:active { transform:scale(.96); }
+.cm-undo-btn svg { width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+.theme-light .cm-undo-bar { background:#fff; color:#1D1D1F; box-shadow:0 14px 34px rgba(51,51,54,.22), 0 2px 8px rgba(51,51,54,.12); }
+.theme-light .cm-undo-track { stroke:rgba(0,0,0,.10); }
+.theme-light .cm-undo-btn { background:#1D1D1F; color:#fff; }
+@media (prefers-reduced-motion:reduce) { .cm-undo-bar { transition:opacity .2s ease; transform:none !important; } }

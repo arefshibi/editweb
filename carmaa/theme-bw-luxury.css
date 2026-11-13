@@ -1,0 +1,14 @@
+/* CM-BW: تم لاکچری مشکی و سفید — این فایل آخر از همه لود می‌شود */
+:root{--cm-red:#fff;--cm-red-2:#fff;--cm-red-deep:#e4e4e7;--cm-accent:#fff;--cm-page:#1D1D1F;color-scheme:dark}
+html{accent-color:#fff;-webkit-tap-highlight-color:rgba(255,255,255,.08)}
+::selection{background:rgba(255,255,255,.9);color:#1D1D1F}
+input,textarea,[contenteditable]{caret-color:#fff}
+:focus-visible{outline-color:rgba(255,255,255,.75)}
+/* تصاویر سه‌بعدی قرمز → سیاه‌وسفید */
+img[src*="fuel-pump-3d"],img[src*="engine-3d"]{filter:grayscale(1) contrast(1.06) brightness(1.08)}
+/* اسکرول‌بار ظریف و بدون رنگ */
+*{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.22) transparent}
+[data-bw-fx]{transition:none}
+@media (prefers-reduced-motion:no-preference){
+  button,[role="button"],a{-webkit-font-smoothing:antialiased}
+}

@@ -1,0 +1,32 @@
+/* CarMaa - minimal map confirm button + tidy sell steps (loaded after khuzestan-ios.css) */
+html body .sell-location-map .sell-confirm-btn{
+  bottom:12px; min-width:0; height:40px; padding:0 20px; gap:7px;
+  font:600 14px/1 inherit; font-family:inherit; letter-spacing:0;
+  background:rgba(255,255,255,.94) !important; color:#262628 !important; border:0;
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+  box-shadow:0 4px 14px rgba(0,0,0,.28), 0 0 0 .5px rgba(0,0,0,.12) !important;
+}
+html body .sell-location-map .sell-confirm-btn.is-confirmed{
+  background:rgba(29,29,31,.82) !important; color:#fff !important;
+  -webkit-backdrop-filter:blur(18px) saturate(160%); backdrop-filter:blur(18px) saturate(160%);
+  box-shadow:0 4px 14px rgba(0,0,0,.35), inset 0 0 0 .5px rgba(255,255,255,.22) !important;
+}
+html body .sell-location-map .sell-confirm-btn.is-confirmed svg{ color:#30d158; stroke:#30d158; }
+html body .sell-center-circle.is-confirmed{ border-color:#30d158 !important; background:rgba(48,209,88,.14) !important; }
+html body .sell-center-circle.is-confirmed .leaflet-app-pin{ background:#30d158 !important; }
+html body .sell-center-circle.is-confirmed .leaflet-app-pin svg{ color:#fff !important; }
+
+
+/* locked map after confirmation */
+html body .sell-location-map .sell-confirm-btn{ white-space:nowrap; }
+html body .sell-location-map .sell-confirm-btn svg{ flex:none; }
+html body .sell-location-map .sell-fallback-hint{ display:none !important; }
+html body .sell-location-map.is-locked [data-slot="locationMapEl"]{ pointer-events:none !important; }
+html body .sell-location-map.is-locked .leaflet-control-zoom, html body .sell-location-map.is-locked .sell-fb-zoom, html body .sell-location-map.is-locked .sell-locate-btn{ display:none !important; }
+html body .sell-location-map .sell-confirm-sep{ width:1px; height:16px; background:rgba(255,255,255,.28); margin:0 4px; }
+html body .sell-location-map .sell-confirm-edit{ color:rgba(255,255,255,.72); font-weight:600; }
+
+/* sell steps: one consistent rhythm */
+html body [data-page="sell-step"] .sell-step-heading{ margin-bottom:2px; }
+html body [data-page="sell-step"] .sell-block-grid > .sell-adtitle{ margin:0; }
+html body [data-page="sell-step"] .sell-ownership-more{ margin-top:4px; }

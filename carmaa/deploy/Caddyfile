@@ -1,0 +1,61 @@
+{$SITE_ADDRESS::80} {
+	encode gzip zstd
+	request_body {
+		max_size 25MB
+	}
+	header -Server
+	root * /srv
+
+	# SEC-PATCH: بکاپ/اسکریپت/env/کپی قدیمی هیچوقت سرو نشوند (فقط اگر فایل واقعاً وجود داشته باشد؛ مسیرهای SPA آزادند)
+	@private {
+		path_regexp private (?i)(^|/)(\.[^/]+|(_bak|_backup|backup-)[^/]*|(backend|deploy|docs|security|carmaa|test|var|node_modules))(/|$)|\.(env|sh|save|b64|zip|tar|gz|tgz|7z|py|ps1|md|log|sql|yml|yaml|pem|key|orig|swp)(\.[^/]*)?$|\.(bak|pre-rollback)[^/]*$
+		file {
+			root /srv
+			try_files {path}
+		}
+	}
+	@privtxt {
+		path_regexp privtxt (?i)\.txt$
+		not path_regexp keeptxt ^/([0-9]+|robots|humans|ads)\.txt$
+		file {
+			root /srv
+			try_files {path}
+		}
+	}
+	handle @private {
+		respond "Not Found" 404
+	}
+	handle @privtxt {
+		respond "Not Found" 404
+	}
+	handle /api/v1/live {
+		reverse_proxy api:3000 {
+			flush_interval -1
+		}
+	}
+	handle /api/* {
+		reverse_proxy api:3000
+	}
+	handle /media/* {
+		reverse_proxy api:3000
+	}
+	handle {
+		root * /srv
+		@static path *.webp *.png *.jpg *.jpeg *.svg *.ico *.woff *.woff2 *.mp4
+		@frontendCode path *.css *.js *.json *.webmanifest
+		@aiWorker path /js/ai-vision-worker.js
+		header Cache-Control "no-cache"
+		header @static Cache-Control "public, max-age=86400"
+		header @frontendCode Cache-Control "public, max-age=300, must-revalidate"
+		header {
+			X-Content-Type-Options "nosniff"
+			Referrer-Policy "strict-origin-when-cross-origin"
+			Permissions-Policy "camera=(self), microphone=(self), geolocation=(self), payment=(), usb=()"
+			Strict-Transport-Security "max-age=15552000"
+			Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com https://cdn.jsdelivr.net; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: data:; connect-src 'self' blob: data: https:; worker-src 'self' blob:; manifest-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+		}
+		header @aiWorker Content-Security-Policy "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'wasm-unsafe-eval' blob:; connect-src 'self' https: blob: data:; worker-src 'self' blob:; frame-ancestors 'none'"
+		try_files {path} /index.html
+		file_server
+	}
+}

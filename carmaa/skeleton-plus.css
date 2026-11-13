@@ -1,0 +1,69 @@
+/* اسکلت لودینگ سراسری: تصویرها (آواتار، عکس آگهی، بنر، استوری)، ریل استوری‌ها و اعلان‌ها */
+@keyframes cm-sk-sweep { 0% { background-position:200% 0; } 100% { background-position:-200% 0; } }
+@keyframes cm-img-in { from { opacity:0; } to { opacity:1; } }
+
+/* تا وقتی تصویر کامل لود نشده، یک پس‌زمینه‌ی اسکلتی با موج نور نشان می‌دهیم */
+img.cm-img-sk {
+  background-color:#262628;
+  background-image:linear-gradient(100deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.09) 50%, rgba(255,255,255,0) 70%);
+  background-size:200% 100%; background-repeat:no-repeat;
+  animation:cm-sk-sweep 1.4s linear infinite;
+  color:transparent !important;
+}
+img.cm-img-ready { animation:cm-img-in .28s ease-out both; }
+.theme-light img.cm-img-sk { background-color:#d6d9dc; background-image:linear-gradient(100deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.55) 50%, rgba(255,255,255,0) 70%); }
+
+/* ریل استوری‌ها */
+.cm-ts-skeleton .cm-ts-item { cursor:default; pointer-events:none; }
+
+/* لیست اعلان‌ها */
+.mr-nf-sk-row { display:flex; align-items:flex-start; gap:12px; padding:14px 16px; }
+.mr-nf-sk-row > .skeleton-block { flex:none; }
+.mr-nf-sk-body { flex:1; min-width:0; display:flex; flex-direction:column; gap:9px; padding-top:3px; }
+
+@media (prefers-reduced-motion:reduce) {
+  img.cm-img-sk { animation:none; }
+  img.cm-img-ready { animation:none; }
+}
+
+/* ===== Home skeleton v2 — mirrors the current home layout (search, stories, banner,
+   latest listings, showrooms banner, showrooms rail, news, brand marquee) ===== */
+.cm-home-skeleton .cm-hb-track { overflow:hidden; }
+.cm-home-skeleton .cm-hb-slide { cursor:default; }
+.cm-home-skeleton .cm-lay-head > .skeleton-block:last-child { flex:0 0 auto; }
+.cm-sk-xcd .xcd { min-height:176px; }
+.cm-sk-xcd .xcd-photo { min-height:100%; }
+.cm-sk-xcd-info { flex:1 1 auto; min-width:0; display:flex; flex-direction:column; justify-content:center; gap:12px; padding:0 12px; }
+.cm-sk-xcd-chips { display:flex; gap:6px; }
+.cm-sk-xcd-chips .skeleton-block { flex:1 1 0; }
+.cm-sk-more { width:46px; height:46px; border-radius:50%; margin:14px auto 0; }
+.cm-lay-sk-banner { position:relative; overflow:hidden; margin-top:8px; aspect-ratio:1704/1230; border-radius:0; }
+.cm-home-skeleton .cm-lay-sk-banner + .cm-lay-section--showrooms { margin-top:24px; }
+.cm-home-skeleton .cm-lay-showrooms { overflow:hidden; }
+.cm-sk-news { display:block; }
+.cm-sk-news-cover { display:block; width:100%; aspect-ratio:16/9; border-radius:18px; }
+.cm-sk-news-body { display:flex; flex-direction:column; gap:9px; padding:14px 4px 4px; }
+.cm-home-skeleton .cm-home-brand-marquee { margin-top:40px; }
+
+/* تصویر lazy که هنوز شروع به لود نشده: رنگ اسکلتی ثابت (بدون انیمیشن) تا جای خالی دیده نشود */
+img.cm-img-sk-wait { background-color:#262628; color:transparent !important; }
+.theme-light img.cm-img-sk-wait { background-color:#d6d9dc; }
+
+/* المان‌هایی که عکس‌شان background-image است (کاور نمایشگاه، بنر، لوگو): تا لود کامل، موج اسکلتی */
+.cm-bg-sk {
+  background-color:#262628 !important;
+  background-image:linear-gradient(100deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.09) 50%, rgba(255,255,255,0) 70%) !important;
+  background-size:200% 100% !important; background-repeat:no-repeat !important;
+  animation:cm-sk-sweep 1.4s linear infinite;
+}
+.theme-light .cm-bg-sk { background-color:#d6d9dc !important; background-image:linear-gradient(100deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.55) 50%, rgba(255,255,255,0) 70%) !important; }
+.cm-bg-ready { animation:cm-img-in .28s ease-out both; }
+@media (prefers-reduced-motion:reduce) { .cm-bg-sk, .cm-bg-ready { animation:none; } }
+
+/* ===== اسکلت کارت آگهی (compact) دقیقاً هم‌اندازهٔ کارت واقعی: ارتفاع ردیف‌ها از خود کارت (cqw) ===== */
+.xcd.is-skeleton .xcd-titlerow { min-height:calc(1.2 * max(13px, 4.7cqw)); }
+.xcd.is-skeleton .xcd-sk-title { height:max(13px,3.9cqw); }
+.xcd.is-skeleton .xcd-kmrow { min-height:calc(1.2 * max(9px, 2.5cqw)); align-items:center; }
+.xcd.is-skeleton .xcd-sk-chip { height:4.9cqw; }
+.xcd.is-skeleton .xcd-sk-logo { height:max(4cqw, 14px); width:14cqw; }
+.xcd.is-skeleton .xcd-sk-count { position:absolute; left:2.6cqw; bottom:2.6cqw; width:15cqw; height:5.2cqw; border-radius:999px; display:block; z-index:2; opacity:.7; }

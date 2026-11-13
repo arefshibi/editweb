@@ -1,0 +1,202 @@
+/* CarMaa requested polish: white edge-pinned dock, clearer story IDs and document disclosure,
+   calmer vehicle info blocks, and server-backed profile state presentation. */
+
+/* Bottom dock: clean white surface flush with the screen edge. */
+.bottom-dock {
+  position: fixed !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: 0 !important;
+  width: min(100%, 520px) !important;
+  max-width: 520px !important;
+  transform: translateX(-50%) !important;
+  padding: 0 !important;
+  justify-content: center !important;
+  z-index: 90 !important;
+  pointer-events: none !important;
+}
+.bottom-dock-inner,
+.theme-light .bottom-dock-inner,
+body[data-dock-page="listings"] #bottomDock .bottom-dock-inner,
+.theme-light body[data-dock-page="listings"] #bottomDock .bottom-dock-inner,
+body:has(#pageContent > [data-page="listings"]) #bottomDock .bottom-dock-inner {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 7px 8px calc(7px + env(safe-area-inset-bottom, 0px)) !important;
+  border: 1px solid rgba(29,29,31, .09) !important;
+  border-bottom: 0 !important;
+  border-radius: 19px 19px 0 0 !important;
+  background: #fff !important;
+  background-image: none !important;
+  color: #262628 !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: 0 -5px 22px rgba(29,29,31, .09) !important;
+  overflow: hidden !important;
+}
+.bottom-dock-inner::before { display: none !important; content: none !important; }
+.bottom-dock .dock-item,
+.theme-light .bottom-dock .dock-item {
+  color: #73777e !important;
+  border-radius: 13px !important;
+  background: transparent !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+.bottom-dock .dock-item.is-active,
+.theme-light .bottom-dock .dock-item.is-active {
+  color: #1D1D1F !important;
+  background: #f0f2f5 !important;
+}
+.bottom-dock .dock-item svg,
+.bottom-dock .dock-item .icon { color: currentColor !important; }
+.bottom-dock .dock-label { color: currentColor !important; font-weight: 750 !important; }
+.bottom-dock .dock-badge,
+.bottom-dock .mr-chat-dock-badge { border-color: #fff !important; }
+/* Home should show the dock too; hide it where it obstructs a focused full-screen task. */
+body[data-dock-page="home"] #bottomDock { display: flex !important; }
+body[data-dock-page="conversation"] #bottomDock,
+body:has(#pageContent > [data-page="conversation"]) #bottomDock,
+body[data-dock-page="sell"] #bottomDock,
+body[data-dock-page="sell-step"] #bottomDock,
+body[data-dock-page="sellReview"] #bottomDock,
+body:has(#pageContent > [data-page="sell-step"]) #bottomDock,
+html.mr-nf-open #bottomDock { display: none !important; }
+
+/* IDs/handles below story names in the message-story rail. */
+.mr-story-tile .mr-story-name { bottom: 25px !important; }
+.mr-story-tile .mr-story-handle {
+  position: absolute;
+  z-index: 3;
+  right: 7px;
+  left: 7px;
+  bottom: 7px;
+  overflow: hidden;
+  color: rgba(255,255,255,.9);
+  font-family: Inter, Arial, sans-serif;
+  font-size: 8.5px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  direction: ltr;
+  text-shadow: 0 1px 4px rgba(0,0,0,.8);
+  pointer-events: none;
+}
+
+/* A genuinely clickable, obvious disclosure for title/insurance/proxy information. */
+.sell-ownership-more { margin-top: 12px !important; padding-top: 0 !important; border-top: 0 !important; }
+.sell-ownership-more > summary {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 14px 13px !important;
+  border: 1px solid rgba(155, 145, 255, .38) !important;
+  border-radius: 15px !important;
+  background: linear-gradient(135deg, rgba(137, 120, 245, .13), rgba(137, 120, 245, .045)) !important;
+  color: var(--sm-text, #edf0f5) !important;
+  text-align: right !important;
+  cursor: pointer !important;
+  list-style: none !important;
+  transition: border-color .16s ease, background .16s ease, transform .16s ease !important;
+}
+.sell-ownership-more > summary::-webkit-details-marker { display: none !important; }
+.sell-ownership-more > summary:active { transform: scale(.992); }
+.sell-ownership-more > summary:focus-visible { outline: 2px solid #8c7cf6 !important; outline-offset: 3px !important; }
+.sell-ownership-summary-copy { display: flex !important; flex: 1 1 auto !important; min-width: 0 !important; flex-direction: column !important; gap: 5px !important; }
+.sell-ownership-summary-copy strong { font-size: 13px !important; font-weight: 850 !important; line-height: 1.5 !important; }
+.sell-ownership-summary-copy small { color: var(--sm-muted, #9ca3aa) !important; font-size: 11px !important; line-height: 1.7 !important; }
+.sell-ownership-summary-cta {
+  display: inline-flex !important;
+  flex: 0 0 auto !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  min-height: 31px !important;
+  padding: 0 9px !important;
+  border: 1px solid rgba(155,145,255,.32) !important;
+  border-radius: 10px !important;
+  background: rgba(135,120,245,.2) !important;
+  color: #c4baff !important;
+  font-size: 10px !important;
+  font-weight: 850 !important;
+  white-space: nowrap !important;
+}
+.sell-ownership-summary-cta svg { width: 15px !important; height: 15px !important; transition: transform .18s ease !important; }
+.sell-ownership-more[open] > summary { border-color: rgba(155,145,255,.7) !important; background: rgba(135,120,245,.16) !important; border-radius: 15px !important; }
+.sell-ownership-more[open] .sell-ownership-summary-cta svg { transform: rotate(180deg) !important; }
+.sell-ownership-intro { padding-inline: 3px !important; margin: 12px 0 14px !important; }
+@media (max-width: 370px) {
+  .sell-ownership-summary-cta { gap: 2px !important; padding-inline: 6px !important; font-size: 9px !important; }
+  .sell-ownership-summary-copy strong { font-size: 12px !important; }
+}
+
+/* Vehicle specification/documents: simpler rows and lighter borders, same data. */
+.vehicle-demo-layout .vds-grid {
+  gap: 7px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  overflow: visible !important;
+}
+.vehicle-demo-layout .vds-tile {
+  min-height: 68px !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 11px 12px !important;
+  border: 1px solid var(--line, rgba(130,140,150,.18)) !important;
+  border-radius: 13px !important;
+  background: var(--surface-2, rgba(255,255,255,.035)) !important;
+}
+.vehicle-demo-layout .vds-tile-label { font-size: 11px !important; }
+.vehicle-demo-layout .vds-tile-value { font-size: 14px !important; font-weight: 750 !important; }
+.vehicle-demo-layout .vds-tile-mark { opacity: .025 !important; }
+.vehicle-demo-layout .vds-tile-mark .icon { width: 40px !important; height: 40px !important; }
+.vehicle-demo-layout .vds-docs {
+  display: grid !important;
+  gap: 7px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  overflow: visible !important;
+}
+.vehicle-demo-layout .vds-doc,
+.vehicle-demo-layout .vds-doc + .vds-doc {
+  min-height: 54px !important;
+  gap: 10px !important;
+  padding: 10px 12px !important;
+  border: 1px solid var(--line, rgba(130,140,150,.18)) !important;
+  border-radius: 13px !important;
+  background: var(--surface-2, rgba(255,255,255,.035)) !important;
+}
+.vehicle-demo-layout .vds-doc-badge { width: 30px !important; height: 30px !important; border-radius: 9px !important; }
+.vehicle-demo-layout .vds-doc-badge .icon { width: 16px !important; height: 16px !important; }
+.vehicle-demo-layout .vds-doc-value { font-size: 13px !important; font-weight: 700 !important; }
+.vehicle-demo-layout .vds-doc-check .icon { width: 16px !important; height: 16px !important; }
+
+/* FIX: dock was shifted left by translateX(-50%) clashing with desktop.css inset-inline:0 */
+html body #bottomDock.bottom-dock {
+  left: 0 !important;
+  right: 0 !important;
+  inset-inline: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+/* Home: story rail under the search box; ID shown under each story */
+.cm-home-page > .cm-ts { margin: 4px 0 0; padding: 0 14px; direction: rtl; }
+@media (min-width: 760px) and (max-width: 1023px) { .cm-home-page > .cm-ts { max-width: 520px; margin-inline: auto; } }
+.cm-ts .cm-ts-name { display: none !important; }
+.cm-ts .cm-ts-handle { margin-top: 9px !important; font-size: 11.5px !important; font-weight: 700 !important; color: #ececee !important; line-height: 1.3 !important; max-width: 76px !important; }
+@media (min-width: 1024px) {
+  .cm-home-page > .cm-ts { padding: 0; margin: 0 0 14px; }
+  .cm-home-page .cm-hb > .cm-hb-banner, .cm-home-page .cm-hb > .cm-hb-grid { grid-row: 1 !important; }
+  .cm-ts .cm-ts-handle { max-width: 92px !important; font-size: 12.5px !important; }
+}

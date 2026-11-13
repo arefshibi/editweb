@@ -1,0 +1,78 @@
+/* CarMaa — professional site header (home + nav pages: saved, messages, Q&A…).
+   Layout (RTL, right → left):  [search] [bell] [account]  ········  [logo]
+   Account / vehicle / showroom pages keep their own back-button chrome
+   (.account-header-active) and are not touched. Loaded after matte-cards.css. */
+
+#siteHeader:not(.account-header-active) .header-home-row {
+  display: flex !important; align-items: center; gap: 8px;
+  padding: 12px 16px 12px !important; min-height: 66px;
+}
+/* flatten the two button groups so every control can be ordered individually */
+#siteHeader:not(.account-header-active) .header-home-row > div { display: contents !important; }
+#siteHeader:not(.account-header-active) .header-home-row .brand-mark { order: 5; margin-inline-start: auto; padding: 0; display: flex; align-items: center; }
+#siteHeader:not(.account-header-active) .header-home-row .header-brand-logo { width: 112px; max-height: 38px; }
+#siteHeader:not(.account-header-active) .header-home-row [data-action="openSearchOverlay"] { order: 1; }
+#siteHeader:not(.account-header-active) .header-home-row [data-action="openNotifications"] { order: 2; }
+#siteHeader:not(.account-header-active) .header-home-row #headerAccountBtn { order: 3; }
+
+/* icon buttons: soft squircles */
+html body #siteHeader:not(.account-header-active) .header-home-row button:not(.brand-mark):not(#headerAccountBtn) {
+  width: 40px; height: 40px; border-radius: 50% !important; position: relative;
+  background: rgba(255,255,255,.05) !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  transition: background .2s ease, transform .15s ease;
+}
+html body #siteHeader:not(.account-header-active) .header-home-row button:not(.brand-mark):not(#headerAccountBtn):active { transform: scale(.92); background: rgba(255,255,255,.1) !important; }
+
+/* account avatar with a fine ring */
+html body #siteHeader:not(.account-header-active) .header-home-row #headerAccountBtn {
+  width: 40px; height: 40px; padding: 2px; border-radius: 50%;
+  background: linear-gradient(145deg, rgba(255,255,255,.55), rgba(255,255,255,.08) 55%, rgba(255,255,255,.3)) !important;
+  border: 0 !important;
+}
+#siteHeader:not(.account-header-active) .header-home-row #headerAccountBtn .header-account-avatar,
+#siteHeader:not(.account-header-active) .header-home-row #headerAccountBtn .header-account-initial {
+  width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: flex; align-items: center; justify-content: center;
+  background: #262628; border: 2px solid #1D1D1F; box-sizing: border-box; font-weight: 800; font-size: 14px; color: #f3f4f6;
+}
+#siteHeader:not(.account-header-active) .header-home-row #headerAccountBtn > svg {
+  width: 100%; height: 100%; padding: 8px; box-sizing: border-box; border-radius: 50%; background: #262628; border: 2px solid #1D1D1F;
+}
+
+/* bell badge sits on the squircle corner */
+#siteHeader:not(.account-header-active) .header-home-row .mr-bell-badge { top: -4px; inset-inline-end: -4px; border: 2px solid #1D1D1F; box-sizing: content-box; }
+
+/* a hairline under the header instead of a hard seam */
+#siteHeader:not(.account-header-active):not(.listings-header-hidden) { box-shadow: 0 1px 0 rgba(255,255,255,.05); }
+
+
+/* The shared header stays dark in the light theme too (see styles.css "Unified flat chrome"), so no light overrides are needed. */
+html.theme-light body #siteHeader:not(.account-header-active) .header-home-row button:not(.brand-mark):not(#headerAccountBtn) {
+  background: #f0f0f2 !important; border-color: rgba(0,0,0,.09) !important; color: #262628 !important;
+}
+html.theme-light body #siteHeader:not(.account-header-active) .header-home-row button:not(.brand-mark):not(#headerAccountBtn):active { background: #e1e2e6 !important; }
+html.theme-light body #siteHeader:not(.account-header-active) .header-home-row #headerAccountBtn { color: #f3f4f6 !important; }
+
+/* Header wordmark — same "Carma" lettering as the footer (Fredoka 600, loaded in index.html) */
+.header-wordmark {
+  display: inline-block;
+  font-family: 'Fredoka', 'Baloo 2', 'Nunito', 'Varela Round', ui-rounded, 'SF Pro Rounded', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--sm-text, #F5F5F7);
+  direction: ltr; unicode-bidi: isolate;
+  -webkit-font-smoothing: antialiased;
+  white-space: nowrap;
+  user-select: none;
+}
+.header-wordmark--small { font-size: 23px; }
+.theme-light .header-wordmark { color: #262628; }
+
+/* "C" of the header wordmark = brand glyph (white PNG used as a mask → follows text colour, white in dark theme) */
+.header-wordmark .hw-c{
+  display:inline-block; width:.9em; height:.9em; margin-inline-end:.06em; margin-block:0; vertical-align:baseline;
+  background-color:#ffffff;
+  -webkit-mask:url(assets/carma-c-white.png?v=2) center/contain no-repeat; mask:url(assets/carma-c-white.png?v=2) center/contain no-repeat;
+color:#1D1D1F}

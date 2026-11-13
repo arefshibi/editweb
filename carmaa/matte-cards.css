@@ -1,0 +1,318 @@
+/* CarMaa — one consistent matte-black surface for cards throughout the site.
+   Loaded after all component stylesheets so listing, showroom, account, QA,
+   dealer, saved-search, vehicle-detail and other cards share the same finish. */
+
+:root {
+  --cm-matte-card-bg: #1D1D1F;
+  --cm-matte-card-border: rgba(255,255,255,.14);
+  --cm-matte-card-shadow: 0 5px 14px rgba(0,0,0,.22);
+}
+
+/* Known card containers, including classes whose names do not follow one pattern. */
+html body :is(
+  .cm-home-page .cm-home-tile-surface,
+  .xcard, .listing-card, .account-pin-card, .acct-type-card,
+  .body-condition-card, .cm-home-showroom-card, .cm-showroom-card,
+  .cm-showroom-skeleton-card, .dealership-card,
+  .detail-condition-card, .detail-diagram-card, .detail-map-card,
+  .detail-owner-card, .detail-price-card, .detail-review-card,
+  .detail-similar-card, .filter-icon-card, .gallery-card, .glass-card,
+  .home-brand-card, .home-demo-card, .home-demo-category-card,
+  .location-card, .login-modal-card, .modal-card,
+  .mr-nf-card, .mr-nf-panel, .mr-saved-search-card, .mr-sv-sheet-card,
+  .mr-transparency-card, .mr-history-box, .mr-inline-offer-panel,
+  .mr-card-body-diagram, .mr-dealer-public-info,
+  .paint-card, .peek-active-card, .price-card, .promo-card,
+  .qa-card, .qa-detail-card, .qa-related-item, .qa-similar-item,
+  .qa-note-item, .section-card, .sell-check-card, .sell-publishing-card,
+  .seller-card, .sp-honor-card, .sr-card, .swipe-card-fg,
+  .vehicle-detail-specs-card, .questionCard, .adStats-tile, .adStats-tiles,
+  .spec-tile, .vds-tile, .detail-overview-panel,
+  .cm-home-trust-item, .cm-home-search-panel,
+  .mr-dealer-filter-empty, .search-overlay-sk-card
+) {
+  background: linear-gradient(145deg, #262628 0%, #1D1D1F 52%, #1D1D1F 100%) !important;
+  background-color: #1D1D1F !important;
+  border-color: var(--cm-matte-card-border) !important;
+  box-shadow: var(--cm-matte-card-shadow) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Also cover other present and future card wrappers, but not their inner content parts
+   such as photos, logos, titles, price text, badges, and layout rows. */
+html body [class*="card"]:not([class*="avatar"]):not([class*="badge"]):not([class*="body"]):not([class*="main"]):not([class*="media"]):not([class*="image"]):not([class*="photo"]):not([class*="logo"]):not([class*="label"]):not([class*="title"]):not([class*="text"]):not([class*="name"]):not([class*="count"]):not([class*="meta"]):not([class*="action"]):not([class*="head"]):not([class*="foot"]):not([class*="top"]):not([class*="link"]):not([class*="price"]):not([class*="spec"]):not([class*="icon"]):not([class*="dot"]):not([class*="arrow"]):not([class*="copy"]):not([class*="status"]):not([class*="row"]):not([class*="stack"]):not([class*="ribbon"]):not([class*="tag"]):not([class*="glow"]):not([class*="shade"]):not([class*="-bg"]):not([class*="placeholder"]):not([class*="selected"]):not([class*="create"]):not([class*="unit"]):not([class*="surface"]):not([class*="overlay"]):not([class*="corner"]):not([class*="-id"]):not([class*="verified"]):not([class*="city"]):not([class*="namerow"]):not([class*="excerpt"]):not([class*="kicker"]):not([class*="sub"]):not([class*="diagram"]):not([class*="disabled"]):not([class*="wrap"]) {
+  background: linear-gradient(145deg, #262628 0%, #1D1D1F 52%, #1D1D1F 100%) !important;
+  background-color: #1D1D1F !important;
+  border-color: var(--cm-matte-card-border) !important;
+  box-shadow: var(--cm-matte-card-shadow) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Remove decorative blue/purple glows that made some brand cards look unlike the matte cards. */
+.home-brand-card::before,
+.home-brand-card::after,
+.home-demo-card-glow,
+.home-demo-card-shade {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Keep the actual listing/showroom photos and brand logos as content; only card surfaces change. */
+html body .xcard-media,
+html body .xcard-photo-foreground,
+html body .qa-card-media,
+html body .cm-showroom-cover,
+html body .cm-showroom-cover-image,
+html body .hero-photo-wrap,
+html body .hero-photo,
+html body .home-demo-card-bg {
+  background-image: initial;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Matte selected states rather than blue/purple filled cards. */
+html body .acct-type-card:has(input:checked),
+html body .home-demo-card-selected,
+html body .home-brand-card.is-selected,
+html body .qa-card.is-selected {
+  background: linear-gradient(145deg, #262628 0%, #1D1D1F 52%, #1D1D1F 100%) !important;
+  border-color: rgba(255,255,255,.18) !important;
+  box-shadow: var(--cm-matte-card-shadow) !important;
+}
+
+/* No blue hover wash on the outside of cards. */
+html body .xcard:hover,
+html body .dealership-card:hover,
+html body .cm-showroom-card:hover,
+html body .qa-card:hover,
+html body .home-brand-card:hover,
+html body .home-demo-card:hover {
+  background: linear-gradient(145deg, #262628 0%, #1D1D1F 52%, #1D1D1F 100%) !important;
+  border-color: rgba(255,255,255,.15) !important;
+  box-shadow: 0 7px 18px rgba(0,0,0,.28) !important;
+}
+
+/* Remove the remaining decorative card-surface glows; retain badge/medal icons and photos. */
+.vehicle-demo-layout .price-card::before,
+.sp-honor-card::before {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* ---- Home page only (dark theme): slightly lighter page background so the
+   cards stand out. Every other page keeps the original #1D1D1F. ---- */
+html:not(.theme-light):has(#pageContent > [data-page="home"]),
+html:not(.theme-light):has(#pageContent > [data-page="home"]) body,
+html:not(.theme-light) body:has(#pageContent > [data-page="home"]) #appViewport,
+html:not(.theme-light) body:has(#pageContent > [data-page="home"]) #appFrame,
+html:not(.theme-light) body:has(#pageContent > [data-page="home"]) #siteHeader,
+html:not(.theme-light) body:has(#pageContent > [data-page="home"]) .cm-home-page {
+  background: #1D1D1F !important;
+  background-color: #1D1D1F !important;
+}
+html:not(.theme-light) body:has(#pageContent > [data-page="home"]) #stickyHeaderGroup {
+  --chrome-fade-bg: #1D1D1F;
+}
+html:not(.theme-light) body:has(#pageContent > [data-page="home"]) .cm-home-page {
+  --cm-home-bg: #1D1D1F;
+}
+
+/* ---- Account page: solid header. (The showroom page lets the header float
+   transparently over its full-bleed banner — see showrooms-ios.css.) ---- */
+html:not(.theme-light) body:has(#pageContent > [data-page="account"]) #siteHeader,
+html:not(.theme-light) body:has(#pageContent > [data-page="account"]) #stickyHeaderGroup,
+html:not(.theme-light) body:has(#pageContent > [data-page="account"]) #pageContent > [data-page="account"] .page-header-sticky {
+  background: #1D1D1F !important;
+  background-color: #1D1D1F !important;
+}
+html.theme-light body:has(#pageContent > [data-page="account"]) #siteHeader,
+html.theme-light body:has(#pageContent > [data-page="account"]) #stickyHeaderGroup {
+  background: #F5F5F7 !important;
+  background-color: #F5F5F7 !important;
+}
+
+/* Universal "← بازگشت" button removed from all pages. */
+.cm-universal-back { display: none !important; }
+
+/* Banners removed: showroom edit form shows only the centred profile photo. */
+.dealer-media-edit { display: flex; justify-content: center; padding-bottom: 0; }
+.dealer-media-edit .dealer-avatar-pick { position: relative; right: auto; bottom: auto; }
+.account-edit-banner-tools, .dealer-cover-pick { display: none !important; }
+
+/* =====================================================================
+   HOME PAGE — premium monochrome boxes (dark theme)
+   No colour accents: depth comes from black shadows, inner vignettes and
+   a faint white edge light. Geometry stays as defined in styles.css.
+   ===================================================================== */
+html:not(.theme-light) body .cm-home-page .cm-home-services-primary > .cm-home-tile .cm-home-tile-surface {
+  background:
+    linear-gradient(90deg, transparent, rgba(255,255,255,.28) 50%, transparent) top center / 52% 1px no-repeat,
+    radial-gradient(120% 90% at 100% 0%, rgba(255,255,255,.06), transparent 55%),
+    linear-gradient(155deg, #262628 0%, #1D1D1F 52%, #1D1D1F 100%) !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 -26px 34px -16px rgba(0,0,0,.85),
+    inset 0 0 0 1px rgba(0,0,0,.55),
+    0 22px 38px -12px rgba(0,0,0,.95),
+    0 8px 14px -4px rgba(0,0,0,.75) !important;
+  transition: transform .25s cubic-bezier(.2,.9,.25,1), box-shadow .25s ease, border-color .25s ease;
+}
+/* faint specular sheen, top-left */
+html:not(.theme-light) body .cm-home-page .cm-home-services-primary > .cm-home-tile .cm-home-tile-surface::before {
+  content: "" !important;
+  position: absolute; inset: 0; z-index: 2;
+  border-radius: inherit; pointer-events: none;
+  background: linear-gradient(118deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.02) 26%, transparent 46%) !important;
+}
+html:not(.theme-light) body .cm-home-page .cm-home-services-primary > .cm-home-tile:hover .cm-home-tile-surface {
+  border-color: rgba(255,255,255,.20) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -26px 34px -16px rgba(0,0,0,.85),
+    inset 0 0 0 1px rgba(0,0,0,.55),
+    0 26px 44px -12px rgba(0,0,0,1),
+    0 10px 18px -4px rgba(0,0,0,.8) !important;
+}
+
+/* neutral glass pill */
+html:not(.theme-light) body .cm-home-page .cm-home-services-primary .cm-home-tile-tag {
+  background: rgba(255,255,255,.07) !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  color: #e4e7ec !important;
+  font-weight: 800 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.10), 0 3px 8px rgba(0,0,0,.5);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+/* silver title with a black shadow */
+html:not(.theme-light) body .cm-home-page .cm-home-services-primary .cm-home-tile-title {
+  background: linear-gradient(180deg, #ffffff 0%, #d6dbe2 55%, #a9b0ba 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent !important;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,.85));
+}
+html:not(.theme-light) body .cm-home-page .cm-home-services-primary .cm-home-tile-caption {
+  color: rgba(224,228,234,.66) !important;
+  text-shadow: 0 2px 6px rgba(0,0,0,.9);
+}
+/* neutral glass arrow button */
+html:not(.theme-light) body .cm-home-page .cm-home-services-primary .cm-home-tile-corner {
+  background: linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.02)) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  color: #e9ecf0 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 8px 16px -4px rgba(0,0,0,.85);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  transition: transform .25s ease;
+}
+html:not(.theme-light) body .cm-home-page .cm-home-services-primary > .cm-home-tile:hover .cm-home-tile-corner {
+  transform: translate(-2px, 2px);
+}
+html:not(.theme-light) body .cm-home-page .cm-home-services-primary .cm-home-showroom-badge {
+  background: rgba(255,255,255,.07) !important;
+  border-color: rgba(255,255,255,.16) !important;
+  color: #e4e7ec !important;
+}
+html:not(.theme-light) body .cm-home-page .cm-home-services-primary .cm-home-account-outline { color: #cfd4db !important; }
+html:not(.theme-light) body .cm-home-page .cm-home-dealers-glow { display: none !important; }
+
+/* trust items: matte black cards with deep shadow */
+html:not(.theme-light) body .cm-home-page .cm-home-trust-item {
+  background: linear-gradient(155deg, #262628 0%, #1D1D1F 100%) !important;
+  border: 1px solid rgba(255,255,255,.09) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.09),
+    inset 0 -16px 22px -14px rgba(0,0,0,.8),
+    0 14px 26px -10px rgba(0,0,0,.9) !important;
+}
+html:not(.theme-light) body .cm-home-page .cm-home-trust-icon {
+  background: linear-gradient(145deg, rgba(255,255,255,.14), rgba(255,255,255,.03)) !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 5px 10px -3px rgba(0,0,0,.8);
+}
+
+/* sell CTA: matte black panel */
+html:not(.theme-light) body .cm-home-page .cm-home-sell-cta {
+  background: linear-gradient(155deg, #262628 0%, #1D1D1F 100%) !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 -22px 30px -16px rgba(0,0,0,.85),
+    0 20px 36px -12px rgba(0,0,0,.95) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body .cm-home-page .cm-home-tile-surface, html body .cm-home-page .cm-home-tile-corner { transition: none !important; }
+}
+
+/* Account page: no "حساب من" title. */
+body:has(#pageContent > [data-page="account"]) #pageHeaderSlot .page-header-sticky h1,
+body:has(#pageContent > [data-page="account"]) #pageContent > [data-page="account"] .page-header-sticky h1 { display: none !important; }
+
+/* Banners are gone: drop the spacer that used to reserve room for the cover,
+   so the avatar and everything below sits right under the header. */
+.account-profile-banner-spacer { display: none !important; height: 0 !important; min-height: 0 !important; flex: 0 0 0 !important; }
+.account-profile { padding-top: 10px !important; }
+
+/* ---- Header buttons: flat matte instead of liquid glass ---- */
+html body #siteHeader .header-home-row button:not(.brand-mark):not([hidden]),
+html body #siteHeader .non-home-header-row .header-menu-button,
+html body .explore-header button.explore-icon-btn,
+html body .mr-cv-head .mr-cv-back,
+html body #siteHeader.account-header-active .header-home-row > div:first-child > button,
+html body #siteHeader.account-header-active .header-home-row > div:last-child > button[data-action="vehicleBack"],
+html body #siteHeader.account-header-active .header-home-row .brand-mark.header-center-notifications {
+  background: #262628 !important;
+  background-image: none !important;
+  border: 1px solid rgba(255,255,255,.09) !important;
+  color: #f3f4f6 !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+html body #siteHeader.account-header-active .header-home-row > div:first-child > button::before,
+html body #siteHeader.account-header-active .header-home-row > div:last-child > button[data-action="vehicleBack"]::before { display: none !important; }
+html body #siteHeader .header-home-row button:not(.brand-mark):not([hidden]):active,
+html body #siteHeader .non-home-header-row .header-menu-button:active,
+html body .explore-header button.explore-icon-btn:active,
+html body .mr-cv-head .mr-cv-back:active { background: #262628 !important; }
+html body #siteHeader .header-home-row button:not(.brand-mark) svg,
+html body .explore-header button.explore-icon-btn svg { filter: none !important; }
+
+html.theme-light body #siteHeader .header-home-row button:not(.brand-mark):not([hidden]),
+html.theme-light body #siteHeader .non-home-header-row .header-menu-button,
+html.theme-light body .explore-header button.explore-icon-btn,
+html.theme-light body .mr-cv-head .mr-cv-back,
+html.theme-light body #siteHeader.account-header-active .header-home-row > div:first-child > button,
+html.theme-light body #siteHeader.account-header-active .header-home-row > div:last-child > button[data-action="vehicleBack"],
+html.theme-light body #siteHeader.account-header-active .header-home-row .brand-mark.header-center-notifications {
+  background: #f0f0f2 !important;
+  border-color: rgba(0,0,0,.09) !important;
+  color: #262628 !important;
+}
+
+/* ---- Account page buttons: same look as the showroom page buttons
+   (48px tall, 14px radius, 16px/600; primary = system blue, others = soft fill). ---- */
+html body .account-profile .account-edit-btn,
+html body .dealership-btn-main,
+html body .dealership-btn-sub {
+  height: 48px !important; min-height: 48px !important;
+  border: 0 !important; border-radius: 14px !important;
+  font: inherit !important; font-size: 16px !important; font-weight: 600 !important;
+  display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 6px;
+  box-shadow: none !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+  background: var(--sr-fill) !important; color: var(--sr-label) !important;
+  transition: transform .12s, background .2s, opacity .2s;
+}
+html body .dealership-btn-main { background: var(--sr-blue) !important; color: #fff !important; }
+html body .account-profile .account-edit-btn[data-action="logout"] { color: #ffffff !important; }
+html body .account-profile .account-edit-btn:active,
+html body .dealership-btn-main:active,
+html body .dealership-btn-sub:active { transform: scale(.98); opacity: .85; }

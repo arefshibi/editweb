@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+    <title>Carma | پلتفرم جامع خودرو</title>
+
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#050505" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Carma" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.v2.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="icons/favicon-48.v2.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.v2.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <link rel="stylesheet" href="styles.css?v=noimg-20261029-083656-rb1-bw20261104053208" />
+    <link rel="stylesheet" href="showrooms-ios.css?v=33-dock-sell-rb1-bw20261104053208" />
+    <link rel="stylesheet" href="chat-attach.css?v=9-rb1-bw20261104053208" />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&text=Carma&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&text=Carma&display=swap" rel="stylesheet" /></noscript>
+    <link rel="stylesheet" href="home-footer.css?v=12-trust-rb1-ft1102101211-bw20261104053208" />
+    <link rel="stylesheet" href="matte-cards.css?v=13-rb1-bw20261104053208" />
+    <link rel="stylesheet" href="home-d.css?v=26-brands-footer-rb1" />
+    <link rel="stylesheet" href="header-premium.css?v=5-rb1-bw20261104053208" />
+    <link rel="stylesheet" href="contact-bar.css?v=10-theme-rb1-bw20261104053208" />
+    <link rel="stylesheet" href="skeleton-plus.css?v=4-card1" />
+    <link rel="stylesheet" href="top-stories.css?v=4-rb1" />
+    <link rel="stylesheet" href="undo-delete.css?v=1-rb1" />
+    <link rel="stylesheet" href="ai-autofill.css?v=2-rb1-bw20261104053208" />
+    <link rel="stylesheet" href="ad-title.css?v=1-rb1" />
+    <link rel="stylesheet" href="demo-showrooms.css?v=1-rb1" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/nonexistent.css" />
+      <style id="carma-brand-inline">
+      /* Carma brand colours (inline so they never depend on cached CSS files) */
+      .header-wordmark .hw-c{background-color:#ffffff !important;color:#0a0a0a !important}
+      html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"],
+      html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"].is-active{background:#ffffff !important;background-color:#ffffff !important;color:#0a0a0a !important}
+      html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"] svg{stroke:#000 !important;color:#000 !important}
+    </style>
+    <link rel="stylesheet" href="dock-ios.css?v=2-rb1-bw20261104053208" />
+      <link rel="stylesheet" href="theme-redblack.css?v=rb1-bw20261104053208" />
+      <link rel="stylesheet" href="section-links.css?v=sl1102124714-bw20261104053208" />
+    <link rel="stylesheet" href="first-ad-story.css?v=1-bw20261104053208" />
+      <link rel="stylesheet" href="msg-hero.css?v=1-bw20261104053208" />
+  
+    <link rel="stylesheet" href="dock-compact.css?v=1793737808-bw20261104053208-df20261104061100-dw20261104065548-ft20261108" />
+  <link rel="stylesheet" href="msg-hero-sticky.css?v=msgBG20261105063315" />
+  <link rel="stylesheet" href="theme-bw-luxury.css?v=bw20261104053949" />
+  <script defer src="theme-bw-luxury.js?v=bw20261104053208"></script>
+    <link rel="stylesheet" href="theme-bw-blue.css?v=bw20261104053949" />
+  <script defer src="theme-bw-blue.js?v=bw20261104053949"></script>
+    <link rel="stylesheet" href="theme-bw-card.css?v=perf20261105074007" />
+    <link rel="stylesheet" href="msg-empty-ios.css?v=me20261108b" />
+      <link rel="stylesheet" href="story-offer-lux.css?v=flux20261108215357" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="appFrame" class="min-h-screen bg-black flex justify-center font-sans text-neutral-100">
+        <div id="appViewport" class="w-full max-w-[520px] bg-neutral-950 min-h-screen border-x border-neutral-800 relative overflow-x-clip">
+          <!-- FIX 4: horizontal clipping is back on #appViewport (this is what
+               stops wide/animated content — e.g. the vehicle gallery — from
+               bleeding past the boxed viewport and exposing the page's
+               white background on the left). It uses `overflow-x: clip`
+               instead of `overflow-x: hidden` on purpose: unlike `hidden`,
+               `clip` does not establish a scroll container, so per the CSS
+               Overflow spec it does NOT force the other axis (overflow-y)
+               to be promoted to `auto`. That promotion is exactly what
+               broke #stickyHeaderGroup's stickiness in FIX 3 above — so
+               `clip` gives the same visual clipping as the old
+               `overflow-x-hidden` utility without reintroducing that bug.
+               Do not swap this back to `.overflow-x-hidden`. -->
+          <!-- FIX 3: removed `overflow-x-hidden` from #appViewport. Per the
+               CSS overflow spec, when overflow-x is anything other than
+               `visible` and overflow-y is left as `visible`, the browser
+               silently promotes overflow-y to `auto` too (an axis can't
+               stay `visible` while its sibling axis is clipped) — so this
+               single class was quietly turning #appViewport into a scroll
+               container on the Y axis as well, even though it never
+               actually scrolls internally (its height just grows with
+               content). That makes #appViewport, not the real page
+               viewport, the reference box `position: sticky` measures
+               against — so #stickyHeaderGroup (a child of this element)
+               just sat at the container's own top edge and rode away with
+               the page instead of pinning to the screen. The off-canvas
+               menu drawer this was added to guard (#menuOverlayInner) is
+               `position: fixed`, so it was never actually clipped by this
+               anyway; `html { overflow-x: hidden }` in the base rules
+               already prevents any page-wide horizontal scrollbar. -->
+          <!-- FIX: #stickyHeaderGroup must be a SIBLING of #pageBlurWrap, not
+               nested inside it. #pageBlurWrap gets a filter/transform class
+               during page-transition loading (see render() in script.js),
+               and a filter/transform on an ancestor breaks position:sticky
+               on its descendants. See styles.css "FIX 2" comment above
+               .page-header-sticky for the full explanation. -->
+          <!-- FIX: no bg-neutral-950 here on purpose. This wrapper used to
+               paint an opaque background across the whole sticky group,
+               which would sit directly behind #stickyHeaderGroup::after's
+               fade-out gradient (see styles.css) and hide it completely.
+               Each real chrome child carries its own opaque background
+               instead (#siteHeader, .page-header-sticky, .toolbar-sticky
+               all already have bg-neutral-950), so the ::after strip
+               appended past whichever of them renders last can actually
+               fade to reveal the real scrolled content behind it. -->
+          <div id="stickyHeaderGroup" class="sticky top-0 z-30">
+            <header id="siteHeader" class="bg-neutral-950">
+              <div class="header-home-row grid grid-cols-3 items-center px-4 py-1">
+                <div class="flex items-center gap-5 justify-self-start">
+                  <button aria-label="منو" class="text-neutral-100" data-action="openMenu">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+                  </button>
+                </div>
+                <button data-action="goHome" class="brand-mark text-center leading-none justify-self-center">
+                  <span class="header-wordmark" dir="ltr" lang="en" aria-label="Carma"><i class="hw-c" aria-hidden="true"></i>arma</span>
+                </button>
+                <div class="flex items-center gap-4 justify-self-end">
+                  <button aria-label="جستجو" class="text-neutral-100" data-action="openSearchOverlay">
+                    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+                  </button>
+                  <button aria-label="حساب کاربری" id="headerAccountBtn" class="text-neutral-100" data-action="openAccount">
+                    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="non-home-header-row" aria-label="جستجو">
+                <button data-action="goHome" class="header-shield-logo" aria-label="خانه"><span class="header-wordmark header-wordmark--small" dir="ltr" lang="en" aria-label="Carma"><i class="hw-c" aria-hidden="true"></i>arma</span></button>
+                <div data-action="openSearchOverlay" role="button" tabindex="0" class="header-search-box" aria-label="جستجو در خودروها، برندها و مدل‌ها">
+                  <svg class="header-search-icon" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+                  <span class="bar-search-field">
+                    <input id="toolSearchInput" type="text" tabindex="-1" readonly autocomplete="off" placeholder="" aria-hidden="true"/>
+                    <span class="bar-search-copy" aria-hidden="true">
+                      <span class="bar-search-label">جستجو خودرو بر اساس</span>
+                      <span class="bar-search-rotator" id="toolSearchRotator"></span>
+                    </span>
+                  </span>
+                  <button type="button" data-action="clearToolSearch" class="header-search-clear" aria-label="پاک کردن جستجو" hidden>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+                  </button>
+                </div>
+                <button aria-label="منو" class="header-menu-button text-neutral-100" data-action="openMenu">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+                </button>
+              </div>
+            </header>
+            <div id="pageHeaderSlot"></div>
+            <div id="toolbarSlot"></div>
+          </div>
+          <div id="pageBlurWrap">
+            <main id="pageContent"></main>
+          </div>
+<template id="tpl-brand-models">
+            <section data-page="brand-models">
+              <div class="page-header-sticky bg-neutral-950">
+                <div data-slot="breadcrumbs"></div>
+                <h1 data-slot="title" class="font-serif font-bold text-[18px] px-4 pt-1 pb-0 tracking-tight leading-tight"></h1>
+              </div>
+              <div data-slot="toolbar"></div>
+              <div data-slot="models" class="grid grid-cols-2 gap-3.5 p-4"></div>
+            </section>
+          </template>
+
+          <template id="tpl-listings">
+            <section data-page="listings">
+              <div class="page-header-sticky bg-neutral-950 cm-lh">
+                <div class="cm-lh-text"><h1>آگهی‌ها</h1><p>خودروی مناسبت را پیدا و مقایسه کن</p></div>
+                <div class="cm-lh-btns">
+                  <button type="button" data-action="openSearchOverlay" class="cm-lh-btn" aria-label="جستجو"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></button>
+                  <button type="button" data-action="goSell" class="cm-lh-btn" aria-label="ثبت آگهی"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                </div>
+              </div>
+              <div data-slot="toolbar"></div>
+              <div data-slot="viewToggle" class="vt-row"></div>
+              <div data-slot="refreshTop"></div>
+              <div data-slot="cards" class="explore-list"></div>
+              <div data-slot="footer"></div>
+            </section>
+          </template>
+
+          <template id="tpl-saved">
+            <section data-page="saved">
+              <div class="page-header-sticky bg-neutral-950">
+                <div data-slot="breadcrumbs"></div>
+                <h1 data-slot="title" class="font-serif font-bold text-[18px] px-4 pt-1 pb-0 tracking-tight leading-tight"></h1>
+              </div>
+              <div data-slot="toolbar"></div>
+              <div data-slot="cards" class="grid grid-cols-2 gap-3.5 p-4"></div>
+              <div data-slot="footer"></div>
+            </section>
+          </template>
+
+          <template id="tpl-manage-listings">
+            <section data-page="manage-listings">
+              <div class="page-header-sticky bg-neutral-950">
+                <div data-slot="breadcrumbs"></div>
+                <h1 data-slot="title" class="font-serif font-bold text-[18px] px-4 pt-1 pb-0 tracking-tight leading-tight"></h1>
+              </div>
+              <div data-slot="toolbar"></div>
+              <div data-slot="login-gate" class="mx-4 mt-4 rounded-2xl border border-neutral-800 bg-neutral-900 p-5 flex flex-col items-center gap-3 text-center" hidden>
+                <div class="text-[13.5px] text-neutral-300">برای مدیریت و ثبت آگهی، ابتدا وارد حساب کاربری خود شوید.</div>
+                <button type="button" data-action="promptLoginSell" class="bg-violet-300 text-neutral-950 text-[13px] font-semibold rounded-full px-5 py-2.5">ورود به حساب کاربری</button>
+              </div>
+              <div data-slot="cards" class="flex flex-col gap-3 px-4 pt-4 pb-8"></div>
+            </section>
+          </template>
+
+          <template id="tpl-dealers">
+            <section data-page="dealers">
+              <div class="page-header-sticky bg-neutral-950">
+                <div data-slot="breadcrumbs"></div>
+                <h1 class="font-serif font-bold text-2xl px-4 pt-2 pb-3 tracking-tight">نمایندگی‌های مجاز</h1>
+              </div>
+              <div data-slot="toolbar"></div>
+              <div data-slot="dealers" class="px-4 pb-8 flex flex-col gap-3"></div>
+            </section>
+          </template>
+
+          <template id="tpl-sell">
+            <section data-page="sell">
+              <div class="page-header-sticky bg-neutral-950">
+                <div data-slot="breadcrumbs"></div>
+                <h1 class="font-serif font-bold text-2xl px-4 pt-2 pb-1 tracking-tight">فروش خودرو</h1>
+                <p class="px-4 text-[13px] text-neutral-400 pb-3">خودروی خود را مرحله‌به‌مرحله ثبت کنید؛ لازم نیست همه اطلاعات را یک‌جا وارد کنید.</p>
+              </div>
+              <div data-slot="sell-content"></div>
+            </section>
+          </template>
+
+          <template id="tpl-vehicle">
+            <section data-page="vehicle" class="vehicle-detail-page">
+              <div class="detail-hero">
+                <div class="detail-hero-main" data-slot="hero"></div>
+                <div class="detail-hero-overlay"></div>
+                <div class="detail-top-actions">
+                  <button type="button" data-action="vehicleBack" aria-label="بازگشت" class="detail-round-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <div class="detail-action-group">
+                    <button type="button" data-action="shareVehicle" aria-label="اشتراک‌گذاری" class="detail-round-btn">
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="18" cy="18" r="2.4"/><path d="M8.1 10.8l7.8-4.4M8.1 13.2l7.8 4.4"/></svg>
+                    </button>
+                    <button type="button" data-action="toggleLike" data-slot-id="like" aria-label="ذخیره" class="detail-round-btn">
+                      <svg data-icon="bookmark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5h11a1 1 0 0 1 1 1V21l-6.5-4-6.5 4V4.5a1 1 0 0 1 1-1z"/></svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="detail-counter" data-slot="photo-count"></div>
+              </div>
+
+              <div class="detail-info-sheet">
+                <div class="detail-title-row">
+                  <div class="detail-title-wrap">
+                    <div class="detail-name-row">
+                      <h1 data-slot="title" class="detail-car-name"></h1>
+                      <span class="detail-year-badge" data-slot="year"></span>
+                    </div>
+                    <div class="detail-location" data-slot="city"></div>
+                  </div>
+                </div>
+
+                <div class="detail-main-price-row">
+                  <div class="detail-main-price">
+                    <div class="detail-main-price-value" data-slot="price-main"></div>
+                    <div class="detail-main-price-label">قیمت آگهی</div>
+                  </div>
+                </div>
+
+                <div class="detail-facts-grid" data-slot="quick-facts"></div>
+
+                <div class="detail-tabs" role="tablist" data-slot="tabs"></div>
+                <div class="detail-tab-panels" data-slot="tab-content"></div>
+
+                <div class="detail-section-head">
+                  <h2 data-slot="similar-title">خودروهای مشابه</h2>
+                  <button type="button" data-action="goListings" data-slot-id="similar-all" class="detail-outline-btn">مشاهده همه</button>
+                </div>
+                <div class="detail-similar-row" data-slot="similar"></div>
+
+                <div class="detail-spacer"></div>
+              </div>
+
+              <div class="detail-cta">
+      <div class="detail-cta-inner detail-cta-split">
+        <button type="button" data-action="openContactChooser" data-slot-id="contact-sticky" class="detail-cta-btn detail-cta-contact"><svg class="icon"><use href="#vd-i-chat"></use></svg><span>گفت‌وگو و تماس</span></button>
+        <button type="button" data-action="openCarOffer" data-slot-id="offer-sticky" class="detail-cta-btn detail-cta-offer" hidden><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.3"/></svg><span>پیشنهاد قیمت</span></button>
+        <div class="detail-cta-hidden" hidden><div class="detail-cta-price-value" data-slot="price-sticky"></div><div class="detail-cta-price-unit"></div><a data-slot="phone-sticky" data-action="clickContact" class="detail-cta-phone"></a></div>
+      </div>
+    </div>
+            </section>
+          </template>
+
+          <template id="tpl-sell-step">
+            <section data-page="sell-step">
+              <div class="page-header-sticky bg-neutral-950 explore-header">
+                <button type="button" data-action="goHome" aria-label="بازگشت" class="explore-icon-btn">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6 8 12l7 6"/></svg>
+                </button>
+                <div class="explore-title" data-slot="title">فروش خودرو</div>
+                <span class="explore-icon-btn" style="visibility:hidden" aria-hidden="true"></span>
+              </div>
+              <div data-slot="progress"></div>
+              <form data-action="submitSell" class="px-4 flex flex-col pb-10">
+                <input type="hidden" name="sellStep" data-slot="step-input" />
+                <div data-slot="step-content"></div>
+                <div data-slot="form-error" class="bg-red-950/50 border border-red-800 text-red-300 text-[12.5px] rounded-xl px-3.5 py-2.5 mt-3.5" hidden></div>
+                <div data-slot="actions" class="sell-actions-dock flex gap-2"></div>
+                <p data-slot="terms" class="text-[11.5px] text-neutral-500 text-center mt-3" hidden>با ثبت آگهی، شرایط فروشندگان C♻️RMA را می‌پذیرید.</p>
+              </form>
+            </section>
+          </template>
+
+          <template id="tpl-account">
+            <section data-page="account">
+              <div class="page-header-sticky bg-neutral-950">
+                <div data-slot="breadcrumbs"></div>
+                <h1 class="font-serif font-bold text-xl px-4 pt-1 pb-0 tracking-tight leading-tight">حساب من</h1>
+              </div>
+              <div dir="rtl" class="account-body">
+                <div data-slot="profile"></div>
+                <div data-slot="tabs"></div>
+                <div data-slot="tab-content" class="pt-4"></div>
+              </div>
+            </section>
+          </template>
+
+
+          <template id="tpl-menu-buy"><div data-template-root><button data-action="toggleBuy" class="w-full flex items-center gap-3 rounded-xl border px-4 py-3 mb-2 transition-colors"><span class="font-semibold text-[15px]">خرید</span><span data-slot="bag"></span><span data-slot="chevron" class="mr-auto"></span></button><div data-slot="buy-content" class="pt-2 pb-1 menu-submenu-motion" hidden></div></div></template>
+          <template id="tpl-menu-item"><button data-template-root data-action="menuNavItem" class="menu-link"><span data-slot="icon" class="menu-link-icon"></span><span data-slot="label" class="menu-link-label"></span></button></template>
+          <template id="tpl-menu-promo"><div data-template-root class="border border-neutral-700 rounded-2xl px-4 py-4 mb-4"><div data-slot="title" class="font-semibold text-[15px] mb-1.5"></div><div data-slot="desc" class="text-[12.5px] text-neutral-400 leading-snug mb-3"></div><button data-action="promo" class="flex items-center gap-1.5 text-violet-300 font-semibold text-[14px] underline underline-offset-2"><span data-slot="cta"></span><span data-slot="arrow"></span></button></div></template>
+          <template id="tpl-skeleton-card"><div data-template-root class="rounded-2xl border border-neutral-800 overflow-hidden bg-neutral-950 flex flex-col"><div class="relative aspect-[3/2] bg-neutral-900"><div class="absolute inset-0 skeleton-block rounded-none"></div></div><div class="p-3 flex flex-col gap-1"><div class="h-3.5 skeleton-block rounded-full w-full"></div><div class="h-3.5 skeleton-block rounded-full w-3/5 mt-0.5"></div><div class="h-4 skeleton-block rounded-full w-2/5 mt-1"></div><div class="flex items-center justify-between mb-1.5 mt-1"><div class="h-2.5 skeleton-block rounded-full w-1/4"></div><div class="h-2.5 skeleton-block rounded-full w-1/5"></div></div><div class="h-9 skeleton-block rounded-full mt-0.5"></div><div class="h-2.5 skeleton-block rounded-full w-1/3 mx-auto mt-2"></div></div></div></template>
+          <template id="tpl-skeleton-grid"><div data-template-root class="grid grid-cols-2 gap-3.5 p-4" data-slot="cards"></div></template>
+          <template id="tpl-skeleton-explore-card-compact"><div data-template-root class="xcd-wrap"><article class="xcd is-skeleton" aria-hidden="true"><div class="xcd-photo"><div class="xcd-photo-img"><span class="skeleton-block xcd-sk-photo"></span></div><span class="skeleton-block xcd-sk-count"></span></div><div class="xcd-info"><div class="xcd-head"><span class="skeleton-block xcd-sk-logo"></span></div><div class="xcd-titlerow"><span class="skeleton-block xcd-sk-title"></span></div><div class="xcd-kmrow"><span class="skeleton-block xcd-sk-km"></span></div><div class="xcd-chips"><span class="skeleton-block xcd-sk-chip" style="width:9cqw"></span><span class="skeleton-block xcd-sk-chip" style="width:11cqw"></span><span class="skeleton-block xcd-sk-chip" style="width:15cqw"></span></div><div class="xcd-foot"><div class="xcd-price"><div class="xcd-price-in"><span class="skeleton-block xcd-sk-plabel"></span><span class="skeleton-block xcd-sk-pamount"></span></div></div></div></div></article></div></template>
+          <template id="tpl-skeleton-explore-card"><article data-template-root class="xc is-skeleton" aria-hidden="true"><div class="xc-media"><div class="xc-photo"><div class="absolute inset-0 skeleton-block rounded-none"></div></div><div class="xc-glass xc-glass--tab"><div class="xc-glass-text"><div class="xc-b-head"><span class="xc-sk xc-sk-title skeleton-block rounded-full"></span><span class="xc-sk xc-sk-year skeleton-block rounded-full"></span></div><div class="xc-b-meta"><span class="xc-sk xc-sk-pill skeleton-block rounded-full"></span><span class="xc-sk xc-sk-pill xc-sk-pill-sm skeleton-block rounded-full"></span></div></div><div class="xc-price xc-price--tab"><span class="xc-sk xc-sk-amount skeleton-block rounded-full"></span><span class="xc-sk xc-sk-unit skeleton-block rounded-full"></span></div></div></div></article></template>
+          <template id="tpl-skeleton-shell"><section data-template-root><div class="page-header-sticky bg-neutral-950"><div data-slot="breadcrumbs"></div><h1 data-slot="title" class="font-serif font-bold text-xl px-4 pt-1 pb-0 tracking-tight leading-tight"></h1></div><div data-slot="extra"></div><div data-slot="grid"></div></section></template>
+          <template id="tpl-breadcrumbs"><nav data-template-root class="px-4 pt-0.5 text-[12px] leading-tight text-neutral-400 flex flex-wrap items-center gap-1"></nav></template>
+          <template id="tpl-toolbox">
+            <div data-template-root class="toolbar-sticky bg-neutral-950 toolbox-shell">
+              <div class="toolbox-filter-row">
+                <div data-slot="filter-chips" class="toolbox-filter-chips">
+                  <button data-action="toggleToolFilters" class="toolbox-filter-main">
+                    <span class="toolbox-filter-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg></span>
+                    <span>فیلترها</span>
+                    <span data-slot="filter-count" class="toolbox-filter-count">0</span>
+                  </button>
+                </div>
+              </div>
+              <div data-slot="chip-dropdown-layer" class="toolbox-chip-dropdown-layer"></div>
+              <div data-slot="filter-panel" class="toolbox-filter-panel" hidden></div>
+            </div>
+          </template>
+          <template id="tpl-listing-toolbar"><div data-template-root class="toolbar-sticky bg-neutral-950"></div></template>
+          <template id="tpl-page-toolbar"><div data-template-root class="toolbar-sticky bg-neutral-950"></div></template>
+
+          <template id="tpl-home-brand-chip">
+            <button data-template-root data-action="goBrand" class="flex flex-col items-center gap-1.5 shrink-0 w-[60px] promo-card">
+              <span data-slot="mark" class="h-14 w-14 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center overflow-hidden p-2.5"></span>
+              <span data-slot="name" class="text-[10.5px] text-neutral-400 font-medium leading-tight text-center w-full truncate"></span>
+            </button>
+          </template>
+<template id="tpl-model-card"><button data-template-root data-action="goListingsModel" class="rounded-2xl border border-neutral-800 overflow-hidden bg-neutral-950 flex flex-col text-right"><div data-slot="visual" class="aspect-[4/3] bg-neutral-900"></div><div class="p-3"><div data-slot="model" class="text-[13.5px] font-bold mb-1 leading-tight"></div><div data-slot="count" class="text-[12.5px] text-violet-400 font-medium"></div></div></button></template>
+          <template id="tpl-model-all-card"><button data-template-root data-action="goListings" class="home-brand-card flex flex-col items-center justify-center text-center rounded-2xl aspect-[4/3] p-4 gap-3"><div data-slot="mark" class="w-14 h-14 rounded-full border-2 border-neutral-700 flex items-center justify-center"></div><div><div class="text-[14px] font-bold mb-1">همه مدل‌ها</div><div data-slot="count" class="text-[12.5px] text-violet-400 font-medium"></div></div></button></template>
+          <template id="tpl-filter-panel"><div data-template-root class="border-t border-neutral-800 px-4 pb-8" data-slot="filters"></div></template>
+          <template id="tpl-filter-group"><div data-template-root class="border-b border-neutral-800 last:border-none"><button data-action="toggleFilter" class="w-full flex items-center justify-between py-4"><span data-slot="label" class="text-[14px] font-bold text-left"></span><span data-slot="icon"></span></button><div data-slot="options" class="flex flex-wrap gap-2 pb-4" hidden></div></div></template>
+          <template id="tpl-filter-option"><button data-template-root data-action="setFilterValue" class="px-3 py-1.5 rounded-full text-[12.5px] border"></button></template>
+          <template id="tpl-vehicle-tab"><button data-template-root data-action="setTab" class="py-3.5 mr-5 text-sm font-semibold border-b-2 whitespace-nowrap"></button></template>
+          <template id="tpl-vehicle-fact"><div data-template-root class="flex flex-col items-center justify-center gap-1 shrink-0 w-[84px] rounded-xl bg-neutral-900 py-2.5"><span data-slot="icon"></span><div data-slot="value" class="text-[12.5px] font-bold text-neutral-100 leading-tight text-center"></div><div data-slot="label" class="text-[10px] text-neutral-500 leading-none"></div></div></template>
+          <template id="tpl-vehicle-thumb"><button data-template-root data-action="setThumb" class="shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2"><div data-slot="image"></div></button></template>
+          <template id="tpl-vehicle-service-row"><div data-template-root class="flex items-center gap-2.5 text-[13.5px] text-neutral-200"><span data-slot="label"></span><span data-slot="icon"></span></div></template>
+          <template id="tpl-vehicle-dealer"><div data-template-root class="p-4 flex flex-col gap-3"><div class="rounded-xl bg-neutral-900 px-4 py-3.5"><div data-slot="name" class="font-bold text-[15px] mb-1"></div><div class="flex items-center gap-1.5 text-[12.5px] text-neutral-400 mb-2"><span data-slot="city"></span><span data-slot="icon"></span></div><div data-slot="rating" class="flex items-center gap-2 text-[13px] text-neutral-400"></div></div><button data-action="openContactSeller" class="w-full flex items-center justify-center gap-2 bg-violet-300 text-neutral-950 text-[14.5px] font-bold rounded-full py-3"><span data-slot="contact-icon"></span>اطلاعات تماس</button></div></template>
+          <template id="tpl-vehicle-overview"><div data-template-root class="p-4 text-[13.5px] text-neutral-300 leading-relaxed"></div></template>
+          <template id="tpl-vehicle-spec-section"><div data-template-root class="mb-5"><div data-slot="title" class="text-[12px] font-bold text-neutral-500 mb-1.5"></div><div data-slot="rows" class="rounded-xl bg-neutral-900 px-4"></div></div></template>
+          <template id="tpl-vehicle-spec-row"><div data-template-root class="flex items-center justify-between py-3"><span data-slot="label" class="text-[13px] text-neutral-400"></span><span data-slot="value" class="text-[13.5px] font-bold text-neutral-100 text-left"></span></div></template>
+          <template id="tpl-list-empty"><div data-template-root class="col-span-2 text-center text-neutral-400 text-[13.5px] py-16 px-6"><span data-slot="message"></span></div></template>
+          <template id="tpl-list-end"><div data-template-root class="px-4 pb-7 text-center text-neutral-500 text-[13px] py-2">به انتهای لیست رسیدید</div></template>
+          <template id="tpl-dealer-row"><button data-template-root data-action="goListings" class="w-full flex items-center justify-between py-4 border-b border-neutral-800 text-left"><div><div data-slot="name" class="font-bold text-[14.5px] mb-0.5"></div><div class="flex items-center gap-1.5 text-[12.5px] text-neutral-400"><span data-slot="city"></span><span data-slot="icon"></span></div></div><div data-slot="count" class="text-[12.5px] text-violet-300 font-medium whitespace-nowrap"></div></button></template>
+          <template id="tpl-sell-step1"><div data-template-root class="sell-step2"><div data-slot="note"></div><div class="sell-list"><div class="sell-row-wrap"><input type="hidden" name="brand" required value=""/><button type="button" data-action="openSellBrandPicker" class="sell-row" aria-haspopup="dialog" aria-expanded="false"><span class="sell-row-label">برند</span><span class="sell-row-value"><span data-slot="brand-mark" class="sell-row-mark"></span><span data-slot="brand-label" class="sell-row-text">انتخاب برند</span></span><svg class="sell-row-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 9 12l6 6"/></svg></button></div><div class="sell-row-wrap"><input type="hidden" name="model" required value=""/><button type="button" data-action="openSellModelPicker" class="sell-row" aria-haspopup="dialog" aria-expanded="false"><span class="sell-row-label">مدل / زیرمدل</span><span class="sell-row-value"><span data-slot="model-label" class="sell-row-text">انتخاب مدل</span></span><svg class="sell-row-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 9 12l6 6"/></svg></button></div><div class="sell-row-wrap"><input type="hidden" name="year" required value=""/><button type="button" data-action="openSellYearPicker" class="sell-row" aria-haspopup="dialog" aria-expanded="false"><span class="sell-row-label">سال ساخت</span><span class="sell-row-value"><span data-slot="year-label" class="sell-row-text">انتخاب سال</span></span><svg class="sell-row-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 9 12l6 6"/></svg></button></div></div></div></template>
+          <template id="tpl-sell-step2"><div data-template-root class="sell-step2"><div data-slot="note"></div><div class="sell-section sell-adtitle"><div class="sell-section-head"><label class="sell-section-title" for="sellAdTitleInput">عنوان آگهی</label><span class="sell-adtitle-opt">اختیاری</span></div><div class="sell-adtitle-box"><input id="sellAdTitleInput" name="adTitle" type="text" maxlength="70" autocomplete="off" placeholder="مثال: سراتو ۲۰۲۲ فول، کم‌کارکرد" class="sell-adtitle-input" aria-label="عنوان آگهی"/><span class="sell-adtitle-count" data-slot="adtitle-count"></span></div><button type="button" class="sell-adtitle-suggest" data-action="suggestSellTitle"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l1.9 5.6a3 3 0 0 0 1.9 1.9l5.6 1.9-5.6 1.9a3 3 0 0 0-1.9 1.9L12 21.3l-1.9-5.6a3 3 0 0 0-1.9-1.9l-5.6-1.9 5.6-1.9a3 3 0 0 0 1.9-1.9L12 2.5z"/></svg><span>پیشنهاد عنوان</span></button><div class="sell-adtitle-chips" data-slot="adtitle-chips" hidden></div></div><div class="sell-section" data-slot="price-section"><label class="sell-section-title" for="sellPriceInput">قیمت خودرو</label><div class="sell-price-box"><input id="sellPriceInput" name="price" required type="text" inputmode="numeric" autocomplete="off" placeholder="0" class="sell-price-input" aria-label="قیمت خودرو به تومان"/><span class="sell-price-unit" id="sellPriceUnit" data-unit="toman">تومان</span></div></div><div class="sell-list sell-toggles"><label class="sell-toggle"><span class="sell-toggle-text">قیمت توافقی</span><input type="checkbox" name="negotiable"/><i class="sell-switch" aria-hidden="true"></i></label><label class="sell-toggle"><span class="sell-toggle-text">مایل به معاوضه</span><input type="checkbox" name="tradeIn"/><i class="sell-switch" aria-hidden="true"></i></label></div><div class="sell-section sell-mileage" role="radiogroup" aria-label="کارکرد خودرو"><div class="sell-section-head"><span class="sell-section-title">وضعیت کارکرد خودرو</span><span class="sell-mileage-req">الزامی</span></div><p class="sell-mileage-sub">خودروی شما صفر است، کارکرده یا حواله/پیش‌فروش؟ یکی را انتخاب کنید.</p><input type="hidden" name="mileageType" value="used"/><button type="button" role="radio" aria-checked="false" class="sell-radio" data-action="setSellMileage" data-value="zero"><i class="sell-radio-dot" aria-hidden="true"></i><span class="sell-radio-label">صفر</span></button><button type="button" role="radio" aria-checked="false" class="sell-radio" data-action="setSellMileage" data-value="used"><i class="sell-radio-dot" aria-hidden="true"></i><span class="sell-radio-label">کارکرده</span></button><div class="sell-mileage-panel" data-slot="mileage-used"><label class="sell-mileage-field" for="sellMilesInput">مقدار کارکرد را وارد کنید</label><input id="sellMilesInput" name="miles" type="text" inputmode="numeric" autocomplete="off" placeholder="مثال: ۱۲٬۰۰۰" class="sell-mileage-input" aria-label="کارکرد خودرو به کیلومتر"/><span class="sell-mileage-hint" data-slot="miles-hint"></span></div><button type="button" role="radio" aria-checked="false" class="sell-radio" data-action="setSellMileage" data-value="presale"><i class="sell-radio-dot" aria-hidden="true"></i><span class="sell-radio-label">حواله یا پیش فروش</span></button><div class="sell-mileage-panel" data-slot="mileage-presale" hidden><span class="sell-mileage-field">زمان تحویل را انتخاب کنید</span><input type="hidden" name="deliveryTime" value=""/><div class="sell-opt-grid sell-cols-2" data-slot="delivery-grid" role="group" aria-label="زمان تحویل"></div></div></div><div class="sell-list"><div class="sell-row-wrap"><input type="hidden" name="color" value=""/><button type="button" data-action="openSellColorPicker" class="sell-row" aria-haspopup="dialog" aria-expanded="false"><span class="sell-row-label">رنگ بیرونی</span><span class="sell-row-value"><span data-slot="color-swatch" class="sell-row-swatch is-empty"></span><span data-slot="color-label" class="sell-row-text">انتخاب رنگ</span></span><svg class="sell-row-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 9 12l6 6"/></svg></button></div><div class="sell-row-wrap"><input type="hidden" name="trim" required value="full"/><button type="button" data-action="openSellTrimPicker" class="sell-row"><span class="sell-row-label">وضعیت خودرو</span><span class="sell-row-value"><span data-slot="trim-icon" class="sell-row-badge"></span><span data-slot="trim-label" class="sell-row-text">فول</span></span><svg class="sell-row-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 9 12l6 6"/></svg></button></div></div></div></template>
+          <template id="tpl-sell-step3"><div data-template-root class="flex flex-col gap-4"><div data-slot="note"></div><div class="sell-block-grid"><div class="sell-block-field"><label class="sell-block-label"><span>شهر شما</span><small>محل نگهداری خودرو</small></label><input type="hidden" name="city" required value=""/><button type="button" data-action="openSellCityPicker" class="sell-trim-trigger" aria-haspopup="dialog" aria-expanded="false"><span class="sell-trim-trigger-icon" aria-hidden="true">📍</span><span data-slot="city-label" class="sell-trim-trigger-label">انتخاب شهر</span><span class="sell-brand-trigger-arrow" aria-hidden="true">⌄</span></button></div><div class="sell-block-field"><label class="sell-block-label"><span>منطقه</span><small>نقشه را بکشید تا دایره روی منطقه قرار بگیرد</small></label><div class="sell-location-map" data-slot="locationMap"><div class="detail-map-visual" data-slot="locationMapEl"></div></div><span class="text-[11px] text-neutral-500 leading-relaxed" data-slot="locationHint">منطقه انتخاب‌شده: <b data-slot="locationLabel">مرکز شهر</b></span></div><div class="sell-block-field"><label class="sell-block-label"><span>شماره تماس</span><small>ثابت و غیرقابل تغییر</small></label><input name="phone" required type="tel" readonly aria-readonly="true" tabindex="-1" class="bg-neutral-900 border border-neutral-800 rounded-xl px-3.5 py-3 text-[14px] outline-none text-neutral-400 cursor-not-allowed"/><span class="text-[11px] text-neutral-500 leading-relaxed">شماره تماس آگهی همان شماره حساب کاربری شماست و قابل تغییر نیست.</span></div></div></div></template>
+          <template id="tpl-sell-step4"><div data-template-root class="flex flex-col gap-4"><div data-slot="note"></div><div class="sell-block-grid"><div class="sell-media" data-slot="media"><div class="sell-media-head"><span class="sell-media-title">تصاویر یا ویدیو را بارگذاری کنید</span><span class="sell-media-opt">(اختیاری)</span></div><div class="sell-media-tiles"><label class="sell-media-tile" data-slot="photo-tile"><input id="sellPhotoInput" type="file" accept="image/*" multiple class="hidden"/><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8.5A1.5 1.5 0 0 1 5.5 7H8l1.2-2h5.6L16 7h2.5A1.5 1.5 0 0 1 20 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z"/><circle cx="12" cy="13" r="3.2"/></svg><span class="sell-media-tile-label">افزودن عکس</span><span class="sell-media-tile-count" data-slot="photo-count"></span></label><label class="sell-media-tile" data-slot="video-tile"><input id="sellVideoInput" type="file" accept="video/*" class="hidden"/><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6.5" width="12.5" height="11" rx="2"/><path d="m15.5 11 5-2.8v7.6l-5-2.8z"/></svg><span class="sell-media-tile-label">افزودن ویدیو</span><span class="sell-media-tile-count" data-slot="video-count"></span></label></div><div class="sell-media-rules"><p>تا ۴ عکس و هر عکس حداکثر ۲۰ مگابایت</p><p>زمان ویدئو حداقل ۳۰ ثانیه تا حداکثر ۳ دقیقه است.</p><p>بارگذاری ویدیو به‌معنای پذیرش <button type="button" class="sell-media-link" data-action="showVideoRules">قوانین</button> مربوط به آن است.</p></div><div data-slot="video-preview" hidden></div><div data-slot="photos" class="grid grid-cols-2 gap-2"></div><div class="sell-media-warn" data-slot="media-warn" role="note">آگهی بدون عکس، توجه بسیار کمتری جلب می‌کند!</div></div><div class="sell-block-field"><label class="sell-block-label"><span>توضیحات</span><small>الزامی</small></label><textarea name="description" required rows="4" minlength="1" placeholder="وضعیت، تاریخچه سرویس، آپشن‌ها…" aria-required="true" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 resize-none"></textarea></div></div></div></template>
+          <template id="tpl-sell-step-damage"><div data-template-root class="sell-step2"><div data-slot="note"></div><div class="sell-section"><div class="sell-section-head"><span class="sell-section-title">روی بخش‌های آسیب‌دیده بزنید</span></div><div data-slot="diagram" class="sell-diagram"></div><div class="sell-legend" aria-hidden="true"><span><i style="background:#3b82f6"></i>رنگ شده</span><span><i style="background:#a855f7"></i>تعویض شده</span><span><i style="background:#f59e0b"></i>ضربه دیده</span></div><div data-slot="summary" class="sell-summary"></div><details class="sell-more"><summary>انتخاب از لیست قطعات</summary><div data-slot="panel-chips" class="sell-chip-wrap"></div></details></div><div class="sell-list"><div class="sell-row-wrap"><button type="button" data-action="openBodyConditionOverlay" data-slot="bodyConditionTrigger" class="sell-row bcond-row"><span class="sell-row-label">وضعیت جامع بدنه</span><span class="sell-row-value"><span class="sell-row-text" data-slot="bcondTriggerSub">ثبت نشده</span></span><svg class="sell-row-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 9 12l6 6"/></svg></button></div></div></div></template>
+          <template id="tpl-sell-action-prev"><button data-template-root type="button" data-action="sellPrev" class="flex-1 bg-neutral-800 text-neutral-200 font-semibold rounded-full py-3.5 text-[14px]">بازگشت</button></template>
+          <template id="tpl-sell-action-cancel"><button data-template-root type="button" data-action="goHome" class="flex-1 bg-neutral-800 text-neutral-200 font-semibold rounded-full py-3.5 text-[14px]">انصراف</button></template>
+          <template id="tpl-sell-action-next"><button data-template-root type="button" data-action="sellNext" class="flex-1 bg-violet-300 text-neutral-950 font-bold rounded-full py-3.5 text-[14px]">مرحله بعد</button></template>
+          <template id="tpl-sell-action-submit"><button data-template-root type="submit" class="flex-1 bg-violet-300 text-neutral-950 font-bold rounded-full py-3.5 text-[14px]">ثبت آگهی خودرو</button></template>
+          <template id="tpl-account-profile"><div data-template-root class="account-profile"><div class="account-profile-banner" data-slot="profile-banner" aria-hidden="true"></div><div class="account-avatar-wrap" aria-label="عکس پروفایل"><div data-slot="avatar" class="account-avatar bg-violet-600 text-white"></div></div><div data-slot="name" class="account-name text-neutral-100"></div><div class="flex items-center gap-2.5"><button data-slot="action" type="button" class="account-edit-btn bg-neutral-800 text-neutral-100"><span data-slot="action-label"></span></button><button data-slot="logout" type="button" data-action="logout" class="account-edit-btn text-red-400 border border-red-900/60 bg-transparent" hidden>خروج از حساب</button></div></div></template>
+
+          <template id="tpl-account-edit">
+            <section data-page="account-edit">
+              <div class="page-header-sticky bg-neutral-950">
+                <div data-slot="breadcrumbs"></div>
+                <h1 class="font-serif font-bold text-2xl px-4 pt-2 pb-1 tracking-tight">ویرایش اطلاعات</h1>
+                <p class="px-4 text-[13px] text-neutral-400 pb-3">اطلاعات حساب کاربری خود را به‌روزرسانی کنید.</p>
+              </div>
+              <form data-action="saveAccountInfo" dir="ltr" class="px-4 flex flex-col gap-4 pb-10">
+                <div class="flex flex-col items-center gap-2 py-2">
+                  <label class="account-edit-avatar-wrap" aria-label="تغییر عکس پروفایل">
+                    <input type="file" id="accountAvatarInput" accept="image/*" class="hidden"/>
+                    <div data-slot="avatar-preview" class="account-edit-avatar bg-violet-600 text-white"></div>
+                    <span class="account-edit-avatar-badge" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2Z"/><circle cx="12" cy="13" r="4"/></svg></span>
+                  </label>
+                  <span class="text-[12px] text-neutral-500">تغییر عکس پروفایل</span>
+                </div>
+                <section class="account-edit-banner-tools" aria-label="بنر حساب کاربری">
+                  <input type="file" id="accountEditBannerInput" accept="image/*" class="hidden"/>
+                  <div class="account-edit-banner-preview" data-slot="banner-preview"><span>پیش‌نمایش بنر حساب کاربری</span></div>
+                  <div class="account-edit-banner-copy"><strong>بنر حساب کاربری</strong><p>بنر پشت آواتار در صفحهٔ حساب نمایش داده می‌شود.</p><button type="button" class="account-edit-banner-button" data-action="chooseAccountEditBanner"><span aria-hidden="true">＋</span> انتخاب بنر</button></div>
+                </section>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[12.5px] font-semibold text-neutral-400">نام</label>
+                  <input name="firstName" placeholder="نام" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 focus:border-violet-400"/>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[12.5px] font-semibold text-neutral-400">نام خانوادگی</label>
+                  <input name="lastName" placeholder="نام خانوادگی" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 focus:border-violet-400"/>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[12.5px] font-semibold text-neutral-400">ایمیل</label>
+                  <input name="email" type="email" placeholder="[email protected]" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 focus:border-violet-400"/>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[12.5px] font-semibold text-neutral-400 flex items-center gap-1">شماره تماس<svg width="14" height="14" viewBox="0 0 24 24" style="display:inline-block;vertical-align:middle"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" fill="#3897f0" stroke="none"/><path d="m9 12 2 2 4-4" stroke="#ffffff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></label>
+                  <input name="phone" type="tel" readonly aria-readonly="true" tabindex="-1" class="bg-neutral-900 border border-neutral-800 rounded-xl px-3.5 py-3 text-[14px] outline-none text-neutral-400 cursor-not-allowed"/>
+                  <span class="text-[11px] text-neutral-500 leading-relaxed">شماره تماس همان شماره ورود شماست و قابل تغییر نیست.</span>
+                </div>
+                <div data-slot="form-error" class="bg-red-950/50 border border-red-800 text-red-300 text-[12.5px] rounded-xl px-3.5 py-2.5" hidden></div>
+                <button type="submit" class="bg-violet-300 text-neutral-950 font-bold rounded-full py-3.5 text-[14.5px] mt-2">ذخیره تغییرات</button>
+                <button type="button" data-action="logout" class="text-[13px] text-red-400 font-semibold py-2 text-center">خروج از حساب</button>
+              </form>
+            </section>
+          </template>
+          <template id="tpl-card-grid"><div data-template-root class="grid grid-cols-2 gap-3.5 px-4" data-slot="items"></div></template>
+          <template id="tpl-account-section"><div data-template-root><button type="button" data-slot="header" class="w-full px-4 mt-7 mb-2 flex items-center justify-between"><span class="flex items-center gap-1"><h2 data-slot="title" class="font-serif font-bold text-[17px]"></h2><span data-slot="chevron" class="text-neutral-500"></span></span><span data-slot="count" class="text-[12px] text-neutral-500"></span></button><div data-slot="content"></div></div></template>
+          <template id="tpl-account-empty"><div data-template-root class="mx-4 text-center text-neutral-400 text-[13px] py-8 border border-dashed border-neutral-800 rounded-2xl"></div></template>
+          <template id="tpl-sell-progress"><div data-template-root class="px-4 pb-4 toolbar-sticky bg-neutral-950"></div></template>
+          <template id="tpl-sell-note-1"><div data-template-root class="sell-step-heading">عکس‌های خودرو را اضافه کنید</div></template>
+          <template id="tpl-sell-note-2"><div data-template-root class="sell-step-heading">خودرو را معرفی کنید</div></template>
+          <template id="tpl-sell-note-3"><div data-template-root class="sell-step-heading">قیمت و وضعیت خودرو</div></template>
+          <template id="tpl-sell-note-4"><div data-template-root class="sell-step-heading">وضعیت بدنه و رنگ</div></template>
+          <template id="tpl-sell-note-5"><div data-template-root class="sell-step-heading">چطور تماس بگیریم؟</div></template>
+          <template id="tpl-sell-note"><div data-template-root class="sell-step-heading" data-slot="title"></div></template>
+          <template id="tpl-sell-input"><input data-template-root class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 focus:border-violet-400"/></template>
+          <template id="tpl-sell-select"><select data-template-root class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none focus:border-violet-400"></select></template>
+          <template id="tpl-sell-textarea"><textarea data-template-root rows="4" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-3 text-[14px] outline-none placeholder:text-neutral-500 resize-none"></textarea></template>
+          <template id="tpl-sell-field"><div data-template-root class="flex flex-col gap-1.5"><label data-slot="label" class="text-[12.5px] font-semibold text-neutral-400"></label><div data-slot="control"></div></div></template>
+          <template id="tpl-sell-photo"><div data-template-root class="relative aspect-[4/3] rounded-xl overflow-hidden border border-neutral-700 bg-neutral-900"><img data-slot="img" alt="" class="w-full h-full object-cover"/><button type="button" data-action="removeSellPhoto" class="absolute top-1.5 right-1.5 w-7 h-7 rounded-full bg-black/70 text-white flex items-center justify-center"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button><div data-slot="primary" class="absolute bottom-1.5 right-1.5 bg-black/70 text-[9.5px] px-2 py-1 rounded-full" hidden>تصویر اصلی</div><button type="button" data-slot="makePrimary" data-action="makeSellPhotoPrimary" class="absolute bottom-1.5 right-1.5 bg-black/70 hover:bg-black/85 text-white text-[9.5px] px-2 py-1 rounded-full" hidden>تصویر اصلی کن</button></div></template>
+          <template id="tpl-sell-photo-input"><label data-template-root class="rounded-2xl border border-dashed border-neutral-700 bg-neutral-900/70 px-4 py-6 flex flex-col items-center gap-2 text-center cursor-pointer"><input id="sellPhotoInput" type="file" accept="image/*" multiple class="hidden"/><div class="w-12 h-12 rounded-full bg-neutral-800 flex items-center justify-center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8" cy="10" r="1.5"/><path d="m4 17 5-5 4 4 2-2 5 5"/></svg></div><div class="font-semibold text-[13.5px]">افزودن عکس‌های خودرو</div><div class="text-[11.5px] text-neutral-500">JPG، PNG یا WEBP — چند عکس را همزمان انتخاب کنید</div></label></template>
+          <template id="tpl-modal-login-body"><div data-template-root class="mb-5"><div data-slot="reason" class="mb-4 rounded-2xl border border-violet-900/50 bg-violet-950/25 px-4 py-3.5 text-[12.5px] leading-6 text-neutral-200" hidden></div><form data-slot="phoneStep" data-action="sendOtp" class="flex flex-col gap-3.5"><div><label class="block text-[12px] font-semibold text-neutral-400 mb-2">شماره موبایل</label><input data-role="loginPhone" required type="tel" inputmode="numeric" autocomplete="tel" placeholder="09xxxxxxxxx" class="login-modal-input" dir="ltr" /></div><button type="submit" class="login-modal-primary mt-1">دریافت کد تایید</button></form><form data-slot="codeStep" data-action="verifyOtp" class="flex flex-col gap-3.5" hidden><div class="text-[12.5px] text-neutral-400 -mt-1">کد تایید به شماره <span data-slot="phoneDisplay" class="text-neutral-200 font-semibold" dir="ltr"></span> پیامک شد.</div><div><label class="block text-[12px] font-semibold text-neutral-400 mb-2">کد تایید</label><input data-role="loginCode" required type="tel" inputmode="numeric" maxlength="5" placeholder="− − − − −" class="login-modal-input text-center tracking-[0.5em]" dir="ltr" /></div><button type="submit" class="login-modal-primary mt-1">ورود</button><button type="button" data-action="resendOtp" class="text-[12px] text-violet-300 self-center">ویرایش شماره یا ارسال مجدد کد</button></form></div></template>
+          <template id="tpl-modal-logged"><div data-template-root class="rounded-2xl border border-neutral-800 bg-neutral-900/80 p-4 mb-4"><div class="text-[12px] text-neutral-500 mb-1">حساب فعال</div><div data-slot="account" class="text-[14px] font-semibold truncate" dir="ltr"></div></div></template>
+          <template id="tpl-modal-action-button"><button data-template-root data-action="logout" class="login-modal-primary">خروج از حساب</button></template>
+          <template id="tpl-modal-getstarted"><form data-template-root data-action="submitGetStarted" class="flex flex-col gap-3"><input data-slot="name" required placeholder="نام کامل" class="bg-neutral-900 border border-neutral-700 rounded-full px-4 py-3 text-[14px] outline-none placeholder:text-neutral-500"/><input data-slot="email" required type="email" placeholder="آدرس ایمیل" class="bg-neutral-900 border border-neutral-700 rounded-full px-4 py-3 text-[14px] outline-none placeholder:text-neutral-500"/><button type="submit" class="bg-violet-300 text-neutral-950 font-bold rounded-full py-3 text-[14.5px] mt-1">ثبت</button></form></template>
+          <template id="tpl-modal-pricing"><div data-template-root class="flex flex-col gap-2.5 text-[13.5px]"><div class="flex justify-between"><span class="text-neutral-400">قیمت خودرو</span><span data-slot="price" class="font-semibold"></span></div><div class="flex justify-between"><span class="text-neutral-400">مالیات تخمینی (7.25%)</span><span data-slot="tax" class="font-semibold"></span></div><div class="flex justify-between"><span class="text-neutral-400">هزینه اسناد</span><span class="font-semibold">$599</span></div><div class="border-t border-neutral-800 my-1"></div><div class="flex justify-between text-[15px]"><span class="font-bold">مجموع تخمینی</span><span data-slot="total" class="font-bold text-emerald-400"></span></div><div data-slot="estimate" class="text-neutral-500 text-[12px] mt-1" hidden></div></div></template>
+          <template id="tpl-modal-info"><div data-template-root class="text-[14px] text-neutral-300"></div></template>
+          <template id="tpl-modal-manage-ad"><div data-template-root class="ma"><div data-slot="status" class="ma-status"><div class="ma-head"><span class="ma-thumb" data-slot="thumb"></span><span class="ma-head-text"><span class="ma-title" data-slot="adTitle"></span><span class="ma-price" data-slot="adPrice"></span></span></div><div class="ma-state"><span class="ma-pill"><i aria-hidden="true"></i><span data-slot="statusTitle"></span></span><span data-slot="statusDesc" class="ma-desc"></span></div></div><div class="ma-group" data-slot="mainGroup"><button type="button" data-action="manageAdPreview" class="ma-row"><span class="ma-row-ic" data-c="green" data-slot="iconPreview"></span><span class="ma-row-label">پیش‌نمایش</span><span class="ma-row-chev" data-slot="chevPreview"></span></button><button type="button" data-action="manageAdEdit" class="ma-row"><span class="ma-row-ic" data-c="orange" data-slot="iconEdit"></span><span class="ma-row-label">ویرایش</span><span class="ma-row-chev" data-slot="chevEdit"></span></button></div><div class="ma-group"><button type="button" data-action="manageAdDeleteAsk" class="ma-row ma-row--danger"><span class="ma-row-ic" data-c="red" data-slot="iconDelete"></span><span class="ma-row-label">حذف آگهی</span><span class="ma-row-chev" data-slot="chevDelete"></span></button></div><div class="ma-group"><button type="button" data-action="contactSupport" class="ma-row"><span class="ma-row-ic" data-c="gray" data-slot="iconSupport"></span><span class="ma-row-label">تماس با پشتیبانی</span><span class="ma-row-chev" data-slot="chevSupport"></span></button></div></div></template>
+          <template id="tpl-modal-manage-ad-delete"><div data-template-root class="flex flex-col gap-3"><div class="manageAd-delete-sub">لطفاً دلیل حذف این آگهی را انتخاب کنید</div><div data-slot="reasons" class="flex flex-col gap-2"></div><div class="manageAd-delete-warn">آیا مطمئنید می‌خواهید این آگهی را حذف کنید؟ این عملیات غیرقابل بازگشت است.</div><div class="flex gap-2.5 mt-1"><button type="button" data-action="closeModal" class="flex-1 bg-neutral-800 text-neutral-200 font-semibold rounded-full py-3 text-[14px]">انصراف</button><button type="button" data-action="confirmDeleteListing" data-slot="confirmBtn" class="manageAd-confirm-delete-btn flex-1 font-bold rounded-full py-3 text-[14px]">بله، حذف شود</button></div></div></template>
+          <template id="tpl-modal-manage-ad-confirm"><div data-template-root class="flex flex-col"><div class="manageAd-delete-warn"><span data-slot="warnIcon" class="manageAd-delete-warn-icon"></span><div><div class="manageAd-delete-warn-title">مطمئنی می‌خوای این آگهی رو حذف کنی؟</div><div class="manageAd-delete-warn-desc">این کار قابل بازگشت نیست. لطفاً دلیل حذف را انتخاب کن:</div></div></div><div data-slot="reasons" class="manageAd-reason-list"></div><div class="ma-actions"><button type="button" data-action="manageAdDeleteCancel" class="manageAd-cancel-btn">انصراف</button><button type="button" data-action="manageAdDeleteConfirm" data-slot="confirmBtn" class="manageAd-delete-confirm-btn is-unarmed">حذف آگهی</button></div></div></template>
+          <template id="tpl-modal-contact"><div data-template-root><div class="rounded-xl bg-neutral-900 px-4 py-3 mb-4"><div data-slot="dealer" class="font-bold text-[14.5px] mb-1"></div><div class="flex items-center gap-1.5 text-[12px] text-neutral-400"><span data-slot="city"></span><span data-slot="icon"></span></div></div><div data-slot="phone-area"></div><a data-slot="sms" data-action="clickContact" class="w-full flex items-center justify-center gap-2 border border-neutral-700 text-neutral-100 text-[14px] font-bold rounded-full py-3.5"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-4.8 7.6 8.5 8.5 0 0 1-8.9-.9L3 21l1.9-4.3a8.38 8.38 0 0 1-.9-3.7 8.5 8.5 0 0 1 9.4-6.6c.13.56.2 1.14.2 1.7z"/></svg> ارسال پیام</a></div></template>
+
+
+
+          <aside id="menuOverlayInner" class="fixed inset-0 z-50 pointer-events-none" aria-label="منوی اصلی">
+            <div id="menuBackdropEl" data-action="closeMenu" class="menu-veil"></div>
+            <button aria-label="بستن منو" data-action="closeMenu" class="menu-close">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f5f5f5" stroke-width="2.4" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+            </button>
+            <nav id="menuScrollWrap" class="menu-links"></nav>
+          </aside>
+
+          <div id="modalWrap" aria-live="polite">
+            <div id="sellYearPicker" class="sell-year-picker" hidden aria-hidden="true">
+              <div class="sell-year-picker-backdrop" data-action="closeSellYearPicker"></div>
+              <section class="sell-year-picker-sheet" role="dialog" aria-modal="true" aria-labelledby="sellYearPickerTitle">
+                <div class="sell-year-picker-handle" aria-hidden="true"><span></span></div>
+                <div class="sell-year-picker-head">
+                  <div><div id="sellYearPickerTitle" class="text-[15px] font-bold">سال خودرو</div><div class="text-[11px] text-neutral-500 mt-1">سال موردنظر را در چرخ انتخاب کنید</div></div>
+                  <button type="button" data-action="closeSellYearPicker" aria-label="بستن" class="sell-year-picker-close">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+                  </button>
+                </div>
+                <div class="sell-year-wheel-wrap">
+                  <div class="sell-year-wheel-fade sell-year-wheel-fade-top" aria-hidden="true"></div>
+                  <div class="sell-year-wheel-highlight" aria-hidden="true"></div>
+                  <div id="sellYearWheel" class="sell-year-wheel" role="listbox" aria-label="انتخاب سال"></div>
+                  <div class="sell-year-wheel-fade sell-year-wheel-fade-bottom" aria-hidden="true"></div>
+                </div>
+                <div class="sell-year-picker-actions">
+                  <button type="button" id="sellYearPickerConfirm" data-action="confirmSellYear" class="sell-year-picker-confirm">انتخاب سال</button>
+                </div>
+              </section>
+            </div>
+
+            <div id="sellBrandPicker" class="sell-brand-picker" hidden aria-hidden="true">
+              <div class="sell-brand-picker-backdrop" data-action="closeSellBrandPicker"></div>
+              <section class="sell-brand-picker-sheet" role="dialog" aria-modal="true" aria-labelledby="sellBrandPickerTitle">
+                <div class="sell-year-picker-handle" aria-hidden="true"><span></span></div>
+                <div class="sell-brand-picker-head">
+                  <div><div id="sellBrandPickerTitle" class="text-[16px] font-bold">برند خودرو</div><div class="text-[11px] text-neutral-500 mt-1">برند موردنظر را از بین گزینه‌ها انتخاب کنید</div></div>
+                  <button type="button" data-action="closeSellBrandPicker" aria-label="بستن" class="sell-year-picker-close">✕</button>
+                </div>
+                <div id="sellBrandPickerGrid" class="sell-brand-picker-grid"></div>
+              </section>
+            </div>
+
+            <div id="sellModelPicker" class="sell-brand-picker" hidden aria-hidden="true">
+              <div class="sell-brand-picker-backdrop" data-action="closeSellModelPicker"></div>
+              <section class="sell-brand-picker-sheet sell-model-picker-sheet" role="dialog" aria-modal="true" aria-labelledby="sellModelPickerTitle">
+                <div class="sell-year-picker-handle" aria-hidden="true"><span></span></div>
+                <div class="smp-head">
+                  <button type="button" id="sellModelPickerBack" class="smp-iconbtn" data-action="backSellModelPicker" aria-label="بازگشت به مدل‌ها" hidden><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+                  <span id="sellModelPickerMark" class="smp-mark" aria-hidden="true"></span>
+                  <div class="smp-titles"><div id="sellModelPickerTitle" class="smp-title">انتخاب مدل</div><div class="smp-sub" id="sellModelPickerSubtitle">مدل موردنظر را جستجو یا از لیست انتخاب کنید</div></div>
+                  <button type="button" data-action="closeSellModelPicker" aria-label="بستن" class="smp-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+                </div>
+                <div id="sellModelPickerCrumbs" class="smp-crumbs" aria-label="مسیر انتخاب"></div>
+                <div class="sell-model-picker-search-wrap">
+                  <span class="sell-model-picker-search-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+                  <input id="sellModelPickerSearch" type="text" inputmode="search" placeholder="جستجوی مدل…" autocomplete="off" class="sell-model-picker-search"/>
+                  <button type="button" id="sellModelPickerClear" class="smp-clear" data-action="clearSellModelSearch" aria-label="پاک کردن جستجو" hidden>×</button>
+                </div>
+                <div id="sellModelPickerList" class="sell-model-picker-list" role="listbox" aria-label="مدل‌ها"></div>
+              </section>
+            </div>
+
+            <div id="sellColorPicker" class="sell-color-picker" hidden aria-hidden="true"><div class="sell-color-picker-backdrop" data-action="closeSellColorPicker"></div><section class="sell-color-picker-sheet" role="dialog" aria-modal="true" aria-labelledby="sellColorPickerTitle"><div class="sell-year-picker-handle" aria-hidden="true"><span></span></div><div class="sell-brand-picker-head"><div><div id="sellColorPickerTitle" class="text-[16px] font-bold">رنگ خودرو</div><div class="text-[11px] text-neutral-500 mt-1">رنگ موردنظر را انتخاب کنید</div></div><button type="button" data-action="closeSellColorPicker" class="sell-year-picker-close" aria-label="بستن">✕</button></div><div id="sellColorPickerGrid" class="sell-color-options" role="listbox" aria-label="رنگ‌های خودرو"></div></section></div>
+
+            <div id="sellTrimPicker" class="sell-trim-picker" hidden aria-hidden="true">
+              <div class="sell-trim-picker-backdrop" data-action="closeSellTrimPicker"></div>
+              <section class="sell-trim-picker-sheet" role="dialog" aria-modal="true" aria-labelledby="sellTrimPickerTitle">
+                <div class="sell-year-picker-handle" aria-hidden="true"><span></span></div>
+                <div class="sell-brand-picker-head"><div><div id="sellTrimPickerTitle" class="text-[16px] font-bold">وضعیت خودرو</div><div class="text-[11px] text-neutral-500 mt-1">یکی از سه وضعیت را انتخاب کنید</div></div><button type="button" data-action="closeSellTrimPicker" class="sell-year-picker-close" aria-label="بستن">✕</button></div>
+                <div class="sell-trim-options">
+                  <button type="button" class="sell-trim-option" data-action="chooseSellTrim" data-trim="full"><span class="sell-trim-big">F</span><span><strong>فول</strong><small>Full</small></span><b>✓</b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellTrim" data-trim="half"><span class="sell-trim-big">S</span><span><strong>نیمه‌فول</strong><small>Semi-Full</small></span><b>✓</b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellTrim" data-trim="basic"><span class="sell-trim-big">B</span><span><strong>بیسیک</strong><small>Basic</small></span><b>✓</b></button>
+                </div>
+              </section>
+            </div>
+
+            <div id="sellCityPicker" class="sell-trim-picker" hidden aria-hidden="true">
+              <div class="sell-trim-picker-backdrop" data-action="closeSellCityPicker"></div>
+              <section class="sell-trim-picker-sheet" role="dialog" aria-modal="true" aria-labelledby="sellCityPickerTitle">
+                <div class="sell-year-picker-handle" aria-hidden="true"><span></span></div>
+                <div class="sell-brand-picker-head"><div><div id="sellCityPickerTitle" class="text-[16px] font-bold">شهر شما</div><div class="text-[11px] text-neutral-500 mt-1">شهر محل قرارگیری خودرو را انتخاب کنید</div></div><button type="button" data-action="closeSellCityPicker" class="sell-year-picker-close" aria-label="بستن">✕</button></div>
+                <div class="sell-trim-options">
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="آبادان"><span class="sell-trim-big">📍</span><span><strong>آبادان</strong></span><b>✓</b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="خرمشهر"><span class="sell-trim-big">📍</span><span><strong>خرمشهر</strong></span><b>✓</b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="اهواز"><span class="sell-trim-big">📍</span><span><strong>اهواز</strong></span><b>✓</b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="تهران"><span class="sell-trim-big">📍</span><span><strong>تهران</strong></span><b>✓</b></button>
+                  <button type="button" class="sell-trim-option" data-action="chooseSellCity" data-city="کرج"><span class="sell-trim-big">📍</span><span><strong>کرج</strong></span><b>✓</b></button>
+                </div>
+              </section>
+            </div>
+
+            <div id="partStatusPicker" class="sell-trim-picker" hidden aria-hidden="true">
+              <div class="sell-trim-picker-backdrop" data-action="closePartStatusPicker"></div>
+              <section class="sell-trim-picker-sheet" role="dialog" aria-modal="true" aria-labelledby="partStatusPickerTitle">
+                <div class="sell-year-picker-handle" aria-hidden="true"><span></span></div>
+                <div class="sell-brand-picker-head"><div><div id="partStatusPickerTitle" class="text-[16px] font-bold">قسمت بدنه</div><div class="text-[11px] text-neutral-500 mt-1">وضعیت این قسمت را انتخاب کنید</div></div><button type="button" data-action="closePartStatusPicker" class="sell-year-picker-close" aria-label="بستن">✕</button></div>
+                <div class="sell-trim-options">
+                  <button type="button" class="sell-trim-option part-status-option" data-action="choosePartStatus" data-status="painted" style="--status-color:#3b82f6"><span class="sell-trim-big">🎨</span><span><strong>رنگ شده</strong></span><b>✓</b></button>
+                  <button type="button" class="sell-trim-option part-status-option" data-action="choosePartStatus" data-status="replaced" style="--status-color:#a855f7"><span class="sell-trim-big">🔧</span><span><strong>تعویض شده</strong></span><b>✓</b></button>
+                  <button type="button" class="sell-trim-option part-status-option" data-action="choosePartStatus" data-status="dented" style="--status-color:#f59e0b"><span class="sell-trim-big">💥</span><span><strong>ضربه دیده</strong></span><b>✓</b></button>
+                </div>
+                <button type="button" class="bcond-clear" data-action="clearPartStatus" hidden>پاک کردن وضعیت</button>
+              </section>
+            </div>
+
+            <div id="sellPublishingSheet" class="sell-publishing-sheet" hidden aria-hidden="true">
+              <div class="sell-publishing-backdrop"></div>
+              <section class="sell-publishing-card" role="dialog" aria-modal="true" aria-labelledby="sellPublishingTitle" dir="rtl">
+                <div class="sell-publishing-handle" aria-hidden="true"><span></span></div>
+                <div class="sell-publishing-content">
+                  <div class="sell-publishing-icon" data-slot="statusIcon" aria-hidden="true"><span class="sell-publishing-dash"></span></div>
+                  <h3 id="sellPublishingTitle" data-slot="title">درحال ثبت آگهی...</h3>
+                  <p data-slot="message">آگهی شما در حال آماده‌سازی است</p>
+                  <div class="sell-publishing-progress" aria-hidden="true"><span data-slot="progress"></span></div>
+                  <button type="button" class="sell-publishing-stop" data-action="cancelSellPublishing">توقف</button>
+                </div>
+              </section>
+            </div>
+
+            <div id="bodyConditionOverlay" class="bcond-overlay" hidden aria-hidden="true" dir="rtl">
+              <div class="bcond-backdrop" data-action="closeBodyConditionOverlay"></div>
+              <section class="bcond-sheet" role="dialog" aria-modal="true" aria-labelledby="bcondTitle">
+                <div class="bcond-topbar">
+                  <button type="button" class="bcond-back" data-action="closeBodyConditionOverlay" aria-label="بازگشت"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+                </div>
+
+                <div class="bcond-heading">
+                  <h2 id="bcondTitle" class="bcond-title">وضعیت جامع بدنه</h2>
+                  <p class="bcond-subtitle">بدنه خودرو در چه وضعیتی است؟</p>
+                </div>
+
+                <div class="bcond-numeral-wrap">
+                  <span class="bcond-numeral" id="bcondNumeral" data-slot="numeral">5</span>
+                </div>
+
+                <div class="bcond-label" id="bcondLabel" data-slot="label">متوسط</div>
+                <p class="bcond-desc" id="bcondDesc" data-slot="desc">چند خط و خش قابل توجه یا رنگ‌شدگی جزئی روی بدنه دیده می‌شود.</p>
+
+                <div class="bcond-slider-area">
+                  <span class="bcond-range-badge" id="bcondRangeBadge" hidden>خارج از میانگین آگهی‌های مشابه</span>
+                  <div class="bcond-track-wrap">
+                    <div class="bcond-track" id="bcondTrack">
+                      <div class="bcond-usual-band" id="bcondUsualBand"></div>
+                      <button type="button" class="bcond-thumb" id="bcondThumb" role="slider" aria-label="امتیاز وضعیت بدنه" aria-valuemin="1" aria-valuemax="10" aria-valuenow="5" aria-orientation="horizontal"></button>
+                    </div>
+                  </div>
+                  <span class="bcond-usual-caption" id="bcondUsualCaption">میانگین آگهی‌ها</span>
+                </div>
+
+                <button type="button" class="bcond-clear" data-action="clearBodyConditionRating">پاک کردن ورودی</button>
+                <div class="bcond-divider"></div>
+                <button type="button" class="bcond-howto" data-action="openBodyConditionHowTo">راهنمای ارزیابی بدنه ›</button>
+
+                <button type="button" class="bcond-save-big" id="bcondSaveBtn" data-action="saveBodyConditionRating">
+                  <span class="bcond-save-big-text">ثبت</span>
+                  <small class="bcond-save-big-sub" id="bcondSaveSub" hidden>خارج از میانگین آگهی‌های مشابه</small>
+                </button>
+              </section>
+            </div>
+
+            <div id="genericModal" class="modal-shell fixed inset-0 z-[60] flex items-end justify-center" hidden>
+              <div data-action="closeModal" class="modal-backdrop absolute inset-0 bg-black/70"></div>
+              <div class="modal-card modal-sheet relative w-full bg-neutral-950 border border-neutral-800" role="dialog" aria-modal="true">
+                <div class="modal-sheet-handle" aria-hidden="true"></div>
+                <div class="flex items-center justify-between mb-3">
+                  <h3 id="modalTitle" class="text-[17px] font-semibold"></h3>
+                  <button data-action="closeModal" aria-label="بستن" class="w-8 h-8 rounded-full border border-neutral-700 flex items-center justify-center">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+                  </button>
+                </div>
+                <div id="modalBody"></div>
+              </div>
+            </div>
+            <div id="authFlow" class="auth-flow" dir="rtl" hidden aria-live="polite" aria-label="ورود / ثبت‌نام">
+              <div id="authFlowBackdrop" class="auth-flow-backdrop" data-action="closeAuthSheet"></div>
+              <div class="auth-app-shell" role="dialog" aria-modal="true">
+                <div class="auth-sheet-handle" aria-hidden="true"><span></span></div>
+
+                <div id="authScreenPhone" class="auth-screen auth-screen-phone" data-auth-screen="phone">
+                  <div class="auth-sheet-topbar">
+                    <button type="button" class="auth-back" data-action="authBack" aria-label="بازگشت"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+                  </div>
+                  <div class="auth-phone-content">
+                    <h1 class="auth-phone-title" dir="auto">شماره موبایل شما چیست؟</h1>
+                    <p class="auth-otp-subtitle" dir="auto">با کیبورد زیر شماره‌ی خود را وارد کنید</p>
+                    <form id="authPhoneForm" class="auth-phone-form" data-action="sendOtp">
+                      <div class="auth-phone-input-wrap">
+                        <button type="button" id="authCountryButton" class="auth-country-button" data-action="toggleCountryPicker" aria-haspopup="listbox" aria-expanded="false">
+                          <span id="authCountryFlag">🇮🇷</span><span id="authCountryCode">+98</span><svg class="auth-country-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                        </button>
+                        <span class="auth-phone-divider" aria-hidden="true"></span>
+                        <input id="authPhoneInput" data-role="authPhone" type="tel" inputmode="none" readonly autocomplete="off" maxlength="15" aria-label="شماره موبایل" placeholder="شماره موبایل" dir="ltr" />
+                        <div id="authCountryPicker" class="auth-country-picker" role="listbox" hidden>
+                          <button type="button" role="option" data-action="selectAuthCountry" data-country="US">🇺🇸 <span>+1</span></button>
+                          <button type="button" role="option" data-action="selectAuthCountry" data-country="DE">🇩🇪 <span>+49</span></button>
+                          <button type="button" role="option" data-action="selectAuthCountry" data-country="IR">🇮🇷 <span>+98</span></button>
+                          <button type="button" role="option" data-action="selectAuthCountry" data-country="GB">🇬🇧 <span>+44</span></button>
+                        </div>
+                      </div>
+
+                      <div class="auth-keypad" data-keypad="phone" role="group" aria-label="کیبورد اعداد">
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="1">1</button>
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="2">2</button>
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="3">3</button>
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="4">4</button>
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="5">5</button>
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="6">6</button>
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="7">7</button>
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="8">8</button>
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="9">9</button>
+                        <span class="auth-keypad-spacer" aria-hidden="true"></span>
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="0">0</button>
+                        <button type="button" class="auth-keypad-btn auth-keypad-backspace" data-action="authKeypadBackspace" aria-label="حذف رقم"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-6-6a1 1 0 0 1 0-1.4L9 6Z"/><path d="m14.5 9.5-5 5M9.5 9.5l5 5"/></svg></button>
+                      </div>
+
+                      <p class="auth-terms" dir="auto">با ثبت‌نام، شرایط استفاده و حریم خصوصی را می‌پذیرید</p>
+                      <div class="auth-bottom-bar">
+                        <button id="authPhoneContinue" type="submit" class="auth-primary-button" disabled><span>ادامه</span><svg class="auth-arrow" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+                <div id="authScreenOtp" class="auth-screen auth-screen-otp" data-auth-screen="otp" hidden>
+                  <div class="auth-sheet-topbar">
+                    <button type="button" class="auth-back" data-action="authBack" aria-label="بازگشت"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+                  </div>
+                  <div class="auth-otp-content">
+                    <h1 class="auth-phone-title" id="authOtpTitle" dir="auto">کد تایید را وارد کنید</h1>
+                    <p class="auth-otp-subtitle" id="authOtpSubtitle" dir="auto">کد ۶ رقمی به شماره‌ی <span id="authOtpPhone" dir="ltr"></span> پیامک شد</p>
+                    <form id="authOtpForm" data-action="verifyOtp">
+                      <div class="auth-otp-stage">
+                        <div id="authOtpInputs" class="auth-otp-inputs" role="group" aria-label="کد ۶ رقمی تأیید">
+                          <div class="otp-cell"><input type="text" maxlength="1" inputmode="none" readonly autocomplete="off" data-otp-index="0" aria-label="رقم ۱"><svg class="otp-cell-trace" viewBox="0 0 44 54" preserveAspectRatio="none" aria-hidden="true"><rect x="2" y="2" width="40" height="50" rx="12" pathLength="100"></rect></svg></div>
+                          <div class="otp-cell"><input type="text" maxlength="1" inputmode="none" readonly autocomplete="off" data-otp-index="1" aria-label="رقم ۲"><svg class="otp-cell-trace" viewBox="0 0 44 54" preserveAspectRatio="none" aria-hidden="true"><rect x="2" y="2" width="40" height="50" rx="12" pathLength="100"></rect></svg></div>
+                          <div class="otp-cell"><input type="text" maxlength="1" inputmode="none" readonly autocomplete="off" data-otp-index="2" aria-label="رقم ۳"><svg class="otp-cell-trace" viewBox="0 0 44 54" preserveAspectRatio="none" aria-hidden="true"><rect x="2" y="2" width="40" height="50" rx="12" pathLength="100"></rect></svg></div>
+                          <div class="otp-cell"><input type="text" maxlength="1" inputmode="none" readonly autocomplete="off" data-otp-index="3" aria-label="رقم ۴"><svg class="otp-cell-trace" viewBox="0 0 44 54" preserveAspectRatio="none" aria-hidden="true"><rect x="2" y="2" width="40" height="50" rx="12" pathLength="100"></rect></svg></div>
+                          <div class="otp-cell"><input type="text" maxlength="1" inputmode="none" readonly autocomplete="off" data-otp-index="4" aria-label="رقم ۵"><svg class="otp-cell-trace" viewBox="0 0 44 54" preserveAspectRatio="none" aria-hidden="true"><rect x="2" y="2" width="40" height="50" rx="12" pathLength="100"></rect></svg></div>
+                          <div class="otp-cell"><input type="text" maxlength="1" inputmode="none" readonly autocomplete="off" data-otp-index="5" aria-label="رقم ۶"><svg class="otp-cell-trace" viewBox="0 0 44 54" preserveAspectRatio="none" aria-hidden="true"><rect x="2" y="2" width="40" height="50" rx="12" pathLength="100"></rect></svg></div>
+                        </div>
+                        <div id="authOtpSuccessIcon" class="auth-otp-success-icon" aria-hidden="true"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 24.5 21 31l14-15"/></svg></div>
+                      </div>
+                      <button type="button" class="auth-resend-button" dir="auto" data-action="resendOtp">دریافت کد از طریق پیامک</button>
+                      <p id="authOtpError" class="auth-error" hidden></p>
+
+                      <div class="auth-keypad" data-keypad="otp" role="group" aria-label="کیبورد اعداد">
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="1">1</button>
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="2">2</button>
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="3">3</button>
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="4">4</button>
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="5">5</button>
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="6">6</button>
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="7">7</button>
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="8">8</button>
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="9">9</button>
+                        <span class="auth-keypad-spacer" aria-hidden="true"></span>
+                        <button type="button" class="auth-keypad-btn" data-action="authKeypadDigit" data-key="0">0</button>
+                        <button type="button" class="auth-keypad-btn auth-keypad-backspace" data-action="authKeypadBackspace" aria-label="حذف رقم"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-6-6a1 1 0 0 1 0-1.4L9 6Z"/><path d="m14.5 9.5-5 5M9.5 9.5l5 5"/></svg></button>
+                      </div>
+
+                      <div class="auth-bottom-bar">
+                        <button id="authOtpContinue" type="submit" class="auth-primary-button auth-otp-continue" disabled>ادامه</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <div id="authSuccessBackdrop" class="auth-success-overlay" hidden>
+                <div class="auth-success-backdrop" data-action="noop"></div>
+                <div id="authSuccessSheet" class="auth-success-sheet" role="dialog" aria-modal="true" aria-label="ورود موفق">
+                  <div class="auth-sheet-handle" aria-hidden="true"><span></span></div>
+                  <div class="auth-success-icon-wrap"><div class="auth-success-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 24.5 21 31l14-15"/></svg></div></div>
+                  <h2 dir="auto">ورود موفق</h2>
+                  <p dir="auto">با موفقیت وارد حساب C♻️RMA شدید.</p>
+                  <button type="button" class="auth-done-button" data-action="authDone">تمام</button>
+                </div>
+              </div>
+            </div>
+            <div id="loginModal" class="login-modal-shell" hidden role="dialog" aria-modal="true" aria-label="ورود به حساب">
+              <div data-action="closeModal" class="login-modal-backdrop"></div>
+              <div class="login-modal-card" dir="rtl">
+                <div class="flex items-start justify-between gap-3 mb-5">
+                  <div class="flex items-center gap-3 min-w-0">
+                    <div class="login-modal-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div>
+                    <div class="min-w-0">
+                      <div id="loginModalTitle" class="font-bold text-[20px] leading-tight">ورود به حساب</div>
+                      <div class="text-[12.5px] text-neutral-500 mt-1">دسترسی به امکانات شخصی C♻️RMA</div>
+                    </div>
+                  </div>
+                  <button data-action="closeModal" aria-label="بستن" class="w-9 h-9 rounded-full border border-neutral-800 bg-neutral-900 flex items-center justify-center shrink-0 hover:bg-neutral-800">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+                  </button>
+                </div>
+                <div id="loginModalBody"></div>
+              </div>
+            </div>
+          </div>
+          <div id="searchOverlay" class="search-overlay" hidden role="dialog" aria-modal="true" aria-label="جستجوی خودرو">
+            <div id="searchOverlayBackdrop" data-action="closeSearchOverlay" class="search-overlay-backdrop"></div>
+            <div class="search-overlay-panel" data-action="closeSearchOverlay">
+              <div class="search-overlay-shell" data-action="noop">
+                <div class="search-overlay-copy" aria-hidden="true">
+                  <span class="search-overlay-label">جستجو خودرو بر اساس</span>
+                  <span class="search-overlay-rotator" id="searchOverlayRotator"></span>
+                </div>
+                <input id="searchOverlayInput" class="search-overlay-input" type="search" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="جستجو در خودروها، برندها و مدل‌ها" dir="auto" />
+                <button type="button" data-action="clearOrCloseSearchOverlay" class="search-overlay-clear" aria-label="بستن جستجو">
+                  <span>×</span>
+                </button>
+              </div>
+
+              <div class="search-overlay-loading" id="searchOverlayLoading" aria-hidden="true">
+                <div class="search-overlay-toolbar-sk">
+                  <span class="skeleton-block rounded-full"></span>
+                  <span class="skeleton-block rounded-full"></span>
+                  <span class="skeleton-block rounded-full"></span>
+                  <span class="skeleton-block rounded-full"></span>
+                </div>
+                <div class="search-overlay-grid">
+                  <div class="search-overlay-sk-card"><div class="skeleton-block search-overlay-sk-image"></div><div class="skeleton-block rounded-full search-overlay-sk-title"></div><div class="search-overlay-sk-meta"><span class="skeleton-block rounded-full"></span><span class="skeleton-block rounded-full"></span></div><div class="skeleton-block rounded-full search-overlay-sk-line"></div><div class="skeleton-block rounded-full search-overlay-sk-button"></div></div>
+                  <div class="search-overlay-sk-card"><div class="skeleton-block search-overlay-sk-image"></div><div class="skeleton-block rounded-full search-overlay-sk-title"></div><div class="search-overlay-sk-meta"><span class="skeleton-block rounded-full"></span><span class="skeleton-block rounded-full"></span></div><div class="skeleton-block rounded-full search-overlay-sk-line"></div><div class="skeleton-block rounded-full search-overlay-sk-button"></div></div>
+                  <div class="search-overlay-sk-card"><div class="skeleton-block search-overlay-sk-image"></div><div class="skeleton-block rounded-full search-overlay-sk-title"></div><div class="search-overlay-sk-meta"><span class="skeleton-block rounded-full"></span><span class="skeleton-block rounded-full"></span></div><div class="skeleton-block rounded-full search-overlay-sk-line"></div><div class="skeleton-block rounded-full search-overlay-sk-button"></div></div>
+                  <div class="search-overlay-sk-card"><div class="skeleton-block search-overlay-sk-image"></div><div class="skeleton-block rounded-full search-overlay-sk-title"></div><div class="search-overlay-sk-meta"><span class="skeleton-block rounded-full"></span><span class="skeleton-block rounded-full"></span></div><div class="skeleton-block rounded-full search-overlay-sk-line"></div><div class="skeleton-block rounded-full search-overlay-sk-button"></div></div>
+                </div>
+              </div>
+
+              <div class="search-overlay-results" id="searchOverlayResults">
+                <div class="search-overlay-rail" id="searchOverlayRail"></div>
+              </div>
+            </div>
+          </div>
+          <div id="filterOverlay" class="filter-overlay" hidden role="dialog" aria-modal="true" aria-label="فیلترها">
+            <div id="filterOverlayBackdrop" data-action="closeFilterOverlay" class="filter-overlay-backdrop"></div>
+            <div class="filter-overlay-panel">
+              <div class="filter-overlay-drag" data-sheet-handle aria-hidden="true"><span></span></div>
+              <div class="filter-overlay-header" data-sheet-handle>
+                <h2 class="filter-overlay-title">فیلترها</h2>
+                <button type="button" data-action="resetFilterOverlay" class="filter-overlay-reset">بازنشانی</button>
+                <button type="button" data-action="closeFilterOverlay" class="filter-overlay-icon-btn" aria-label="بستن">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              </div>
+              <div class="filter-overlay-body" id="filterOverlayBody"></div>
+              <div class="filter-overlay-footer">
+                <button type="button" data-action="closeFilterOverlay" class="filter-overlay-apply" id="filterOverlayApplyBtn">نمایش نتایج</button>
+              </div>
+            </div>
+          </div>
+          <nav id="bottomDock" class="bottom-dock" aria-label="ناوبری پایین صفحه">
+            <div class="bottom-dock-inner">
+              <button type="button" data-action="openSearchOverlay" data-dock="search" class="dock-item dock-search" aria-label="جستجو">
+                <span class="dock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></span>
+                <span class="dock-label">جستجو</span>
+              </button>
+              <div class="dock-pill" role="group">
+                <button type="button" data-action="goHome" data-dock="home" class="dock-item" aria-label="خانه">
+                  <span class="dock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.9 12 4l8 6.9V19a1.5 1.5 0 0 1-1.5 1.5h-3.2V15h-6.6v5.5H5.5A1.5 1.5 0 0 1 4 19z"/></svg></span>
+                  <span class="dock-label">خانه</span>
+                </button>
+                <button type="button" data-action="goListings" data-brand="all" data-dock="listings" class="dock-item" aria-label="آگهی‌ها">
+                  <span class="dock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.2"/><circle cx="16.5" cy="16.5" r="2.2"/></svg></span>
+                  <span class="dock-label">آگهی‌ها</span>
+                </button>
+                <button type="button" data-action="goSaved" data-dock="saved" class="dock-item" aria-label="نشان‌شده‌ها">
+                  <span class="dock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5h11a1 1 0 0 1 1 1V21l-6.5-4-6.5 4V4.5a1 1 0 0 1 1-1z"/></svg></span>
+                  <span class="dock-label">نشان‌شده‌ها</span>
+                </button>
+                <button type="button" data-action="openMessages" data-dock="messages" class="dock-item mr-chat-dock-item" aria-label="پیام‌ها">
+                  <span class="dock-icon mr-chat-dock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.6c-4.7 0-8.4 3.1-8.4 7.1 0 2.2 1.1 4.1 2.9 5.4-.1 1.1-.6 2.2-1.5 3.1-.3.3-.1.8.4.7 1.7-.2 3.2-.9 4.3-1.8.8.2 1.5.3 2.3.3 4.7 0 8.4-3.1 8.4-7.1S16.7 3.6 12 3.6Z"/></svg><span class="mr-chat-dock-badge" hidden></span></span>
+                  <span class="dock-label">پیام‌ها</span>
+                </button>
+                <button type="button" data-action="openAccount" data-dock="account" class="dock-item" aria-label="حساب کاربری"><span class="dock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg></span><span class="dock-label">حساب</span></button>
+              </div>
+              <button type="button" data-action="goSell" data-dock="sell" class="dock-item dock-plus" aria-label="ثبت آگهی">
+                <span class="dock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5.5" x2="12" y2="18.5"/><line x1="5.5" y1="12" x2="18.5" y2="12"/></svg></span>
+                <span class="dock-label">ثبت آگهی</span>
+              </button>
+            </div>
+          </nav>
+          <div id="toastWrap" aria-live="polite"><div id="toastMessage" class="ui-toast fixed bottom-5 left-1/2 -translate-x-1/2 z-[90] bg-neutral-100 text-neutral-950 text-[13.5px] font-semibold px-4 py-2.5 rounded-full shadow-xl" hidden></div></div>
+        </div>
+      </div>
+    </div>
+    <script>window.L=null;</script>
+    <!--
+      The app used to be one big script.js file. It's now split into the
+      files below, each covering one part of the app — see the comment at
+      the top of each file for what lives inside it. They rely on the
+      browser sharing one global scope across <script> tags (classic,
+      non-module scripts), so the LOAD ORDER below matters: keep it as-is,
+      or move a file only if everything it depends on still loads first.
+    -->
+    <script src="js/00-demo-showrooms.js?v=photos-1-rb1"></script>
+    <script src="js/01-data.js?v=rb1"></script>
+    <script src="js/01b-vehicle-specs.js?v=rb1"></script>
+    <script src="js/52-ai-autofill-popup.js?v=rb1"></script>
+    <script src="js/02-helpers.js?v=rb1"></script>
+    <script src="js/02a-admin-store.js?v=rb1"></script>
+    <script src="js/03-icons.js?v=rb1"></script>
+    <script src="js/04-state-core.js?v=117-showroom-media-dl-rb1"></script>
+    <script src="js/05-small-render-pieces.js?v=page-skeletons-16-card1"></script>
+    <script src="js/06-home-cards.js?v=xcd-v3-14-city-rb1"></script>
+    <script src="js/07-vehicle-account-common.js?v=rb1"></script>
+    <script src="js/08-auth-modal-toast.js?v=rb1"></script>
+    <script src="js/09-search-overlay.js?v=rb1"></script>
+    <script src="js/10-search-bar-rotator.js?v=so2-rb1-tf20261104060534"></script>
+    <script src="js/11-filters-overlay.js?v=rb1"></script>
+    <script src="js/12-templates-toolbar.js?v=pill-1-rb1"></script>
+    <script src="js/13-pages-home-listings-vehicle.js?v=pc2-20261029-135303-rb1"></script>
+    <script src="js/14-pages-sell-saved-manage.js?v=111-stepper-adt1-rb1"></script>
+    <script src="js/15-pages-account.js?v=123-media-editor-rb1"></script>
+    <script src="js/16-app-render-router.js?v=nosaved-1-rb1"></script>
+    <script src="js/17-chip-dropdown.js?v=member-3-nofocus-adt1-rb1-fas1-fas"></script>
+    <script src="js/55-photo-autofill.js?v=1-rb1"></script>
+    <script src="js/18-peek-preview-init.js?v=home1-rb1"></script>
+    <script src="js/19-swipe-save-card.js?v=rb1"></script>
+    <script src="js/20-body-condition-overlay.js?v=rb1"></script>
+    <script src="js/21-brand-sheet.js?v=rb1"></script>
+    <script src="js/22a-carmaa-story-share.js?v=11-smooth-rb1-fas1-fas"></script>
+    <script src="js/22-share-poster.js?v=story-slider-10-rb1-fas1-fas"></script>
+    <script src="js/23-admin-sync.js?v=rb1"></script>
+    <script src="js/25-ad-stats.js?v=rb1"></script>
+    <script src="js/24-paid-services.js?v=rb1"></script>
+    <script src="js/26-messaging.js?v=media-1-rb1-hero1-bw20261104053208-me20261108b"></script>
+    <script src="js/27-stories.js?v=media-2-offline-rb1-fas1-fas-pl20261103210604-bw20261104053208-tf20261104060534"></script>
+    <script defer src="msg-hero-sticky.js?v=msgC20261104071710"></script>
+    <script src="js/64-first-ad-story.js?v=flux20261108215357"></script>
+    <script src="js/28-qa-store.js?v=rb1"></script>
+    <script src="js/29-qa-components.js?v=rb1"></script>
+    <!-- Q&A disabled (temporary): <script src="js/30-qa-pages.js?v=rb1"></script> -->
+    <!-- Q&A disabled (temporary): <script src="js/31-qa-ask.js?v=rb1"></script> -->
+    <!-- Q&A disabled (temporary): <script src="js/32-qa-detail.js?v=rb1"></script> -->
+    <!-- Q&A disabled (temporary): <script src="js/33-qa-mine.js?v=rb1"></script> -->
+    <script src="js/34-trust-marketplace.js?v=offer-2-rb1"></script>
+    <script src="js/35-home-dashboard.js?v=trust-1-xp1-lt2-lt3-rb1-lt3-rb1-xp1-lt3-rb1-xp1-lt3-rb1-xp1-lt3-rb1-pn1102100358-ft1102101211-lv1102120102-q20261103195050-bw20261104053208-ca20261104055005-tf20261104060534"></script>
+    <script src="js/38-listings-header-autohide.js?v=6-showrooms-rb1"></script>
+    <script src="js/39-undo-delete.js?v=1-rb1"></script>
+    <script src="js/36-profile-page.js?v=117-showroom-media-rb1-bw20261104053208"></script>
+    <script src="js/46-skeleton-plus.js?v=3-bg-sk1"></script>
+      <script src="js/54-dock-instant.js?v=1-rb1"></script>
+    <script src="js/64-pwa-fullscreen.js?v=fs1102125835"></script>
+  <script defer src="cm-guest-login.js?v=perf20261105074007"></script>
+  <script defer src="cm-unread-welcome.js?v=uw20261105071009"></script>
+</body>
+</html>

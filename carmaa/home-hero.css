@@ -1,0 +1,226 @@
+/* CM-HERO — بالای صفحه اصلی (تم دارک، پالت Apple) */
+html body .cm-home-page .cm-hh{direction:rtl;padding:6px 16px 8px;display:block}
+.cm-hh svg{width:20px;height:20px;flex:none}
+.cm-hh-greet{padding:6px 2px 14px}
+.cm-hh-greet p{margin:0 0 4px;font-size:14px;font-weight:500;color:#98989D;letter-spacing:0}
+.cm-hh-greet h1{margin:0;font-size:26px;line-height:1.3;font-weight:800;color:#F5F5F7;letter-spacing:0}
+/* search + filter */
+.cm-hh-searchrow{display:flex;gap:10px;align-items:stretch;margin:0 0 16px}
+html body .cm-hh-search{flex:1;min-width:0;display:flex;align-items:center;gap:10px;height:54px;padding:0 16px;border-radius:999px;background:#262628;border:1px solid #3A3A3D;color:#98989D;text-align:right;cursor:pointer}
+.cm-hh-search .bar-search-field{flex:1;min-width:0;position:relative;display:block;height:100%}
+.cm-hh-search .bar-search-field input{position:absolute;inset:0;opacity:0;pointer-events:none}
+.cm-hh-search .bar-search-copy{display:flex;align-items:center;gap:5px;height:100%;font-size:14px;color:#98989D;white-space:nowrap;overflow:hidden}
+.cm-hh-search .bar-search-rotator{color:#F5F5F7;font-weight:700}
+html body .cm-hh-filter{width:54px;height:54px;flex:none;border-radius:18px;background:#0071E3;border:0;color:#fff;display:grid;place-items:center;cursor:pointer}
+html body .cm-hh-filter:active{background:#0066CC}
+/* tiles */
+.cm-hh-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 18px}
+html body .cm-hh-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;aspect-ratio:1/1;padding:0;border-radius:22px;background:#262628;border:1px solid #3A3A3D;color:#F5F5F7;font-size:12.5px;font-weight:700;cursor:pointer;box-shadow:none}
+.cm-hh-tile-ic{display:grid;place-items:center}
+.cm-hh-tile-ic svg{width:24px;height:24px}
+html body .cm-hh-tile.is-on{background:#0071E3;border-color:#0071E3;color:#fff}
+.cm-hh-tile:active{opacity:.85;transform:scale(.97)}
+/* featured card */
+.cm-hh-feat{margin:0 -16px 22px}
+.cm-hh-track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cm-hh-track::-webkit-scrollbar{display:none}
+html body .cm-hh-card{position:relative;flex:0 0 100%;scroll-snap-align:center;border-radius:28px;overflow:hidden;background:#262628;border:1px solid #3A3A3D;aspect-ratio:4/4.15;cursor:pointer;color:#F5F5F7;min-width:0}
+.cm-hh-photo,.cm-hh-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cm-hh-photo{background:#333336}
+.cm-hh-card::after{content:"";position:absolute;inset:auto 0 0 0;height:62%;background:linear-gradient(to top,rgba(29,29,31,.96) 8%,rgba(29,29,31,.72) 45%,transparent);pointer-events:none}
+.cm-hh-badge{position:absolute;top:14px;right:14px;z-index:2;padding:6px 14px;border-radius:999px;background:rgba(29,29,31,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(245,245,247,.14);font-size:12px;font-weight:700;color:#F5F5F7}
+html body .cm-hh-heart{position:absolute;top:12px;left:12px;z-index:2;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:rgba(29,29,31,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(245,245,247,.14);color:#F5F5F7;cursor:pointer;padding:0}
+.cm-hh-heart svg{width:19px;height:19px}
+html body .cm-hh-heart.is-on{background:#0071E3;border-color:#0071E3}
+.cm-hh-heart.is-on svg{fill:currentColor}
+.cm-hh-info{position:absolute;z-index:2;inset:auto 18px 52px 18px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.cm-hh-main{min-width:0}
+.cm-hh-main h3{margin:0;font-size:18px;line-height:1.4;font-weight:800;color:#F5F5F7;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cm-hh-main p{margin:5px 0 0;display:flex;align-items:center;gap:5px;font-size:13px;color:#E8E8ED}
+.cm-hh-main p svg{width:15px;height:15px}
+.cm-hh-price{flex:none;text-align:left;display:flex;flex-direction:column;align-items:flex-end}
+.cm-hh-price b{font-size:19px;font-weight:800;color:#F5F5F7;line-height:1.2}
+.cm-hh-price small{font-size:11px;color:#E8E8ED;margin-top:2px}
+.cm-hh-specs{position:absolute;z-index:2;inset:auto 18px 16px 18px;display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:#E8E8ED}
+.cm-hh-specs span+span{position:relative;padding-inline-start:14px}
+.cm-hh-specs span+span::before{content:"";position:absolute;inset-inline-start:0;top:50%;width:4px;height:4px;margin-top:-2px;border-radius:50%;background:#98989D}
+.cm-hh-card--empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:24px;aspect-ratio:auto;min-height:250px;cursor:default}
+.cm-hh-card--empty::after{display:none}
+.cm-hh-card--empty h3{margin:0;font-size:17px;font-weight:800}
+.cm-hh-card--empty p{margin:0;color:#98989D;font-size:13.5px}
+.cm-hh-empty-ic{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#333336;color:#2997FF}
+.cm-hh-empty-ic svg{width:28px;height:28px}
+html body .cm-hh-cta{margin-top:6px;height:42px;padding:0 26px;border-radius:999px;background:#0071E3;border:0;color:#fff;font-size:14.5px;font-weight:700;cursor:pointer}
+.cm-hh-dots{display:flex;justify-content:center;gap:6px;margin-top:12px}
+.cm-hh-dots i{width:6px;height:6px;border-radius:999px;background:#3A3A3D;transition:width .25s ease,background .25s ease}
+.cm-hh-dots i.is-on{width:20px;background:#0071E3}
+/* popular cities */
+.cm-hh-sechead{display:flex;align-items:center;justify-content:space-between;margin:0 0 12px}
+.cm-hh-sechead h2{margin:0;font-size:19px;font-weight:800;color:#F5F5F7}
+html body .cm-hh-all{background:none;border:0;padding:4px 0;color:#2997FF;font-size:13.5px;font-weight:600;cursor:pointer}
+.cm-hh-cities{display:flex;gap:10px;overflow-x:auto;margin:0 -16px;padding:0 16px 4px;scrollbar-width:none;scroll-snap-type:x proximity}
+.cm-hh-cities::-webkit-scrollbar{display:none}
+html body .cm-hh-city{flex:0 0 118px;height:150px;border-radius:22px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:2px;padding:14px;border:1px solid #3A3A3D;color:#F5F5F7;text-align:right;cursor:pointer;scroll-snap-align:start;background:linear-gradient(160deg,#333336 0%,#262628 70%)}
+html body .cm-hh-city[style*="--k:1"]{background:linear-gradient(160deg,#333336 0%,#262628 75%)}
+html body .cm-hh-city[style*="--k:2"]{background:linear-gradient(160deg,#2E2E31 0%,#262628 75%)}
+html body .cm-hh-city[style*="--k:3"]{background:linear-gradient(160deg,#2A2A2D 0%,#262628 80%)}
+.cm-hh-city-ini{position:absolute;top:2px;left:10px;font-size:76px;font-weight:900;line-height:1;color:rgba(245,245,247,.07)}
+.cm-hh-city b{font-size:15px;font-weight:800;position:relative}
+.cm-hh-city small{font-size:11.5px;color:#98989D;position:relative}
+.cm-hh-city:active{opacity:.85;transform:scale(.98)}
+@media (min-width:768px){html body .cm-home-page .cm-hh{max-width:760px;margin-inline:auto}.cm-hh-card{aspect-ratio:16/9}}
+
+html body .cm-home-page .cm-hh-stories-head{padding:6px 16px 0;margin:0 0 6px}
+html body .cm-home-page .cm-hh+.cm-hh-stories-head{margin-top:4px}
+
+/* بر اساس کاربرد */
+html body .cm-home-page .cm-uc{padding:14px 0 4px;direction:rtl}
+.cm-uc .cm-hh-sechead{padding:0 16px}
+html body .cm-uc-all{height:36px;padding:0 14px;border-radius:999px;border:1px solid #3A3A3D;background:transparent;color:#F5F5F7;font-size:12.5px;font-weight:600;cursor:pointer}
+.cm-uc-rail{display:flex;gap:16px;overflow-x:auto;padding:0 16px 4px;scroll-snap-type:x proximity;scrollbar-width:none}
+.cm-uc-rail::-webkit-scrollbar{display:none}
+/* CM-UC-SIZE: باکس ۱۴۸×۲۲۲ (نسبت ۲:۳) مطابق عکس مرجع؛ فعلاً بدون عکس */
+html body .cm-uc-card{position:relative;flex:0 0 148px;width:148px;height:222px;aspect-ratio:auto;border-radius:7px;overflow:hidden;border:0;padding:0;background:#262628;scroll-snap-align:start;cursor:pointer;text-align:right;color:#F5F5F7}
+.cm-uc-body{position:absolute;z-index:1;inset:auto 12px 12px 12px;display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.cm-uc-body b{font-size:14px;font-weight:700;letter-spacing:0;line-height:1.2}
+.cm-uc-tags{display:flex;flex-wrap:wrap;gap:4px 6px}
+.cm-uc-tags i{font-style:normal;font-size:10px;font-weight:600;line-height:1;padding:5px 9px;border-radius:999px;background:#2b2e45;border:0;color:#F5F5F7;white-space:nowrap}
+.cm-uc-card:active{transform:scale(.98);opacity:.9}
+
+/* CM-POPFILTERS: باکس ۹۴×۱۶۵ مطابق عکس مرجع؛ فعلاً بدون عکس */
+html body .cm-home-page .cm-pf{padding:14px 0 4px;direction:rtl}
+.cm-pf .cm-hh-sechead{padding:0 16px}
+.cm-pf-rail{display:flex;gap:16px;overflow-x:auto;padding:0 16px 4px;scroll-snap-type:x proximity;scrollbar-width:none}
+.cm-pf-rail::-webkit-scrollbar{display:none}
+html body .cm-pf-card{position:relative;flex:0 0 94px;width:94px;height:165px;border-radius:7px;border:0;padding:8px;background:#262628;scroll-snap-align:start;cursor:pointer;color:#F5F5F7;display:flex;flex-direction:row;align-items:flex-start;justify-content:flex-start;gap:8px;text-align:right}
+.cm-pf-card b{font-size:11px;font-weight:700;line-height:24px;letter-spacing:0;white-space:nowrap}
+.cm-pf-ic{width:24px;height:24px;flex:none;border-radius:50%;border:1px solid #3A3A3D;display:grid;place-items:center;color:#F5F5F7}
+.cm-pf-card:active{transform:scale(.98);opacity:.9}
+
+/* CM-POPBRANDS: «برندهای پرتقاضا» بالای فوتر — باکس‌های ۳ ستونه ~۱۱۲×۸۷ مطابق عکس مرجع */
+html body .cm-home-page .cm-pb{padding:22px 0 8px;direction:rtl}
+.cm-pb .cm-hh-sechead{padding:0 16px;margin-bottom:12px}
+.cm-pb-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:0 16px}
+html body .cm-pb-tile{height:87px;border-radius:7px;border:1px solid #3A3A3D;background:#262628;color:#F5F5F7;padding:13px 4px 0;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:11px;cursor:pointer;min-width:0}
+.cm-pb-x{display:none!important}
+.cm-pb.is-open .cm-pb-x{display:flex!important}
+.cm-pb-logo{height:28px;width:100%;display:grid;place-items:center}
+.cm-pb-logo img{display:block;width:auto;height:auto;max-width:48px;max-height:26px;object-fit:contain;filter:brightness(0) invert(1);pointer-events:none;-webkit-user-drag:none}
+.cm-pb-wm{font-size:12px;font-weight:900;letter-spacing:.04em;line-height:1;direction:ltr;color:#F5F5F7;white-space:nowrap}
+.cm-pb-name{max-width:100%;font-size:13px;font-weight:500;line-height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cm-pb-tile:active{transform:scale(.97);opacity:.9}
+html body .cm-pb-more{display:flex;align-items:center;justify-content:center;gap:6px;margin:14px auto 0;padding:8px 14px;border:0;background:none;color:#F5F5F7;font-size:14px;font-weight:600;cursor:pointer}
+.cm-pb-more svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.cm-pb.is-open .cm-pb-more svg{transform:rotate(180deg)}
+
+/* ریل برندها حذف شد؛ تب «نوع بدنه» تنها تب کارت است */
+html body .cm-dc-tabs button:only-child{grid-column:1/-1}
+
+/* CM-STD-ORDER: ریتم یکسان — فاصله‌ی بخش‌ها ۲۸px، عنوان ۲۰px، فاصله‌ی عنوان تا محتوا ۱۲px */
+html body .cm-home-page .cm-uc,html body .cm-home-page .cm-pf,html body .cm-home-page .cm-pb{padding-top:0!important;padding-bottom:0!important;margin-top:28px!important}
+html body .cm-home-page .cm-lt-sec,html body .cm-home-page .cm-lay-section{margin-top:28px!important}
+html body .cm-home-page .cm-hb{margin-top:20px!important}
+html body .cm-home-page .cm-lt-promo{margin-top:20px!important}
+html body .cm-home-page .cm-hh-sechead h2,html body .cm-home-page .cm-lt-head h2,html body .cm-home-page .cm-lay-head h2,html body .cm-home-page .cm-lay-head--showrooms .cm-lay-showrooms-heading h2{font-size:20px!important;line-height:1.35!important;font-weight:800!important;letter-spacing:0!important}
+html body .cm-home-page .cm-uc .cm-hh-sechead,html body .cm-home-page .cm-pf .cm-hh-sechead,html body .cm-home-page .cm-pb .cm-hh-sechead{margin:0 0 12px!important;align-items:center}
+html body .cm-home-page .cm-lt-head,html body .cm-home-page .cm-lay-head,html body .cm-home-page .cm-lay-head--showrooms{margin-bottom:12px!important}
+html body .cm-home-page .cm-uc-rail,html body .cm-home-page .cm-pf-rail{padding-bottom:0!important}
+html body .cm-home-page .cm-ft{margin-top:32px!important}
+.cm-pb-logo img.cm-pb-raw{filter:none!important}
+
+/* CM-SPACING: فاصله‌ی بیشتر بین بخش‌های صفحه‌ی اصلی (۴۸px) */
+html body .cm-home-page .cm-uc,html body .cm-home-page .cm-pf,html body .cm-home-page .cm-pb,
+html body .cm-home-page .cm-lt-sec,html body .cm-home-page .cm-lay-section{margin-top:48px!important}
+html body .cm-home-page .cm-hb,html body .cm-home-page .cm-lt-promo{margin-top:40px!important}
+html body .cm-home-page .cm-ft{margin-top:56px!important}
+html body .cm-home-page .cm-uc .cm-hh-sechead,html body .cm-home-page .cm-pf .cm-hh-sechead,html body .cm-home-page .cm-pb .cm-hh-sechead,
+html body .cm-home-page .cm-lt-head,html body .cm-home-page .cm-lay-head,html body .cm-home-page .cm-lay-head--showrooms{margin-bottom:16px!important}
+
+/* CM-HERO-SLIDES: اسلاید نمایشگاه برتر */
+.cm-hh-card--sr .cm-hh-photo img{object-fit:cover}
+.cm-hh-go{flex:none;align-self:flex-end;padding:8px 14px;border-radius:999px;background:#0071E3;color:#fff;font-size:12.5px;font-weight:700;white-space:nowrap}
+
+/* CM-SWAP-LATEST: جدیدترین آگهی‌ها بالای صفحه (داخل هیرو) + تیتر هم‌سبک بقیه‌ی تیترها (بدون رنگ و خط) */
+html body .cm-home-page .cm-hh .cm-lt-sec--top{margin:0 -16px 22px!important;padding-inline:16px!important}
+html body .cm-home-page .cm-lt-head h2{color:#F5F5F7!important;font-size:20px!important;font-weight:800!important;line-height:1.35!important;letter-spacing:0!important;gap:0!important}
+html body .cm-home-page .cm-lt-head h2::before{display:none!important}
+html.theme-light body .cm-home-page .cm-lt-head h2,html body.theme-light .cm-home-page .cm-lt-head h2{color:#1D1D1F!important}
+html body .cm-home-page .cm-hh-feat--low{margin:28px 0 0}
+html body .cm-home-page .cm-hh-feat--low .cm-hh-track{padding-bottom:2px}
+html body .cm-home-page .cm-hh-feat--low .cm-hh-dots{margin-top:10px}
+
+/* CM-HERO-PROMO: سرچ بالا، زیرش باکس معرفی، بعد دکمه‌های خرید/فروش/... */
+.cm-hh-promo{position:relative;margin:0 0 16px}
+.cm-hp-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;border-radius:22px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cm-hp-track::-webkit-scrollbar{display:none}
+.cm-hp-slide{position:relative;flex:0 0 100%;scroll-snap-align:start;min-height:196px;border-radius:22px;overflow:hidden;background:#262628;border:1px solid #3A3A3D;box-sizing:border-box;direction:rtl}
+.cm-hp-img{position:absolute;left:0;top:0;height:100%;width:52%;object-fit:cover;object-position:left center;-webkit-mask-image:linear-gradient(to right,#000 55%,transparent);mask-image:linear-gradient(to right,#000 55%,transparent)}
+.cm-hp-copy{position:relative;z-index:1;width:60%;margin-inline-start:0;padding:18px 18px 30px;display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:right}
+.cm-hp-hello{font-size:12px;font-weight:600;color:#98989D}
+.cm-hp-copy h1,.cm-hp-copy h2{margin:0;font-size:21px;line-height:1.35;font-weight:800;color:#F5F5F7;letter-spacing:0}
+.cm-hp-copy p{margin:0;font-size:12px;line-height:1.6;color:#98989D}
+.cm-hp-btn{margin-top:6px;height:36px;padding:0 18px;border:0;border-radius:12px;background:#0071E3;color:#fff;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.cm-hp-btn:active{background:#0066CC}
+.cm-hp-note{display:inline-flex;align-items:center;gap:6px;margin-top:4px;font-size:11.5px;font-weight:600;color:#C9CCD3}
+.cm-hp-note svg{width:15px;height:15px}
+.cm-hp-dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:5px;pointer-events:none}
+.cm-hp-dots i{width:5px;height:5px;border-radius:50%;background:#5A5A5F}
+.cm-hp-dots i.is-on{background:#F5F5F7}
+html.theme-light .cm-hp-slide{background:#fff;border-color:rgba(0,0,0,.08)}
+html.theme-light .cm-hp-copy h1,html.theme-light .cm-hp-copy h2{color:#1D1D1F}
+
+/* CM-UC-IMG: عکس کارت‌های «بر اساس کاربرد» */
+.cm-uc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cm-uc-card::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(to top,rgba(0,0,0,.78) 0,rgba(0,0,0,.35) 38%,rgba(0,0,0,0) 62%)}
+.cm-uc-card .cm-uc-body{color:#fff}
+
+/* CM-PF-IMG: عکس کارت‌های «فیلترهای پرطرفدار» */
+.cm-pf-card{overflow:hidden}
+.cm-pf-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;display:block}
+.cm-pf-card::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(to bottom,rgba(0,0,0,.55) 0,rgba(0,0,0,0) 38%)}
+.cm-pf-card b,.cm-pf-card .cm-pf-ic{position:relative;z-index:1}
+.cm-pf-card .cm-pf-ic{background:rgba(0,0,0,.35);border-color:rgba(255,255,255,.35)}
+
+/* CM-BODYRAIL: ریل «نوع بدنه» */
+html body .cm-home-page .cm-bt{padding:0!important;margin-top:28px!important;direction:rtl}
+.cm-bt .cm-hh-sechead{padding:0 16px;margin:0 0 12px}
+.cm-bt-rail{display:flex;gap:12px;overflow-x:auto;padding:0 16px 4px;scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cm-bt-rail::-webkit-scrollbar{display:none}
+html body .cm-bt-tile{flex:0 0 132px;width:132px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px 8px 12px;border:0;border-radius:16px;background:#F5F5F7;color:#1D1D1F;scroll-snap-align:start;cursor:pointer}
+.cm-bt-tile img{width:100%;height:auto;aspect-ratio:2/1;object-fit:contain;display:block}
+.cm-bt-tile span{font-size:13px;font-weight:700;line-height:1.4;letter-spacing:0}
+.cm-bt-tile:active{transform:scale(.97);opacity:.9}
+html body .cm-home-page .cm-bt .cm-bt-tile{background:#F5F5F7!important;background-image:none!important;color:#1D1D1F!important;box-shadow:none!important;border:0!important}
+
+/* CM-PF-WHITE: کارت‌های «فیلترهای پرطرفدار» با پس‌زمینه سفید + نمایشگاه‌ها زیرش */
+html body .cm-home-page .cm-pf .cm-pf-card,html.theme-light body .cm-home-page .cm-pf .cm-pf-card{background:#fff!important;box-shadow:0 0 0 1px rgba(0,0,0,.06),0 6px 16px rgba(0,0,0,.06)!important;color:#1D1D1F!important}
+html body .cm-home-page .cm-pf .cm-pf-card::after,html.theme-light body .cm-home-page .cm-pf .cm-pf-card::after{background:none!important;display:none!important}
+html body .cm-home-page .cm-pf .cm-pf-card b,html.theme-light body .cm-home-page .cm-pf .cm-pf-card b{color:#1D1D1F!important;-webkit-text-fill-color:#1D1D1F!important}
+html body .cm-home-page .cm-pf .cm-pf-card .cm-pf-ic,html.theme-light body .cm-home-page .cm-pf .cm-pf-card .cm-pf-ic{background:rgba(255,255,255,.9)!important;border:1px solid rgba(0,0,0,.18)!important;color:#1D1D1F!important;-webkit-text-fill-color:#1D1D1F!important}
+html body .cm-home-page .cm-lay-section--showrooms{margin-top:28px!important}
+
+/* CM-BM-BLACK: دکمه‌ی «بازار سیاه» با باکس مشکی */
+html body .cm-home-page .cm-hh-tile.cm-hh-tile--black,html.theme-light body .cm-home-page .cm-hh-tile.cm-hh-tile--black{background:#0b0b0c!important;border:1px solid #000!important;color:#fff!important;-webkit-text-fill-color:#fff!important;box-shadow:0 6px 16px rgba(0,0,0,.22)!important}
+html body .cm-home-page .cm-hh-tile--black .cm-hh-tile-ic svg{stroke:#fff!important;color:#fff!important}
+
+/* CM-HP-CINEMA: کارت معرفی بالای صفحه — عکس تمام‌کارت تیره، متن سفید، دکمه‌ی گرد سفید */
+html body .cm-home-page .cm-hh-promo .cm-hp-track{border-radius:28px!important;box-shadow:0 10px 28px rgba(0,0,0,.18)}
+html body .cm-home-page .cm-hh-promo .cm-hp-slide,html.theme-light body .cm-home-page .cm-hh-promo .cm-hp-slide{min-height:236px!important;height:236px;border-radius:28px!important;background:#0b0b0d!important;border:0!important;display:flex;align-items:center}
+html body .cm-home-page .cm-hh-promo .cm-hp-slide::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(270deg,rgba(0,0,0,.85) 0,rgba(0,0,0,.6) 42%,rgba(0,0,0,0) 70%)}
+html body .cm-home-page .cm-hh-promo .cm-hp-img{position:absolute!important;inset:0!important;left:0!important;top:0!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:38% center!important;-webkit-mask-image:none!important;mask-image:none!important}
+html body .cm-home-page .cm-hh-promo .cm-hp-slide:nth-child(2) .cm-hp-img{object-position:100% center!important;transform:scaleX(-1) translateX(14%)}
+html body .cm-home-page .cm-hh-promo .cm-hp-copy{position:relative;z-index:1;width:50%!important;margin-inline-start:22px!important;padding:0!important;gap:8px!important;align-items:flex-start;justify-content:center}
+html body .cm-home-page .cm-hh-promo .cm-hp-hello,html.theme-light body .cm-home-page .cm-hh-promo .cm-hp-hello{color:rgba(255,255,255,.7)!important;font-size:11.5px!important;-webkit-text-fill-color:rgba(255,255,255,.7)!important}
+html body .cm-home-page .cm-hh-promo .cm-hp-copy h1,html body .cm-home-page .cm-hh-promo .cm-hp-copy h2,html.theme-light body .cm-home-page .cm-hh-promo .cm-hp-copy h1,html.theme-light body .cm-home-page .cm-hh-promo .cm-hp-copy h2{color:#fff!important;-webkit-text-fill-color:#fff!important;font-size:21px!important;line-height:1.5!important;font-weight:700!important}
+html body .cm-home-page .cm-hh-promo .cm-hp-copy p,html.theme-light body .cm-home-page .cm-hh-promo .cm-hp-copy p{color:rgba(255,255,255,.72)!important;-webkit-text-fill-color:rgba(255,255,255,.72)!important;line-height:1.7!important}
+html body .cm-home-page .cm-hh-promo .cm-hp-btn,html.theme-light body .cm-home-page .cm-hh-promo .cm-hp-btn{height:38px!important;padding:0 20px!important;border-radius:980px!important;background:#fff!important;color:#1D1D1F!important;-webkit-text-fill-color:#1D1D1F!important;font-weight:700!important;margin-top:6px!important;box-shadow:none!important}
+html body .cm-home-page .cm-hh-promo .cm-hp-btn:active{background:#e8e8ed!important}
+html body .cm-home-page .cm-hh-promo .cm-hp-note{display:none!important}
+html body .cm-home-page .cm-hh-promo .cm-hp-dots{position:static!important;margin:12px 0 0!important;gap:6px!important}
+html body .cm-home-page .cm-hh-promo .cm-hp-dots i,html.theme-light body .cm-home-page .cm-hh-promo .cm-hp-dots i{width:6px;height:6px;border-radius:50%;background:#C7C7CC!important;transition:width .2s}
+html body .cm-home-page .cm-hh-promo .cm-hp-dots i.is-on,html.theme-light body .cm-home-page .cm-hh-promo .cm-hp-dots i.is-on{width:18px;border-radius:3px;background:#1D1D1F!important}
+
+/* CM-CARD-CONTRAST: در تم روشن کارت‌ها و باکس‌ها در پس‌زمینه گم نشوند */
+html.theme-light,html.theme-light body,html.theme-light body #appViewport,html.theme-light body #appFrame,html.theme-light body #siteHeader,html.theme-light body #stickyHeaderGroup,html.theme-light body #pageContent,html.theme-light body .cm-home-page{background-color:#E9EAEE!important}
+html.theme-light body :is(.cm-hh-card,.cm-pb-tile,.cm-bt-tile,.cm-hh-tile:not(.cm-hh-tile--black),.cm-pf-card,.xcard,.listing-card,.cm-home-showroom-card,.cm-showroom-card,.dealership-card,.home-brand-card,.cm-home-trust-item,.cm-home-search-panel,.cm-lt-promo,.qa-card,.section-card,.seller-card){background-color:#fff!important;border:1px solid rgba(29,29,31,.13)!important;box-shadow:0 1px 2px rgba(29,29,31,.06),0 6px 16px rgba(29,29,31,.09)!important}
+html.theme-light body .cm-home-page .cm-pf .cm-pf-card{box-shadow:0 0 0 1px rgba(29,29,31,.13),0 6px 16px rgba(29,29,31,.1)!important}

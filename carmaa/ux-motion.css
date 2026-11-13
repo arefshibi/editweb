@@ -1,0 +1,28 @@
+/* ux-motion.css — smoother dock + feedback. Loaded AFTER dock-ios.css. Page transitions live in js/55-ux-motion.js. */
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock .dock-pill .cm-dock-ind{
+  position:absolute; left:0; top:0; width:0; height:0; margin:0; padding:0; pointer-events:none; z-index:0;
+  border-radius:999px; opacity:0;
+  background:var(--dock-on-bg); box-shadow:inset 0 1px 0 rgba(255,255,255,.12);
+  transform:translate3d(0,0,0); will-change:transform,width,opacity;
+  transition:transform .46s cubic-bezier(.3,1.35,.45,1), width .3s cubic-bezier(.2,.8,.2,1), opacity .2s ease;
+}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock .dock-pill .cm-dock-ind.cm-snap{transition:none}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock .dock-pill.cm-ind-on .dock-item{position:relative; z-index:1}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock .dock-pill.cm-ind-on .dock-item.is-active,
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock .dock-pill.cm-ind-on .dock-item.is-tap{
+  background:transparent !important; background-color:transparent !important; box-shadow:none !important; color:var(--dock-ic-on) !important;
+}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock .dock-pill.cm-ind-on:has(.is-tap) .dock-item.is-active:not(.is-tap){color:var(--dock-ic) !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock .dock-pill .dock-item svg,
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock .dock-search svg{
+  transition:transform .32s cubic-bezier(.34,1.56,.64,1), stroke .2s ease; transform-origin:50% 55%;
+}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock .dock-pill .dock-item:active svg,
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock .dock-search:active svg{transform:scale(.8)}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock .dock-search:active{transform:scale(.92) !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock .dock-pill .dock-item.cm-pop svg{animation:cmDockPop .46s cubic-bezier(.34,1.56,.64,1)}
+@keyframes cmDockPop{0%{transform:scale(.78)}55%{transform:scale(1.22)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){
+  html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock .dock-pill .cm-dock-ind{transition-duration:.01s}
+  html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock .dock-pill .dock-item.cm-pop svg{animation:none}
+}

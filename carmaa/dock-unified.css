@@ -1,0 +1,210 @@
+/* ==========================================================================
+   Unified bottom dock — ONE look on every page (loaded last on purpose).
+   White floating pill bar, icons only (no titles), active item = dark pill.
+   Tweak the 4 colours below; everything else follows.
+   ========================================================================== */
+:root{
+  --dock-bg:#ffffff;          /* bar */
+  --dock-icon:#1D1D1F;        /* inactive icons */
+  --dock-pill:#1D1D1F;        /* active pill */
+  --dock-pill-icon:#ffffff;   /* icon on the active pill */
+}
+
+/* outer wrapper: floats above the page with side + bottom margins */
+html body #bottomDock#bottomDock.bottom-dock{
+  position:fixed !important; left:0 !important; right:0 !important; inset-inline:0 !important;
+  bottom:calc(12px + env(safe-area-inset-bottom,0px)) !important;
+  width:100% !important; max-width:none !important; margin:0 !important; transform:none !important;
+  padding:0 14px !important; box-sizing:border-box !important;
+  z-index:120 !important; justify-content:center !important; pointer-events:none !important;
+}
+
+/* the bar */
+html body #bottomDock#bottomDock.bottom-dock .bottom-dock-inner,
+html body.theme-light #bottomDock#bottomDock.bottom-dock .bottom-dock-inner,
+html body[data-dock-page] #bottomDock#bottomDock.bottom-dock .bottom-dock-inner{
+  pointer-events:auto !important;
+  display:flex !important; flex-direction:row !important; align-items:center !important; justify-content:space-around !important;
+  width:100% !important; max-width:440px !important; margin:0 auto !important; box-sizing:border-box !important;
+  min-height:0 !important; height:auto !important; padding:9px 10px !important; gap:0 !important;
+  background:var(--dock-bg) !important; background-image:none !important;
+  border:0 !important; border-radius:26px !important; overflow:visible !important;
+  box-shadow:0 10px 28px rgba(0,0,0,.38), 0 2px 6px rgba(0,0,0,.22) !important;
+  -webkit-backdrop-filter:none !important; backdrop-filter:none !important;
+}
+html body #bottomDock#bottomDock.bottom-dock .bottom-dock-inner::before,
+html body #bottomDock#bottomDock.bottom-dock .bottom-dock-inner::after{display:none !important;content:none !important}
+
+/* items: icon-only circles; the active one widens into a pill */
+html body #bottomDock#bottomDock.bottom-dock .dock-item,
+html body.theme-light #bottomDock#bottomDock.bottom-dock .dock-item{
+  flex:0 0 auto !important; width:48px !important; height:46px !important; min-height:46px !important;
+  padding:0 !important; margin:0 !important; gap:0 !important;
+  align-items:center !important; justify-content:center !important;
+  border-radius:999px !important; background:transparent !important; background-color:transparent !important;
+  color:var(--dock-icon) !important; box-shadow:none !important; border:0 !important;
+  transition:width .28s cubic-bezier(.2,.8,.2,1), background-color .2s ease, color .2s ease, opacity .15s ease;
+}
+html body #bottomDock#bottomDock.bottom-dock .dock-item.is-active,
+html body.theme-light #bottomDock#bottomDock.bottom-dock .dock-item.is-active{
+  width:78px !important; background:var(--dock-pill) !important; background-color:var(--dock-pill) !important;
+  color:var(--dock-pill-icon) !important;
+}
+html body #bottomDock#bottomDock.bottom-dock .dock-item:active{opacity:.7}
+
+/* no titles under the icons */
+html body #bottomDock#bottomDock.bottom-dock .dock-label{display:none !important}
+
+/* thin line icons, like the reference */
+html body #bottomDock#bottomDock.bottom-dock .dock-icon{display:flex !important;align-items:center;justify-content:center}
+html body #bottomDock#bottomDock.bottom-dock .dock-item svg,
+html body #bottomDock#bottomDock.bottom-dock .dock-item .icon{
+  width:23px !important; height:23px !important; color:currentColor !important; stroke:currentColor !important; stroke-width:1.7 !important;
+}
+html body #bottomDock#bottomDock.bottom-dock .dock-item.is-active .dock-icon svg{stroke-width:1.8 !important}
+
+/* unread badges keep their ring in the bar colour */
+html body #bottomDock#bottomDock.bottom-dock .mr-chat-dock-badge,
+html body #bottomDock#bottomDock.bottom-dock .qa-dock-badge,
+html body #bottomDock#bottomDock.bottom-dock .dock-badge{border-color:var(--dock-bg) !important}
+html body #bottomDock#bottomDock.bottom-dock .dock-item.is-active .mr-chat-dock-badge,
+html body #bottomDock#bottomDock.bottom-dock .dock-item.is-active .qa-dock-badge{border-color:var(--dock-pill) !important}
+
+/* ---- which items show ---- */
+/* «پرسش‌وپاسخ» is never part of the dock */
+html body #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="qa"]{display:none !important}
+/* «خانه» exists only on the listings page, where it takes the place of «ثبت آگهی» */
+html body #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="home"]{display:none !important}
+html body[data-dock-page="listings"] #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="home"]{display:flex !important;order:1}
+html body[data-dock-page="listings"] #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"]{display:none !important}
+html body[data-dock-page="listings"] #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="saved"]{order:2}
+html body[data-dock-page="listings"] #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="messages"]{order:3}
+html body[data-dock-page="listings"] #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="account"]{order:4}
+
+/* ---- vehicle detail page: no dock at all ---- */
+html body[data-dock-page="vehicle"] #bottomDock#bottomDock.bottom-dock,
+html body:has(#pageContent > [data-page="vehicle"]) #bottomDock#bottomDock.bottom-dock{display:none !important}
+
+/* room under the content so the floating bar never covers the last items */
+html body:not([data-dock-page="vehicle"]) #pageContent{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px)) !important}
+
+/* ==========================================================================
+   «+» (ثبت آگهی) — always the centre of the dock, bigger than every other
+   button, raised out of the bar like a jewel.
+   Layout is a 5-column grid (item · item · [+] · item · item) so the centre
+   stays exactly centred on every page, even when the active pill widens.
+   ========================================================================== */
+:root{
+  --fab-size:56px;
+  --fab-lift:14px;
+  --fab-a:#262628;
+  --fab-b:#262628;
+  --fab-c:#1D1D1F;
+}
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .bottom-dock-inner{
+  display:grid !important; grid-template-columns:1fr 1fr calc(var(--fab-size) + 10px) 1fr 1fr !important;
+  grid-auto-flow:row !important; align-items:center !important; justify-items:center !important;
+  justify-content:stretch !important;
+}
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item{grid-row:1 !important;order:0 !important}
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="home"],
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="listings"]{grid-column:1 !important}
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="saved"]{grid-column:2 !important}
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"]{grid-column:3 !important}
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="messages"]{grid-column:4 !important}
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="account"]{grid-column:5 !important}
+/* active pill must fit its cell so it never pushes the centre */
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item.is-active{width:62px !important}
+/* «+» shows on every page (also on listings, where «خانه» sits at the edge) */
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"]{display:flex !important}
+
+/* the button itself: minimal, dark graphite disc */
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"],
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"].is-active{
+  position:relative !important; z-index:3 !important;
+  width:var(--fab-size) !important; height:var(--fab-size) !important; min-height:var(--fab-size) !important;
+  border-radius:50% !important; color:#fff !important;
+  background:linear-gradient(160deg,var(--fab-a),var(--fab-b) 55%,var(--fab-c)) !important;
+  background-color:var(--fab-b) !important;
+  box-shadow:0 0 0 5px var(--dock-bg), 0 -1px 0 5px var(--dock-bg), 0 6px 14px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.12) !important;
+  transform:translateY(calc(var(--fab-lift) * -1));
+  transition:transform .22s cubic-bezier(.2,.8,.2,1) !important;
+  -webkit-tap-highlight-color:transparent;
+}
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"]::after{content:none !important;display:none !important}
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"] svg{
+  width:26px !important; height:26px !important; stroke:#fff !important; stroke-width:2.1 !important;
+}
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"]:active{
+  opacity:1 !important; transform:translateY(calc(var(--fab-lift) * -1 + 1px)) scale(.94);
+}
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"]:focus-visible{outline:2px solid #fff; outline-offset:3px}
+
+/* the + sticks out slightly above the bar, so give the page a bit more room */
+html body:not([data-dock-page="vehicle"]) #pageContent{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px)) !important}
+
+/* ===== GLASS PREVIEW ===== */
+:root{--dock-icon:rgba(255,255,255,.78);--dock-pill:rgba(255,255,255,.16);--dock-pill-icon:#fff;--dock-bg:rgba(29,29,31,.5)}
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .bottom-dock-inner{
+  background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.05)) !important;
+  -webkit-backdrop-filter:blur(26px) saturate(190%) !important; backdrop-filter:blur(26px) saturate(190%) !important;
+  border:1px solid rgba(255,255,255,.16) !important;
+  box-shadow:0 14px 34px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.28), inset 0 -1px 0 rgba(255,255,255,.05) !important;
+}
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item.is-active{box-shadow:inset 0 1px 0 rgba(255,255,255,.25) !important}
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .mr-chat-dock-badge,
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .qa-dock-badge{border-color:rgba(38,38,40,.9) !important}
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"],
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"].is-active{
+  background:linear-gradient(160deg,rgba(255,255,255,.30),rgba(255,255,255,.08)) !important;
+  background-color:transparent !important;
+  -webkit-backdrop-filter:blur(22px) saturate(190%); backdrop-filter:blur(22px) saturate(190%);
+  border:1px solid rgba(255,255,255,.34) !important;
+  box-shadow:0 10px 24px rgba(0,0,0,.45), inset 0 1.5px 0 rgba(255,255,255,.5), inset 0 -8px 14px rgba(255,255,255,.04) !important;
+}
+/* matte frosted centre disc: opaque enough that nothing shows through */
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"],
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"].is-active{
+  background:
+    radial-gradient(110% 80% at 30% 8%, rgba(255,255,255,.22), rgba(255,255,255,0) 55%),
+    linear-gradient(160deg,#5a5d66 0%,#262628 55%,#262628 100%) !important;
+  background-color:#262628 !important;
+  -webkit-backdrop-filter:none !important; backdrop-filter:none !important;
+  border:1px solid rgba(255,255,255,.28) !important;
+  box-shadow:0 10px 22px rgba(0,0,0,.5), inset 0 1.5px 0 rgba(255,255,255,.4), inset 0 -6px 12px rgba(0,0,0,.25) !important;
+}
+
+/* live badges: a quick pop whenever the number changes */
+@keyframes badgePop{0%{transform:scale(.4)}55%{transform:scale(1.35)}100%{transform:scale(1)}}
+.mr-bell-badge.is-pop,.mr-chat-dock-badge.is-pop,.qa-dock-badge.is-pop{animation:badgePop .38s cubic-bezier(.2,.9,.3,1.4)}
+@media (prefers-reduced-motion:reduce){.mr-bell-badge.is-pop,.mr-chat-dock-badge.is-pop{animation:none}}
+
+/* ===== Carma brand: lime "+" disc with black plus ===== */
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"],
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"].is-active{
+  background:#ffffff !important; background-color:#ffffff !important;
+  border:1px solid rgba(0,0,0,.18) !important; color:#1D1D1F !important;
+  box-shadow:0 10px 22px rgba(0,0,0,.5), 0 0 18px rgba(255,255,255,.168), inset 0 1.5px 0 rgba(255,255,255,.45), inset 0 -6px 12px rgba(0,0,0,.08) !important;
+}
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"] svg,
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"].is-active svg{stroke:#000 !important; color:#000 !important}
+html body:not(#x) #bottomDock#bottomDock.bottom-dock .dock-item[data-dock="sell"]:focus-visible{outline-color:#ffffff !important}
+
+/* ==========================================================================
+   No dock inside popups — whenever any sheet / modal / overlay is open
+   (body.has-popup is set by js/53-hide-dock-on-popups.js; the html classes
+   are a CSS-only backup that acts instantly).
+   ========================================================================== */
+html body.has-popup:not(#x) #bottomDock#bottomDock.bottom-dock,
+html.menu-active body:not(#x) #bottomDock#bottomDock.bottom-dock,
+html.auth-active body:not(#x) #bottomDock#bottomDock.bottom-dock,
+html.mr-trust-dialog-open body:not(#x) #bottomDock#bottomDock.bottom-dock,
+html.mr-nf-open body:not(#x) #bottomDock#bottomDock.bottom-dock,
+html.nw-sheet-open body:not(#x) #bottomDock#bottomDock.bottom-dock,
+html.brand-sheet-lock body:not(#x) #bottomDock#bottomDock.bottom-dock,
+html.mr-sv-lock body:not(#x) #bottomDock#bottomDock.bottom-dock{
+  opacity:0 !important; visibility:hidden !important; pointer-events:none !important;
+  transform:translateY(24px) !important;
+  transition:opacity .18s ease, transform .22s ease, visibility 0s linear .22s !important;
+}
+html body.has-popup:not(#x) #bottomDock#bottomDock.bottom-dock *{pointer-events:none !important}

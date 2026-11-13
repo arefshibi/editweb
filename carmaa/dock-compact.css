@@ -1,0 +1,41 @@
+/* CarMaa — داک جمع‌وجور (ایدهٔ ۴): کپسول شیشه‌ای ۴ دکمه‌ای، فقط تب فعال لیبل دارد، «+» جدا */
+:root{--dock-cherry:#ffffff}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock){bottom:calc(10px + env(safe-area-inset-bottom,0px)) !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .bottom-dock-inner{justify-content:center !important;gap:10px !important;width:auto !important;max-width:none !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-search,
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-item[data-dock="saved"]{display:none !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock.cm-social-dock .dock-pill .dock-item[data-dock="account"]{display:none !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-pill{padding:5px !important;gap:3px !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-pill .dock-item{width:46px !important;height:44px !important;min-height:44px !important;flex-direction:row !important;gap:0 !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-pill .dock-item.is-active{width:auto !important;min-width:46px !important;padding:0 16px !important;gap:7px !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-pill .dock-item.is-active .dock-label{display:inline-block !important;position:static !important;opacity:1 !important;transform:none !important;font-size:13px !important;font-weight:500 !important;line-height:1 !important;color:#fff !important;white-space:nowrap !important;animation:cmDockLbl .26s ease both}
+@keyframes cmDockLbl{from{opacity:0;transform:translateX(6px)}to{opacity:1;transform:none}}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-item.dock-plus,
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-item.dock-plus.is-active{width:46px !important;height:46px !important;min-height:46px !important;background:var(--dock-cherry) !important;background-color:var(--dock-cherry) !important;border:0.5px solid rgba(255,255,255,.22) !important;box-shadow:none !important;filter:none !important;-webkit-filter:none !important;transform:none !important;color:#1D1D1F !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-item.dock-plus .dock-label{display:none !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-item.dock-plus svg{width:22px !important;height:22px !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-item.dock-plus::before,
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-item.dock-plus::after{content:none !important;display:none !important;box-shadow:none !important;background:none !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-pill .dock-item svg{width:24px !important;height:24px !important}
+html body:not(#x):not([data-dock-page="vehicle"]) #pageContent{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px)) !important}
+
+/* حرکت شیشهٔ فعال: بدون پرش اضافه، عرض و جابه‌جایی هم‌زمان؛ از کادر بیرون نمی‌زنه */
+@media (prefers-reduced-motion:no-preference){
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-pill .cm-dock-ind:not(.cm-snap){transition:transform .36s cubic-bezier(.25,.85,.3,1),width .36s cubic-bezier(.25,.85,.3,1),opacity .2s ease !important}
+}
+/* >>> CM-DOCK-W: کپسول داک = 70% عرض صفحه، دکمه + کنارش */
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .bottom-dock-inner{width:auto !important;max-width:none !important;gap:10px !important;justify-content:center !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-pill{flex:none !important;width:70vw !important;max-width:560px !important;min-width:230px !important;padding:6px !important;gap:3px !important;box-sizing:border-box !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-pill .dock-item{flex:1 1 0 !important;width:auto !important;min-width:0 !important;height:48px !important;min-height:48px !important;padding:0 !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-pill .dock-item.is-active{flex:2.1 1 0 !important;width:auto !important;min-width:0 !important;padding:0 8px !important;gap:6px !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-pill .dock-item svg{width:25px !important;height:25px !important;flex:none !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-pill .dock-item.is-active .dock-label{font-size:13px !important;font-weight:600 !important;overflow:hidden;text-overflow:ellipsis;min-width:0}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-item.dock-plus,html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-item.dock-plus.is-active{flex:none !important;width:52px !important;height:52px !important;min-height:52px !important}
+html body:not(#x):not(#y) #bottomDock#bottomDock.bottom-dock:not(.cm-social-dock) .dock-item.dock-plus svg{width:23px !important;height:23px !important}
+html body:not(#x):not([data-dock-page="vehicle"]) #pageContent{padding-bottom:calc(98px + env(safe-area-inset-bottom,0px)) !important}
+/* <<< CM-DOCK-W */
+
+/* >>> CM-HOME-FOOT-TIGHT: home page end — wordmark sits right above the dock, no empty gap under it */
+html body:not(#x):not([data-dock-page="vehicle"]):has(.cm-home-page) #pageContent{padding-bottom:0 !important}
+html body:not(#x) .cm-home-page .cm-ft.cm-ft2{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
+/* <<< CM-HOME-FOOT-TIGHT */
